@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cxjbe4cwk7smx"]
+
+[ext_resource type="Script" uid="uid://bxjkhk0e0aejl" path="res://scripts/mower.gd" id="1_5cn51"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cn51"]
+albedo_color = Color(1, 0.6039216, 0.47058824, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5cn51"]
+material = SubResource("StandardMaterial3D_5cn51")
+size = Vector3(1, 0.4, 1.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cn51"]
+size = Vector3(1, 0.4, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ob06m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cepda"]
+material = SubResource("StandardMaterial3D_ob06m")
+size = Vector3(0.8, 0.5, 0.1)
+
+[node name="Mower" type="AnimatableBody3D" unique_id=1986578710]
+sync_to_physics = false
+script = ExtResource("1_5cn51")
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=127398873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_5cn51")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1268873710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_5cn51")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1976113559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0.5)
+mesh = SubResource("BoxMesh_cepda")

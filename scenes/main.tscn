@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cg6e6w404qh3d"]
 
 [ext_resource type="PackedScene" uid="uid://dcb5654jw6sb7" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cxjbe4cwk7smx" path="res://scenes/mower.tscn" id="2_0wfyh"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
 background_mode = 1
@@ -74,6 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 0.5, 0)
 mesh = SubResource("BoxMesh_jyhfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/WallWest" unique_id=116392694]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_o5qli")
 
 [node name="WallWest2" type="StaticBody3D" parent="Walls" unique_id=2039347437]
@@ -83,7 +85,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.5, 0)
 mesh = SubResource("BoxMesh_jyhfs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/WallWest2" unique_id=1725287104]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 shape = SubResource("BoxShape3D_o5qli")
 
-[node name="Player" parent="." unique_id=1213674497 instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." unique_id=1213674497 node_paths=PackedStringArray("mower") instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.842544, 0, 5.939865)
+mower = NodePath("../Mower")
+
+[node name="Player2" parent="." unique_id=1118012485 instance=ExtResource("1_o5qli")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -5)
+player_id = 2
+color = Color(0.94509804, 0, 0, 1)
+
+[node name="Mower" parent="." unique_id=374699352 instance=ExtResource("2_0wfyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.106081, 0, 3.444499)
