@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dlbdmfnd4jr2t"
+path="res://.godot/imported/Dummy_Base_Dummy_Body_Dummy_Target.obj-52b83a4be1e02745a00fb6605dc6f650.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Dummy_Base_Dummy_Body_Dummy_Target.obj-52b83a4be1e02745a00fb6605dc6f650.mesh"]
+
+source_file="res://assets/escenario/ferreteria (interior)/Assets/obj/Dummy_Base_Dummy_Body_Dummy_Target.obj"
+dest_files=["res://.godot/imported/Dummy_Base_Dummy_Body_Dummy_Target.obj-52b83a4be1e02745a00fb6605dc6f650.mesh", "res://.godot/imported/Dummy_Base_Dummy_Body_Dummy_Target.obj-52b83a4be1e02745a00fb6605dc6f650.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

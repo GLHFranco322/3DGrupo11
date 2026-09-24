@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cclbvlvdcvk07"
+path="res://.godot/imported/Primitive_Slope_Half_OuterCorner.obj-6f2c9d762d44990eca1471a97b9ce1de.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Primitive_Slope_Half_OuterCorner.obj-6f2c9d762d44990eca1471a97b9ce1de.mesh"]
+
+source_file="res://assets/escenario/ferreteria (interior)/Assets/obj/Primitive_Slope_Half_OuterCorner.obj"
+dest_files=["res://.godot/imported/Primitive_Slope_Half_OuterCorner.obj-6f2c9d762d44990eca1471a97b9ce1de.mesh", "res://.godot/imported/Primitive_Slope_Half_OuterCorner.obj-6f2c9d762d44990eca1471a97b9ce1de.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

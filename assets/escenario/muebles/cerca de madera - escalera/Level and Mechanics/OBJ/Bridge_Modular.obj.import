@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://duekea1wwcp77"
+path="res://.godot/imported/Bridge_Modular.obj-62169d12beee744122a4cb8ab254a50c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bridge_Modular.obj-62169d12beee744122a4cb8ab254a50c.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Level and Mechanics/OBJ/Bridge_Modular.obj"
+dest_files=["res://.godot/imported/Bridge_Modular.obj-62169d12beee744122a4cb8ab254a50c.mesh", "res://.godot/imported/Bridge_Modular.obj-62169d12beee744122a4cb8ab254a50c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

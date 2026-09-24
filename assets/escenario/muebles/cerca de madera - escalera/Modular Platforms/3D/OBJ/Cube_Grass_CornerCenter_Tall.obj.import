@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvms2yi5f201s"
+path="res://.godot/imported/Cube_Grass_CornerCenter_Tall.obj-605854662f1aa98f329c8cacb205066b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cube_Grass_CornerCenter_Tall.obj-605854662f1aa98f329c8cacb205066b.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Modular Platforms/3D/OBJ/Cube_Grass_CornerCenter_Tall.obj"
+dest_files=["res://.godot/imported/Cube_Grass_CornerCenter_Tall.obj-605854662f1aa98f329c8cacb205066b.mesh", "res://.godot/imported/Cube_Grass_CornerCenter_Tall.obj-605854662f1aa98f329c8cacb205066b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

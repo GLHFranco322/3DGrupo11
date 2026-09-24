@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dc4xxodeg6o1u"
+path="res://.godot/imported/Tree_2_D_Color1.obj-abbfe8b6ad7cfb63ecd85c5ec092e090.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Tree_2_D_Color1.obj-abbfe8b6ad7cfb63ecd85c5ec092e090.mesh"]
+
+source_file="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/obj/Tree_2_D_Color1.obj"
+dest_files=["res://.godot/imported/Tree_2_D_Color1.obj-abbfe8b6ad7cfb63ecd85c5ec092e090.mesh", "res://.godot/imported/Tree_2_D_Color1.obj-abbfe8b6ad7cfb63ecd85c5ec092e090.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

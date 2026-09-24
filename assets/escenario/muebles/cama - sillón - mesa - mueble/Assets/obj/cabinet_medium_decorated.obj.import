@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3dak2j37lanj"
+path="res://.godot/imported/cabinet_medium_decorated.obj-cbefd1817fc628d71bfb34a4d8828846.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cabinet_medium_decorated.obj-cbefd1817fc628d71bfb34a4d8828846.mesh"]
+
+source_file="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/obj/cabinet_medium_decorated.obj"
+dest_files=["res://.godot/imported/cabinet_medium_decorated.obj-cbefd1817fc628d71bfb34a4d8828846.mesh", "res://.godot/imported/cabinet_medium_decorated.obj-cbefd1817fc628d71bfb34a4d8828846.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ddl7sgekd02vi"
+path="res://.godot/imported/trashcan.obj-d601a1d54c491096c5cb4db8fce1f5db.mesh"
+
+[deps]
+
+files=["res://.godot/imported/trashcan.obj-d601a1d54c491096c5cb4db8fce1f5db.mesh"]
+
+source_file="res://assets/escenario/piso/Assets/obj/trashcan.obj"
+dest_files=["res://.godot/imported/trashcan.obj-d601a1d54c491096c5cb4db8fce1f5db.mesh", "res://.godot/imported/trashcan.obj-d601a1d54c491096c5cb4db8fce1f5db.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

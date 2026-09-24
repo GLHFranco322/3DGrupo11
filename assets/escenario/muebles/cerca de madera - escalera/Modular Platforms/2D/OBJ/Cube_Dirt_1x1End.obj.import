@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c5tbbw78ennbh"
+path="res://.godot/imported/Cube_Dirt_1x1End.obj-1a5b87bc3faeb8d4e12fbf2508511fde.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cube_Dirt_1x1End.obj-1a5b87bc3faeb8d4e12fbf2508511fde.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Modular Platforms/2D/OBJ/Cube_Dirt_1x1End.obj"
+dest_files=["res://.godot/imported/Cube_Dirt_1x1End.obj-1a5b87bc3faeb8d4e12fbf2508511fde.mesh", "res://.godot/imported/Cube_Dirt_1x1End.obj-1a5b87bc3faeb8d4e12fbf2508511fde.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
