@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqk0b0tlv36bu"
+path="res://.godot/imported/Star_Outline.obj-745feba51f43458c505ed3b0a2436927.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Star_Outline.obj-745feba51f43458c505ed3b0a2436927.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Powerups and Pickups/OBJ/Star_Outline.obj"
+dest_files=["res://.godot/imported/Star_Outline.obj-745feba51f43458c505ed3b0a2436927.mesh", "res://.godot/imported/Star_Outline.obj-745feba51f43458c505ed3b0a2436927.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

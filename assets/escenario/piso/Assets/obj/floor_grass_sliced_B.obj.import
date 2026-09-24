@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bh4lfn0kx35aa"
+path="res://.godot/imported/floor_grass_sliced_B.obj-395ff0a60c0245b9b06234fafe8d9902.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor_grass_sliced_B.obj-395ff0a60c0245b9b06234fafe8d9902.mesh"]
+
+source_file="res://assets/escenario/piso/Assets/obj/floor_grass_sliced_B.obj"
+dest_files=["res://.godot/imported/floor_grass_sliced_B.obj-395ff0a60c0245b9b06234fafe8d9902.mesh", "res://.godot/imported/floor_grass_sliced_B.obj-395ff0a60c0245b9b06234fafe8d9902.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

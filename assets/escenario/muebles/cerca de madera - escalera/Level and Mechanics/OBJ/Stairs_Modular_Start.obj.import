@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bo5xg87hbm4nn"
+path="res://.godot/imported/Stairs_Modular_Start.obj-e66b908f3e30ab3e0ee63d6cfbc8d3a9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Stairs_Modular_Start.obj-e66b908f3e30ab3e0ee63d6cfbc8d3a9.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Level and Mechanics/OBJ/Stairs_Modular_Start.obj"
+dest_files=["res://.godot/imported/Stairs_Modular_Start.obj-e66b908f3e30ab3e0ee63d6cfbc8d3a9.mesh", "res://.godot/imported/Stairs_Modular_Start.obj-e66b908f3e30ab3e0ee63d6cfbc8d3a9.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ra1t4xds7gm2"
+path="res://.godot/imported/grass_B.obj-f073dffe648c9c15e8f06d14611fbf0c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/grass_B.obj-f073dffe648c9c15e8f06d14611fbf0c.mesh"]
+
+source_file="res://assets/escenario/piso/Assets/obj/grass_B.obj"
+dest_files=["res://.godot/imported/grass_B.obj-f073dffe648c9c15e8f06d14611fbf0c.mesh", "res://.godot/imported/grass_B.obj-f073dffe648c9c15e8f06d14611fbf0c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

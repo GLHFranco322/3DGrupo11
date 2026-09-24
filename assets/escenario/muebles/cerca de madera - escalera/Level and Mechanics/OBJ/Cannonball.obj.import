@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmnqfbkjm4gn"
+path="res://.godot/imported/Cannonball.obj-d3b9d5887ad32868ecda0f301b9fc3c2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cannonball.obj-d3b9d5887ad32868ecda0f301b9fc3c2.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Level and Mechanics/OBJ/Cannonball.obj"
+dest_files=["res://.godot/imported/Cannonball.obj-d3b9d5887ad32868ecda0f301b9fc3c2.mesh", "res://.godot/imported/Cannonball.obj-d3b9d5887ad32868ecda0f301b9fc3c2.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

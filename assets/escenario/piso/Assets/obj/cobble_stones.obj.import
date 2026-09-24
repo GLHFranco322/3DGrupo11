@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ch56xovepfapj"
+path="res://.godot/imported/cobble_stones.obj-fb6af8eb537dc2c5000affeeaa927417.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cobble_stones.obj-fb6af8eb537dc2c5000affeeaa927417.mesh"]
+
+source_file="res://assets/escenario/piso/Assets/obj/cobble_stones.obj"
+dest_files=["res://.godot/imported/cobble_stones.obj-fb6af8eb537dc2c5000affeeaa927417.mesh", "res://.godot/imported/cobble_stones.obj-fb6af8eb537dc2c5000affeeaa927417.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

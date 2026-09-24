@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bavi8mhvq8d63"
+path="res://.godot/imported/Bush_Fruit.obj-7c1711149bc03a73730da49eb2c0865f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bush_Fruit.obj-7c1711149bc03a73730da49eb2c0865f.mesh"]
+
+source_file="res://assets/escenario/muebles/cerca de madera - escalera/Nature/OBJ/Bush_Fruit.obj"
+dest_files=["res://.godot/imported/Bush_Fruit.obj-7c1711149bc03a73730da49eb2c0865f.mesh", "res://.godot/imported/Bush_Fruit.obj-7c1711149bc03a73730da49eb2c0865f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
