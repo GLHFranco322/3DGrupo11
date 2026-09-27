@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cg6e6w404qh3d"]
 
 [ext_resource type="PackedScene" uid="uid://dcb5654jw6sb7" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bew864pxvb0ey" path="res://scenes/grass_grid.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cxjbe4cwk7smx" path="res://scenes/mower.tscn" id="2_0wfyh"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
@@ -48,6 +49,9 @@ environment = SubResource("Environment_sgp6g")
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=1684275144]
 mesh = SubResource("PlaneMesh_0wfyh")
 
+[node name="GrassGrid" type="MultiMeshInstance3D" parent="." unique_id=1159492834]
+script = ExtResource("1_sugp2")
+
 [node name="Walls" type="Node3D" parent="." unique_id=1813535896]
 
 [node name="WallNorth" type="StaticBody3D" parent="Walls" unique_id=1442664077]
@@ -92,10 +96,16 @@ shape = SubResource("BoxShape3D_o5qli")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.842544, 0, 5.939865)
 mower = NodePath("../Mower")
 
-[node name="Player2" parent="." unique_id=1118012485 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -5)
+[node name="Player2" parent="." unique_id=1118012485 node_paths=PackedStringArray("mower") instance=ExtResource("1_o5qli")]
+transform = Transform3D(-0.999565, 0, 0.029491829, 0, 1, 0, -0.029491829, 0, -0.999565, -13, 0, -5)
 player_id = 2
 color = Color(0.94509804, 0, 0, 1)
+mower = NodePath("../Mower2")
 
-[node name="Mower" parent="." unique_id=374699352 instance=ExtResource("2_0wfyh")]
+[node name="Mower" parent="." unique_id=374699352 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.106081, 0, 3.444499)
+grass_grid = NodePath("../GrassGrid")
+
+[node name="Mower2" parent="." unique_id=1986578710 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
+transform = Transform3D(-0.9999932, 0, -0.0036825177, 0, 1, 0, 0.0036825177, 0, -0.9999932, -12.869682, 0, -3.3933783)
+grass_grid = NodePath("../GrassGrid")
