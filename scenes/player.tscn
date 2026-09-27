@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c0c1crgvne10g" path="res://scripts/idle.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://cbj41cqad8vue" path="res://scripts/walk.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://cs6ygo0px57bi" path="res://scripts/run.gd" id="5_tuyoq"]
+[ext_resource type="Script" uid="uid://cygvuo0oy83k3" path="res://scripts/stunned.gd" id="6_tuyoq"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_u8vuu"]
 size = Vector3(1, 1.2, 0.3)
@@ -20,7 +21,18 @@ size = Vector3(1, 0.4, 1.2)
 
 [node name="Player" type="CharacterBody3D" unique_id=1213674497 groups=["player"]]
 script = ExtResource("1_3vyb7")
+player_id = null
 color = Color(0.94509804, 0.9411765, 0, 1)
+walk_speed = null
+run_speed = null
+mower_speed = null
+acceleration = null
+friction = null
+turn_speed = null
+rock_pickup_distance = null
+rock_hold_offset = null
+mower_hold_offset = null
+mower_pickup_distance = null
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1375012721]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -46,6 +58,9 @@ script = ExtResource("4_qlg0r")
 
 [node name="Run" type="Node" parent="StateMachine" unique_id=1641435922]
 script = ExtResource("5_tuyoq")
+
+[node name="Stunned" type="Node" parent="StateMachine" unique_id=231263178]
+script = ExtResource("6_tuyoq")
 
 [node name="MowerCollision" type="CollisionShape3D" parent="." unique_id=1609645198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -1.4)

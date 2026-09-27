@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://48i4xm3v5mqe"]
+
+[ext_resource type="Script" uid="uid://b1fiyiobaabcm" path="res://scripts/rock.gd" id="1_1di36"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t8sxr"]
+radius = 0.15
+height = 0.3
+
+[node name="Rock" type="Node3D" unique_id=119285836 groups=["rock"]]
+script = ExtResource("1_1di36")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1670689847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+mesh = SubResource("SphereMesh_t8sxr")

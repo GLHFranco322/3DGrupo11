@@ -33,3 +33,9 @@ func _on_transitioned(state_name: String) -> void:
 	current_state.exit()
 	current_state = new_state
 	current_state.enter()
+
+func force_state(state_name: String) -> void:
+	_on_transitioned(state_name)
+
+func is_current(state_name: String) -> bool:
+	return current_state != null and current_state.name.to_lower() == state_name.to_lower()

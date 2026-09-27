@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cg6e6w404qh3d"]
 
 [ext_resource type="PackedScene" uid="uid://dcb5654jw6sb7" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://bew864pxvb0ey" path="res://scenes/grass_grid.gd" id="1_sugp2"]
+[ext_resource type="Script" uid="uid://bew864pxvb0ey" path="res://scripts/grass_grid.gd" id="1_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cxjbe4cwk7smx" path="res://scenes/mower.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://dom2qyq223jsn" path="res://scripts/hud.gd" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://48i4xm3v5mqe" path="res://scenes/rock.tscn" id="5_tbgi4"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
 background_mode = 1
@@ -51,6 +53,8 @@ mesh = SubResource("PlaneMesh_0wfyh")
 
 [node name="GrassGrid" type="MultiMeshInstance3D" parent="." unique_id=1159492834]
 script = ExtResource("1_sugp2")
+cell_size = 0.5
+grown_height = 0.1
 
 [node name="Walls" type="Node3D" parent="." unique_id=1813535896]
 
@@ -109,3 +113,27 @@ grass_grid = NodePath("../GrassGrid")
 [node name="Mower2" parent="." unique_id=1986578710 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
 transform = Transform3D(-0.9999932, 0, -0.0036825177, 0, 1, 0, 0.0036825177, 0, -0.9999932, -12.869682, 0, -3.3933783)
 grass_grid = NodePath("../GrassGrid")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=146105782 node_paths=PackedStringArray("player1", "player2")]
+script = ExtResource("4_jyhfs")
+player1 = NodePath("../Player")
+player2 = NodePath("../Player2")
+
+[node name="ScoreLabel1" type="Label" parent="HUD" unique_id=586473174]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.26020515, 0.40514827, 0.8759585, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="ScoreLabel2" type="Label" parent="HUD" unique_id=244680481]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0.38948637, 0.5953161, 1)
+theme_override_font_sizes/font_size = 32
+
+[node name="Rock" parent="." unique_id=119285836 instance=ExtResource("5_tbgi4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.311375, 0, 2.4891105)
