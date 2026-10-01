@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://035cxp1ve0ta"
-path="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb-1ddf5aef245d11bcde0466c0e2c27e9d.scn"
+uid="uid://do1020523klr3"
+path="res://.godot/imported/Trianguloblend.glb-51a0cbd9c03456912ed84f3eab65e8c0.scn"
 
 [deps]
 
-source_file="res://assets/personajes/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb-1ddf5aef245d11bcde0466c0e2c27e9d.scn"]
+source_file="res://assets/personajes/Triangulo/Trianguloblend.glb"
+dest_files=["res://.godot/imported/Trianguloblend.glb-51a0cbd9c03456912ed84f3eab65e8c0.scn"]
 
 [params]
 

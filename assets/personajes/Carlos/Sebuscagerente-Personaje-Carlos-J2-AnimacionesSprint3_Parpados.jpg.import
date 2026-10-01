@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctnr24gskrawm"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Pupilas.jpg-f08f77d368fde5945ce407bd1b9bd181.s3tc.ctex"
+uid="uid://c8owyvl72uip7"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Parpados.jpg-49e6a634e669acb4847109d233c6be57.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d1dd210d6b1312cb342b56d02bd5e651"
+"md5": "2d20d9c8b8dd5c933a3982613c4b7778"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Pupilas.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Pupilas.jpg-f08f77d368fde5945ce407bd1b9bd181.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Parpados.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Parpados.jpg-49e6a634e669acb4847109d233c6be57.s3tc.ctex"]
 
 [params]
 

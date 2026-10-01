@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blhelawmml0qb"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-8d6a00d2512cbafef2d8b01d71dfc073.s3tc.ctex"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-29fd5cc9f01d004e4a0076e1d3f70f35.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/personajes/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-8d6a00d2512cbafef2d8b01d71dfc073.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-29fd5cc9f01d004e4a0076e1d3f70f35.s3tc.ctex"]
 
 [params]
 
