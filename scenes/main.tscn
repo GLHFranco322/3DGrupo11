@@ -57,6 +57,7 @@ environment = SubResource("Environment_sgp6g")
 mesh = SubResource("PlaneMesh_0wfyh")
 
 [node name="GrassGrid" type="MultiMeshInstance3D" parent="." unique_id=1159492834]
+visible = false
 script = ExtResource("1_sugp2")
 cell_size = 0.5
 grown_height = 0.1

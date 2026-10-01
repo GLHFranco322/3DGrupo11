@@ -22,7 +22,10 @@ extends CharacterBody3D
 @export_group("Pozo")
 @export var pit_hold_offset: Vector3 = Vector3(0.0, 0.6, -0.9)
 @export var reticle: Node3D
-@export var aim_range: float = 5.0
+@export var reticle_height: float = 0.1
+@export var reticle_speed: float = 15.0
+@export var map_min: Vector2 = Vector2(-20.0, -12.0)
+@export var map_max: Vector2 = Vector2(20.0, 12.0)
 
 signal score_changed(new_score: int)
 
@@ -32,26 +35,20 @@ var held_rock: Rock = null
 var held_pit: Pit = null
 var is_aiming: bool = false
 var spawn_position: Vector3
-
+var _was_aiming: bool = false
 var _mower_home: Node
 
-@onready var body: MeshInstance3D = $Body
+@onready var anim: AnimationPlayer = $Model/AnimationPlayer
 @onready var mower_collision: CollisionShape3D = $MowerCollision
 @onready var state_machine: StateMachine = $StateMachine
 
 
 func _ready() -> void:
 	spawn_position = global_position
-
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	body.material_override = mat
-
 	if mower:
 		_mower_home = mower.get_parent()
 	else:
 		push_warning("Player %d no tiene cortadora asignada" % player_id)
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if state_machine.is_current("stunned") or state_machine.is_current("falling"):
@@ -61,12 +58,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_mower()
 	elif event.is_action_pressed("p%d_grab" % player_id):
 		try_grab_rock()
-	elif event.is_action_pressed("p%d_place" % player_id):
+
+
+func _physics_process(delta: float) -> void:
+	_update_aiming(delta)
+
+	if Input.is_action_just_pressed("p%d_place" % player_id) \
+			and not state_machine.is_current("stunned") \
+			and not state_machine.is_current("falling"):
 		confirm_aim()
-
-
-func _physics_process(_delta: float) -> void:
-	_update_aiming()
 
 
 func apply_movement(input: Vector2, speed: float, delta: float) -> void:
@@ -146,7 +146,7 @@ func confirm_aim() -> void:
 		return
 
 	if held_rock:
-		held_rock.throw(reticle.global_position)
+		held_rock.throw(reticle.global_position, self)
 		held_rock = null
 	elif held_pit:
 		held_pit.place_at(reticle.global_position)
@@ -154,6 +154,11 @@ func confirm_aim() -> void:
 
 	is_aiming = false
 	reticle.visible = false
+	
+	if held_rock:
+		play_anim("tirarOPiedra")
+		held_rock.throw(reticle.global_position, self)
+		held_rock = null
 
 
 func get_hit_by_rock(damage: int) -> void:
@@ -179,25 +184,34 @@ func fall_into_pit() -> void:
 	state_machine.force_state("falling")
 
 
-func _update_aiming() -> void:
+func _update_aiming(delta: float) -> void:
 	if reticle == null:
 		return
 
 	var holding_something := held_rock != null or held_pit != null
 	if state_machine.is_current("stunned") or state_machine.is_current("falling") or not holding_something:
 		is_aiming = false
+		_was_aiming = false
 		reticle.visible = false
 		return
 
 	is_aiming = Input.is_action_pressed("p%d_aim" % player_id)
 	reticle.visible = is_aiming
 	if not is_aiming:
+		_was_aiming = false
 		return
+
+	if not _was_aiming:
+		_was_aiming = true
+		reticle.global_position = Vector3(global_position.x, reticle_height, global_position.z)
 
 	var prefix := "p%d_" % player_id
 	var aim_input := Input.get_vector(prefix + "aim_left", prefix + "aim_right", prefix + "aim_up", prefix + "aim_down")
-	var offset := Vector3(aim_input.x, 0.0, aim_input.y) * aim_range
-	reticle.global_position = global_position + offset
+	var pos := reticle.global_position
+	pos.x = clampf(pos.x + aim_input.x * reticle_speed * delta, map_min.x, map_max.x)
+	pos.z = clampf(pos.z + aim_input.y * reticle_speed * delta, map_min.y, map_max.y)
+	pos.y = reticle_height
+	reticle.global_position = pos
 
 
 func _get_rival() -> Player:
@@ -206,3 +220,9 @@ func _get_rival() -> Player:
 		if p is Player and p.player_id == rival_id:
 			return p
 	return null
+
+func play_anim(anim_name: StringName) -> void:
+	if anim == null or not anim.has_animation(anim_name):
+		return
+	if anim.current_animation != anim_name:
+		anim.play(anim_name)

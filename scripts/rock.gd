@@ -13,6 +13,7 @@ var _home_parent: Node
 var _home_position: Vector3
 var _target_position: Vector3
 var _flying: bool = false
+var _thrower: Player = null
 
 
 func _ready() -> void:
@@ -39,13 +40,14 @@ func pick_up(holder: Player) -> void:
 	transform = Transform3D(Basis.IDENTITY, holder.rock_hold_offset)
 
 
-func throw(target_position: Vector3) -> void:
+func throw(target_position: Vector3, thrower: Player) -> void:
 	var world_transform := global_transform
 	reparent(_home_parent)
 	global_transform = world_transform
 	is_held = false
 	_flying = true
 	_target_position = target_position
+	_thrower = thrower
 
 
 func drop() -> void:
@@ -61,13 +63,17 @@ func drop() -> void:
 func _on_hit() -> void:
 	_flying = false
 	for p in get_tree().get_nodes_in_group("player"):
-		if p is Player and p.global_position.distance_to(global_position) <= hit_radius:
+		if p == _thrower or not p is Player:
+			continue
+		var flat := Vector3(p.global_position.x - global_position.x, 0.0, p.global_position.z - global_position.z)
+		if flat.length() <= hit_radius:
 			p.get_hit_by_rock(damage)
 			break
 	_return_home()
 
 
 func _return_home() -> void:
+	_thrower = null
 	visible = false
 	await get_tree().create_timer(respawn_time).timeout
 	reparent(_home_parent)
