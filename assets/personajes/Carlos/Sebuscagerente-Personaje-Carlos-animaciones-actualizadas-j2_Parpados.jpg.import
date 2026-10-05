@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blhelawmml0qb"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-29fd5cc9f01d004e4a0076e1d3f70f35.s3tc.ctex"
+uid="uid://c7brg7kw568pw"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Parpados.jpg-5f4bfcfd0459b0ad12cf59e5cb1c1ba9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d1dd210d6b1312cb342b56d02bd5e651"
+"md5": "2d20d9c8b8dd5c933a3982613c4b7778"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Piernas.jpg-29fd5cc9f01d004e4a0076e1d3f70f35.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Parpados.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Parpados.jpg-5f4bfcfd0459b0ad12cf59e5cb1c1ba9.s3tc.ctex"]
 
 [params]
 

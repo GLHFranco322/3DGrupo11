@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://035cxp1ve0ta"
-path="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb-9308ebf6e24e6b7f4ecb4230cddd1c2d.scn"
+uid="uid://ce0bsdlmjt8hh"
+path="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2.glb-6612efa5cbf6e6101a3a68f3c39dbe64.scn"
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3.glb-9308ebf6e24e6b7f4ecb4230cddd1c2d.scn"]
+source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2.glb"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2.glb-6612efa5cbf6e6101a3a68f3c39dbe64.scn"]
 
 [params]
 

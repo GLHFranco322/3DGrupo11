@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2qh7ugtxyxes"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Brazos.jpg-dd67f116c755c9caa2e5c86669d7e7c3.s3tc.ctex"
+uid="uid://bje2txf7xaoc1"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Cuerpo.jpg-0f7cf3faf2d9a67b26e622daf44db35e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d1dd210d6b1312cb342b56d02bd5e651"
+"md5": "4f531e39322bb1a87e7af7054738ede3"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Brazos.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-J2-AnimacionesSprint3_Brazos.jpg-dd67f116c755c9caa2e5c86669d7e7c3.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Cuerpo.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animaciones-actualizadas-j2_Cuerpo.jpg-0f7cf3faf2d9a67b26e622daf44db35e.s3tc.ctex"]
 
 [params]
 
