@@ -153,6 +153,7 @@
 [ext_resource type="PackedScene" uid="uid://bp0ntehp87pfj" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/tree-pine.fbx" id="151_eyu2i"]
 [ext_resource type="PackedScene" uid="uid://blkd1k8ya3gh6" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/tree-snow.fbx" id="152_bdyy1"]
 [ext_resource type="PackedScene" uid="uid://ck0hps3sye0sh" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/tree.fbx" id="153_2kfue"]
+[ext_resource type="PackedScene" uid="uid://dagp57cj2to28" path="res://assets/escenario/muebles/cerca de madera seleccionada/wooden fences.glb" id="154_a7uj7"]
 
 [node name="Node3D" type="Node3D" unique_id=658936065]
 
@@ -614,3 +615,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16833985, 0, -0.027820587)
 
 [node name="tree" parent="." unique_id=951729097 instance=ExtResource("153_2kfue")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16833985, 0, -0.027820587)
+
+[node name="wooden fences" parent="." unique_id=1001442727 instance=ExtResource("154_a7uj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4464948, 0, 0.21369171)

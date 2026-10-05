@@ -1,0 +1,640 @@
+[gd_scene format=3 uid="uid://dryp7ttg14yy2"]
+
+[ext_resource type="PackedScene" uid="uid://bsyys868xh1eo" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/armchair.fbx" id="1_sdy20"]
+[ext_resource type="PackedScene" uid="uid://i804khot7nl7" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/armchair_pillows.fbx" id="2_3th1u"]
+[ext_resource type="PackedScene" uid="uid://hr2m718pxkjf" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_double_A.fbx" id="3_4wfm4"]
+[ext_resource type="PackedScene" uid="uid://n3w5eyacuops" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_double_B.fbx" id="4_r1ga5"]
+[ext_resource type="PackedScene" uid="uid://dke05lbpw5y4s" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_single_A.fbx" id="5_k07u4"]
+[ext_resource type="PackedScene" uid="uid://rog00blmiw23" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_single_B.fbx" id="6_i0lw7"]
+[ext_resource type="PackedScene" uid="uid://ctpwqfmym6fdc" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/book_set.fbx" id="7_1bov1"]
+[ext_resource type="PackedScene" uid="uid://b6ys88yoh4vej" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/book_single.fbx" id="8_g0nhh"]
+[ext_resource type="PackedScene" uid="uid://dyus3t0b5vss2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_medium.fbx" id="9_pfnmf"]
+[ext_resource type="PackedScene" uid="uid://sjoo2sgo6pi2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_medium_decorated.fbx" id="10_lp75y"]
+[ext_resource type="PackedScene" uid="uid://ciwxgoexnfdgt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_small.fbx" id="11_8sajk"]
+[ext_resource type="PackedScene" uid="uid://b4py5ycyr58pl" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_small_decorated.fbx" id="12_73aw1"]
+[ext_resource type="PackedScene" uid="uid://dbn6wghoayb6w" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_medium_A.fbx" id="13_7dna3"]
+[ext_resource type="PackedScene" uid="uid://brvmtkk3txrqe" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_medium_B.fbx" id="14_7cf7l"]
+[ext_resource type="PackedScene" uid="uid://f1j2oqq7ph8a" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_small_A.fbx" id="15_4267g"]
+[ext_resource type="PackedScene" uid="uid://dcimq7000st5m" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_small_B.fbx" id="16_kqjtc"]
+[ext_resource type="PackedScene" uid="uid://c0o2cmmtdwu5d" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_A.fbx" id="17_ns02u"]
+[ext_resource type="PackedScene" uid="uid://cgqbyi52g43l0" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_A_wood.fbx" id="18_k3if3"]
+[ext_resource type="PackedScene" uid="uid://d3smv3o3uoidf" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_B.fbx" id="19_b6at6"]
+[ext_resource type="PackedScene" uid="uid://cuqel0olu01bt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_B_wood.fbx" id="20_ofg8q"]
+[ext_resource type="PackedScene" uid="uid://c5i62pb78gnp0" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_C.fbx" id="21_vrqlt"]
+[ext_resource type="PackedScene" uid="uid://bgmw8avjqq0hj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_stool.fbx" id="22_fs8o6"]
+[ext_resource type="PackedScene" uid="uid://chj1q7isw5doh" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_stool_wood.fbx" id="23_336va"]
+[ext_resource type="PackedScene" uid="uid://bv8qn46t5bx2f" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/couch.fbx" id="24_ns32e"]
+[ext_resource type="PackedScene" uid="uid://dxltartsu21qv" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/couch_pillows.fbx" id="25_idew8"]
+[ext_resource type="PackedScene" uid="uid://cap0llxisoot2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/lamp_standing.fbx" id="26_eb5ff"]
+[ext_resource type="PackedScene" uid="uid://dbwisq07n67ay" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/lamp_table.fbx" id="27_mlspq"]
+[ext_resource type="PackedScene" uid="uid://d0y18pkoqoxmq" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_large_A.fbx" id="28_you1a"]
+[ext_resource type="PackedScene" uid="uid://vancskv335be" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_large_B.fbx" id="29_p4i0n"]
+[ext_resource type="PackedScene" uid="uid://bup1d51q40tkk" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_medium.fbx" id="30_lmyg8"]
+[ext_resource type="PackedScene" uid="uid://6ljcr5xjbw42" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_A.fbx" id="31_25abo"]
+[ext_resource type="PackedScene" uid="uid://vbyj6u88qnkd" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_B.fbx" id="32_75w82"]
+[ext_resource type="PackedScene" uid="uid://c2ykaippx7sj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_C.fbx" id="33_il8u1"]
+[ext_resource type="PackedScene" uid="uid://psjecu7cl8eq" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_standing_A.fbx" id="34_ovvhg"]
+[ext_resource type="PackedScene" uid="uid://b6hohqevvrp1x" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_standing_B.fbx" id="35_q6tk6"]
+[ext_resource type="PackedScene" uid="uid://dm7a1y2giam0o" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pillow_A.fbx" id="36_cscqy"]
+[ext_resource type="PackedScene" uid="uid://ed0hewakl5f" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pillow_B.fbx" id="37_pf1va"]
+[ext_resource type="PackedScene" uid="uid://c7vn0j43iu6nr" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_oval_A.fbx" id="38_33fgw"]
+[ext_resource type="PackedScene" uid="uid://rifp11p8c3fl" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_oval_B.fbx" id="39_ryind"]
+[ext_resource type="PackedScene" uid="uid://dwmlgvmq6gp2a" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_rectangle_A.fbx" id="40_1gkfh"]
+[ext_resource type="PackedScene" uid="uid://c2ufi28yrbpyc" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_rectangle_B.fbx" id="41_sj17g"]
+[ext_resource type="PackedScene" uid="uid://d10n633wkjo6" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_rectangle_stripes_A.fbx" id="42_l4amx"]
+[ext_resource type="PackedScene" uid="uid://bxsiktdabs1xb" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/rug_rectangle_stripes_B.fbx" id="43_51dav"]
+[ext_resource type="PackedScene" uid="uid://bspfcerxgoqbp" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_A_big.fbx" id="44_st8wm"]
+[ext_resource type="PackedScene" uid="uid://vri6aeuaskwt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_A_small.fbx" id="45_uewwo"]
+[ext_resource type="PackedScene" uid="uid://cavrer21tk4gt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_B_large.fbx" id="46_20k5e"]
+[ext_resource type="PackedScene" uid="uid://br4x6c17nh5wh" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_B_large_decorated.fbx" id="47_gchwm"]
+[ext_resource type="PackedScene" uid="uid://c7uaui4soht14" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_B_small.fbx" id="48_66ofh"]
+[ext_resource type="PackedScene" uid="uid://byn0bubuxefq8" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_B_small_decorated.fbx" id="49_l8oy0"]
+[ext_resource type="PackedScene" uid="uid://d84o7ud5uw5m" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_low.fbx" id="50_d3tq4"]
+[ext_resource type="PackedScene" uid="uid://ba2d25xyxl3nj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_medium.fbx" id="51_a118p"]
+[ext_resource type="PackedScene" uid="uid://76tlm6ojingg" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_medium_long.fbx" id="52_e6vue"]
+[ext_resource type="PackedScene" uid="uid://cn5aiw3j2ekwv" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_small.fbx" id="53_bj3hy"]
+[ext_resource type="PackedScene" uid="uid://dagp57cj2to28" path="res://assets/escenario/muebles/cerca de madera seleccionada/wooden fences.glb" id="54_0rqyp"]
+[ext_resource type="PackedScene" uid="uid://cbm2nos0tc5cy" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_A_Color1.fbx" id="55_v2syn"]
+[ext_resource type="PackedScene" uid="uid://dhdpan2242pcv" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_B_Color1.fbx" id="56_vaxqr"]
+[ext_resource type="PackedScene" uid="uid://w8ibf32afgvo" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_C_Color1.fbx" id="57_cqudg"]
+[ext_resource type="PackedScene" uid="uid://dac6hnxtvarfd" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_D_Color1.fbx" id="58_6r1f2"]
+[ext_resource type="PackedScene" uid="uid://bb1lue1xqbckm" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_E_Color1.fbx" id="59_mdqqi"]
+[ext_resource type="PackedScene" uid="uid://f7xurati242f" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_F_Color1.fbx" id="60_38uv1"]
+[ext_resource type="PackedScene" uid="uid://bdxaegfiehh33" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_1_G_Color1.fbx" id="61_qk0wd"]
+[ext_resource type="PackedScene" uid="uid://dc4lf42pgemx1" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_A_Color1.fbx" id="62_avkom"]
+[ext_resource type="PackedScene" uid="uid://bdq456xwbwr7j" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_B_Color1.fbx" id="63_vijso"]
+[ext_resource type="PackedScene" uid="uid://crq3e4vw5h8as" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_C_Color1.fbx" id="64_agf88"]
+[ext_resource type="PackedScene" uid="uid://dkem4jst0h2x5" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_D_Color1.fbx" id="65_4o45m"]
+[ext_resource type="PackedScene" uid="uid://g2dn671eaoae" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_E_Color1.fbx" id="66_nn3hs"]
+[ext_resource type="PackedScene" uid="uid://c4wq37fg7umeg" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_2_F_Color1.fbx" id="67_1l8bl"]
+[ext_resource type="PackedScene" uid="uid://comh5y1n7v5ek" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_3_A_Color1.fbx" id="68_lc2fn"]
+[ext_resource type="PackedScene" uid="uid://cw5e53jyusyt0" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_3_B_Color1.fbx" id="69_hpkdv"]
+[ext_resource type="PackedScene" uid="uid://bonncdxgd2rpy" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_3_C_Color1.fbx" id="70_htcqb"]
+[ext_resource type="PackedScene" uid="uid://brvjailt7nyn" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_A_Color1.fbx" id="71_46rb5"]
+[ext_resource type="PackedScene" uid="uid://ck7ahyvcswb0h" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_B_Color1.fbx" id="72_nvdj0"]
+[ext_resource type="PackedScene" uid="uid://72ior812qx1n" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_C_Color1.fbx" id="73_etcey"]
+[ext_resource type="PackedScene" uid="uid://bdiryye47bmk2" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_D_Color1.fbx" id="74_a1e1o"]
+[ext_resource type="PackedScene" uid="uid://dufo5ao4qott3" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_E_Color1.fbx" id="75_s62te"]
+[ext_resource type="PackedScene" uid="uid://cptr0hv8ntw65" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Bush_4_F_Color1.fbx" id="76_jp4af"]
+[ext_resource type="PackedScene" uid="uid://m10fn0p4y638" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_A_Color1.fbx" id="77_k4mdd"]
+[ext_resource type="PackedScene" uid="uid://5gf0pl2hfnm3" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_A_Singlesided_Color1.fbx" id="78_y3klb"]
+[ext_resource type="PackedScene" uid="uid://b882iw51x8y6e" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_B_Color1.fbx" id="79_740p1"]
+[ext_resource type="PackedScene" uid="uid://b32wyqe15erxr" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_B_Singlesided_Color1.fbx" id="80_yn545"]
+[ext_resource type="PackedScene" uid="uid://xe1u8oeghj46" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_C_Color1.fbx" id="81_au1h0"]
+[ext_resource type="PackedScene" uid="uid://btd2hbegrxrpo" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_C_Singlesided_Color1.fbx" id="82_jwrvv"]
+[ext_resource type="PackedScene" uid="uid://cvqg7nj54ejde" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_D_Color1.fbx" id="83_di4gf"]
+[ext_resource type="PackedScene" uid="uid://bts1o3pr120xf" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_D_Singlesided_Color1.fbx" id="84_eeykp"]
+[ext_resource type="PackedScene" uid="uid://dq1q4xb3fbr3o" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_Mesh.fbx" id="85_gks2u"]
+[ext_resource type="PackedScene" uid="uid://bql4jc6ftfbje" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_1_SingleSided_Mesh.fbx" id="86_t4h3s"]
+[ext_resource type="PackedScene" uid="uid://c4ip1ryp82hq5" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_A_Color1.fbx" id="87_hm7rr"]
+[ext_resource type="PackedScene" uid="uid://1bgyakeoehq4" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_A_Singlesided_Color1.fbx" id="88_deunr"]
+[ext_resource type="PackedScene" uid="uid://c61wwgar3nm0e" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_B_Color1.fbx" id="89_187fi"]
+[ext_resource type="PackedScene" uid="uid://cead5swp74sw3" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_B_Singlesided_Color1.fbx" id="90_fw4wa"]
+[ext_resource type="PackedScene" uid="uid://348ploecosmt" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_C_Color1.fbx" id="91_moxmv"]
+[ext_resource type="PackedScene" uid="uid://bk7f7erylb1n1" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_C_Singlesided_Color1.fbx" id="92_dt88w"]
+[ext_resource type="PackedScene" uid="uid://iifdum6svhly" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_D_Color1.fbx" id="93_amwkf"]
+[ext_resource type="PackedScene" uid="uid://bkl6lbck5ogv7" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_D_Singlesided_Color1.fbx" id="94_c8ahy"]
+[ext_resource type="PackedScene" uid="uid://cplfk0r14vjie" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_Mesh.fbx" id="95_o1c71"]
+[ext_resource type="PackedScene" uid="uid://bxqqiv3nxd616" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Grass_2_SingleSided_Mesh.fbx" id="96_xr6qe"]
+[ext_resource type="PackedScene" uid="uid://cufjckmnfmcxa" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_A_Color1.fbx" id="97_vi17j"]
+[ext_resource type="PackedScene" uid="uid://drps74ssjg8qb" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_B_Color1.fbx" id="98_s5ye8"]
+[ext_resource type="PackedScene" uid="uid://dgny3w7nv72ch" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_C_Color1.fbx" id="99_ykqo6"]
+[ext_resource type="PackedScene" uid="uid://cs1t08jda0mm2" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_D_Color1.fbx" id="100_v6mds"]
+[ext_resource type="PackedScene" uid="uid://df7xi1rifqpbv" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_E_Color1.fbx" id="101_vytr3"]
+[ext_resource type="PackedScene" uid="uid://cs1ii2n6rqg57" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_F_Color1.fbx" id="102_rw4u1"]
+[ext_resource type="PackedScene" uid="uid://c07dfreiwnndk" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_G_Color1.fbx" id="103_j7xxb"]
+[ext_resource type="PackedScene" uid="uid://bswqlu6ayyfeb" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_H_Color1.fbx" id="104_lidov"]
+[ext_resource type="PackedScene" uid="uid://b4fdj07xrup7b" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_I_Color1.fbx" id="105_pk4y0"]
+[ext_resource type="PackedScene" uid="uid://dgbfb83424ctd" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_J_Color1.fbx" id="106_eu0u3"]
+[ext_resource type="PackedScene" uid="uid://w1ukkiomw60u" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_K_Color1.fbx" id="107_myw3y"]
+[ext_resource type="PackedScene" uid="uid://bi1y5pu8kw5xj" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_L_Color1.fbx" id="108_o7vgw"]
+[ext_resource type="PackedScene" uid="uid://c1ibflhmrdx1p" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_M_Color1.fbx" id="109_rpvbx"]
+[ext_resource type="PackedScene" uid="uid://hs03bl4hlfdq" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_N_Color1.fbx" id="110_u5alc"]
+[ext_resource type="PackedScene" uid="uid://cupaephf0rncn" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_O_Color1.fbx" id="111_xpfj7"]
+[ext_resource type="PackedScene" uid="uid://cwpvyc33ignut" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_P_Color1.fbx" id="112_nwpyn"]
+[ext_resource type="PackedScene" uid="uid://htiuvovir28d" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_1_Q_Color1.fbx" id="113_egkgs"]
+[ext_resource type="PackedScene" uid="uid://d1iumv7giphnf" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_A_Color1.fbx" id="114_v1gut"]
+[ext_resource type="PackedScene" uid="uid://fp216uwcy8yu" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_B_Color1.fbx" id="115_oc64h"]
+[ext_resource type="PackedScene" uid="uid://gx566ge6jcnu" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_C_Color1.fbx" id="116_a2daw"]
+[ext_resource type="PackedScene" uid="uid://dhtv5pxho6gmu" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_D_Color1.fbx" id="117_46b3i"]
+[ext_resource type="PackedScene" uid="uid://bdqvjfuhn8yow" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_E_Color1.fbx" id="118_bopq0"]
+[ext_resource type="PackedScene" uid="uid://du4cmpcath88" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_F_Color1.fbx" id="119_0xm3e"]
+[ext_resource type="PackedScene" uid="uid://cm1ajdq0shfsv" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_G_Color1.fbx" id="120_os6fw"]
+[ext_resource type="PackedScene" uid="uid://ysqptc4e3yiu" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_2_H_Color1.fbx" id="121_q6f2i"]
+[ext_resource type="PackedScene" uid="uid://cyejdqf87omll" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_A_Color1.fbx" id="122_jvp7g"]
+[ext_resource type="PackedScene" uid="uid://dmyswpvkdemu6" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_B_Color1.fbx" id="123_75p13"]
+[ext_resource type="PackedScene" uid="uid://conc3pkbmjk6r" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_C_Color1.fbx" id="124_kojip"]
+[ext_resource type="PackedScene" uid="uid://coul5hu7wtgkh" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_D_Color1.fbx" id="125_y8gtj"]
+[ext_resource type="PackedScene" uid="uid://04b4cdbvn5uw" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_E_Color1.fbx" id="126_4ly2d"]
+[ext_resource type="PackedScene" uid="uid://d16o4cyxbn3sa" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_F_Color1.fbx" id="127_r56qk"]
+[ext_resource type="PackedScene" uid="uid://bo8ed47d2brk7" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_G_Color1.fbx" id="128_nrgpt"]
+[ext_resource type="PackedScene" uid="uid://p2cqk1ohk0c" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_H_Color1.fbx" id="129_p72w8"]
+[ext_resource type="PackedScene" uid="uid://dtpxx6r2blvxr" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_I_Color1.fbx" id="130_vs4cn"]
+[ext_resource type="PackedScene" uid="uid://cuhxh0qqhmyy" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_J_Color1.fbx" id="131_yf5lf"]
+[ext_resource type="PackedScene" uid="uid://5nbxge4j2ar7" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_K_Color1.fbx" id="132_io463"]
+[ext_resource type="PackedScene" uid="uid://uepl5lpbui4g" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_L_Color1.fbx" id="133_axckv"]
+[ext_resource type="PackedScene" uid="uid://cw1pfonndu7yq" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_M_Color1.fbx" id="134_c2vwl"]
+[ext_resource type="PackedScene" uid="uid://csy66ulxa5flf" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_N_Color1.fbx" id="135_tp01q"]
+[ext_resource type="PackedScene" uid="uid://dqe5bsg5yojvq" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_O_Color1.fbx" id="136_yu7b2"]
+[ext_resource type="PackedScene" uid="uid://dj5y782tnppis" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_P_Color1.fbx" id="137_7e2li"]
+[ext_resource type="PackedScene" uid="uid://by5mxja7lg6in" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_Q_Color1.fbx" id="138_7gsr3"]
+[ext_resource type="PackedScene" uid="uid://cx6j2ww3ltvmt" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Rock_3_R_Color1.fbx" id="139_5b2pv"]
+[ext_resource type="PackedScene" uid="uid://c2pebec4hetxi" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_1_A_Color1.fbx" id="140_nqmyl"]
+[ext_resource type="PackedScene" uid="uid://eyy2a4qb07ni" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_1_B_Color1.fbx" id="141_4kaih"]
+[ext_resource type="PackedScene" uid="uid://b7i84pb8fhcer" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_1_C_Color1.fbx" id="142_b2eef"]
+[ext_resource type="PackedScene" uid="uid://ii4onjb68lhl" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_2_A_Color1.fbx" id="143_o75k7"]
+[ext_resource type="PackedScene" uid="uid://du4tlgvaxwkls" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_2_B_Color1.fbx" id="144_i6owp"]
+[ext_resource type="PackedScene" uid="uid://dccgqiki5r5xh" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_2_C_Color1.fbx" id="145_lda7i"]
+[ext_resource type="PackedScene" uid="uid://hyaqsvmuessv" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_2_D_Color1.fbx" id="146_mrdls"]
+[ext_resource type="PackedScene" uid="uid://byl8ly4f3jk2i" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_2_E_Color1.fbx" id="147_30y5w"]
+[ext_resource type="PackedScene" uid="uid://bekoh75seugqa" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_3_A_Color1.fbx" id="148_a5xi6"]
+[ext_resource type="PackedScene" uid="uid://vs8c4w33mxcr" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_3_B_Color1.fbx" id="149_bodwd"]
+[ext_resource type="PackedScene" uid="uid://786frbgeo0ke" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_3_C_Color1.fbx" id="150_k1iu7"]
+[ext_resource type="PackedScene" uid="uid://bocebnt76ocw1" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_4_A_Color1.fbx" id="151_23b0s"]
+[ext_resource type="PackedScene" uid="uid://b50ogsc6e585e" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_4_B_Color1.fbx" id="152_oqlkn"]
+[ext_resource type="PackedScene" uid="uid://dxcsatt7naw5y" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_4_C_Color1.fbx" id="153_2mr2r"]
+[ext_resource type="PackedScene" uid="uid://c4p6nsopqb6ug" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_1_A_Color1.fbx" id="154_8rhde"]
+[ext_resource type="PackedScene" uid="uid://bs5otskmaot3g" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_1_B_Color1.fbx" id="155_r5ujj"]
+[ext_resource type="PackedScene" uid="uid://cuqw7xkc3xefd" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_1_C_Color1.fbx" id="156_jb34p"]
+[ext_resource type="PackedScene" uid="uid://k7kocah7ok8n" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_2_A_Color1.fbx" id="157_mstr2"]
+[ext_resource type="PackedScene" uid="uid://ce8xnayocb2em" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_2_B_Color1.fbx" id="158_2dtbt"]
+[ext_resource type="PackedScene" uid="uid://dp14atakb4dxl" path="res://assets/escenario/naturaleza/árboles - piedras - pasto/Assets/fbx/Tree_Bare_2_C_Color1.fbx" id="159_uxxkl"]
+
+[node name="MeshesMapa" type="Node3D" unique_id=1190781908]
+
+[node name="armchair" parent="." unique_id=44732567 instance=ExtResource("1_sdy20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="armchair_pillows" parent="." unique_id=228157421 instance=ExtResource("2_3th1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="bed_double_A" parent="." unique_id=1612241857 instance=ExtResource("3_4wfm4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="bed_double_B" parent="." unique_id=574520873 instance=ExtResource("4_r1ga5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="bed_single_A" parent="." unique_id=1103184736 instance=ExtResource("5_k07u4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="bed_single_B" parent="." unique_id=1328921065 instance=ExtResource("6_i0lw7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="book_set" parent="." unique_id=786703941 instance=ExtResource("7_1bov1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="book_single" parent="." unique_id=1108928268 instance=ExtResource("8_g0nhh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cabinet_medium" parent="." unique_id=152528631 instance=ExtResource("9_pfnmf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cabinet_medium_decorated" parent="." unique_id=1649252732 instance=ExtResource("10_lp75y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cabinet_small" parent="." unique_id=233529718 instance=ExtResource("11_8sajk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cabinet_small_decorated" parent="." unique_id=1281868768 instance=ExtResource("12_73aw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cactus_medium_A" parent="." unique_id=1500144304 instance=ExtResource("13_7dna3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cactus_medium_B" parent="." unique_id=549820039 instance=ExtResource("14_7cf7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cactus_small_A" parent="." unique_id=907620884 instance=ExtResource("15_4267g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="cactus_small_B" parent="." unique_id=667788070 instance=ExtResource("16_kqjtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_A" parent="." unique_id=497679619 instance=ExtResource("17_ns02u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_A_wood" parent="." unique_id=1142500131 instance=ExtResource("18_k3if3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_B" parent="." unique_id=411565012 instance=ExtResource("19_b6at6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_B_wood" parent="." unique_id=1031046832 instance=ExtResource("20_ofg8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_C" parent="." unique_id=1859058768 instance=ExtResource("21_vrqlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_stool" parent="." unique_id=322271979 instance=ExtResource("22_fs8o6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="chair_stool_wood" parent="." unique_id=2000107519 instance=ExtResource("23_336va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="couch" parent="." unique_id=1647088563 instance=ExtResource("24_ns32e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="couch_pillows" parent="." unique_id=657404159 instance=ExtResource("25_idew8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="lamp_standing" parent="." unique_id=1741293533 instance=ExtResource("26_eb5ff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="lamp_table" parent="." unique_id=1347536343 instance=ExtResource("27_mlspq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_large_A" parent="." unique_id=121918862 instance=ExtResource("28_you1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_large_B" parent="." unique_id=746961147 instance=ExtResource("29_p4i0n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_medium" parent="." unique_id=1061855856 instance=ExtResource("30_lmyg8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_small_A" parent="." unique_id=1863634224 instance=ExtResource("31_25abo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_small_B" parent="." unique_id=266888031 instance=ExtResource("32_75w82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_small_C" parent="." unique_id=1171712757 instance=ExtResource("33_il8u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_standing_A" parent="." unique_id=704702297 instance=ExtResource("34_ovvhg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pictureframe_standing_B" parent="." unique_id=1440675881 instance=ExtResource("35_q6tk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pillow_A" parent="." unique_id=1861483071 instance=ExtResource("36_cscqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="pillow_B" parent="." unique_id=1603538837 instance=ExtResource("37_pf1va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_oval_A" parent="." unique_id=1633322659 instance=ExtResource("38_33fgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_oval_B" parent="." unique_id=48857385 instance=ExtResource("39_ryind")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_rectangle_A" parent="." unique_id=416060810 instance=ExtResource("40_1gkfh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_rectangle_B" parent="." unique_id=1726230944 instance=ExtResource("41_sj17g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_rectangle_stripes_A" parent="." unique_id=1583579411 instance=ExtResource("42_l4amx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="rug_rectangle_stripes_B" parent="." unique_id=1496949594 instance=ExtResource("43_51dav")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_A_big" parent="." unique_id=602604469 instance=ExtResource("44_st8wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_A_small" parent="." unique_id=80619751 instance=ExtResource("45_uewwo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_B_large" parent="." unique_id=727822538 instance=ExtResource("46_20k5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_B_large_decorated" parent="." unique_id=288370160 instance=ExtResource("47_gchwm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_B_small" parent="." unique_id=1219681726 instance=ExtResource("48_66ofh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="shelf_B_small_decorated" parent="." unique_id=1092568173 instance=ExtResource("49_l8oy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="table_low" parent="." unique_id=1783454191 instance=ExtResource("50_d3tq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="table_medium" parent="." unique_id=1225708864 instance=ExtResource("51_a118p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="table_medium_long" parent="." unique_id=175848019 instance=ExtResource("52_e6vue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="table_small" parent="." unique_id=687923208 instance=ExtResource("53_bj3hy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22032726, 0, -0.2563672)
+
+[node name="wooden fences" parent="." unique_id=1001442727 instance=ExtResource("54_0rqyp")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 3.8965693, 0, 0.052425385)
+
+[node name="Bush_1_A_Color1" parent="." unique_id=1997612769 instance=ExtResource("55_v2syn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_B_Color1" parent="." unique_id=377471413 instance=ExtResource("56_vaxqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_C_Color1" parent="." unique_id=281032998 instance=ExtResource("57_cqudg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_D_Color1" parent="." unique_id=2049094728 instance=ExtResource("58_6r1f2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_E_Color1" parent="." unique_id=300596361 instance=ExtResource("59_mdqqi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_F_Color1" parent="." unique_id=1609700108 instance=ExtResource("60_38uv1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_1_G_Color1" parent="." unique_id=931769122 instance=ExtResource("61_qk0wd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_A_Color1" parent="." unique_id=103707328 instance=ExtResource("62_avkom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_B_Color1" parent="." unique_id=1165545453 instance=ExtResource("63_vijso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_C_Color1" parent="." unique_id=829772184 instance=ExtResource("64_agf88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_D_Color1" parent="." unique_id=2146447113 instance=ExtResource("65_4o45m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_E_Color1" parent="." unique_id=84832473 instance=ExtResource("66_nn3hs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_2_F_Color1" parent="." unique_id=1780618484 instance=ExtResource("67_1l8bl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_3_A_Color1" parent="." unique_id=1677180073 instance=ExtResource("68_lc2fn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_3_B_Color1" parent="." unique_id=1047767437 instance=ExtResource("69_hpkdv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_3_C_Color1" parent="." unique_id=1561893468 instance=ExtResource("70_htcqb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_A_Color1" parent="." unique_id=1329748566 instance=ExtResource("71_46rb5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_B_Color1" parent="." unique_id=2111456616 instance=ExtResource("72_nvdj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_C_Color1" parent="." unique_id=281967639 instance=ExtResource("73_etcey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_D_Color1" parent="." unique_id=834926825 instance=ExtResource("74_a1e1o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_E_Color1" parent="." unique_id=1602501127 instance=ExtResource("75_s62te")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Bush_4_F_Color1" parent="." unique_id=814799501 instance=ExtResource("76_jp4af")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_A_Color1" parent="." unique_id=1274579880 instance=ExtResource("77_k4mdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_A_Singlesided_Color1" parent="." unique_id=643213142 instance=ExtResource("78_y3klb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_B_Color1" parent="." unique_id=645291698 instance=ExtResource("79_740p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_B_Singlesided_Color1" parent="." unique_id=1801184252 instance=ExtResource("80_yn545")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_C_Color1" parent="." unique_id=1640782355 instance=ExtResource("81_au1h0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_C_Singlesided_Color1" parent="." unique_id=318311888 instance=ExtResource("82_jwrvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_D_Color1" parent="." unique_id=390728810 instance=ExtResource("83_di4gf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_D_Singlesided_Color1" parent="." unique_id=93518059 instance=ExtResource("84_eeykp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_Mesh" parent="." unique_id=1402198224 instance=ExtResource("85_gks2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_1_SingleSided_Mesh" parent="." unique_id=938958799 instance=ExtResource("86_t4h3s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_A_Color1" parent="." unique_id=1756428605 instance=ExtResource("87_hm7rr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_A_Singlesided_Color1" parent="." unique_id=896747271 instance=ExtResource("88_deunr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_B_Color1" parent="." unique_id=2141106037 instance=ExtResource("89_187fi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_B_Singlesided_Color1" parent="." unique_id=352791675 instance=ExtResource("90_fw4wa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_C_Color1" parent="." unique_id=2023265803 instance=ExtResource("91_moxmv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_C_Singlesided_Color1" parent="." unique_id=2140295035 instance=ExtResource("92_dt88w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_D_Color1" parent="." unique_id=902315948 instance=ExtResource("93_amwkf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_D_Singlesided_Color1" parent="." unique_id=551385903 instance=ExtResource("94_c8ahy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_Mesh" parent="." unique_id=1467449475 instance=ExtResource("95_o1c71")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Grass_2_SingleSided_Mesh" parent="." unique_id=2098737861 instance=ExtResource("96_xr6qe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_A_Color1" parent="." unique_id=872178052 instance=ExtResource("97_vi17j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_B_Color1" parent="." unique_id=395832655 instance=ExtResource("98_s5ye8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_C_Color1" parent="." unique_id=1880223352 instance=ExtResource("99_ykqo6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_D_Color1" parent="." unique_id=459000080 instance=ExtResource("100_v6mds")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_E_Color1" parent="." unique_id=1680688361 instance=ExtResource("101_vytr3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_F_Color1" parent="." unique_id=1493835666 instance=ExtResource("102_rw4u1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_G_Color1" parent="." unique_id=1631071916 instance=ExtResource("103_j7xxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_H_Color1" parent="." unique_id=413311178 instance=ExtResource("104_lidov")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_I_Color1" parent="." unique_id=1921282515 instance=ExtResource("105_pk4y0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_J_Color1" parent="." unique_id=863687324 instance=ExtResource("106_eu0u3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_K_Color1" parent="." unique_id=371928173 instance=ExtResource("107_myw3y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_L_Color1" parent="." unique_id=710001757 instance=ExtResource("108_o7vgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_M_Color1" parent="." unique_id=33443326 instance=ExtResource("109_rpvbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_N_Color1" parent="." unique_id=559957764 instance=ExtResource("110_u5alc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_O_Color1" parent="." unique_id=1321930107 instance=ExtResource("111_xpfj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_P_Color1" parent="." unique_id=716551324 instance=ExtResource("112_nwpyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_1_Q_Color1" parent="." unique_id=1917219352 instance=ExtResource("113_egkgs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_A_Color1" parent="." unique_id=1294722849 instance=ExtResource("114_v1gut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_B_Color1" parent="." unique_id=60425399 instance=ExtResource("115_oc64h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_C_Color1" parent="." unique_id=1273709632 instance=ExtResource("116_a2daw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_D_Color1" parent="." unique_id=555117373 instance=ExtResource("117_46b3i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_E_Color1" parent="." unique_id=928577158 instance=ExtResource("118_bopq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_F_Color1" parent="." unique_id=1670903851 instance=ExtResource("119_0xm3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_G_Color1" parent="." unique_id=2122867642 instance=ExtResource("120_os6fw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_2_H_Color1" parent="." unique_id=1404505718 instance=ExtResource("121_q6f2i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_A_Color1" parent="." unique_id=424779804 instance=ExtResource("122_jvp7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_B_Color1" parent="." unique_id=856055877 instance=ExtResource("123_75p13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_C_Color1" parent="." unique_id=1779236473 instance=ExtResource("124_kojip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_D_Color1" parent="." unique_id=1181270896 instance=ExtResource("125_y8gtj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_E_Color1" parent="." unique_id=951431966 instance=ExtResource("126_4ly2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_F_Color1" parent="." unique_id=1953470553 instance=ExtResource("127_r56qk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_G_Color1" parent="." unique_id=273490633 instance=ExtResource("128_nrgpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_H_Color1" parent="." unique_id=1844070860 instance=ExtResource("129_p72w8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_I_Color1" parent="." unique_id=970578412 instance=ExtResource("130_vs4cn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_J_Color1" parent="." unique_id=571839094 instance=ExtResource("131_yf5lf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_K_Color1" parent="." unique_id=1214871068 instance=ExtResource("132_io463")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_L_Color1" parent="." unique_id=541570247 instance=ExtResource("133_axckv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_M_Color1" parent="." unique_id=241928329 instance=ExtResource("134_c2vwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_N_Color1" parent="." unique_id=1874039889 instance=ExtResource("135_tp01q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_O_Color1" parent="." unique_id=83141187 instance=ExtResource("136_yu7b2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_P_Color1" parent="." unique_id=2107696204 instance=ExtResource("137_7e2li")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_Q_Color1" parent="." unique_id=1870029944 instance=ExtResource("138_7gsr3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Rock_3_R_Color1" parent="." unique_id=2128864132 instance=ExtResource("139_5b2pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_1_A_Color1" parent="." unique_id=1877295835 instance=ExtResource("140_nqmyl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_1_B_Color1" parent="." unique_id=10001302 instance=ExtResource("141_4kaih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_1_C_Color1" parent="." unique_id=1619947712 instance=ExtResource("142_b2eef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_2_A_Color1" parent="." unique_id=111857230 instance=ExtResource("143_o75k7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_2_B_Color1" parent="." unique_id=404211820 instance=ExtResource("144_i6owp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_2_C_Color1" parent="." unique_id=1811789697 instance=ExtResource("145_lda7i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_2_D_Color1" parent="." unique_id=89556457 instance=ExtResource("146_mrdls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_2_E_Color1" parent="." unique_id=485362865 instance=ExtResource("147_30y5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_3_A_Color1" parent="." unique_id=1970413598 instance=ExtResource("148_a5xi6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_3_B_Color1" parent="." unique_id=1657124728 instance=ExtResource("149_bodwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_3_C_Color1" parent="." unique_id=1038348439 instance=ExtResource("150_k1iu7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_4_A_Color1" parent="." unique_id=677285439 instance=ExtResource("151_23b0s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_4_B_Color1" parent="." unique_id=1447848731 instance=ExtResource("152_oqlkn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_4_C_Color1" parent="." unique_id=1031576187 instance=ExtResource("153_2mr2r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_1_A_Color1" parent="." unique_id=638343617 instance=ExtResource("154_8rhde")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_1_B_Color1" parent="." unique_id=1035746932 instance=ExtResource("155_r5ujj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_1_C_Color1" parent="." unique_id=701390100 instance=ExtResource("156_jb34p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_2_A_Color1" parent="." unique_id=1316584351 instance=ExtResource("157_mstr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_2_B_Color1" parent="." unique_id=787540298 instance=ExtResource("158_2dtbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
+
+[node name="Tree_Bare_2_C_Color1" parent="." unique_id=2023961245 instance=ExtResource("159_uxxkl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.078992, 0, -1.1040039)
