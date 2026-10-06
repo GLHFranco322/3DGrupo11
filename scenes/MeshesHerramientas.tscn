@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://cbkvlo8ke85ui"]
+
+[ext_resource type="PackedScene" uid="uid://bg0x2ffep8shm" path="res://assets/herramientas/Assets/fbx/anvil.fbx" id="1_7xrx6"]
+[ext_resource type="PackedScene" uid="uid://dsvvwg5ssp6el" path="res://assets/herramientas/Assets/fbx/axe.fbx" id="2_uki60"]
+[ext_resource type="PackedScene" uid="uid://baxiddqfkd0st" path="res://assets/herramientas/Assets/fbx/blueprint.fbx" id="3_fa301"]
+[ext_resource type="PackedScene" uid="uid://b5j4vkplllwgf" path="res://assets/herramientas/Assets/fbx/blueprint_stacked.fbx" id="4_vk0xj"]
+[ext_resource type="PackedScene" uid="uid://b17twlqyvybkj" path="res://assets/herramientas/Assets/fbx/bucket_metal.fbx" id="5_6qqk3"]
+[ext_resource type="PackedScene" uid="uid://2n4n4niysjjw" path="res://assets/herramientas/Assets/fbx/chisel.fbx" id="6_aqr7s"]
+[ext_resource type="PackedScene" uid="uid://domkonbuxwlxt" path="res://assets/herramientas/Assets/fbx/compass_base.fbx" id="7_mafb6"]
+[ext_resource type="PackedScene" uid="uid://dxse3kpbmddq" path="res://assets/herramientas/Assets/fbx/drafting_compass.fbx" id="8_s55fj"]
+[ext_resource type="PackedScene" uid="uid://dggvljv1h0a47" path="res://assets/herramientas/Assets/fbx/file.fbx" id="9_46rrv"]
+[ext_resource type="PackedScene" uid="uid://d3lh4ggbuw0gw" path="res://assets/herramientas/Assets/fbx/grindstone.fbx" id="10_ppemh"]
+[ext_resource type="PackedScene" uid="uid://daaelpfix2ggi" path="res://assets/herramientas/Assets/fbx/hammer.fbx" id="11_r8qii"]
+[ext_resource type="PackedScene" uid="uid://bwoscvcb3poct" path="res://assets/herramientas/Assets/fbx/handdrill.fbx" id="12_p4se4"]
+[ext_resource type="PackedScene" uid="uid://ck6w3dk8dbjq8" path="res://assets/herramientas/Assets/fbx/handplane.fbx" id="13_nl2a1"]
+[ext_resource type="PackedScene" uid="uid://csmhys3vblm5y" path="res://assets/herramientas/Assets/fbx/journal_closed.fbx" id="14_ti88n"]
+[ext_resource type="PackedScene" uid="uid://unnectm1mi2e" path="res://assets/herramientas/Assets/fbx/journal_open.fbx" id="15_hv5vw"]
+[ext_resource type="PackedScene" uid="uid://cs4rmnt0jqsli" path="res://assets/herramientas/Assets/fbx/knife.fbx" id="16_2mcsn"]
+[ext_resource type="PackedScene" uid="uid://b6xwmtrwhwlaa" path="res://assets/herramientas/Assets/fbx/lantern.fbx" id="17_57ncu"]
+[ext_resource type="PackedScene" uid="uid://bwr74jucugtqq" path="res://assets/herramientas/Assets/fbx/magnifying_glass.fbx" id="18_0dh8f"]
+[ext_resource type="PackedScene" uid="uid://c4wbuy643pcpf" path="res://assets/herramientas/Assets/fbx/mallet.fbx" id="19_beu17"]
+[ext_resource type="PackedScene" uid="uid://toae53o52nnd" path="res://assets/herramientas/Assets/fbx/map.fbx" id="20_qlejm"]
+[ext_resource type="PackedScene" uid="uid://bv3d3i5ujg36g" path="res://assets/herramientas/Assets/fbx/map_empty.fbx" id="21_8ujgm"]
+[ext_resource type="PackedScene" uid="uid://8ee48fmw0u4o" path="res://assets/herramientas/Assets/fbx/map_rolled.fbx" id="22_ikhfl"]
+[ext_resource type="PackedScene" uid="uid://do06j7nxyoqmt" path="res://assets/herramientas/Assets/fbx/nail.fbx" id="23_cbah8"]
+[ext_resource type="PackedScene" uid="uid://cb70e48u55c08" path="res://assets/herramientas/Assets/fbx/pencil_A_long.fbx" id="24_3i4mo"]
+[ext_resource type="PackedScene" uid="uid://ba6yupffjkni4" path="res://assets/herramientas/Assets/fbx/pencil_A_short.fbx" id="25_yiu00"]
+[ext_resource type="PackedScene" uid="uid://dqijkwk1sh5fw" path="res://assets/herramientas/Assets/fbx/pencil_B_long.fbx" id="26_b0bdi"]
+[ext_resource type="PackedScene" uid="uid://cex62gyaexfj0" path="res://assets/herramientas/Assets/fbx/pencil_B_short.fbx" id="27_qc1ms"]
+[ext_resource type="PackedScene" uid="uid://02u52eu1dw7e" path="res://assets/herramientas/Assets/fbx/pickaxe.fbx" id="28_5k1b6"]
+[ext_resource type="PackedScene" uid="uid://b2u47vcrmw22l" path="res://assets/herramientas/Assets/fbx/rope_bundle_A.fbx" id="29_avdqx"]
+[ext_resource type="PackedScene" uid="uid://f5w0b72x4fsy" path="res://assets/herramientas/Assets/fbx/rope_bundle_B.fbx" id="30_ey0v2"]
+[ext_resource type="PackedScene" uid="uid://7ruhtcu2qfx4" path="res://assets/herramientas/Assets/fbx/saw.fbx" id="31_bulxq"]
+[ext_resource type="PackedScene" uid="uid://dcbm02m6sng1f" path="res://assets/herramientas/Assets/fbx/scissors.fbx" id="32_d3qv6"]
+[ext_resource type="PackedScene" uid="uid://3yng2o8d0u8n" path="res://assets/herramientas/Assets/fbx/screwdriver_A_long.fbx" id="33_wp176"]
+[ext_resource type="PackedScene" uid="uid://xpjvudgqy2rs" path="res://assets/herramientas/Assets/fbx/screwdriver_A_long_color.fbx" id="34_cgsqn"]
+[ext_resource type="PackedScene" uid="uid://bww6a028agweu" path="res://assets/herramientas/Assets/fbx/screwdriver_A_short.fbx" id="35_jj02c"]
+[ext_resource type="PackedScene" uid="uid://cpcu166r3d0dq" path="res://assets/herramientas/Assets/fbx/screwdriver_A_short_color.fbx" id="36_jg7kn"]
+[ext_resource type="PackedScene" uid="uid://d1st0lhnqlbhf" path="res://assets/herramientas/Assets/fbx/screwdriver_B_long.fbx" id="37_byu3n"]
+[ext_resource type="PackedScene" uid="uid://cotvl0eapnl56" path="res://assets/herramientas/Assets/fbx/screwdriver_B_long_color.fbx" id="38_4k0av"]
+[ext_resource type="PackedScene" uid="uid://b86oaf7qg4a2x" path="res://assets/herramientas/Assets/fbx/screwdriver_B_short.fbx" id="39_j87mq"]
+[ext_resource type="PackedScene" uid="uid://colbdhtpa6gum" path="res://assets/herramientas/Assets/fbx/screwdriver_B_short_color.fbx" id="40_84d0y"]
+[ext_resource type="PackedScene" uid="uid://djc8dm4h3ricp" path="res://assets/herramientas/Assets/fbx/screw_A.fbx" id="41_ghsre"]
+[ext_resource type="PackedScene" uid="uid://d0slp4e14fycs" path="res://assets/herramientas/Assets/fbx/screw_B.fbx" id="42_8xim8"]
+[ext_resource type="PackedScene" uid="uid://cgek6bcr4k2dw" path="res://assets/herramientas/Assets/fbx/shovel.fbx" id="43_8gybx"]
+[ext_resource type="PackedScene" uid="uid://bpiuwibagoqqk" path="res://assets/herramientas/Assets/fbx/tongs.fbx" id="44_iin4g"]
+[ext_resource type="PackedScene" uid="uid://hnpqm1awuhlw" path="res://assets/herramientas/Assets/fbx/torch.fbx" id="45_8u82d"]
+[ext_resource type="PackedScene" uid="uid://dcuuxb0bgmvu7" path="res://assets/herramientas/Assets/fbx/torch_burnt.fbx" id="46_plp4v"]
+[ext_resource type="PackedScene" uid="uid://dxfk4p25hbk1y" path="res://assets/herramientas/Assets/fbx/trowel.fbx" id="47_qlhod"]
+[ext_resource type="PackedScene" uid="uid://ducs2ogebau3g" path="res://assets/herramientas/Assets/fbx/wrench_A.fbx" id="48_3he2a"]
+[ext_resource type="PackedScene" uid="uid://bv6lqr1kc877i" path="res://assets/herramientas/Assets/fbx/wrench_B.fbx" id="49_0sunq"]
+
+[node name="Node3D" type="Node3D" unique_id=1749276292]
+
+[node name="anvil" parent="." unique_id=568615869 instance=ExtResource("1_7xrx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="axe" parent="." unique_id=1880427702 instance=ExtResource("2_uki60")]
+
+[node name="blueprint" parent="." unique_id=418252180 instance=ExtResource("3_fa301")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="blueprint_stacked" parent="." unique_id=996745515 instance=ExtResource("4_vk0xj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="bucket_metal" parent="." unique_id=554381431 instance=ExtResource("5_6qqk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="chisel" parent="." unique_id=2053633580 instance=ExtResource("6_aqr7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+
+[node name="compass_base" parent="." unique_id=599167923 instance=ExtResource("7_mafb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="drafting_compass" parent="." unique_id=1180016936 instance=ExtResource("8_s55fj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="file" parent="." unique_id=1578318307 instance=ExtResource("9_46rrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="grindstone" parent="." unique_id=461549790 instance=ExtResource("10_ppemh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="hammer" parent="." unique_id=1688563996 instance=ExtResource("11_r8qii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="handdrill" parent="." unique_id=1304641920 instance=ExtResource("12_p4se4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+
+[node name="handplane" parent="." unique_id=1952778351 instance=ExtResource("13_nl2a1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="journal_closed" parent="." unique_id=1095685194 instance=ExtResource("14_ti88n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+
+[node name="journal_open" parent="." unique_id=816519106 instance=ExtResource("15_hv5vw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="knife" parent="." unique_id=2142811101 instance=ExtResource("16_2mcsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="lantern" parent="." unique_id=882238236 instance=ExtResource("17_57ncu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="magnifying_glass" parent="." unique_id=104890052 instance=ExtResource("18_0dh8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="mallet" parent="." unique_id=144241973 instance=ExtResource("19_beu17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+
+[node name="map" parent="." unique_id=65989973 instance=ExtResource("20_qlejm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+
+[node name="map_empty" parent="." unique_id=1042070617 instance=ExtResource("21_8ujgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7)
+
+[node name="map_rolled" parent="." unique_id=2050028307 instance=ExtResource("22_ikhfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+
+[node name="nail" parent="." unique_id=921205047 instance=ExtResource("23_cbah8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
+
+[node name="pencil_A_long" parent="." unique_id=1818743677 instance=ExtResource("24_3i4mo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
+
+[node name="pencil_A_short" parent="." unique_id=382102099 instance=ExtResource("25_yiu00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+
+[node name="pencil_B_long" parent="." unique_id=347047518 instance=ExtResource("26_b0bdi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+
+[node name="pencil_B_short" parent="." unique_id=186596341 instance=ExtResource("27_qc1ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
+
+[node name="pickaxe" parent="." unique_id=452650121 instance=ExtResource("28_5k1b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
+
+[node name="rope_bundle_A" parent="." unique_id=1961972288 instance=ExtResource("29_avdqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 10)
+
+[node name="rope_bundle_B" parent="." unique_id=728981419 instance=ExtResource("30_ey0v2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 11)
+
+[node name="saw" parent="." unique_id=1469558244 instance=ExtResource("31_bulxq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 11)
+
+[node name="scissors" parent="." unique_id=604486512 instance=ExtResource("32_d3qv6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 10)
+
+[node name="screwdriver_A_long" parent="." unique_id=1158284898 instance=ExtResource("33_wp176")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 12)
+
+[node name="screwdriver_A_long_color" parent="." unique_id=710002543 instance=ExtResource("34_cgsqn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+
+[node name="screwdriver_A_short" parent="." unique_id=326998437 instance=ExtResource("35_jj02c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 12)
+
+[node name="screwdriver_A_short_color" parent="." unique_id=1429499388 instance=ExtResource("36_jg7kn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 12)
+
+[node name="screwdriver_B_long" parent="." unique_id=910135893 instance=ExtResource("37_byu3n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 12)
+
+[node name="screwdriver_B_long_color" parent="." unique_id=1159216545 instance=ExtResource("38_4k0av")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 12)
+
+[node name="screwdriver_B_short" parent="." unique_id=1176751164 instance=ExtResource("39_j87mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 11)
+
+[node name="screwdriver_B_short_color" parent="." unique_id=685566374 instance=ExtResource("40_84d0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="screw_A" parent="." unique_id=1310717969 instance=ExtResource("41_ghsre")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 13)
+
+[node name="screw_B" parent="." unique_id=1004460690 instance=ExtResource("42_8xim8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 13)
+
+[node name="shovel" parent="." unique_id=243667319 instance=ExtResource("43_8gybx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 13)
+
+[node name="tongs" parent="." unique_id=25446460 instance=ExtResource("44_iin4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 13)
+
+[node name="torch" parent="." unique_id=455842144 instance=ExtResource("45_8u82d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 15)
+
+[node name="torch_burnt" parent="." unique_id=1780341987 instance=ExtResource("46_plp4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.166645, 0, 15.004987)
+
+[node name="trowel" parent="." unique_id=344253168 instance=ExtResource("47_qlhod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6878443, 0, 17.626259)
+
+[node name="wrench_A" parent="." unique_id=1348406960 instance=ExtResource("48_3he2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.194811, 0, 17.980175)
+
+[node name="wrench_B" parent="." unique_id=1018917763 instance=ExtResource("49_0sunq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.288375, 0, 18.355679)

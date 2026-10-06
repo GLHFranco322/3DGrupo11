@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://cfrwd2okth6im"]
+
+[ext_resource type="PackedScene" uid="uid://bsyys868xh1eo" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/armchair.fbx" id="1_auayn"]
+[ext_resource type="PackedScene" uid="uid://i804khot7nl7" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/armchair_pillows.fbx" id="2_8lurl"]
+[ext_resource type="PackedScene" uid="uid://hr2m718pxkjf" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_double_A.fbx" id="3_yl7nw"]
+[ext_resource type="PackedScene" uid="uid://n3w5eyacuops" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_double_B.fbx" id="4_prf54"]
+[ext_resource type="PackedScene" uid="uid://dke05lbpw5y4s" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_single_A.fbx" id="5_d3v43"]
+[ext_resource type="PackedScene" uid="uid://rog00blmiw23" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/bed_single_B.fbx" id="6_frgmb"]
+[ext_resource type="PackedScene" uid="uid://ctpwqfmym6fdc" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/book_set.fbx" id="7_f1dqn"]
+[ext_resource type="PackedScene" uid="uid://b6ys88yoh4vej" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/book_single.fbx" id="8_m1emf"]
+[ext_resource type="PackedScene" uid="uid://dyus3t0b5vss2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_medium.fbx" id="9_x5ay5"]
+[ext_resource type="PackedScene" uid="uid://sjoo2sgo6pi2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_medium_decorated.fbx" id="10_s48h5"]
+[ext_resource type="PackedScene" uid="uid://ciwxgoexnfdgt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_small.fbx" id="11_eseg4"]
+[ext_resource type="PackedScene" uid="uid://b4py5ycyr58pl" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cabinet_small_decorated.fbx" id="12_8km5s"]
+[ext_resource type="PackedScene" uid="uid://dbn6wghoayb6w" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_medium_A.fbx" id="13_c522t"]
+[ext_resource type="PackedScene" uid="uid://brvmtkk3txrqe" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_medium_B.fbx" id="14_qssj6"]
+[ext_resource type="PackedScene" uid="uid://f1j2oqq7ph8a" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_small_A.fbx" id="15_xp2x4"]
+[ext_resource type="PackedScene" uid="uid://dcimq7000st5m" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/cactus_small_B.fbx" id="16_tn5rm"]
+[ext_resource type="PackedScene" uid="uid://c0o2cmmtdwu5d" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_A.fbx" id="17_qh43v"]
+[ext_resource type="PackedScene" uid="uid://cgqbyi52g43l0" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_A_wood.fbx" id="18_8f3jg"]
+[ext_resource type="PackedScene" uid="uid://d3smv3o3uoidf" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_B.fbx" id="19_aelya"]
+[ext_resource type="PackedScene" uid="uid://cuqel0olu01bt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_B_wood.fbx" id="20_6xmru"]
+[ext_resource type="PackedScene" uid="uid://c5i62pb78gnp0" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_C.fbx" id="21_kqcwy"]
+[ext_resource type="PackedScene" uid="uid://bgmw8avjqq0hj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_stool.fbx" id="22_mqrnq"]
+[ext_resource type="PackedScene" uid="uid://chj1q7isw5doh" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/chair_stool_wood.fbx" id="23_8wc50"]
+[ext_resource type="PackedScene" uid="uid://bv8qn46t5bx2f" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/couch.fbx" id="24_e4w80"]
+[ext_resource type="PackedScene" uid="uid://dxltartsu21qv" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/couch_pillows.fbx" id="25_h6bkn"]
+[ext_resource type="PackedScene" uid="uid://cap0llxisoot2" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/lamp_standing.fbx" id="26_qgaqg"]
+[ext_resource type="PackedScene" uid="uid://dbwisq07n67ay" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/lamp_table.fbx" id="27_67mxe"]
+[ext_resource type="PackedScene" uid="uid://d0y18pkoqoxmq" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_large_A.fbx" id="28_mt5v2"]
+[ext_resource type="PackedScene" uid="uid://vancskv335be" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_large_B.fbx" id="29_mfg86"]
+[ext_resource type="PackedScene" uid="uid://bup1d51q40tkk" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_medium.fbx" id="30_c8516"]
+[ext_resource type="PackedScene" uid="uid://6ljcr5xjbw42" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_A.fbx" id="31_2cvib"]
+[ext_resource type="PackedScene" uid="uid://vbyj6u88qnkd" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_B.fbx" id="32_qfoph"]
+[ext_resource type="PackedScene" uid="uid://c2ykaippx7sj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_small_C.fbx" id="33_2gnnd"]
+[ext_resource type="PackedScene" uid="uid://psjecu7cl8eq" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_standing_A.fbx" id="34_dhw0a"]
+[ext_resource type="PackedScene" uid="uid://b6hohqevvrp1x" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pictureframe_standing_B.fbx" id="35_xpxhx"]
+[ext_resource type="PackedScene" uid="uid://dm7a1y2giam0o" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pillow_A.fbx" id="36_yncad"]
+[ext_resource type="PackedScene" uid="uid://ed0hewakl5f" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/pillow_B.fbx" id="37_6uc1f"]
+[ext_resource type="PackedScene" uid="uid://bspfcerxgoqbp" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_A_big.fbx" id="38_syk8j"]
+[ext_resource type="PackedScene" uid="uid://vri6aeuaskwt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_A_small.fbx" id="39_brodg"]
+[ext_resource type="PackedScene" uid="uid://cavrer21tk4gt" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/shelf_B_large.fbx" id="40_0wll7"]
+[ext_resource type="PackedScene" uid="uid://ba2d25xyxl3nj" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_medium.fbx" id="41_cqjgv"]
+[ext_resource type="PackedScene" uid="uid://76tlm6ojingg" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/table_medium_long.fbx" id="42_o3jec"]
+
+[node name="MueblesMeshes" type="Node3D" unique_id=1934214735]
+
+[node name="armchair" parent="." unique_id=44732567 instance=ExtResource("1_auayn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4704552, 0, 0.100522995)
+
+[node name="armchair_pillows" parent="." unique_id=228157421 instance=ExtResource("2_8lurl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42480683, 0, 0.35402203)
+
+[node name="bed_double_A" parent="." unique_id=1612241857 instance=ExtResource("3_yl7nw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.584302, 0, -0.40958452)
+
+[node name="bed_double_B" parent="." unique_id=574520873 instance=ExtResource("4_prf54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.620966, 0, 4.298771)
+
+[node name="bed_single_A" parent="." unique_id=1103184736 instance=ExtResource("5_d3v43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6586208, 0, 4.4653034)
+
+[node name="bed_single_B" parent="." unique_id=1328921065 instance=ExtResource("6_frgmb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0320129, 0, 4.4418297)
+
+[node name="book_set" parent="." unique_id=786703941 instance=ExtResource("7_f1dqn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9451303, -4.7683716e-07, 4.7365036)
+
+[node name="book_single" parent="." unique_id=1108928268 instance=ExtResource("8_m1emf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.659847, 0, 3.990652)
+
+[node name="cabinet_medium" parent="." unique_id=152528631 instance=ExtResource("9_x5ay5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.305684, 0, 2.2911186)
+
+[node name="cabinet_medium_decorated" parent="." unique_id=1649252732 instance=ExtResource("10_s48h5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.668756, 0, 8.099905)
+
+[node name="cabinet_small" parent="." unique_id=233529718 instance=ExtResource("11_eseg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9969163, 4.7683716e-07, 6.922943)
+
+[node name="cabinet_small_decorated" parent="." unique_id=1281868768 instance=ExtResource("12_8km5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.74328, 0, 6.657158)
+
+[node name="cactus_medium_A" parent="." unique_id=1500144304 instance=ExtResource("13_c522t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3392467, 0, 10.014215)
+
+[node name="cactus_medium_B" parent="." unique_id=549820039 instance=ExtResource("14_qssj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1634173, 0, 9.794863)
+
+[node name="cactus_small_A" parent="." unique_id=907620884 instance=ExtResource("15_xp2x4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.205933, 0, 8.925438)
+
+[node name="cactus_small_B" parent="." unique_id=667788070 instance=ExtResource("16_tn5rm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.362055, 0, 8.019617)
+
+[node name="chair_A" parent="." unique_id=497679619 instance=ExtResource("17_qh43v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9067154, 0, 10.146029)
+
+[node name="chair_A_wood" parent="." unique_id=1142500131 instance=ExtResource("18_8f3jg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0808554, 0, 11.561853)
+
+[node name="chair_B" parent="." unique_id=411565012 instance=ExtResource("19_aelya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8553824, 0, 11.457328)
+
+[node name="chair_B_wood" parent="." unique_id=1031046832 instance=ExtResource("20_6xmru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.748869, 0, 12.302198)
+
+[node name="chair_C" parent="." unique_id=1859058768 instance=ExtResource("21_kqcwy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5018291, 0, 13.621673)
+
+[node name="chair_stool" parent="." unique_id=322271979 instance=ExtResource("22_mqrnq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.668054, 0, 14.424253)
+
+[node name="chair_stool_wood" parent="." unique_id=2000107519 instance=ExtResource("23_8wc50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0536156, -9.536743e-07, 12.68078)
+
+[node name="couch" parent="." unique_id=1647088563 instance=ExtResource("24_e4w80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5138845, -9.536743e-07, 16.127066)
+
+[node name="couch_pillows" parent="." unique_id=657404159 instance=ExtResource("25_h6bkn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.514202, 0, 9.62805)
+
+[node name="lamp_standing" parent="." unique_id=1741293533 instance=ExtResource("26_qgaqg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.273522, 0, 4.9093094)
+
+[node name="lamp_table" parent="." unique_id=1347536343 instance=ExtResource("27_67mxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.004029, 0, 4.9276276)
+
+[node name="pictureframe_large_A" parent="." unique_id=121918862 instance=ExtResource("28_mt5v2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.473648, 0, 6.299368)
+
+[node name="pictureframe_large_B" parent="." unique_id=746961147 instance=ExtResource("29_mfg86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.695118, 0, 13.075392)
+
+[node name="pictureframe_medium" parent="." unique_id=1061855856 instance=ExtResource("30_c8516")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.027323, 9.536743e-07, 14.511043)
+
+[node name="pictureframe_small_A" parent="." unique_id=1863634224 instance=ExtResource("31_2cvib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.222785, 0, 13.378968)
+
+[node name="pictureframe_small_B" parent="." unique_id=266888031 instance=ExtResource("32_qfoph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.867922, 0, 10.808788)
+
+[node name="pictureframe_small_C" parent="." unique_id=1171712757 instance=ExtResource("33_2gnnd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.754652, 0, 15.641079)
+
+[node name="pictureframe_standing_A" parent="." unique_id=704702297 instance=ExtResource("34_dhw0a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.024454, 0, 18.64251)
+
+[node name="pictureframe_standing_B" parent="." unique_id=1440675881 instance=ExtResource("35_xpxhx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9302464, 0, 21.472668)
+
+[node name="pillow_A" parent="." unique_id=1861483071 instance=ExtResource("36_yncad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.084793, 0, 15.928831)
+
+[node name="pillow_B" parent="." unique_id=1603538837 instance=ExtResource("37_6uc1f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.452442, 0, 15.907381)
+
+[node name="shelf_A_big" parent="." unique_id=602604469 instance=ExtResource("38_syk8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.102983, 1.7748718, 11.2210655)
+
+[node name="shelf_A_small" parent="." unique_id=80619751 instance=ExtResource("39_brodg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.28887, -1.3031235, -2.440609)
+
+[node name="shelf_B_large" parent="." unique_id=727822538 instance=ExtResource("40_0wll7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.987223, 0.91321135, -3.0659828)
+
+[node name="table_medium" parent="." unique_id=1225708864 instance=ExtResource("41_cqjgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.20957, 0.6363964, -1.2560692)
+
+[node name="table_medium_long" parent="." unique_id=175848019 instance=ExtResource("42_o3jec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.40548, 0.4675684, 7.5263176)
