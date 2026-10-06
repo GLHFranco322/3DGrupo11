@@ -4,12 +4,16 @@ extends MultiMeshInstance3D
 @export var field_size: Vector2 = Vector2(32.0, 18.0)
 @export var cell_size: float = 1.0
 @export var grown_height: float = 0.35
-@export var cut_height: float = 0.08
 @export var regrow_time: float = 6.0
 @export var grown_color: Color = Color(0.2, 0.65, 0.15)
-@export var cut_color: Color = Color(0.55, 0.75, 0.35)
 @export var blade_mesh: Mesh
 @export var blade_material: StandardMaterial3D
+
+@export_group("Modelo")
+@export var cell_fill: float = 0.7
+@export var height_multiplier: float = 0.3
+@export var jitter: float = 0.4
+@export var random_rotation: bool = true
 
 var columns: int
 var rows: int
@@ -18,6 +22,10 @@ var rows: int
 var _cut_timers: Dictionary = {}
 
 var _half_field: Vector2
+var _base_scale: Vector3 = Vector3.ONE
+var _base_y: float = 0.0
+var _yaw: PackedFloat32Array
+var _offset: PackedVector2Array
 
 
 func _ready() -> void:
@@ -25,19 +33,27 @@ func _ready() -> void:
 	rows = int(field_size.y / cell_size)
 	_half_field = field_size / 2.0
 
+	var mesh: Mesh = blade_mesh if blade_mesh else _default_blade_mesh()
+	_prepare_mesh_scale(mesh)
+
+	var count := columns * rows
+	_yaw.resize(count)
+	_offset.resize(count)
+	for i in count:
+		_yaw[i] = randf() * TAU if random_rotation else 0.0
+		_offset[i] = Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * jitter * cell_size * 0.5
+
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_colors = true
-	mm.mesh = blade_mesh if blade_mesh else _default_blade_mesh()
-	mm.instance_count = columns * rows
+	mm.mesh = mesh
+	mm.instance_count = count
 	multimesh = mm
 
 	for y in rows:
 		for x in columns:
 			var index := _index(x, y)
-			var t := Transform3D(Basis.IDENTITY, _cell_to_world(x, y))
-			t.origin.y = grown_height * 0.5
-			mm.set_instance_transform(index, t)
+			mm.set_instance_transform(index, _make_transform(x, y, true))
 			mm.set_instance_color(index, grown_color)
 
 	material_override = blade_material if blade_material else _default_material()
@@ -81,13 +97,32 @@ func cut_area(world_position: Vector3, radius: float) -> int:
 
 
 func _set_cell_state(index: int, grown: bool) -> void:
-	var height := grown_height if grown else cut_height
-	var scale_y := height / grown_height
-	var t := multimesh.get_instance_transform(index)
-	t.basis = Basis.IDENTITY.scaled(Vector3(1.0, scale_y, 1.0))
-	t.origin.y = height * 0.5
-	multimesh.set_instance_transform(index, t)
-	multimesh.set_instance_color(index, grown_color if grown else cut_color)
+	var x := index % columns
+	var y := index / columns
+	multimesh.set_instance_transform(index, _make_transform(x, y, grown))
+
+
+func _make_transform(x: int, y: int, grown: bool) -> Transform3D:
+	var index := _index(x, y)
+	var factor := 1.0 if grown else 0.001
+	var scale := _base_scale * factor
+	var basis := Basis(Vector3.UP, _yaw[index]) * Basis.from_scale(scale)
+
+	var origin := _cell_to_world(x, y)
+	origin.x += _offset[index].x
+	origin.z += _offset[index].y
+	origin.y = _base_y * scale.y
+	return Transform3D(basis, origin)
+
+
+func _prepare_mesh_scale(mesh: Mesh) -> void:
+	var aabb := mesh.get_aabb()
+	if blade_mesh:
+		var s := cell_size * cell_fill / maxf(aabb.size.x, aabb.size.z)
+		_base_scale = Vector3(s, s * height_multiplier, s)
+	else:
+		_base_scale = Vector3.ONE
+	_base_y = -aabb.position.y
 
 
 func _index(x: int, y: int) -> int:
@@ -103,7 +138,7 @@ func _world_to_cell(world_position: Vector3) -> Vector2i:
 func _cell_to_world(x: int, y: int) -> Vector3:
 	var wx := (x + 0.5) * cell_size - _half_field.x
 	var wz := (y + 0.5) * cell_size - _half_field.y
-	return Vector3(wx, 0.5, wz)
+	return Vector3(wx, 0.0, wz)
 
 
 func _default_blade_mesh() -> BoxMesh:
