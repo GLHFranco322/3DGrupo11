@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq7vwbkxeg0k1"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Brazos.jpg-0bc6e14479dc7fe49ed27ae2cdd09eeb.s3tc.ctex"
+uid="uid://bsxva3ww7fmj0"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-58993e58144a1a3f8c05105c58bf3f30.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d1dd210d6b1312cb342b56d02bd5e651"
+"md5": "2d20d9c8b8dd5c933a3982613c4b7778"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animacion-Falling_Brazos.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Brazos.jpg-0bc6e14479dc7fe49ed27ae2cdd09eeb.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-58993e58144a1a3f8c05105c58bf3f30.s3tc.ctex"]
 
 [params]
 

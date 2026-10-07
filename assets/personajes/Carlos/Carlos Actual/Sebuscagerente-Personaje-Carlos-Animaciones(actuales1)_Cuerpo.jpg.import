@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvxlq6cnck2el"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Cuerpo.jpg-0ad976ba8c84c744a801d9441031b1d9.s3tc.ctex"
+uid="uid://bmbdk32y1wuy2"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Cuerpo.jpg-410b3dc67fd104dd67cb3efa90149d03.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animacion-Falling_Cuerpo.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Cuerpo.jpg-0ad976ba8c84c744a801d9441031b1d9.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Cuerpo.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Cuerpo.jpg-410b3dc67fd104dd67cb3efa90149d03.s3tc.ctex"]
 
 [params]
 

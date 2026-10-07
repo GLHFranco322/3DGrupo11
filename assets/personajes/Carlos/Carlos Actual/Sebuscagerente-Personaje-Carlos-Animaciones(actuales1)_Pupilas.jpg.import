@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djnmppr28047e"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Pies.jpg-ce2e858c4e71cf2b052249228e79e23d.s3tc.ctex"
+uid="uid://dnbcxe7r0lm5i"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg-d196386b645fa8f2e0df098c400af3d5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "498e23c82ca78a4bcd7ba88e5243b6fc"
+"md5": "d1dd210d6b1312cb342b56d02bd5e651"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Sebuscagerente-Personaje-Carlos-animacion-Falling_Pies.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-animacion-Falling_Pies.jpg-ce2e858c4e71cf2b052249228e79e23d.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg-d196386b645fa8f2e0df098c400af3d5.s3tc.ctex"]
 
 [params]
 
