@@ -42,7 +42,8 @@ func pick_up(player: Player) -> void:
 		return
 	state = State.HELD
 	holder = player
-	pickup_area.monitoring = false
+	player.held_pit = self
+	pickup_area.set_deferred("monitoring", false)
 	reparent(player)
 	transform = Transform3D(Basis.IDENTITY, player.pit_hold_offset)
 
@@ -58,7 +59,7 @@ func place_at(world_position: Vector3) -> void:
 
 	bubble.visible = false
 	trap_visual.visible = true
-	trap_area.monitoring = true
+	trap_area.set_deferred("monitoring", true)
 	state = State.PLACED
 
 
@@ -75,13 +76,13 @@ func _enter_spawning() -> void:
 	global_position = _home_position + Vector3(0.0, start_height, 0.0)
 	bubble.visible = true
 	trap_visual.visible = false
-	pickup_area.monitoring = false
-	trap_area.monitoring = false
+	pickup_area.set_deferred("monitoring", false)
+	trap_area.set_deferred("monitoring", false)
 
 
 func _enter_landed() -> void:
 	state = State.LANDED
-	pickup_area.monitoring = true
+	pickup_area.set_deferred("monitoring", true)
 
 
 func _on_pickup_area_body_entered(body: Node) -> void:
@@ -103,7 +104,7 @@ func _on_trap_area_body_entered(body: Node) -> void:
 
 func _trigger() -> void:
 	state = State.TRIGGERED
-	trap_area.monitoring = false
+	trap_area.set_deferred("monitoring", false)
 	visible = false
 	await get_tree().create_timer(respawn_time).timeout
 	visible = true

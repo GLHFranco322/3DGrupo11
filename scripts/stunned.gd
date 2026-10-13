@@ -8,6 +8,8 @@ var _elapsed: float = 0.0
 func enter() -> void:
 	_elapsed = 0.0
 	player.velocity = Vector3.ZERO
+	player.anim.speed_scale = 1.0
+	player.play_anim(&"estuniado", true)
 
 
 func physics_update(delta: float) -> void:

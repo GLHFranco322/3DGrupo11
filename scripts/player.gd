@@ -146,6 +146,7 @@ func confirm_aim() -> void:
 		return
 
 	if held_rock:
+		play_anim("tirarOPiedra", true)
 		held_rock.throw(reticle.global_position, self)
 		held_rock = null
 	elif held_pit:
@@ -221,8 +222,18 @@ func _get_rival() -> Player:
 			return p
 	return null
 
-func play_anim(anim_name: StringName) -> void:
+func play_anim(anim_name: StringName, force: bool = false) -> void:
 	if anim == null or not anim.has_animation(anim_name):
 		return
-	if anim.current_animation != anim_name:
+	if not force and anim.current_animation == &"tirarOPiedra" and anim.is_playing():
+		return
+	if anim.current_animation != anim_name or not anim.is_playing():
 		anim.play(anim_name)
+
+
+func stop_anim() -> void:
+	if anim == null:
+		return
+	if anim.current_animation == &"tirarOPiedra" and anim.is_playing():
+		return
+	anim.stop()
