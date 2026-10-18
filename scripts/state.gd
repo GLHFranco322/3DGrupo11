@@ -1,6 +1,8 @@
 class_name State
 extends Node
 
+# Se emite desde los estados hijos (idle.gd, walk.gd, etc.)
+@warning_ignore("unused_signal")
 signal transitioned(state_name: String)
 
 var player: Player

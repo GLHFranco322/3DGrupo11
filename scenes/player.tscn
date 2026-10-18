@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cygvuo0oy83k3" path="res://scripts/stunned.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://cj4qp02jdwptw" path="res://scripts/falling.gd" id="7_fjrip"]
 [ext_resource type="PackedScene" uid="uid://do1020523klr3" path="res://assets/personajes/Triangulo/Trianguloblend.glb" id="8_smehm"]
+[ext_resource type="Script" uid="uid://be3muax0328ic" path="res://scripts/aim_indicator.gd" id="9_aim"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_u8vuu"]
 size = Vector3(1, 1.2, 0.3)
@@ -28,9 +29,10 @@ top_radius = 0.4
 bottom_radius = 0.4
 height = 0.02
 
-[node name="Player" type="CharacterBody3D" unique_id=1213674497 node_paths=PackedStringArray("reticle") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1213674497 node_paths=PackedStringArray("aim_indicator", "reticle") groups=["player"]]
 script = ExtResource("1_3vyb7")
 color = Color(0.94509804, 0.9411765, 0, 1)
+aim_indicator = NodePath("AimIndicator")
 reticle = NodePath("Reticle")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1375012721]
@@ -73,3 +75,6 @@ mesh = SubResource("CylinderMesh_smehm")
 
 [node name="Model" parent="." unique_id=929007688 instance=ExtResource("8_smehm")]
 transform = Transform3D(-0.25, 0, -2.1855694e-08, 0, 0.25, 0, 2.1855694e-08, 0, -0.25, 0, 0, 0.2)
+
+[node name="AimIndicator" type="Node3D" parent="." unique_id=1610277490]
+script = ExtResource("9_aim")

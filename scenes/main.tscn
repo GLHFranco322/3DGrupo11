@@ -9,12 +9,20 @@
 [ext_resource type="Script" uid="uid://dom2qyq223jsn" path="res://scripts/hud.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://48i4xm3v5mqe" path="res://scenes/rock.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dd2ua30ahxdeb" path="res://scenes/pit.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://i80nyjc0t2ym" path="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb" id="8_carlos"]
+[ext_resource type="PackedScene" uid="uid://b58oalsqr000a" path="res://assets/personajes/Triangulo/falling.glb" id="9_trifall"]
+[ext_resource type="Script" uid="uid://b3s2yk7t0502y" path="res://scripts/match.gd" id="10_match"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
 background_mode = 1
 background_color = Color(0.49803922, 0.60784316, 0.50980395, 1)
 
-[node name="Main" type="Node3D" unique_id=225576862]
+[node name="Main" type="Node3D" unique_id=225576862 node_paths=PackedStringArray("player1", "player2", "hud")]
+script = ExtResource("10_match")
+match_duration = 20.0
+player1 = NodePath("Player")
+player2 = NodePath("Player2")
+hud = NodePath("HUD")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1032799816 node_paths=PackedStringArray("player1", "player2")]
 transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 26, 15)
@@ -32,32 +40,42 @@ shadow_enabled = true
 environment = SubResource("Environment_sgp6g")
 
 [node name="EsceneMap" parent="." unique_id=991740624 instance=ExtResource("2_85g3d")]
-transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, -1.5195045, 0)
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, -0.9729147, 0)
 
 [node name="GrassGrid" type="MultiMeshInstance3D" parent="." unique_id=1159492834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -1.15)
 script = ExtResource("1_sugp2")
+field_size = Vector2(26.5, 19.5)
 cell_size = 0.25
-grown_height = 0.1
 blade_mesh = ExtResource("3_tipki")
+grown_height = 0.1
 cell_fill = 1.4
 jitter = 0.6
 
 [node name="Player" parent="." unique_id=1213674497 node_paths=PackedStringArray("mower") instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.842544, 0, 5.939865)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 9, 0, 6)
+mouse_aim = true
 mower = NodePath("../Mower")
+map_min = Vector2(-14, -11)
+map_max = Vector2(12.5, 8.7)
+extra_animations = Array[PackedScene]([ExtResource("9_trifall")])
 
 [node name="Player2" parent="." unique_id=1118012485 node_paths=PackedStringArray("mower") instance=ExtResource("1_o5qli")]
-transform = Transform3D(-0.999565, 0, 0.029491829, 0, 1, 0, -0.029491829, 0, -0.999565, -13, 0, -5)
+transform = Transform3D(-1.99913, 0, 0.058983658, 0, 2, 0, -0.058983658, 0, -1.99913, -12, 0, -5)
 player_id = 2
 color = Color(0.94509804, 0, 0, 1)
 mower = NodePath("../Mower2")
+map_min = Vector2(-14, -11)
+map_max = Vector2(12.5, 8.7)
+model_scene = ExtResource("8_carlos")
+model_scale = 0.4
 
 [node name="Mower" parent="." unique_id=374699352 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.106081, 0, 3.444499)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3.5)
 grass_grid = NodePath("../GrassGrid")
 
 [node name="Mower2" parent="." unique_id=1986578710 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
-transform = Transform3D(-0.9999932, 0, -0.0036825177, 0, 1, 0, 0.0036825177, 0, -0.9999932, -12.869682, 0, -3.3933783)
+transform = Transform3D(-0.9999932, 0, -0.0036825177, 0, 1, 0, 0.0036825177, 0, -0.9999932, -12, 0, -3.4)
 grass_grid = NodePath("../GrassGrid")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=146105782 node_paths=PackedStringArray("player1", "player2")]
@@ -81,11 +99,45 @@ offset_bottom = 23.0
 theme_override_colors/font_color = Color(1, 0.38948637, 0.5953161, 1)
 theme_override_font_sizes/font_size = 32
 
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=1309438229]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 50.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "2:00"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="HUD" unique_id=1957556915]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -60.0
+offset_right = 300.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 80
+text = "¡Tiempo!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Rock" parent="." unique_id=119285836 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.311375, 0, 2.4891105)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
 
 [node name="Rock2" parent="." unique_id=1497960569 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.734606, 0, -3.6108985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
 
 [node name="Rock3" parent="." unique_id=780162465 instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4235716, 0, 3.4227233)

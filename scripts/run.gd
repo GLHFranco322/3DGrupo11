@@ -10,6 +10,6 @@ func physics_update(delta: float) -> void:
 		transitioned.emit("walk")
 		return
 
-	player.play_anim(&"caminar")
+	player.play_anim(Player.ANIM_WALK)
 	player.anim.speed_scale = 1.6
 	player.apply_movement(input, player.run_speed, delta)

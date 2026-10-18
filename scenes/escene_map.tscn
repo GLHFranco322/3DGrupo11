@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://dgdaeyjt2q7xw" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/pipe.fbx" id="38_qyhol"]
 [ext_resource type="PackedScene" uid="uid://d3xljugqs1d0" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/door-large-open.fbx" id="39_eog3t"]
 [ext_resource type="PackedScene" uid="uid://b2u47vcrmw22l" path="res://assets/herramientas/Assets/fbx/rope_bundle_A.fbx" id="40_oovot"]
+[ext_resource type="Script" path="res://scripts/map_collisions.gd" id="41_mapcol"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
 albedo_color = Color(0.2509804, 0.6, 0.2, 1)
@@ -311,6 +312,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ctc76")
 
 [node name="EsceneMap" type="Node3D" unique_id=991740624]
+script = ExtResource("41_mapcol")
+solid_nodes = Array[NodePath]([NodePath("wooden fences"), NodePath("Mates"), NodePath("Desk"), NodePath("Rock"), NodePath("Decorations"), NodePath("Water well"), NodePath("Bush"), NodePath("Tree"), NodePath("Items")])
 
 [node name="GridMap" type="GridMap" parent="." unique_id=339529059]
 mesh_library = ExtResource("1_awoyh")

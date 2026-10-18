@@ -1,19 +1,25 @@
 class_name Rock
 extends Node3D
 
-@export var respawn_time: float = 3.0
-@export var throw_speed: float = 14.0
-@export var damage: int = 20
-@export var hit_radius: float = 1.0
+## Tiempo hasta que la piedra vuelve a su lugar después de lanzarse.
+@export_range(0.0, 60.0, 0.5, "suffix:s") var respawn_time: float = 3.0
+## Velocidad de la piedra en el aire.
+@export_range(1.0, 60.0, 0.5, "suffix:u/s") var throw_speed: float = 14.0
+## Daño que le hace a la cortadora del rival.
+@export_range(0, 100) var damage: int = 20
+## Si no choca con nada, desaparece después de recorrer esta distancia.
+@export_range(1.0, 200.0, 1.0, "suffix:u") var max_distance: float = 40.0
 
 var is_held: bool = false
 var is_available: bool = true
 
 var _home_parent: Node
 var _home_position: Vector3
-var _target_position: Vector3
+var _direction: Vector3
+var _traveled: float = 0.0
 var _flying: bool = false
 var _thrower: Player = null
+var _exclude: Array[RID] = []
 
 
 func _ready() -> void:
@@ -25,29 +31,47 @@ func _physics_process(delta: float) -> void:
 	if not _flying:
 		return
 
-	var to_target := _target_position - global_position
-	to_target.y = 0.0
-	if to_target.length() <= 0.5:
-		_on_hit()
+	var from := global_position
+	var to := from + _direction * throw_speed * delta
+
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = _exclude
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit:
+		global_position = hit.position
+		_on_hit(hit.collider)
 		return
-	global_position += to_target.normalized() * throw_speed * delta
+
+	global_position = to
+	_traveled += throw_speed * delta
+	if _traveled >= max_distance:
+		_on_hit(null)
 
 
 func pick_up(holder: Player) -> void:
 	is_held = true
 	is_available = false
+	Audio.play_sfx(Audio.rock_grab)
 	reparent(holder)
-	transform = Transform3D(Basis.IDENTITY, holder.rock_hold_offset)
+	global_transform = holder.hold_transform(holder.rock_hold_offset)
 
 
-func throw(target_position: Vector3, thrower: Player) -> void:
+# Lanza la piedra en línea recta en "direction" (se ignora el componente Y)
+func throw(direction: Vector3, thrower: Player) -> void:
 	var world_transform := global_transform
 	reparent(_home_parent)
 	global_transform = world_transform
 	is_held = false
 	_flying = true
-	_target_position = target_position
+	_traveled = 0.0
+	Audio.play_sfx(Audio.rock_throw)
+	_direction = Vector3(direction.x, 0.0, direction.z).normalized()
 	_thrower = thrower
+
+	# La piedra no choca contra quien la tiró ni contra la cortadora que lleva
+	_exclude = [thrower.get_rid()]
+	if thrower.has_mower and thrower.mower:
+		_exclude.append(thrower.mower.get_rid())
 
 
 func drop() -> void:
@@ -60,20 +84,25 @@ func drop() -> void:
 	visible = true
 
 
-func _on_hit() -> void:
+func _on_hit(collider: Object) -> void:
 	_flying = false
-	for p in get_tree().get_nodes_in_group("player"):
-		if p == _thrower or not p is Player:
-			continue
-		var flat := Vector3(p.global_position.x - global_position.x, 0.0, p.global_position.z - global_position.z)
-		if flat.length() <= hit_radius:
-			p.get_hit_by_rock(damage)
-			break
+
+	# Si pega en una cortadora que alguien lleva, cuenta como golpe a ese jugador
+	var target := collider
+	if target is Mower and target.get_parent() is Player:
+		target = target.get_parent()
+	if target is Player and target != _thrower:
+		Audio.play_sfx(Audio.rock_hit_player)
+		target.get_hit_by_rock(damage)
+	elif collider != null:
+		Audio.play_sfx(Audio.rock_hit_wall)
+
 	_return_home()
 
 
 func _return_home() -> void:
 	_thrower = null
+	_exclude.clear()
 	visible = false
 	await get_tree().create_timer(respawn_time).timeout
 	reparent(_home_parent)

@@ -1,18 +1,30 @@
 class_name GrassGrid
 extends MultiMeshInstance3D
 
+@export_group("Campo")
+## Tamaño del área de pasto (X, Z), centrada en la posición de este nodo.
 @export var field_size: Vector2 = Vector2(32.0, 18.0)
-@export var cell_size: float = 1.0
-@export var grown_height: float = 0.35
-@export var regrow_time: float = 6.0
-@export var grown_color: Color = Color(0.2, 0.65, 0.15)
-@export var blade_mesh: Mesh
-@export var blade_material: StandardMaterial3D
+## Tamaño de cada celda. Más chico = más pasto (y más pesado).
+@export_range(0.05, 4.0, 0.05, "suffix:u") var cell_size: float = 1.0
+## Tiempo que tarda el pasto cortado en volver a crecer.
+@export_range(0.0, 120.0, 0.5, "suffix:s") var regrow_time: float = 6.0
 
 @export_group("Modelo")
-@export var cell_fill: float = 0.7
-@export var height_multiplier: float = 0.3
-@export var jitter: float = 0.4
+## Malla de cada mata de pasto. Vacío = un cubo simple.
+@export var blade_mesh: Mesh
+## Material del pasto. Vacío = usa "Grown Color".
+@export var blade_material: StandardMaterial3D
+## Color del pasto cuando no hay material asignado.
+@export var grown_color: Color = Color(0.2, 0.65, 0.15)
+## Altura del cubo simple (solo si no hay "Blade Mesh").
+@export_range(0.01, 2.0, 0.01, "suffix:u") var grown_height: float = 0.35
+## Cuánto de la celda ocupa cada mata (1 = toda la celda).
+@export_range(0.1, 3.0, 0.05) var cell_fill: float = 0.7
+## Multiplicador de altura de la malla.
+@export_range(0.05, 3.0, 0.05) var height_multiplier: float = 0.3
+## Desplazamiento al azar de cada mata dentro de su celda (0 = grilla perfecta).
+@export_range(0.0, 1.0, 0.05) var jitter: float = 0.4
+## Gira cada mata al azar para que se vea más natural.
 @export var random_rotation: bool = true
 
 var columns: int
@@ -73,7 +85,9 @@ func _process(delta: float) -> void:
 # Devuelve cuántas celdas se cortaron recién (no estaban cortadas antes).
 func cut_area(world_position: Vector3, radius: float) -> int:
 	var newly_cut := 0
-	var center := _world_to_cell(world_position)
+	# Las celdas están en coordenadas locales del nodo
+	var local_position := to_local(world_position)
+	var center := _world_to_cell(local_position)
 	var cell_radius := int(ceil(radius / cell_size))
 
 	for oy in range(-cell_radius, cell_radius + 1):
@@ -84,7 +98,7 @@ func cut_area(world_position: Vector3, radius: float) -> int:
 				continue
 
 			var cell_pos := _cell_to_world(x, y)
-			if Vector2(cell_pos.x, cell_pos.z).distance_to(Vector2(world_position.x, world_position.z)) > radius:
+			if Vector2(cell_pos.x, cell_pos.z).distance_to(Vector2(local_position.x, local_position.z)) > radius:
 				continue
 
 			var index := _index(x, y)
@@ -98,6 +112,7 @@ func cut_area(world_position: Vector3, radius: float) -> int:
 
 func _set_cell_state(index: int, grown: bool) -> void:
 	var x := index % columns
+	@warning_ignore("integer_division")
 	var y := index / columns
 	multimesh.set_instance_transform(index, _make_transform(x, y, grown))
 
@@ -105,14 +120,14 @@ func _set_cell_state(index: int, grown: bool) -> void:
 func _make_transform(x: int, y: int, grown: bool) -> Transform3D:
 	var index := _index(x, y)
 	var factor := 1.0 if grown else 0.001
-	var scale := _base_scale * factor
-	var basis := Basis(Vector3.UP, _yaw[index]) * Basis.from_scale(scale)
+	var blade_scale := _base_scale * factor
+	var blade_basis := Basis(Vector3.UP, _yaw[index]) * Basis.from_scale(blade_scale)
 
 	var origin := _cell_to_world(x, y)
 	origin.x += _offset[index].x
 	origin.z += _offset[index].y
-	origin.y = _base_y * scale.y
-	return Transform3D(basis, origin)
+	origin.y = _base_y * blade_scale.y
+	return Transform3D(blade_basis, origin)
 
 
 func _prepare_mesh_scale(mesh: Mesh) -> void:

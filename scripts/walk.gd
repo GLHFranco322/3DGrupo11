@@ -10,6 +10,6 @@ func physics_update(delta: float) -> void:
 		transitioned.emit("run")
 		return
 
-	player.play_anim(&"cortarPasto" if player.has_mower else &"caminar")
+	player.play_anim(Player.ANIM_MOW if player.has_mower else Player.ANIM_WALK)
 	player.anim.speed_scale = 1.0
 	player.apply_movement(input, player.get_walk_speed(), delta)
