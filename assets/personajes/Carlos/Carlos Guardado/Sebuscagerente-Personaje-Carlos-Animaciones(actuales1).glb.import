@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://i80nyjc0t2ym"
-path="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb-ee4ac19b0c61bf31fbd53ff1f4ba4d4b.scn"
+path="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb-e5c2bc4438e6442fdbc7e2b651c8cdf1.scn"
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb-ee4ac19b0c61bf31fbd53ff1f4ba4d4b.scn"]
+source_file="res://assets/personajes/Carlos/Carlos Guardado/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb-e5c2bc4438e6442fdbc7e2b651c8cdf1.scn"]
 
 [params]
 

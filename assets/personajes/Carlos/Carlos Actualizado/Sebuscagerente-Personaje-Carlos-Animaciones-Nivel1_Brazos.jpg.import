@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnbcxe7r0lm5i"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg-d196386b645fa8f2e0df098c400af3d5.s3tc.ctex"
+uid="uid://bmeopntm881hp"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Brazos.jpg-9b94068a296c2c159af970aa35ce6393.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pupilas.jpg-d196386b645fa8f2e0df098c400af3d5.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Actualizado/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Brazos.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Brazos.jpg-9b94068a296c2c159af970aa35ce6393.s3tc.ctex"]
 
 [params]
 

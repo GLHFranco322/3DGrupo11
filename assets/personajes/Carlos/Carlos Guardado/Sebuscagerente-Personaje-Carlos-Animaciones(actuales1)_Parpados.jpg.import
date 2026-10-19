@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmmw28mgq2opn"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Piernas.jpg-e12d77f35c091113c5408fa779c144cb.s3tc.ctex"
+uid="uid://bsxva3ww7fmj0"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-f91c45f830a323041d666e49335173c5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d1dd210d6b1312cb342b56d02bd5e651"
+"md5": "2d20d9c8b8dd5c933a3982613c4b7778"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Piernas.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Piernas.jpg-e12d77f35c091113c5408fa779c144cb.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Guardado/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-f91c45f830a323041d666e49335173c5.s3tc.ctex"]
 
 [params]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsxva3ww7fmj0"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-58993e58144a1a3f8c05105c58bf3f30.s3tc.ctex"
+uid="uid://wueeevvsx4vy"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Pies.jpg-9344fc1fe03e14eaa216aa4399fc3ae4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2d20d9c8b8dd5c933a3982613c4b7778"
+"md5": "498e23c82ca78a4bcd7ba88e5243b6fc"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Parpados.jpg-58993e58144a1a3f8c05105c58bf3f30.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Actualizado/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Pies.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1_Pies.jpg-9344fc1fe03e14eaa216aa4399fc3ae4.s3tc.ctex"]
 
 [params]
 
