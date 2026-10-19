@@ -1,8 +1,11 @@
 class_name Rock
 extends Node3D
 
-## Tiempo hasta que la piedra vuelve a su lugar después de lanzarse.
-@export_range(0.0, 60.0, 0.5, "suffix:s") var respawn_time: float = 3.0
+# Piedra que aparece en el piso (la crea ItemSpawner). Si nadie la agarra antes
+# de "lifetime" segundos, desaparece. Al lanzarla, desaparece cuando choca.
+
+## Segundos que dura en el piso antes de desaparecer. ItemSpawner lo pisa con su valor.
+@export_range(0.5, 60.0, 0.5, "suffix:s") var lifetime: float = 5.0
 ## Velocidad de la piedra en el aire.
 @export_range(1.0, 60.0, 0.5, "suffix:u/s") var throw_speed: float = 14.0
 ## Daño que le hace a la cortadora del rival.
@@ -14,17 +17,19 @@ var is_held: bool = false
 var is_available: bool = true
 
 var _home_parent: Node
-var _home_position: Vector3
 var _direction: Vector3
 var _traveled: float = 0.0
 var _flying: bool = false
 var _thrower: Player = null
 var _exclude: Array[RID] = []
 
+@onready var item_timer: ItemTimer = $ItemTimer
+
 
 func _ready() -> void:
 	_home_parent = get_parent()
-	_home_position = global_position
+	item_timer.expired.connect(queue_free)
+	item_timer.start(lifetime)
 
 
 func _physics_process(delta: float) -> void:
@@ -51,6 +56,7 @@ func _physics_process(delta: float) -> void:
 func pick_up(holder: Player) -> void:
 	is_held = true
 	is_available = false
+	item_timer.stop()
 	Audio.play_sfx(Audio.rock_grab)
 	reparent(holder)
 	global_transform = holder.hold_transform(holder.rock_hold_offset)
@@ -74,14 +80,17 @@ func throw(direction: Vector3, thrower: Player) -> void:
 		_exclude.append(thrower.mower.get_rid())
 
 
+# La suelta en el piso donde está (ej: el jugador cayó a un pozo) y vuelve a
+# correr su tiempo
 func drop() -> void:
 	if not is_held:
 		return
+	var world_position := global_position
 	reparent(_home_parent)
-	global_position = _home_position
+	global_transform = Transform3D(Basis.IDENTITY, Vector3(world_position.x, 0.0, world_position.z))
 	is_held = false
 	is_available = true
-	visible = true
+	item_timer.start(lifetime)
 
 
 func _on_hit(collider: Object) -> void:
@@ -97,15 +106,4 @@ func _on_hit(collider: Object) -> void:
 	elif collider != null:
 		Audio.play_sfx(Audio.rock_hit_wall)
 
-	_return_home()
-
-
-func _return_home() -> void:
-	_thrower = null
-	_exclude.clear()
-	visible = false
-	await get_tree().create_timer(respawn_time).timeout
-	reparent(_home_parent)
-	global_position = _home_position
-	visible = true
-	is_available = true
+	queue_free()

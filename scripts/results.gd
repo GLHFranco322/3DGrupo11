@@ -54,6 +54,30 @@ func _ready() -> void:
 		_spawn_model(winners[i], Vector3(offset, 0.0, 0.0))
 
 
+# Godot no trae botones de mando para aceptar en menús: se manejan acá.
+# Cualquiera de los dos jugadores puede elegir.
+func _unhandled_input(event: InputEvent) -> void:
+	if _is_pressed(event, ["p1_grab", "p2_grab"]) \
+			or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_A):
+		var focused := get_viewport().gui_get_focus_owner() as BaseButton
+		if focused:
+			focused.pressed.emit()
+			get_viewport().set_input_as_handled()
+	elif _is_pressed(event, ["p1_left", "p2_left", "p1_up", "p2_up"]):
+		play_again_button.grab_focus()
+		get_viewport().set_input_as_handled()
+	elif _is_pressed(event, ["p1_right", "p2_right", "p1_down", "p2_down"]):
+		quit_button.grab_focus()
+		get_viewport().set_input_as_handled()
+
+
+func _is_pressed(event: InputEvent, actions: Array[String]) -> bool:
+	for action in actions:
+		if event.is_action_pressed(action):
+			return true
+	return false
+
+
 func _process(delta: float) -> void:
 	_time += delta
 	winner_spot.rotation.y = deg_to_rad(sway_angle) * sin(_time * sway_speed)

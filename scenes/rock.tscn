@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://48i4xm3v5mqe"]
 
 [ext_resource type="Script" uid="uid://b1fiyiobaabcm" path="res://scripts/rock.gd" id="1_1di36"]
+[ext_resource type="PackedScene" path="res://scenes/item_timer.tscn" id="2_timer"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_t8sxr"]
 radius = 0.15
@@ -12,3 +13,7 @@ script = ExtResource("1_1di36")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1670689847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 mesh = SubResource("SphereMesh_t8sxr")
+
+[node name="ItemTimer" parent="." node_paths=PackedStringArray("blink_node") instance=ExtResource("2_timer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+blink_node = NodePath("../MeshInstance3D")

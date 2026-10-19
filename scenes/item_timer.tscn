@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/item_timer.gd" id="1_timer"]
+
+[node name="ItemTimer" type="Label3D"]
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+render_priority = 10
+outline_render_priority = 9
+modulate = Color(1, 1, 1, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "5"
+font_size = 72
+outline_size = 18
+script = ExtResource("1_timer")

@@ -87,6 +87,8 @@ var _mower_home: Node
 var _aim_direction: Vector3 = Vector3.FORWARD
 # Mientras no se toque el analógico derecho, la flecha sigue hacia donde mira el jugador
 var _aim_from_stick: bool = false
+# Con "mouse_aim": true si lo último que se usó fue el mouse, false si el mando
+var _using_mouse: bool = true
 var _step_timer: float = 0.0
 
 @onready var anim: AnimationPlayer = $Model/AnimationPlayer
@@ -155,6 +157,29 @@ static func merge_animations(target: AnimationPlayer, scenes: Array[PackedScene]
 					if not library.has_animation(anim_name):
 						library.add_animation(anim_name, other_library.get_animation(anim_name))
 		instance.free()
+
+
+# Con "mouse_aim", se apunta con el último dispositivo usado: mouse o mando
+func _input(event: InputEvent) -> void:
+	if not mouse_aim:
+		return
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		_using_mouse = true
+	elif _is_my_joypad_event(event):
+		_using_mouse = false
+
+
+func _is_my_joypad_event(event: InputEvent) -> bool:
+	if event is InputEventJoypadMotion:
+		if absf(event.axis_value) < aim_deadzone:
+			return false
+	elif not (event is InputEventJoypadButton and event.pressed):
+		return false
+	var prefix := "p%d_" % player_id
+	for action in InputMap.get_actions():
+		if String(action).begins_with(prefix) and event.is_action(action):
+			return true
+	return false
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -328,7 +353,7 @@ func _update_aiming(delta: float) -> void:
 		return
 
 	# Con mouse la retícula sigue al cursor siempre que se tenga el pozo
-	if mouse_aim:
+	if mouse_aim and _using_mouse:
 		var point = _get_mouse_ground_point()
 		if point != null:
 			is_aiming = true
@@ -373,7 +398,7 @@ func _update_rock_aim() -> void:
 
 	var prefix := "p%d_" % player_id
 	var stick := Input.get_vector(prefix + "aim_left", prefix + "aim_right", prefix + "aim_up", prefix + "aim_down")
-	var mouse_direction := _get_mouse_aim_direction() if mouse_aim else Vector3.ZERO
+	var mouse_direction := _get_mouse_aim_direction() if mouse_aim and _using_mouse else Vector3.ZERO
 	if stick.length() > aim_deadzone:
 		_aim_direction = Vector3(stick.x, 0.0, stick.y).normalized()
 		_aim_from_stick = true

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://i80nyjc0t2ym" path="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb" id="8_carlos"]
 [ext_resource type="PackedScene" uid="uid://b58oalsqr000a" path="res://assets/personajes/Triangulo/falling.glb" id="9_trifall"]
 [ext_resource type="Script" uid="uid://b3s2yk7t0502y" path="res://scripts/match.gd" id="10_match"]
+[ext_resource type="Script" path="res://scripts/item_spawner.gd" id="12_spawner"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
 background_mode = 1
@@ -19,7 +20,7 @@ background_color = Color(0.49803922, 0.60784316, 0.50980395, 1)
 
 [node name="Main" type="Node3D" unique_id=225576862 node_paths=PackedStringArray("player1", "player2", "hud")]
 script = ExtResource("10_match")
-match_duration = 20.0
+match_duration = 61.0
 player1 = NodePath("Player")
 player2 = NodePath("Player2")
 hud = NodePath("HUD")
@@ -133,17 +134,7 @@ text = "¡Tiempo!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Rock" parent="." unique_id=119285836 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
-
-[node name="Rock2" parent="." unique_id=1497960569 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -4)
-
-[node name="Rock3" parent="." unique_id=780162465 instance=ExtResource("5_tbgi4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4235716, 0, 3.4227233)
-
-[node name="pit" parent="." unique_id=400709519 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.910342, 0, -3.7204576)
-
-[node name="pit2" parent="." unique_id=1903430592 instance=ExtResource("7_o6xl0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.024726, 0, 5.2133684)
+[node name="ItemSpawner" type="Node3D" parent="."]
+script = ExtResource("12_spawner")
+rock_scene = ExtResource("5_tbgi4")
+pit_scene = ExtResource("7_o6xl0")

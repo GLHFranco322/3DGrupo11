@@ -1,15 +1,19 @@
 class_name Pit
 extends Node3D
 
+# Pozo que cae del cielo (lo crea ItemSpawner). Al tocar el piso arranca su
+# tiempo: si nadie lo agarra antes de "lifetime" segundos, desaparece. Una vez
+# colocado como trampa queda hasta que alguien lo pisa, y después desaparece.
+
 enum State { SPAWNING, LANDED, HELD, PLACED, TRIGGERED }
 
 @export_group("Aparición")
+## Segundos que dura en el piso antes de desaparecer. ItemSpawner lo pisa con su valor.
+@export_range(0.5, 60.0, 0.5, "suffix:s") var lifetime: float = 5.0
 ## Velocidad con la que el pozo baja del cielo.
 @export_range(0.1, 20.0, 0.1, "suffix:u/s") var descent_speed: float = 2.0
 ## Altura desde la que empieza a bajar.
 @export_range(0.0, 30.0, 0.5, "suffix:u") var start_height: float = 6.0
-## Tiempo hasta que vuelve a aparecer después de usarse.
-@export_range(0.0, 60.0, 0.5, "suffix:s") var respawn_time: float = 5.0
 
 @export_group("Caída")
 ## Tiempo que el jugador queda congelado sobre el pozo antes de caer.
@@ -27,6 +31,7 @@ enum State { SPAWNING, LANDED, HELD, PLACED, TRIGGERED }
 @onready var trap_visual: MeshInstance3D = $TrapVisual
 @onready var pickup_area: Area3D = $PickupArea
 @onready var trap_area: Area3D = $TrapArea
+@onready var item_timer: ItemTimer = $ItemTimer
 
 var state: int = State.SPAWNING
 var holder: Player = null
@@ -41,6 +46,7 @@ func _ready() -> void:
 	_home_position = global_position
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	trap_area.body_entered.connect(_on_trap_area_body_entered)
+	item_timer.expired.connect(_on_expired)
 	_enter_spawning()
 
 
@@ -59,6 +65,7 @@ func pick_up(player: Player) -> void:
 	state = State.HELD
 	holder = player
 	player.held_pit = self
+	item_timer.stop()
 	pickup_area.set_deferred("monitoring", false)
 	reparent(player)
 	global_transform = player.hold_transform(player.pit_hold_offset)
@@ -80,19 +87,22 @@ func place_at(world_position: Vector3) -> void:
 	state = State.PLACED
 
 
+# Lo suelta en el piso donde está (ej: el jugador cayó a un pozo) y vuelve a
+# correr su tiempo
 func drop() -> void:
 	if state != State.HELD:
 		return
+	var world_position := global_position
 	reparent(_home_parent)
 	holder = null
-	_enter_spawning()
+	_home_position = Vector3(world_position.x, 0.0, world_position.z)
+	global_transform = Transform3D(Basis.IDENTITY, _home_position)
+	_enter_landed()
 
 
 func _enter_spawning() -> void:
 	state = State.SPAWNING
-	# Al arrancar el juego no suena (todos los pozos aparecen a la vez)
-	if is_node_ready():
-		Audio.play_sfx(Audio.pit_spawn)
+	Audio.play_sfx(Audio.pit_spawn)
 	global_position = _home_position + Vector3(0.0, start_height, 0.0)
 	bubble.visible = true
 	trap_visual.visible = false
@@ -103,6 +113,12 @@ func _enter_spawning() -> void:
 func _enter_landed() -> void:
 	state = State.LANDED
 	pickup_area.set_deferred("monitoring", true)
+	item_timer.start(lifetime)
+
+
+func _on_expired() -> void:
+	if state == State.LANDED:
+		queue_free()
 
 
 func _on_pickup_area_body_entered(body: Node) -> void:
@@ -138,14 +154,7 @@ func _trigger() -> void:
 	tween.tween_property(trap_visual, "scale", Vector3(0.001, 1.0, 0.001), close_time) \
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	await tween.finished
-
-	visible = false
-	trap_visual.scale = Vector3.ONE
-	trap_visual.material_override = null
-	await get_tree().create_timer(respawn_time).timeout
-	visible = true
-	placed_by = null
-	_enter_spawning()
+	queue_free()
 
 
 func _hole_material() -> StandardMaterial3D:

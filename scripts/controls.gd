@@ -6,12 +6,38 @@ extends Node
 
 const PLAYER_COUNT := 2
 # Imprime en consola lo que llega de los joysticks (para depurar)
-const DEBUG_INPUT := true
+const DEBUG_INPUT := false
+
+
+var _debug_timer: float = 0.0
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_assign_devices()
+
+
+# Lee el estado de los mandos directamente (sin eventos) cada medio segundo
+func _process(delta: float) -> void:
+	if not DEBUG_INPUT:
+		return
+	_debug_timer -= delta
+	if _debug_timer > 0.0:
+		return
+	_debug_timer = 0.5
+
+	for pad in Input.get_connected_joypads():
+		var active: Array[String] = []
+		for axis in JOY_AXIS_SDL_MAX:
+			var value := Input.get_joy_axis(pad, axis)
+			if absf(value) > 0.3:
+				active.append("eje %d=%.2f" % [axis, value])
+		for button in JOY_BUTTON_SDL_MAX:
+			if Input.is_joy_button_pressed(pad, button):
+				active.append("botón %d" % button)
+		if not active.is_empty():
+			print("[Estado] Mando %d: %s" % [pad, ", ".join(active)])
 
 
 func _input(event: InputEvent) -> void:
@@ -35,6 +61,10 @@ func _assign_devices() -> void:
 	var pads := Input.get_connected_joypads()
 	for pad in pads:
 		print("Joystick conectado: %d - %s" % [pad, Input.get_joy_name(pad)])
+		if DEBUG_INPUT:
+			print("  conocido por Godot: %s" % Input.is_joy_known(pad))
+			print("  info: %s" % Input.get_joy_info(pad))
+			print("  ventana con foco: %s" % get_window().has_focus())
 	if pads.is_empty():
 		print("No hay joysticks conectados")
 
