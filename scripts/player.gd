@@ -71,6 +71,7 @@ const ANIM_MOW := &"cortar_pasto"
 const ANIM_STUNNED := &"aturdido"
 const ANIM_THROW := &"tirar"
 const ANIM_FALL := &"caer"
+const ANIM_EMOTE := &"festejo"
 
 signal score_changed(new_score: int)
 
@@ -101,6 +102,8 @@ func _ready() -> void:
 	if model_scene:
 		_swap_model()
 	_load_extra_animations()
+	# Por si el .glb no se reimportó con los nombres comunes
+	AnimNames.normalize(anim)
 	if mower:
 		_mower_home = mower.get_parent()
 	else:

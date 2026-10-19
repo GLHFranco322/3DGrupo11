@@ -9,10 +9,11 @@
 [ext_resource type="Script" uid="uid://dom2qyq223jsn" path="res://scripts/hud.gd" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://48i4xm3v5mqe" path="res://scenes/rock.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://dd2ua30ahxdeb" path="res://scenes/pit.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://i80nyjc0t2ym" path="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1).glb" id="8_carlos"]
+[ext_resource type="PackedScene" uid="uid://r30161ovryvj" path="res://assets/personajes/Carlos/Carlos Actualizado/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1.glb" id="8_carlos"]
 [ext_resource type="PackedScene" uid="uid://b58oalsqr000a" path="res://assets/personajes/Triangulo/falling.glb" id="9_trifall"]
 [ext_resource type="Script" uid="uid://b3s2yk7t0502y" path="res://scripts/match.gd" id="10_match"]
 [ext_resource type="Script" path="res://scripts/item_spawner.gd" id="12_spawner"]
+[ext_resource type="PackedScene" uid="uid://cdagxb0vfih8y" path="res://assets/maquinas de pasto/maquina azul/vibration/CortadoradepastoModeloAzulVibration.glb" id="13_azul"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
 background_mode = 1
@@ -78,6 +79,7 @@ grass_grid = NodePath("../GrassGrid")
 [node name="Mower2" parent="." unique_id=1986578710 node_paths=PackedStringArray("grass_grid") instance=ExtResource("2_0wfyh")]
 transform = Transform3D(-0.9999932, 0, -0.0036825177, 0, 1, 0, 0.0036825177, 0, -0.9999932, -12, 0, -3.4)
 grass_grid = NodePath("../GrassGrid")
+model_scene = ExtResource("13_azul")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=146105782 node_paths=PackedStringArray("player1", "player2")]
 script = ExtResource("4_jyhfs")
@@ -138,3 +140,8 @@ vertical_alignment = 1
 script = ExtResource("12_spawner")
 rock_scene = ExtResource("5_tbgi4")
 pit_scene = ExtResource("7_o6xl0")
+first_spawn_delay = 0.5
+spawn_interval_min = 0.7
+spawn_interval_max = 1.5
+max_items = 8
+min_distance_between_items = 2.0

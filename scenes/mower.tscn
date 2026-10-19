@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cxjbe4cwk7smx"]
 
 [ext_resource type="Script" uid="uid://bxjkhk0e0aejl" path="res://scripts/mower.gd" id="1_5cn51"]
+[ext_resource type="PackedScene" uid="uid://bjwwagv3moj6i" path="res://assets/maquinas de pasto/maquina naranja/vibration/CortadoradepastoModeloNaranjaVibration.glb" id="2_naranja"]
+[ext_resource type="PackedScene" path="res://scenes/grass_clippings.tscn" id="3_clip"]
+[ext_resource type="PackedScene" uid="uid://cv3dxa51rssd3" path="res://scenes/smoke_particula_2.tscn" id="4_smoke"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cn51"]
 albedo_color = Color(1, 0.6039216, 0.47058824, 1)
@@ -21,6 +24,9 @@ size = Vector3(0.8, 0.5, 0.1)
 [node name="Mower" type="AnimatableBody3D" unique_id=1986578710]
 sync_to_physics = false
 script = ExtResource("1_5cn51")
+model_scene = ExtResource("2_naranja")
+cutting_effect = ExtResource("3_clip")
+broken_effect = ExtResource("4_smoke")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=127398873]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)

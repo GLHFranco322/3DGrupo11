@@ -96,7 +96,11 @@ func _spawn_model(info: Dictionary, offset: Vector3) -> void:
 	if anim:
 		var extra: Array[PackedScene] = info.extra_animations
 		Player.merge_animations(anim, extra)
-		if anim.has_animation(Player.ANIM_IDLE):
+		AnimNames.normalize(anim)
+		# En el podio: festejo si el personaje lo tiene, si no idle
+		if anim.has_animation(Player.ANIM_EMOTE):
+			anim.play(Player.ANIM_EMOTE)
+		elif anim.has_animation(Player.ANIM_IDLE):
 			anim.play(Player.ANIM_IDLE)
 
 

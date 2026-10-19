@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clip"]
+vertex_color_use_as_albedo = true
+cull_mode = 2
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_clip"]
+material = SubResource("StandardMaterial3D_clip")
+size = Vector3(0.07, 0.015, 0.14)
+
+[node name="GrassClippings" type="CPUParticles3D"]
+emitting = false
+amount = 40
+lifetime = 0.7
+local_coords = false
+mesh = SubResource("BoxMesh_clip")
+emission_shape = 3
+emission_box_extents = Vector3(0.45, 0.05, 0.25)
+particle_flag_rotate_y = true
+direction = Vector3(0, 1, 0)
+spread = 55.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, -12, 0)
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.6
+scale_amount_max = 1.4
+color = Color(0.35, 0.7, 0.2, 1)
+hue_variation_min = -0.04
+hue_variation_max = 0.04
