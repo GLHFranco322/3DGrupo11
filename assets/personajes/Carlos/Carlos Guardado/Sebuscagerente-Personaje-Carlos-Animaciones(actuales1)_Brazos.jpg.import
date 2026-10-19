@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6a30p4vkgbga"
-path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pies.jpg-a81e19f1b3f4b9cfe0c6228b5474ab5d.s3tc.ctex"
+uid="uid://bq2ohmpn2qrw6"
+path.s3tc="res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Brazos.jpg-c49d84af87e88a516880e909d6400ca8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "498e23c82ca78a4bcd7ba88e5243b6fc"
+"md5": "d1dd210d6b1312cb342b56d02bd5e651"
 }
 
 [deps]
 
-source_file="res://assets/personajes/Carlos/Carlos Actual/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pies.jpg"
-dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Pies.jpg-a81e19f1b3f4b9cfe0c6228b5474ab5d.s3tc.ctex"]
+source_file="res://assets/personajes/Carlos/Carlos Guardado/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Brazos.jpg"
+dest_files=["res://.godot/imported/Sebuscagerente-Personaje-Carlos-Animaciones(actuales1)_Brazos.jpg-c49d84af87e88a516880e909d6400ca8.s3tc.ctex"]
 
 [params]
 
