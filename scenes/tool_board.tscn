@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/tool_board.gd" id="1_board"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_board"]
+albedo_color = Color(0.62, 0.42, 0.24, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_board"]
+material = SubResource("StandardMaterial3D_board")
+size = Vector3(3, 1.8, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frame"]
+albedo_color = Color(0.3, 0.2, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_frame"]
+material = SubResource("StandardMaterial3D_frame")
+size = Vector3(3.2, 2.0, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_delivery"]
+size = Vector3(3.2, 2.4, 2.4)
+
+[node name="ToolBoard" type="Node3D"]
+script = ExtResource("1_board")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_frame")
+
+[node name="Panel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.04)
+mesh = SubResource("BoxMesh_board")
+
+[node name="Title" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.1)
+pixel_size = 0.008
+outline_modulate = Color(0, 0, 0, 1)
+text = "TABLERO"
+font_size = 64
+outline_size = 16
+
+[node name="Slots" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.15)
+
+[node name="DeliveryArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 1.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeliveryArea"]
+shape = SubResource("BoxShape3D_delivery")

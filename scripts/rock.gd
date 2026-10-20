@@ -12,6 +12,8 @@ extends Node3D
 @export_range(0, 100) var damage: int = 20
 ## Si no choca con nada, desaparece después de recorrer esta distancia.
 @export_range(1.0, 200.0, 1.0, "suffix:u") var max_distance: float = 40.0
+## Radio de la zona de golpe de la piedra en el aire. Más grande = más fácil pegar.
+@export_range(0.05, 3.0, 0.05, "suffix:u") var hit_radius: float = 0.5
 
 var is_held: bool = false
 var is_available: bool = true
@@ -22,12 +24,14 @@ var _traveled: float = 0.0
 var _flying: bool = false
 var _thrower: Player = null
 var _exclude: Array[RID] = []
+var _hit_shape := SphereShape3D.new()
 
 @onready var item_timer: ItemTimer = $ItemTimer
 
 
 func _ready() -> void:
 	_home_parent = get_parent()
+	_hit_shape.radius = hit_radius
 	item_timer.expired.connect(queue_free)
 	item_timer.start(lifetime)
 
@@ -37,17 +41,26 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var from := global_position
-	var to := from + _direction * throw_speed * delta
+	var motion := _direction * throw_speed * delta
 
-	var query := PhysicsRayQueryParameters3D.create(from, to)
+	# Avanza una esfera de radio "hit_radius" en vez de un rayo finito
+	var space := get_world_3d().direct_space_state
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = _hit_shape
+	query.transform = Transform3D(Basis.IDENTITY, from)
+	query.motion = motion
 	query.exclude = _exclude
-	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	if hit:
-		global_position = hit.position
-		_on_hit(hit.collider)
+	var fractions := space.cast_motion(query)
+	if fractions[1] < 1.0:
+		# Choca en este paso: busca contra qué, en el punto del choque
+		global_position = from + motion * fractions[1]
+		query.transform = Transform3D(Basis.IDENTITY, global_position)
+		query.motion = Vector3.ZERO
+		var hits := space.intersect_shape(query, 1)
+		_on_hit(hits[0].collider if not hits.is_empty() else null)
 		return
 
-	global_position = to
+	global_position = from + motion
 	_traveled += throw_speed * delta
 	if _traveled >= max_distance:
 		_on_hit(null)

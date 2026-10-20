@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/collectible.gd" id="1_item"]
+
+[node name="Collectible" type="Node3D" groups=["collectible"]]
+script = ExtResource("1_item")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+pixel_size = 0.006
+billboard = 1
+modulate = Color(1, 0.95, 0.6, 1)
+outline_modulate = Color(0, 0, 0, 1)
+text = "Herramienta"
+font_size = 48
+outline_size = 14

@@ -99,6 +99,7 @@ var _step_timer: float = 0.0
 
 func _ready() -> void:
 	spawn_position = global_position
+	_apply_chosen_character()
 	if model_scene:
 		_swap_model()
 	_load_extra_animations()
@@ -111,6 +112,17 @@ func _ready() -> void:
 	if aim_indicator:
 		# Toma el color del jugador pero respeta la transparencia del indicador
 		aim_indicator.set_color(Color(color, aim_indicator.color.a))
+
+
+# Personaje elegido en la selección de personaje. Si no se eligió (por ejemplo
+# al abrir la escena directo desde el editor) se usa el de la escena.
+func _apply_chosen_character() -> void:
+	var character := GameSettings.get_character(player_id)
+	if character == null or character.model_scene == null:
+		return
+	model_scene = character.model_scene
+	model_scale = character.model_scale
+	extra_animations = character.extra_animations
 
 
 func _swap_model() -> void:

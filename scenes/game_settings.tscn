@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game_settings.gd" id="1_settings"]
+[ext_resource type="Script" path="res://scripts/character_data.gd" id="2_data"]
+[ext_resource type="Resource" path="res://characters/triangulo.tres" id="3_triangulo"]
+[ext_resource type="Resource" path="res://characters/carlos.tres" id="4_carlos"]
+
+[node name="GameSettings" type="Node"]
+script = ExtResource("1_settings")
+characters = Array[ExtResource("2_data")]([ExtResource("3_triangulo"), ExtResource("4_carlos")])

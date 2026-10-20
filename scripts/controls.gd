@@ -10,6 +10,13 @@ const DEBUG_INPUT := false
 
 
 var _debug_timer: float = 0.0
+# player_id -> número de mando asignado
+var _player_devices: Dictionary = {}
+
+
+## Número de mando que controla al jugador "player" (1 o 2).
+func get_player_device(player: int) -> int:
+	return _player_devices.get(player, player - 1)
 
 
 func _ready() -> void:
@@ -71,6 +78,7 @@ func _assign_devices() -> void:
 	for player in range(1, PLAYER_COUNT + 1):
 		# Sin mando para este jugador: se deja el número por defecto (p1 = 0, p2 = 1)
 		var device: int = pads[player - 1] if player - 1 < pads.size() else player - 1
+		_player_devices[player] = device
 		_set_player_device(player, device)
 
 

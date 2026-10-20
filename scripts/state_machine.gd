@@ -23,7 +23,15 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
-	(get_parent() as Player).move_and_slide()
+	var player := get_parent() as Player
+	player.move_and_slide()
+
+	# Sin gravedad ni piso: al chocar con colisiones inclinadas (arbustos,
+	# piedras, cerca) el deslizamiento lo empuja hacia abajo. Se lo mantiene a
+	# la altura del piso, salvo cuando cae al pozo (se hunde a propósito).
+	if not is_current("falling"):
+		player.velocity.y = 0.0
+		player.global_position.y = player.spawn_position.y
 
 
 func _on_transitioned(state_name: String) -> void:

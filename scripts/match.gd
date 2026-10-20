@@ -47,11 +47,11 @@ func _update_time_sounds(previous_second: int) -> void:
 func _finish() -> void:
 	_finished = true
 	MatchResult.save_from([player1, player2])
+	MatchResult.last_level_scene = scene_file_path
 	hud.show_message("¡Tiempo!")
 	Audio.stop_music()
 	Audio.play_sfx(Audio.time_up)
 
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
-	get_tree().paused = false
-	get_tree().change_scene_to_file(results_scene)
+	SceneLoader.change_scene(results_scene)

@@ -1,0 +1,170 @@
+extends Node3D
+
+# Nivel 2, la ferretería: cada jugador tiene una lista de herramientas que
+# tiene que encontrar en el laberinto y colgar en el tablero. Gana el primero
+# que completa su lista; si se acaba el tiempo, el que entregó más.
+
+@export_group("Partida")
+## Herramientas en la lista de cada jugador.
+@export_range(1, 12) var items_per_player: int = 5
+## Herramientas extra que no están en ninguna lista (para confundir).
+@export_range(0, 20) var decoy_items: int = 3
+## Duración máxima de la partida.
+@export_range(10.0, 900.0, 5.0, "suffix:s") var match_duration: float = 180.0
+## Puntos por herramienta entregada.
+@export_range(1, 1000) var points_per_item: int = 100
+## Si es true, los dos jugadores reciben la misma lista.
+@export var same_list_for_both: bool = false
+## Semilla para las listas y dónde aparece cada herramienta. 0 = distinta cada partida.
+@export var items_seed: int = 0
+## Tiempo que se muestra el cartel final antes de los resultados.
+@export_range(0.0, 10.0, 0.1, "suffix:s") var end_delay: float = 2.0
+@export_file("*.tscn") var results_scene: String = "res://scenes/results.tscn"
+
+@export_group("Herramientas")
+## Herramientas que pueden aparecer en las listas.
+@export var item_pool: Array[ItemData] = []
+@export var collectible_scene: PackedScene
+
+@export_group("Referencias")
+@export var maze: MazeBuilder
+@export var board: ToolBoard
+@export var items_root: Node3D
+@export var player1: StorePlayer
+@export var player2: StorePlayer
+@export var hud: StoreHud
+
+var time_left: float
+var _finished: bool = false
+var _rng := RandomNumberGenerator.new()
+
+
+func _ready() -> void:
+	if items_seed == 0:
+		_rng.randomize()
+	else:
+		_rng.seed = items_seed
+
+	_place_board_and_players()
+	_assign_lists()
+	_spawn_items()
+
+	for p in _players():
+		p.deliver_requested.connect(_on_deliver_requested)
+	time_left = match_duration
+	hud.setup(player1, player2)
+	hud.set_time(time_left)
+	Audio.play_music(Audio.music_game)
+
+
+func _process(delta: float) -> void:
+	if _finished:
+		return
+	time_left = maxf(time_left - delta, 0.0)
+	hud.set_time(time_left)
+	for p in _players():
+		hud.set_hint(p, _get_hint(p))
+	if time_left <= 0.0:
+		_finish("¡Tiempo!")
+
+
+func _players() -> Array[StorePlayer]:
+	return [player1, player2]
+
+
+# El tablero va en la pared de abajo, en la celda del medio; los jugadores
+# arrancan en esa celda, mirando hacia el laberinto
+func _place_board_and_players() -> void:
+	@warning_ignore("integer_division")
+	var start_cell := Vector2i(maze.columns / 2, maze.rows - 1)
+	var center := maze.get_cell_center(start_cell)
+	var wall_z := center.z + maze.cell_size * 0.5 - maze.wall_thickness * 0.5
+	board.global_transform = Transform3D(Basis(Vector3.UP, PI), Vector3(center.x, 1.4, wall_z - 0.05))
+	player1.global_position = center + Vector3(-0.8, 0.1, 0.0)
+	player2.global_position = center + Vector3(0.8, 0.1, 0.0)
+
+
+func _assign_lists() -> void:
+	var pool := item_pool.duplicate()
+	_shuffle(pool)
+	var count := mini(items_per_player, pool.size())
+	player1.remaining.assign(pool.slice(0, count))
+	if same_list_for_both:
+		player2.remaining.assign(player1.remaining)
+	else:
+		_shuffle(pool)
+		player2.remaining.assign(pool.slice(0, count))
+
+
+# Una herramienta por cada pedido de cada lista, más las de relleno, cada una
+# en una celda distinta del laberinto
+func _spawn_items() -> void:
+	var to_spawn: Array[ItemData] = []
+	to_spawn.append_array(player1.remaining)
+	to_spawn.append_array(player2.remaining)
+	for i in decoy_items:
+		to_spawn.append(item_pool[_rng.randi_range(0, item_pool.size() - 1)])
+
+	@warning_ignore("integer_division")
+	var start_cell := Vector2i(maze.columns / 2, maze.rows - 1)
+	var cells := maze.get_all_cells()
+	cells.erase(start_cell)
+	_shuffle(cells)
+
+	for i in to_spawn.size():
+		var item := collectible_scene.instantiate() as Collectible
+		item.data = to_spawn[i]
+		var cell: Vector2i = cells[i % cells.size()]
+		var jitter := Vector3(_rng.randf_range(-1.0, 1.0), 0.0, _rng.randf_range(-1.0, 1.0)) * maze.cell_size * 0.2
+		item.position = items_root.to_local(maze.get_cell_center(cell) + jitter)
+		items_root.add_child(item)
+
+
+func _on_deliver_requested(player: StorePlayer) -> void:
+	if _finished:
+		return
+	var item := player.carried
+	if not board.is_in_range(player):
+		player.drop_carried()
+		return
+	if not player.needs(item.data):
+		hud.flash_message(player, "¡No está en tu lista!")
+		return
+
+	player.remaining.erase(item.data)
+	player.score += points_per_item
+	board.hang(player.take_carried())
+	Audio.play_sfx(Audio.score_ping)
+	hud.mark_delivered(player, item.data)
+	if player.remaining.is_empty():
+		_finish("¡Jugador %d completó su lista!" % player.player_id)
+
+
+func _get_hint(player: StorePlayer) -> String:
+	if player.carried == null:
+		return ""
+	if not board.is_in_range(player):
+		return "Llevala al tablero  ·  ✕ soltar"
+	if player.needs(player.carried.data):
+		return "✕ Colgar en el tablero"
+	return "No está en tu lista  ·  alejate y ✕ para soltar"
+
+
+func _finish(message: String) -> void:
+	_finished = true
+	MatchResult.save_from(_players())
+	MatchResult.last_level_scene = scene_file_path
+	hud.show_message(message)
+	Audio.stop_music()
+	Audio.play_sfx(Audio.time_up)
+	get_tree().paused = true
+	await get_tree().create_timer(end_delay, true).timeout
+	SceneLoader.change_scene(results_scene)
+
+
+func _shuffle(array: Array) -> void:
+	for i in range(array.size() - 1, 0, -1):
+		var j := _rng.randi_range(0, i)
+		var temp = array[i]
+		array[i] = array[j]
+		array[j] = temp

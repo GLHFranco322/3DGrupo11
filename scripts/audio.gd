@@ -10,12 +10,20 @@ extends Node
 @export_range(-40.0, 6.0, 0.5, "suffix:dB") var music_volume_db: float = -8.0:
 	set(value):
 		music_volume_db = value
-		if _music_player:
-			_music_player.volume_db = value
+		_update_music_volume()
 ## Volumen de los efectos de sonido.
 @export_range(-40.0, 6.0, 0.5, "suffix:dB") var sfx_volume_db: float = 0.0
 
+# Niveles del menú de opciones (0 a 1). Los maneja GameSettings.
+var music_level: float = 1.0:
+	set(value):
+		music_level = value
+		_update_music_volume()
+var sfx_level: float = 1.0
+
 @export_group("Música")
+## Música del menú principal y la selección de personaje.
+@export var music_menu: AudioStream
 ## Música durante la partida (se repite en loop).
 @export var music_game: AudioStream
 ## Música de los últimos segundos. Vacío = sigue la música normal.
@@ -95,7 +103,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	_music_player = AudioStreamPlayer.new()
-	_music_player.volume_db = music_volume_db
+	_update_music_volume()
 	_music_player.finished.connect(_music_player.play)
 	add_child(_music_player)
 
@@ -117,7 +125,7 @@ func play_sfx(stream: AudioStream, cooldown: float = 0.0, volume_offset_db: floa
 	var player := _sfx_players[_next_voice]
 	_next_voice = (_next_voice + 1) % _sfx_players.size()
 	player.stream = stream
-	player.volume_db = sfx_volume_db + volume_offset_db
+	player.volume_db = get_sfx_db() + volume_offset_db
 	player.play()
 
 
@@ -146,7 +154,17 @@ func stop_music() -> void:
 func create_loop_player(owner_node: Node, stream: AudioStream, volume_offset_db: float = 0.0) -> AudioStreamPlayer:
 	var player := AudioStreamPlayer.new()
 	player.stream = stream
-	player.volume_db = sfx_volume_db + volume_offset_db
+	player.volume_db = get_sfx_db() + volume_offset_db
 	player.finished.connect(player.play)
 	owner_node.add_child(player)
 	return player
+
+
+## Volumen final de los efectos (dB), con el nivel del menú de opciones aplicado.
+func get_sfx_db() -> float:
+	return sfx_volume_db + linear_to_db(maxf(sfx_level, 0.0001))
+
+
+func _update_music_volume() -> void:
+	if _music_player:
+		_music_player.volume_db = music_volume_db + linear_to_db(maxf(music_level, 0.0001))

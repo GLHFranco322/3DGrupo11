@@ -1,0 +1,180 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29, 0.52, 0.27, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="Center/Layout"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 18
+theme_override_font_sizes/font_size = 72
+text = "Se busca Gerente"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="VBoxContainer" parent="Center/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="Center/Layout/MainPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Jugar"
+
+[node name="OptionsButton" type="Button" parent="Center/Layout/MainPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Opciones"
+
+[node name="QuitButton" type="Button" parent="Center/Layout/MainPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Salir"
+
+[node name="OptionsPanel" type="VBoxContainer" parent="Center/Layout"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="OptionsTitle" type="Label" parent="Center/Layout/OptionsPanel"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 40
+text = "Opciones"
+horizontal_alignment = 1
+
+[node name="Volumes" type="GridContainer" parent="Center/Layout/OptionsPanel"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 18
+columns = 3
+
+[node name="MasterLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "General"
+
+[node name="MasterSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+step = 5.0
+value = 100.0
+
+[node name="MasterValue" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="MusicLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Música"
+
+[node name="MusicSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+step = 5.0
+value = 100.0
+
+[node name="MusicValue" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="SfxLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Efectos"
+
+[node name="SfxSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+step = 5.0
+value = 100.0
+
+[node name="SfxValue" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "100%"
+horizontal_alignment = 2
+
+[node name="BackButton" type="Button" parent="Center/Layout/OptionsPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Volver"
+
+[node name="Hint" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -40.0
+offset_right = 400.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 16
+text = "Palanca o flechas para moverte · ✕ / A para aceptar · ○ / B para volver"
+horizontal_alignment = 1

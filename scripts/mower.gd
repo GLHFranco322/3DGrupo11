@@ -173,12 +173,12 @@ func _fit_model(model: Node3D) -> void:
 
 
 func _get_local_bounds(root: Node) -> AABB:
-	var to_local := global_transform.affine_inverse()
+	var to_mower := global_transform.affine_inverse()
 	var result := AABB()
 	var first := true
 	for node in root.find_children("*", "VisualInstance3D", true, false):
 		var visual := node as VisualInstance3D
-		var box := (to_local * visual.global_transform) * visual.get_aabb()
+		var box := (to_mower * visual.global_transform) * visual.get_aabb()
 		result = box if first else result.merge(box)
 		first = false
 	return result

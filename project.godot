@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Se busca Gerente"
-run/main_scene="uid://cg6e6w404qh3d"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 Controls="*res://scripts/controls.gd"
 MatchResult="*res://scripts/match_result.gd"
 Audio="*res://scenes/audio.tscn"
+GameSettings="*res://scenes/game_settings.tscn"
+SceneLoader="*res://scenes/scene_loader.tscn"
 
 [dotnet]
 

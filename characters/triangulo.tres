@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3]
+
+[ext_resource type="Script" path="res://scripts/character_data.gd" id="1_data"]
+[ext_resource type="PackedScene" uid="uid://do1020523klr3" path="res://assets/personajes/Triangulo/Trianguloblend.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://b58oalsqr000a" path="res://assets/personajes/Triangulo/falling.glb" id="3_fall"]
+
+[resource]
+script = ExtResource("1_data")
+display_name = "Triángulo"
+model_scene = ExtResource("2_model")
+model_scale = 0.25
+extra_animations = Array[PackedScene]([ExtResource("3_fall")])

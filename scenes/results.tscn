@@ -89,6 +89,20 @@ text = "0 puntos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Standings" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 160.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Torneo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Buttons" type="HBoxContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 7
@@ -96,20 +110,26 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -240.0
+offset_left = -400.0
 offset_top = -110.0
-offset_right = 240.0
+offset_right = 400.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="PlayAgain" type="Button" parent="UI/Buttons"]
+[node name="NextLevel" type="Button" parent="UI/Buttons"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Siguiente nivel"
+
+[node name="Menu" type="Button" parent="UI/Buttons"]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Volver a jugar"
+text = "Menú"
 
 [node name="Quit" type="Button" parent="UI/Buttons"]
 custom_minimum_size = Vector2(200, 60)

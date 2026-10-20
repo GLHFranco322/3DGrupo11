@@ -31,6 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49
 fov = 45.0
 size = 20.0
 script = ExtResource("1_tefeu")
+mode = 1
 player1 = NodePath("../Player")
 player2 = NodePath("../Player2")
 
