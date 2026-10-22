@@ -184,5 +184,5 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 16
-text = "Cada jugador con su mando: flechas o palanca para elegir · ✕ confirmar · ○ volver"
+text = "Apretá ✕ con el mando que vas a usar para unirte · flechas o palanca para elegir · ✕ confirmar · ○ salir"
 horizontal_alignment = 1

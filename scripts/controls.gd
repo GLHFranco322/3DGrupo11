@@ -1,22 +1,37 @@
 extends Node
 
-# Autoload: asigna los joysticks conectados a cada jugador. El primer mando
-# conectado controla las acciones "p1_*", el segundo las "p2_*", sin importar
-# qué número de dispositivo le dé el sistema operativo.
+# Autoload: asigna los joysticks a cada jugador. En la selección de personaje
+# cada uno se une apretando ✕ con su mando (ver assign_device). Hasta entonces
+# (o si se abre un nivel directo) el primer mando conectado controla "p1_*" y
+# el segundo "p2_*", sin importar el número que le dé el sistema operativo.
 
 const PLAYER_COUNT := 2
 # Imprime en consola lo que llega de los joysticks (para depurar)
 const DEBUG_INPUT := false
+# Mandos que no juegan (número que aparece en consola en "Joystick conectado").
+# Ej: [0] para que jueguen el 1 contra el 2. Vacío = juegan los primeros dos.
+const IGNORED_DEVICES: Array[int] = []
 
 
 var _debug_timer: float = 0.0
 # player_id -> número de mando asignado
 var _player_devices: Dictionary = {}
+# Si los mandos los eligieron los jugadores (no se reasignan solos)
+var _manual: bool = false
 
 
 ## Número de mando que controla al jugador "player" (1 o 2).
 func get_player_device(player: int) -> int:
 	return _player_devices.get(player, player - 1)
+
+
+## Hace que "device" controle al jugador "player". Lo usa la selección de
+## personaje cuando alguien se une con su mando.
+func assign_device(player: int, device: int) -> void:
+	_manual = true
+	_player_devices[player] = device
+	_set_player_device(player, device)
+	print("Jugador %d -> mando %d (%s)" % [player, device, Input.get_joy_name(device)])
 
 
 func _ready() -> void:
@@ -65,15 +80,21 @@ func _on_joy_connection_changed(_device: int, _connected: bool) -> void:
 
 
 func _assign_devices() -> void:
-	var pads := Input.get_connected_joypads()
-	for pad in pads:
-		print("Joystick conectado: %d - %s" % [pad, Input.get_joy_name(pad)])
+	var pads: Array[int] = []
+	for pad in Input.get_connected_joypads():
+		var ignored := pad in IGNORED_DEVICES
+		print("Joystick conectado: %d - %s%s" % [pad, Input.get_joy_name(pad), " (no juega)" if ignored else ""])
+		if not ignored:
+			pads.append(pad)
 		if DEBUG_INPUT:
 			print("  conocido por Godot: %s" % Input.is_joy_known(pad))
 			print("  info: %s" % Input.get_joy_info(pad))
 			print("  ventana con foco: %s" % get_window().has_focus())
 	if pads.is_empty():
 		print("No hay joysticks conectados")
+	# Los eligieron los jugadores: se respeta aunque se conecte otro mando
+	if _manual:
+		return
 
 	for player in range(1, PLAYER_COUNT + 1):
 		# Sin mando para este jugador: se deja el número por defecto (p1 = 0, p2 = 1)

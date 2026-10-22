@@ -1,10 +1,14 @@
 extends Node3D
 
-# Selección de personaje: los dos jugadores eligen a la vez, cada uno con su
-# mando. Palanca izquierda/derecha cambia, ✕ confirma, ○ cancela (si nadie
-# confirmó, vuelve al menú). Cuando los dos confirman, arranca la partida.
+# Selección de personaje: primero cada uno se une apretando ✕ con el mando que
+# quiera usar (el primero es el Jugador 1, el segundo el Jugador 2; los demás
+# mandos no juegan). Después palanca izquierda/derecha cambia, ✕ confirma,
+# ○ cancela o deja el lugar (si no hay nadie, vuelve al menú). Cuando los dos
+# confirman, arranca la partida.
 
 const PLAYERS := [1, 2]
+# Valor de "_devices" para el que se unió con teclado
+const KEYBOARD := -2
 
 ## Escena que se abre cuando los dos están listos.
 @export_file("*.tscn") var game_scene: String = "res://scenes/main.tscn"
@@ -30,6 +34,9 @@ const PLAYERS := [1, 2]
 @onready var message_label: Label = %MessageLabel
 
 var _index := {1: 0, 2: 1}
+# Si cada jugador ya se unió con un mando (y cuál)
+var _joined := {1: false, 2: false}
+var _devices := {1: -1, 2: -1}
 var _ready_players := {1: false, 2: false}
 var _starting: bool = false
 var _time: float = 0.0
@@ -64,6 +71,8 @@ func _process(delta: float) -> void:
 
 # Palanca: un cambio por empujón (a fondo), y hay que soltarla para el siguiente
 func _update_stick(p: int) -> void:
+	if not _joined[p]:
+		return
 	var x := Input.get_joy_axis(Controls.get_player_device(p), JOY_AXIS_LEFT_X)
 	if _stick_held[p]:
 		if absf(x) < stick_release:
@@ -78,14 +87,19 @@ func _update_stick(p: int) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _starting or GameSettings.characters.is_empty():
 		return
+	if _try_join(event) or _try_back_to_menu(event):
+		get_viewport().set_input_as_handled()
+		return
 	for p in PLAYERS:
+		if not _joined[p]:
+			continue
 		if _is_cancel(event, p):
 			if _ready_players[p]:
 				_ready_players[p] = false
 				Audio.play_sfx(Audio.ui_click)
 				_refresh(p)
-			elif not _ready_players[1] and not _ready_players[2]:
-				SceneLoader.change_scene(menu_scene)
+			else:
+				_leave(p)
 			get_viewport().set_input_as_handled()
 			return
 		if _ready_players[p]:
@@ -136,11 +150,15 @@ func _confirm(p: int) -> void:
 func _refresh(p: int) -> void:
 	var character: CharacterData = GameSettings.characters[_index[p]]
 	character_labels[p].text = "◀  %s  ▶" % character.display_name
-	if _ready_players[p]:
+	character_labels[p].modulate = Color.WHITE if _joined[p] else Color(1, 1, 1, 0.35)
+	if not _joined[p]:
+		status_labels[p].text = "Apretá ✕ con tu mando para unirte"
+		status_labels[p].modulate = Color(1, 1, 1, 0.7)
+	elif _ready_players[p]:
 		status_labels[p].text = "¡LISTO!   (○ para cambiar)"
 		status_labels[p].modulate = Color(0.5, 1.0, 0.5)
 	else:
-		status_labels[p].text = "✕ para confirmar"
+		status_labels[p].text = "✕ para confirmar · ○ salir"
 		status_labels[p].modulate = Color.WHITE
 	_show_model(p, character)
 
@@ -177,3 +195,54 @@ func _start_game() -> void:
 	await get_tree().create_timer(start_delay).timeout
 	var level := GameSettings.selected_level if GameSettings.selected_level != "" else game_scene
 	SceneLoader.change_scene(level)
+
+
+# ✕ de un mando que todavía no juega: ocupa el primer lugar libre.
+# En teclado, la tecla de agarrar (E) une al Jugador 1 (para probar sin mandos).
+func _try_join(event: InputEvent) -> bool:
+	var device := -1
+	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_A:
+		device = event.device
+		if device in _devices.values():
+			return false
+	elif event is InputEventKey and event.is_action_pressed("p1_grab"):
+		if _joined[1]:
+			return false
+		_join(1, KEYBOARD)
+		return true
+	else:
+		return false
+
+	for p in PLAYERS:
+		if not _joined[p]:
+			Controls.assign_device(p, device)
+			_join(p, device)
+			return true
+	return false
+
+
+# ○ de un mando que no juega, o Esc, cuando todavía no se unió nadie
+func _try_back_to_menu(event: InputEvent) -> bool:
+	if _joined[1] or _joined[2]:
+		return false
+	var back: bool = (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_B) \
+			or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE)
+	if back:
+		SceneLoader.change_scene(menu_scene)
+	return back
+
+
+func _join(p: int, device: int) -> void:
+	_joined[p] = true
+	_devices[p] = device
+	# El mando recién unido no cambia de personaje hasta que suelte la palanca
+	_stick_held[p] = true
+	Audio.play_sfx(Audio.ui_click)
+	_refresh(p)
+
+
+func _leave(p: int) -> void:
+	_joined[p] = false
+	_devices[p] = -1
+	Audio.play_sfx(Audio.ui_click)
+	_refresh(p)

@@ -10,6 +10,8 @@ extends Control
 
 @onready var main_panel: Control = %MainPanel
 @onready var options_panel: Control = %OptionsPanel
+# Oscurece la imagen de fondo en Opciones para que se lean los textos
+@onready var dim: Control = %Dim
 @onready var play_button: Button = %PlayButton
 @onready var options_button: Button = %OptionsButton
 @onready var quit_button: Button = %QuitButton
@@ -61,6 +63,7 @@ func _show_panel(panel: Control) -> void:
 		if p.visible:
 			previous = p
 		p.visible = p == panel
+	dim.visible = panel == options_panel
 
 	if previous == options_panel:
 		GameSettings.save_settings()

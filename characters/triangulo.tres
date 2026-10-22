@@ -3,10 +3,12 @@
 [ext_resource type="Script" path="res://scripts/character_data.gd" id="1_data"]
 [ext_resource type="PackedScene" uid="uid://do1020523klr3" path="res://assets/personajes/Triangulo/Trianguloblend.glb" id="2_model"]
 [ext_resource type="PackedScene" uid="uid://b58oalsqr000a" path="res://assets/personajes/Triangulo/falling.glb" id="3_fall"]
+[ext_resource type="PackedScene" path="res://assets/personajes/Triangulo/idle.glb" id="4_idle"]
+[ext_resource type="PackedScene" path="res://assets/personajes/Triangulo/celebration.glb" id="5_celebration"]
 
 [resource]
 script = ExtResource("1_data")
 display_name = "Triángulo"
 model_scene = ExtResource("2_model")
 model_scale = 0.25
-extra_animations = Array[PackedScene]([ExtResource("3_fall")])
+extra_animations = Array[PackedScene]([ExtResource("3_fall"), ExtResource("4_idle"), ExtResource("5_celebration")])

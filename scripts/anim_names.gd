@@ -23,6 +23,7 @@ const RENAMES := {
 	"estuniado": "aturdido",
 	"tirarOPiedra": "tirar",
 	"falling": "caer",
+	"celebration": "festejo",
 }
 
 const LOOPED := ["idle", "caminar", "cortar_pasto", "festejo"]
