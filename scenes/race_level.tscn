@@ -1,0 +1,593 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/race_level.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/race_item_spawner.gd" id="2_spawner"]
+[ext_resource type="Script" path="res://scripts/race_hud.gd" id="3_hud"]
+[ext_resource type="PackedScene" path="res://scenes/racer.tscn" id="4_racer"]
+[ext_resource type="PackedScene" path="res://scenes/third_person_camera.tscn" id="5_camera"]
+[ext_resource type="PackedScene" path="res://scenes/race_pickup.tscn" id="6_pickup"]
+[ext_resource type="PackedScene" path="res://scenes/mud_zone.tscn" id="7_mud"]
+[ext_resource type="PackedScene" path="res://scenes/cone.tscn" id="8_cone"]
+[ext_resource type="Resource" path="res://characters/triangulo.tres" id="9_triangulo"]
+[ext_resource type="Resource" path="res://characters/carlos.tres" id="10_carlos"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house1.glb" id="11_house1"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house2.glb" id="12_house2"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house3.glb" id="13_house3"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house4.glb" id="14_house4"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house5.glb" id="15_house5"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house6.glb" id="16_house6"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/house7.glb" id="17_house7"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/tree.glb" id="18_tree"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/tree_001.glb" id="19_tree2"]
+[ext_resource type="PackedScene" path="res://assets/escenario/edificios/gltf/street_light.glb" id="20_light"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.32, 0.55, 0.85, 1)
+sky_horizon_color = Color(0.72, 0.82, 0.92, 1)
+ground_horizon_color = Color(0.72, 0.82, 0.92, 1)
+
+[sub_resource type="Sky" id="Sky_race"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_race"]
+background_mode = 2
+sky = SubResource("Sky_race")
+ambient_light_source = 3
+ambient_light_energy = 0.8
+
+[sub_resource type="Curve3D" id="Curve3D_track"]
+_data = {
+"points": PackedVector3Array(0, 0, 6.667, 0, 0, -6.667, 0, 0, 0, -3.333, 0, 10.833, 3.333, 0, -10.833, 0, 0, -40, -9.167, 0, 5, 9.167, 0, -5, 20, 0, -65, -10, 0, 5, 10, 0, -5, 55, 0, -70, -4.167, 0, 10.833, 4.167, 0, -10.833, 80, 0, -95, 4.167, 0, 10.833, -4.167, 0, -10.833, 80, 0, -135, 10.833, 0, 4.167, -10.833, 0, -4.167, 55, 0, -160, 11.667, 0, 4.167, -11.667, 0, -4.167, 15, 0, -160, 5, 0, 11.667, -5, 0, -11.667, -15, 0, -185, 0, 0, 7.5, 0, 0, -7.5, -15, 0, -230),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[sub_resource type="StandardMaterial3D" id="Mat_road"]
+albedo_color = Color(0.22, 0.22, 0.24, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_curb"]
+albedo_color = Color(0.82, 0.8, 0.76, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_grass"]
+albedo_color = Color(0.36, 0.58, 0.28, 1)
+roughness = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
+material = SubResource("Mat_grass")
+size = Vector2(300, 320)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ground"]
+size = Vector3(300, 0.1, 320)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_endwall"]
+size = Vector3(10.5, 1.4, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_endwall"]
+material = SubResource("Mat_curb")
+size = Vector3(10.5, 1.4, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="Mat_white"]
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_stripe"]
+material = SubResource("Mat_white")
+size = Vector3(9, 0.02, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+material = SubResource("Mat_white")
+size = Vector3(0.3, 4.5, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_banner"]
+albedo_color = Color(0.85, 0.15, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_banner"]
+material = SubResource("Mat_banner")
+size = Vector3(11, 1, 0.15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.55)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="RaceLevel" type="Node3D" node_paths=PackedStringArray("track", "racer1", "racer2", "spawner", "hud", "finish_line")]
+script = ExtResource("1_level")
+track = NodePath("Track")
+racer1 = NodePath("Racer1")
+racer2 = NodePath("Racer2")
+spawner = NodePath("ItemSpawner")
+hud = NodePath("HUD")
+finish_line = NodePath("FinishLine")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.3535534, 0.3535534, 0, 0.7071068, 0.7071068, -0.5, -0.6123725, 0.6123725, 0, 20, 0)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_race")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, -0.1, -115)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_ground")
+
+[node name="Track" type="Path3D" parent="."]
+curve = SubResource("Curve3D_track")
+
+[node name="Road" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(-4.5, -0.3, -4.5, 0, 4.5, 0, 4.5, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("Mat_road")
+
+[node name="CurbLeft" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(-5, -0.3, -5, 1, -4.5, 1, -4.5, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("Mat_curb")
+
+[node name="CurbRight" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(4.5, -0.3, 4.5, 1, 5, 1, 5, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("Mat_curb")
+
+[node name="StartWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StartWall"]
+mesh = SubResource("BoxMesh_endwall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartWall"]
+shape = SubResource("BoxShape3D_endwall")
+
+[node name="EndWall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.7, -230.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndWall"]
+mesh = SubResource("BoxMesh_endwall")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndWall"]
+shape = SubResource("BoxShape3D_endwall")
+
+[node name="StartLine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -5.5)
+mesh = SubResource("BoxMesh_stripe")
+
+[node name="FinishLine" type="Node3D" parent="."]
+
+[node name="Stripe" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("BoxMesh_stripe")
+
+[node name="PostL" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, 2.25, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostR" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 2.25, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="Banner" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)
+mesh = SubResource("BoxMesh_banner")
+
+[node name="BannerText" type="Label3D" parent="FinishLine"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 4.4, -0.1)
+pixel_size = 0.02
+outline_modulate = Color(0, 0, 0, 1)
+text = "LLEGADA"
+font_size = 48
+outline_size = 12
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Cone1" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -20)
+
+[node name="Cone2" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -24)
+
+[node name="Cone3" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, -29)
+
+[node name="Cone4" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0, -158.5)
+
+[node name="Cone5" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -161.5)
+
+[node name="Cone6" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 0, -161)
+
+[node name="Mud1" parent="Obstacles" instance=ExtResource("7_mud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78, 0, -112)
+
+[node name="Mud2" parent="Obstacles" instance=ExtResource("7_mud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 0, -203)
+
+[node name="Decoration" type="Node3D" parent="."]
+
+[node name="House1" parent="Decoration" instance=ExtResource("11_house1")]
+transform = Transform3D(0, 0, -2.5, 0, 2.5, 0, 2.5, 0, 0, -13, 2.63, -8)
+
+[node name="House2" parent="Decoration" instance=ExtResource("12_house2")]
+transform = Transform3D(0, 0, -2.5, 0, 2.5, 0, 2.5, 0, 0, -13, 2.03, -26)
+
+[node name="House3" parent="Decoration" instance=ExtResource("14_house4")]
+transform = Transform3D(0, 0, 2.5, 0, 2.5, 0, -2.5, 0, 0, 13.5, 3.08, -10)
+
+[node name="House4" parent="Decoration" instance=ExtResource("15_house5")]
+transform = Transform3D(0, 0, 2, 0, 2, 0, -2, 0, 0, 13, 4.5, -27)
+
+[node name="House5" parent="Decoration" instance=ExtResource("13_house3")]
+transform = Transform3D(-1.8, 0, 0, 0, 1.8, 0, 0, 0, -1.8, 38, 3.78, -54)
+
+[node name="House6" parent="Decoration" instance=ExtResource("16_house6")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 40, 4.34, -86)
+
+[node name="House7" parent="Decoration" instance=ExtResource("17_house7")]
+transform = Transform3D(0, 0, 2, 0, 2, 0, -2, 0, 0, 94, 2, -105)
+
+[node name="House8" parent="Decoration" instance=ExtResource("11_house1")]
+transform = Transform3D(0, 0, 2.5, 0, 2.5, 0, -2.5, 0, 0, 93, 2.63, -125)
+
+[node name="House9" parent="Decoration" instance=ExtResource("12_house2")]
+transform = Transform3D(0, 0, -2.5, 0, 2.5, 0, 2.5, 0, 0, 67, 2.03, -113)
+
+[node name="House10" parent="Decoration" instance=ExtResource("14_house4")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 35, 3.08, -174)
+
+[node name="House11" parent="Decoration" instance=ExtResource("16_house6")]
+transform = Transform3D(-2, 0, 0, 0, 2, 0, 0, 0, -2, 30, 4.34, -147)
+
+[node name="House12" parent="Decoration" instance=ExtResource("15_house5")]
+transform = Transform3D(0, 0, -2, 0, 2, 0, 2, 0, 0, -28, 4.5, -200)
+
+[node name="House13" parent="Decoration" instance=ExtResource("17_house7")]
+transform = Transform3D(0, 0, -2, 0, 2, 0, 2, 0, 0, -29, 2, -219)
+
+[node name="House14" parent="Decoration" instance=ExtResource("13_house3")]
+transform = Transform3D(0, 0, 1.8, 0, 1.8, 0, -1.8, 0, 0, -1, 3.78, -212)
+
+[node name="Tree1" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -9, 4.18, -16)
+
+[node name="Tree2" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 9.5, 3.65, -18)
+
+[node name="Tree3" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -9, 4.18, -34)
+
+[node name="Tree4" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 27, 3.65, -56)
+
+[node name="Tree5" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 52, 4.18, -58)
+
+[node name="Tree6" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 88, 3.65, -92)
+
+[node name="Tree7" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 72.5, 4.18, -130)
+
+[node name="Tree8" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 48, 3.65, -150)
+
+[node name="Tree9" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 22, 4.18, -170)
+
+[node name="Tree10" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -8, 3.65, -195)
+
+[node name="Tree11" parent="Decoration" instance=ExtResource("18_tree")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -24, 4.18, -189)
+
+[node name="Tree12" parent="Decoration" instance=ExtResource("19_tree2")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -22, 3.65, -228)
+
+[node name="Light1" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.2, 0, -5)
+
+[node name="Light2" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.2, 0, -20)
+
+[node name="Light3" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.2, 0, -35)
+
+[node name="Light4" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 86.2, 0, -110)
+
+[node name="Light5" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 73.8, 0, -122)
+
+[node name="Light6" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 40, 0, -153.8)
+
+[node name="Light7" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 25, 0, -166.2)
+
+[node name="Light8" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8.8, 0, -205)
+
+[node name="Light9" parent="Decoration" instance=ExtResource("20_light")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -21.2, 0, -222)
+
+[node name="ItemSpawner" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("2_spawner")
+pickup_scene = ExtResource("6_pickup")
+track = NodePath("../Track")
+
+[node name="Racer1" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_racer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -2.5)
+player_id = 1
+color = Color(0.945, 0.941, 0, 1)
+camera_rig = NodePath("../HUD/Split/View1/SubViewport/CameraRig1")
+default_character = ExtResource("9_triangulo")
+
+[node name="Racer2" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_racer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.05, -2.5)
+player_id = 2
+color = Color(0.945, 0, 0, 1)
+camera_rig = NodePath("../HUD/Split/View2/SubViewport/CameraRig2")
+default_character = ExtResource("10_carlos")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_hud")
+
+[node name="Split" type="HBoxContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="View1" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View1"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig1" parent="HUD/Split/View1/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Racer1")
+distance = 6.0
+look_height = 1.6
+pitch_degrees = -16.0
+auto_follow_speed = 3.0
+
+[node name="View2" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View2"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig2" parent="HUD/Split/View2/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Racer2")
+distance = 6.0
+look_height = 1.6
+pitch_degrees = -16.0
+auto_follow_speed = 3.0
+
+[node name="Panel1" type="PanelContainer" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 266.0
+offset_bottom = 186.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Info1" type="VBoxContainer" parent="HUD/Panel1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "JUGADOR 1"
+
+[node name="Place1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 48
+text = "1°"
+
+[node name="Progress1" type="ProgressBar" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 14)
+layout_mode = 2
+show_percentage = false
+
+[node name="Item1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "Item: —"
+
+[node name="Turbo1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+
+[node name="Panel2" type="PanelContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -266.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 186.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Info2" type="VBoxContainer" parent="HUD/Panel2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "JUGADOR 2"
+horizontal_alignment = 2
+
+[node name="Place2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 48
+text = "2°"
+horizontal_alignment = 2
+
+[node name="Progress2" type="ProgressBar" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 14)
+layout_mode = 2
+show_percentage = false
+
+[node name="Item2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "Item: —"
+horizontal_alignment = 2
+
+[node name="Turbo2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 2
+
+[node name="TimePanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 12.0
+offset_right = 70.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TimeLabel" type="Label" parent="HUD/TimePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "2:30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint1" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="Hint2" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -60.0
+offset_right = 500.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

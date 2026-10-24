@@ -9,9 +9,9 @@ const SETTINGS_PATH := "user://settings.cfg"
 ## Personajes que se pueden elegir, en el orden en que aparecen.
 @export var characters: Array[CharacterData] = []
 ## Nombres de los niveles, en orden de juego (mismo orden que "Level Scenes").
-@export var level_names: PackedStringArray = ["Nivel 1: El patio", "Nivel 2: La ferretería"]
+@export var level_names: PackedStringArray = ["Nivel 1: El patio", "Nivel 2: La ferretería", "Nivel 3: La carrera de carretillas"]
 ## Escenas de los niveles, en orden de juego. Al terminar uno se ofrece el siguiente.
-@export_file("*.tscn") var level_scenes: PackedStringArray = ["res://scenes/main.tscn", "res://scenes/store_level.tscn"]
+@export_file("*.tscn") var level_scenes: PackedStringArray = ["res://scenes/main.tscn", "res://scenes/store_level.tscn", "res://scenes/race_level.tscn"]
 
 ## Volumen general (0 a 1).
 var master_volume: float = 1.0

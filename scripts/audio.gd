@@ -75,6 +75,26 @@ var sfx_level: float = 1.0
 ## Tiempo entre pasos corriendo.
 @export_range(0.05, 2.0, 0.01, "suffix:s") var footstep_run_interval: float = 0.22
 
+@export_group("Carrera")
+## Cada palada con la pala.
+@export var shovel_stroke: AudioStream
+## Al chocar fuerte y caerse de la carretilla.
+@export var barrow_crash: AudioStream
+## Al subirse de nuevo a la carretilla.
+@export var barrow_climb: AudioStream
+## Al agarrar un item o el mate en la pista.
+@export var item_pickup: AudioStream
+## Al usar el turbo (mate).
+@export var turbo_boost: AudioStream
+## Al tirar los clavos.
+@export var nails_drop: AudioStream
+## Cuando a alguien se le pincha la rueda.
+@export var tire_pop: AudioStream
+## Cuenta regresiva de la largada (3, 2, 1).
+@export var race_count: AudioStream
+## "¡Ya!" de la largada.
+@export var race_go: AudioStream
+
 @export_group("Partida")
 ## Suena una vez por segundo cuando el tiempo se pone rojo.
 @export var countdown_tick: AudioStream

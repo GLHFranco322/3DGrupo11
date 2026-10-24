@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/race_pickup.gd" id="1_pickup"]
+[ext_resource type="PackedScene" path="res://scenes/item_timer.tscn" id="2_timer"]
+[ext_resource type="PackedScene" path="res://assets/mate/mate_argentino_drink.glb" id="3_mate"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_rock"]
+albedo_color = Color(0.5, 0.48, 0.45, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rock"]
+material = SubResource("Mat_rock")
+radius = 0.3
+height = 0.55
+
+[sub_resource type="StandardMaterial3D" id="Mat_pit"]
+albedo_color = Color(0.32, 0.2, 0.12, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pit"]
+material = SubResource("Mat_pit")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.08
+
+[sub_resource type="StandardMaterial3D" id="Mat_nail"]
+albedo_color = Color(0.75, 0.75, 0.78, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_nail"]
+material = SubResource("Mat_nail")
+top_radius = 0.04
+bottom_radius = 0.04
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_bubble"]
+transparency = 1
+albedo_color = Color(1, 0.95, 0.4, 0.3)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bubble"]
+material = SubResource("Mat_bubble")
+radius = 0.7
+height = 1.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 1.1
+
+[node name="RacePickup" type="Node3D"]
+script = ExtResource("1_pickup")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="Bubble" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("SphereMesh_bubble")
+
+[node name="Rock" type="MeshInstance3D" parent="Visuals"]
+mesh = SubResource("SphereMesh_rock")
+
+[node name="Pit" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("CylinderMesh_pit")
+
+[node name="Nails" type="Node3D" parent="Visuals"]
+
+[node name="Nail1" type="MeshInstance3D" parent="Visuals/Nails"]
+transform = Transform3D(0.94, 0.34, 0, -0.34, 0.94, 0, 0, 0, 1, -0.15, 0, 0)
+mesh = SubResource("CylinderMesh_nail")
+
+[node name="Nail2" type="MeshInstance3D" parent="Visuals/Nails"]
+mesh = SubResource("CylinderMesh_nail")
+
+[node name="Nail3" type="MeshInstance3D" parent="Visuals/Nails"]
+transform = Transform3D(0.94, -0.34, 0, 0.34, 0.94, 0, 0, 0, 1, 0.15, 0, 0)
+mesh = SubResource("CylinderMesh_nail")
+
+[node name="Turbo" type="Node3D" parent="Visuals"]
+
+[node name="Mate" parent="Visuals/Turbo" instance=ExtResource("3_mate")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.1, -0.4, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+pixel_size = 0.008
+billboard = 1
+outline_modulate = Color(0, 0, 0, 1)
+text = "Piedra"
+font_size = 64
+outline_size = 16
+
+[node name="ItemTimer" parent="." instance=ExtResource("2_timer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
