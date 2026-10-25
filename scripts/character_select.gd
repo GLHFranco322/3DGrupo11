@@ -38,6 +38,9 @@ var _index := {1: 0, 2: 1}
 var _joined := {1: false, 2: false}
 var _devices := {1: -1, 2: -1}
 var _ready_players := {1: false, 2: false}
+# Orden en que confirmaron (el último en elegir un personaje repetido se tiñe)
+var _confirm_order := {1: 0, 2: 0}
+var _confirm_count: int = 0
 var _starting: bool = false
 var _time: float = 0.0
 # Si la palanca de cada jugador está empujada (espera que la suelte)
@@ -141,8 +144,13 @@ func _change(p: int, step: int) -> void:
 
 func _confirm(p: int) -> void:
 	_ready_players[p] = true
+	GameSettings.set_last_to_choose(p)
+	_confirm_count += 1
+	_confirm_order[p] = _confirm_count
 	Audio.play_sfx(Audio.ui_click)
-	_refresh(p)
+	# Los dos: si repiten personaje, el otro también cambia su vista previa
+	for player in PLAYERS:
+		_refresh(player)
 	if _ready_players[1] and _ready_players[2]:
 		_start_game()
 
@@ -151,14 +159,15 @@ func _refresh(p: int) -> void:
 	var character: CharacterData = GameSettings.characters[_index[p]]
 	character_labels[p].text = "◀  %s  ▶" % character.display_name
 	character_labels[p].modulate = Color.WHITE if _joined[p] else Color(1, 1, 1, 0.35)
+	var keyboard := p == Controls.keyboard_player
 	if not _joined[p]:
-		status_labels[p].text = "Apretá ✕ con tu mando para unirte"
+		status_labels[p].text = "Apretá E (teclado) para unirte" if keyboard else "Apretá ✕ con tu mando para unirte"
 		status_labels[p].modulate = Color(1, 1, 1, 0.7)
 	elif _ready_players[p]:
-		status_labels[p].text = "¡LISTO!   (○ para cambiar)"
+		status_labels[p].text = "¡LISTO!   (Esc para cambiar)" if keyboard else "¡LISTO!   (○ para cambiar)"
 		status_labels[p].modulate = Color(0.5, 1.0, 0.5)
 	else:
-		status_labels[p].text = "✕ para confirmar · ○ salir"
+		status_labels[p].text = "A/D elegir · E confirmar · Esc salir" if keyboard else "✕ para confirmar · ○ salir"
 		status_labels[p].modulate = Color.WHITE
 	_show_model(p, character)
 
@@ -173,6 +182,8 @@ func _show_model(p: int, character: CharacterData) -> void:
 	var model := character.model_scene.instantiate() as Node3D
 	model.scale = Vector3.ONE * character.model_scale * preview_scale
 	spot.add_child(model)
+	if _is_repeated_and_last(p):
+		ModelUtils.tint(model, GameSettings.duplicate_tint)
 
 	var anim := model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	if anim == null:
@@ -197,8 +208,9 @@ func _start_game() -> void:
 	SceneLoader.change_scene(level)
 
 
-# ✕ de un mando que todavía no juega: ocupa el primer lugar libre.
-# En teclado, la tecla de agarrar (E) une al Jugador 1 (para probar sin mandos).
+# ✕ de un mando que todavía no juega: ocupa el primer lugar libre (salvo el del
+# jugador de teclado, si está activado en Opciones). En teclado, la tecla de
+# agarrar (E) une al Jugador 1.
 func _try_join(event: InputEvent) -> bool:
 	var device := -1
 	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_A:
@@ -208,13 +220,15 @@ func _try_join(event: InputEvent) -> bool:
 	elif event is InputEventKey and event.is_action_pressed("p1_grab"):
 		if _joined[1]:
 			return false
+		if Controls.keyboard_player == 1:
+			Controls.assign_device(1, Controls.NO_DEVICE)
 		_join(1, KEYBOARD)
 		return true
 	else:
 		return false
 
 	for p in PLAYERS:
-		if not _joined[p]:
+		if not _joined[p] and p != Controls.keyboard_player:
 			Controls.assign_device(p, device)
 			_join(p, device)
 			return true
@@ -246,3 +260,10 @@ func _leave(p: int) -> void:
 	_devices[p] = -1
 	Audio.play_sfx(Audio.ui_click)
 	_refresh(p)
+
+
+# Los dos confirmaron el mismo personaje y "p" lo eligió después
+func _is_repeated_and_last(p: int) -> bool:
+	var other := 2 if p == 1 else 1
+	return _index[p] == _index[other] and _ready_players[p] and _ready_players[other] \
+			and _confirm_order[p] > _confirm_order[other]

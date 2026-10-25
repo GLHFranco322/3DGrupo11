@@ -39,11 +39,20 @@ enum Mode {
 ## Qué tan rápido sigue a los jugadores. Más bajo = más suave.
 @export_range(0.1, 20.0, 0.1) var follow_speed: float = 4.0
 
+@export_group("Golpe de zoom")
+## Tiempo que tarda la cámara en volver después de un golpe de zoom (patada).
+@export_range(0.1, 5.0, 0.1, "suffix:s") var punch_return_time: float = 1.4
+
 var _tilt: float
 var _fit_target: Vector3
 var _fit_distance: float
 var _current_distance: float
 var _current_target: Vector3
+# Distancia extra temporal (patada): 0.2 = 20% más lejos. "_punch" sigue
+# suave a "_punch_target", que va bajando hasta 0 en "Punch Return Time"
+var _punch: float = 0.0
+var _punch_target: float = 0.0
+var _punch_rate: float = 0.0
 
 
 func _ready() -> void:
@@ -56,14 +65,32 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_punch_target = maxf(_punch_target - _punch_rate * delta, 0.0)
+	_punch = lerpf(_punch, _punch_target, minf(10.0 * delta, 1.0))
 	if mode == Mode.FIT_ARENA or player1 == null or player2 == null:
-		_apply(_fit_target, _fit_distance)
+		_apply(_fit_target, _fit_distance * (1.0 + _punch))
 		return
 
-	var weight := minf(follow_speed * delta, 1.0)
-	_current_distance = lerpf(_current_distance, _get_follow_distance(), weight)
-	_current_target = _current_target.lerp(_get_follow_target(), weight)
-	_apply(_current_target, _current_distance)
+	# Mientras alguien sale volando por una patada, la cámara no lo sigue:
+	# queda quieta y el pateado sale de cuadro
+	if not _is_anyone_kicked():
+		var weight := minf(follow_speed * delta, 1.0)
+		_current_distance = lerpf(_current_distance, _get_follow_distance(), weight)
+		_current_target = _current_target.lerp(_get_follow_target(), weight)
+	_apply(_current_target, _current_distance * (1.0 + _punch))
+
+
+## Aleja la cámara de golpe y la deja volver de a poco (ej: patada con la bota).
+func zoom_punch(amount: float) -> void:
+	_punch_target = maxf(_punch_target, amount)
+	_punch_rate = _punch_target / punch_return_time
+
+
+func _is_anyone_kicked() -> bool:
+	for p in [player1, player2]:
+		if p.state_machine.is_current("kicked") and p.state_machine.current_state.is_flying():
+			return true
+	return false
 
 
 func _apply(target: Vector3, distance: float) -> void:

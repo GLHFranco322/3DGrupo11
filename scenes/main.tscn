@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" path="res://assets/personajes/Triangulo/celebration.glb" id="9_tricele"]
 [ext_resource type="Script" uid="uid://b3s2yk7t0502y" path="res://scripts/match.gd" id="10_match"]
 [ext_resource type="Script" path="res://scripts/item_spawner.gd" id="12_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/boot.tscn" id="14_boot"]
 [ext_resource type="PackedScene" uid="uid://cdagxb0vfih8y" path="res://assets/maquinas de pasto/maquina azul/vibration/CortadoradepastoModeloAzulVibration.glb" id="13_azul"]
 
 [sub_resource type="Environment" id="Environment_sgp6g"]
@@ -143,6 +144,7 @@ vertical_alignment = 1
 script = ExtResource("12_spawner")
 rock_scene = ExtResource("5_tbgi4")
 pit_scene = ExtResource("7_o6xl0")
+boot_scene = ExtResource("14_boot")
 first_spawn_delay = 0.5
 spawn_interval_min = 0.7
 spawn_interval_max = 1.5

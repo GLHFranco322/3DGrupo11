@@ -2,6 +2,9 @@ extends State
 
 ## Tiempo que el jugador queda escondido dentro del pozo antes de reaparecer.
 @export_range(0.0, 10.0, 0.1, "suffix:s") var duration: float = 1.0
+## Al reaparecer queda invencible (titilando) estos segundos, igual que después
+## de una patada: no le pegan piedras, no cae en pozos y no lo pueden patear.
+@export_range(0.0, 10.0, 0.1, "suffix:s") var invincible_time: float = 1.5
 
 var _elapsed: float = 0.0
 var _start_position: Vector3
@@ -56,4 +59,6 @@ func physics_update(delta: float) -> void:
 	player.visible = false
 	if _elapsed >= _freeze_time + _sink_time + duration:
 		player.global_position = player.spawn_position
+		player.make_invincible(invincible_time)
+		Audio.play_sfx(Audio.kicked_land)
 		transitioned.emit("idle")

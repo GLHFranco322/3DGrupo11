@@ -3,7 +3,8 @@ extends Node3D
 
 # Pozo que cae del cielo (lo crea ItemSpawner). Al tocar el piso arranca su
 # tiempo: si nadie lo agarra antes de "lifetime" segundos, desaparece. Una vez
-# colocado como trampa queda hasta que alguien lo pisa, y después desaparece.
+# colocado como trampa dura "Placed Lifetime" segundos: si alguien pasa cerca
+# del centro se cae; si no, se cierra solo.
 
 enum State { SPAWNING, LANDED, HELD, PLACED, TRIGGERED }
 
@@ -14,6 +15,14 @@ enum State { SPAWNING, LANDED, HELD, PLACED, TRIGGERED }
 @export_range(0.1, 20.0, 0.1, "suffix:u/s") var descent_speed: float = 2.0
 ## Altura desde la que empieza a bajar.
 @export_range(0.0, 30.0, 0.5, "suffix:u") var start_height: float = 6.0
+
+@export_group("Trampa")
+## Segundos que dura colocado antes de cerrarse solo (si nadie cae).
+@export_range(0.5, 60.0, 0.5, "suffix:s") var placed_lifetime: float = 3.0
+## El jugador cae cuando su centro está a esta distancia del centro del pozo o
+## menos. Más chico = hay que pisarlo más en el medio (el pozo mide 1.5 de radio
+## y los jugadores 1, así que 1.3 es casi entrar al pozo).
+@export_range(0.1, 3.0, 0.05, "suffix:u") var fall_radius: float = 1.3
 
 @export_group("Caída")
 ## Tiempo que el jugador queda congelado sobre el pozo antes de caer.
@@ -45,12 +54,14 @@ func _ready() -> void:
 	_home_parent = get_parent()
 	_home_position = global_position
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
-	trap_area.body_entered.connect(_on_trap_area_body_entered)
 	item_timer.expired.connect(_on_expired)
 	_enter_spawning()
 
 
 func _process(delta: float) -> void:
+	if state == State.PLACED:
+		_check_fall()
+		return
 	if state != State.SPAWNING:
 		return
 	global_position.y -= descent_speed * delta
@@ -83,8 +94,10 @@ func place_at(world_position: Vector3) -> void:
 	bubble.visible = false
 	trap_visual.visible = true
 	Audio.play_sfx(Audio.pit_place)
-	trap_area.set_deferred("monitoring", true)
 	state = State.PLACED
+	# La cuenta regresiva ahora hace titilar la trampa (no la burbuja)
+	item_timer.blink_node = trap_visual
+	item_timer.start(placed_lifetime)
 
 
 # Lo suelta en el piso donde está (ej: el jugador cayó a un pozo) y vuelve a
@@ -119,6 +132,10 @@ func _enter_landed() -> void:
 func _on_expired() -> void:
 	if state == State.LANDED:
 		queue_free()
+	elif state == State.PLACED:
+		# Nadie cayó: se cierra solo
+		state = State.TRIGGERED
+		_close()
 
 
 func _on_pickup_area_body_entered(body: Node) -> void:
@@ -129,14 +146,19 @@ func _on_pickup_area_body_entered(body: Node) -> void:
 		pick_up.call_deferred(body)
 
 
-func _on_trap_area_body_entered(body: Node) -> void:
-	if state != State.PLACED:
-		return
-	# Cualquier jugador cae, incluso el que lo colocó
-	if body is Player:
-		state = State.TRIGGERED
-		body.fall_into_pit.call_deferred(self)
-		_trigger.call_deferred()
+# Cualquier jugador cae (incluso el que lo colocó) cuando pasa cerca del centro
+func _check_fall() -> void:
+	for node in get_tree().get_nodes_in_group("player"):
+		var player := node as Player
+		if player == null or player.is_disabled() or player.is_invincible():
+			continue
+		var offset := player.global_position - global_position
+		if Vector2(offset.x, offset.z).length() <= fall_radius:
+			state = State.TRIGGERED
+			item_timer.stop()
+			player.fall_into_pit.call_deferred(self)
+			_trigger.call_deferred()
+			return
 
 
 func _trigger() -> void:
@@ -147,8 +169,11 @@ func _trigger() -> void:
 	trap_visual.material_override = _hole_material()
 	Audio.play_sfx(Audio.pit_fall)
 	await get_tree().create_timer(freeze_time + sink_time).timeout
+	_close()
 
-	# Se cierra achicándose hacia el centro
+
+# Se cierra achicándose hacia el centro y desaparece
+func _close() -> void:
 	Audio.play_sfx(Audio.pit_close)
 	var tween := create_tween()
 	tween.tween_property(trap_visual, "scale", Vector3(0.001, 1.0, 0.001), close_time) \

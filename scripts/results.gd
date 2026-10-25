@@ -157,6 +157,7 @@ func _spawn_model(info: Dictionary, offset: Vector3) -> void:
 	model.scale = Vector3.ONE * info.model_scale
 	model.position = offset
 	winner_spot.add_child(model)
+	ModelUtils.tint(model, info.get("tint", Color.WHITE))
 
 	var anim := model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	if anim:

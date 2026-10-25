@@ -11,7 +11,7 @@ extends CanvasLayer
 ## Color del texto del item cuando se tiene uno.
 @export var item_color: Color = Color(1.0, 0.9, 0.4)
 ## Texto del botón para usar el item (cambiarlo si cambian los controles).
-@export var item_button_text: String = "□"
+@export var item_button_text: String = "R2"
 ## Texto del botón del turbo (cambiarlo si cambian los controles).
 @export var turbo_button_text: String = "R1"
 

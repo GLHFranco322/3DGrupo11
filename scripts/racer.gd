@@ -8,7 +8,7 @@ extends Node3D
 # Botones (de ejemplo, se cambian en Proyecto → Configuración → Mapa de entrada):
 #   palanca izquierda  hacia dónde ir (relativo a la cámara)
 #   ✕  (p*_grab)       subirse a la carretilla
-#   □  (p*_throw)      usar el item: piedra adelante, pozo o clavos atrás
+#   R2 o □ (p*_throw)  usar el item: piedra adelante, pozo o clavos atrás
 #   R1 (p*_run)        tomar el mate (turbo)
 #   palanca derecha    mover la cámara
 #
@@ -546,6 +546,7 @@ func _load_model() -> void:
 	# Los modelos miran a +Z; la carretilla avanza hacia -Z
 	model.transform = Transform3D(Basis(Vector3.UP, PI).scaled(Vector3.ONE * _character.model_scale * size_multiplier), Vector3.ZERO)
 	model_root.add_child(model)
+	ModelUtils.tint(model, GameSettings.get_character_tint(player_id))
 	_anim = model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	Player.merge_animations(_anim, _character.extra_animations)
 	AnimNames.normalize(_anim)
@@ -583,4 +584,5 @@ func get_display_info() -> Dictionary:
 		"model_scene": _character.model_scene if _character else null,
 		"model_scale": (_character.model_scale * size_multiplier) if _character else 1.0,
 		"extra_animations": _character.extra_animations if _character else ([] as Array[PackedScene]),
+		"tint": GameSettings.get_character_tint(player_id),
 	}

@@ -24,6 +24,10 @@ signal deliver_requested(player: StorePlayer)
 @export_group("Herramientas")
 ## Distancia máxima para agarrar una herramienta.
 @export_range(0.5, 5.0, 0.1, "suffix:u") var pickup_distance: float = 1.6
+## Distancia delante del jugador donde queda la herramienta al soltarla.
+@export_range(0.0, 3.0, 0.1, "suffix:u") var drop_distance: float = 0.8
+## Si hay una pared delante, la herramienta queda al menos a esta distancia de ella.
+@export_range(0.0, 2.0, 0.05, "suffix:u") var drop_wall_margin: float = 0.4
 
 @export_group("Skin")
 ## Personaje si no se eligió uno en el menú (al probar la escena directo).
@@ -93,8 +97,22 @@ func drop_carried() -> void:
 	if carried == null:
 		return
 	var forward := -model_root.global_basis.z
-	carried.drop(global_position + forward * 0.8)
+	carried.drop(_get_drop_position(forward))
 	carried = null
+
+
+# Delante del jugador, pero si hay una pared en el medio queda de este lado
+# (si no, pegados a una pared se podían esconder herramientas del otro lado)
+func _get_drop_position(forward: Vector3) -> Vector3:
+	var from := global_position + Vector3.UP * 0.5
+	var to := from + forward * drop_distance
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [get_rid()]
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return to
+	var distance := maxf(from.distance_to(hit.position) - drop_wall_margin, 0.0)
+	return from + forward * distance
 
 
 ## Quita la herramienta de las manos (para colgarla en el tablero).
@@ -129,6 +147,7 @@ func _load_model() -> void:
 	# Los modelos miran a +Z; el jugador camina hacia -Z
 	model.transform = Transform3D(Basis(Vector3.UP, PI).scaled(Vector3.ONE * _character.model_scale * size_multiplier), Vector3.ZERO)
 	model_root.add_child(model)
+	ModelUtils.tint(model, GameSettings.get_character_tint(player_id))
 	_anim = model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	Player.merge_animations(_anim, _character.extra_animations)
 	AnimNames.normalize(_anim)
@@ -154,4 +173,5 @@ func get_display_info() -> Dictionary:
 		"model_scene": _character.model_scene if _character else null,
 		"model_scale": (_character.model_scale * size_multiplier) if _character else 1.0,
 		"extra_animations": _character.extra_animations if _character else ([] as Array[PackedScene]),
+		"tint": GameSettings.get_character_tint(player_id),
 	}

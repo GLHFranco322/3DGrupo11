@@ -22,6 +22,8 @@ extends Node3D
 @export var invert_y: bool = false
 ## Qué tan rápido sigue al jugador. Más bajo = más suave.
 @export_range(1.0, 40.0, 0.5) var follow_speed: float = 15.0
+## Sensibilidad del mouse (jugador de teclado y mouse, activado en Opciones).
+@export_range(0.0005, 0.02, 0.0005) var mouse_sensitivity: float = 0.004
 
 @export_group("Acomodarse detrás")
 ## Qué tan rápido gira sola para quedar detrás de hacia dónde mira el
@@ -51,6 +53,20 @@ func _ready() -> void:
 			spring_arm.add_excluded_object(target.get_rid())
 		yaw = _get_heading()
 		global_position = _get_focus() + Vector3.UP * look_height
+	if _uses_mouse():
+		# El cursor se esconde y queda atrapado en la ventana mientras dure el nivel
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		Controls.take_mouse_motion()
+
+
+func _exit_tree() -> void:
+	if _uses_mouse():
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+# El jugador al que sigue es el de teclado y mouse
+func _uses_mouse() -> bool:
+	return target != null and Controls.keyboard_player != 0 and target.player_id == Controls.keyboard_player
 
 
 func _process(delta: float) -> void:
@@ -58,6 +74,9 @@ func _process(delta: float) -> void:
 		return
 	var prefix := "p%d_" % target.player_id
 	var look := Input.get_vector(prefix + "aim_left", prefix + "aim_right", prefix + "aim_up", prefix + "aim_down")
+	if _uses_mouse():
+		# El mouse se suma al analógico (convertido a "velocidad de palanca")
+		look += Controls.take_mouse_motion() * mouse_sensitivity / maxf(turn_speed * delta, 0.0001)
 	yaw -= look.x * turn_speed * delta
 	var pitch_input := -look.y if invert_y else look.y
 	pitch_pivot.rotation.x = clampf(pitch_pivot.rotation.x - pitch_input * turn_speed * delta,

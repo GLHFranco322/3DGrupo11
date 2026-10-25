@@ -32,7 +32,7 @@ extends CharacterBody3D
 @export_range(0.5, 6.0, 0.1, "suffix:u") var mower_pickup_distance: float = 2.5
 
 @export_group("Piedra")
-## Distancia máxima para poder agarrar una piedra.
+## Distancia máxima para poder agarrar una piedra o una bota.
 @export_range(0.5, 6.0, 0.1, "suffix:u") var rock_pickup_distance: float = 2.0
 ## Dónde se sostiene la piedra respecto al jugador (Z negativo = adelante).
 @export var rock_hold_offset: Vector3 = Vector3(0.0, 0.6, -0.9)
@@ -41,11 +41,26 @@ extends CharacterBody3D
 ## Cuánto hay que mover el analógico derecho para cambiar la dirección.
 @export_range(0.0, 1.0, 0.05) var aim_deadzone: float = 0.3
 
+@export_group("Bota")
+## Dónde se sostiene la bota respecto al jugador (Z negativo = adelante).
+@export var boot_hold_offset: Vector3 = Vector3(0.0, 0.6, -0.9)
+## Con la bota se camina y se corre más rápido (2 = el doble).
+@export_range(1.0, 5.0, 0.1) var boot_speed_multiplier: float = 2.0
+## Distancia al rival a la que lo patea solo, al pasarle por encima (los jugadores
+## miden unas 2 unidades de ancho, así que 2.2 es casi tocarse).
+@export_range(0.5, 6.0, 0.1, "suffix:u") var kick_range: float = 2.2
+## Cuánto se aleja la cámara al patear (0.15 = 15% más lejos), para darle efecto.
+@export_range(0.0, 1.0, 0.05) var kick_camera_zoom_out: float = 0.2
+
 @export_group("Pozo")
 ## Dónde se sostiene el pozo respecto al jugador (Z negativo = adelante).
 @export var pit_hold_offset: Vector3 = Vector3(0.0, 0.6, -0.9)
 ## Marca en el piso para elegir dónde colocar el pozo.
 @export var reticle: Node3D
+## Opacidad de la marca del pozo (toma el color del jugador). 1 = sólida.
+@export_range(0.0, 1.0, 0.05) var reticle_alpha: float = 0.75
+## Al agarrar el pozo, la marca aparece a esta distancia delante del jugador.
+@export_range(0.0, 10.0, 0.1, "suffix:u") var reticle_start_distance: float = 2.5
 ## Altura de la retícula sobre el piso.
 @export_range(0.0, 1.0, 0.01, "suffix:u") var reticle_height: float = 0.1
 ## Velocidad de la retícula al moverla con el analógico.
@@ -72,6 +87,7 @@ const ANIM_STUNNED := &"aturdido"
 const ANIM_THROW := &"tirar"
 const ANIM_FALL := &"caer"
 const ANIM_EMOTE := &"festejo"
+const ANIM_KICK := &"patear"
 
 signal score_changed(new_score: int)
 
@@ -79,10 +95,15 @@ var score: int = 0
 var has_mower: bool = false
 var held_rock: Rock = null
 var held_pit: Pit = null
+var held_boot: Boot = null
 var is_aiming: bool = false
 var spawn_position: Vector3
 # Pozo en el que está cayendo (lo usa el estado Falling)
 var falling_pit: Pit = null
+# Hacia dónde sale volando al ser pateado (lo usa el estado Kicked)
+var kick_direction: Vector3 = Vector3.FORWARD
+# Segundos de invencibilidad que quedan (al reaparecer después de una patada)
+var _invincible_left: float = 0.0
 var _was_aiming: bool = false
 var _mower_home: Node
 var _aim_direction: Vector3 = Vector3.FORWARD
@@ -105,6 +126,7 @@ func _ready() -> void:
 	_load_extra_animations()
 	# Por si el .glb no se reimportó con los nombres comunes
 	AnimNames.normalize(anim)
+	ModelUtils.tint($Model, GameSettings.get_character_tint(player_id))
 	if mower:
 		_mower_home = mower.get_parent()
 	else:
@@ -112,6 +134,23 @@ func _ready() -> void:
 	if aim_indicator:
 		# Toma el color del jugador pero respeta la transparencia del indicador
 		aim_indicator.set_color(Color(color, aim_indicator.color.a))
+	_color_reticle()
+
+
+# La marca del pozo toma el color del jugador (material propio: la malla es
+# compartida entre los dos jugadores)
+func _color_reticle() -> void:
+	var mesh_instance := reticle as MeshInstance3D
+	if mesh_instance == null:
+		return
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = Color(color, reticle_alpha)
+	# Se ve aunque quede debajo de una mesa o de otro objeto
+	material.no_depth_test = true
+	material.render_priority = 1
+	mesh_instance.material_override = material
 
 
 # Personaje elegido en la selección de personaje. Si no se eligió (por ejemplo
@@ -151,6 +190,7 @@ func get_display_info() -> Dictionary:
 		"model_scene": scene,
 		"model_scale": model.transform.basis.get_scale().x * scale.x,
 		"extra_animations": extra_animations,
+		"tint": GameSettings.get_character_tint(player_id),
 	}
 
 
@@ -197,33 +237,64 @@ func _is_my_joypad_event(event: InputEvent) -> bool:
 	return false
 
 
+# Botones (los mismos en todos los niveles donde se puede):
+#   ✕ (p*_grab)   agarrar / soltar: cortadora, piedra, bota
+#   R2 o □ (p*_throw)  usar lo que se tiene: tirar la piedra o colocar el pozo (mouse: clic)
+#   △ (p*_place)  también coloca el pozo
+#   palanca derecha  apuntar (flecha de la piedra, marca del pozo)
+# Con la bota se corre el doble de rápido y se patea al rival solo con tocarlo.
 func _unhandled_input(event: InputEvent) -> void:
-	if state_machine.is_current("stunned") or state_machine.is_current("falling"):
+	if is_disabled():
 		return
-
-	if event.is_action_pressed("p%d_toggle_mower" % player_id):
-		toggle_mower()
-	elif event.is_action_pressed("p%d_grab" % player_id):
-		try_grab_rock()
+	if event.is_action_pressed("p%d_grab" % player_id):
+		grab_or_drop()
 
 
 func _physics_process(delta: float) -> void:
+	_update_invincibility(delta)
 	_update_aiming(delta)
 	_update_rock_aim()
 	_update_footsteps(delta)
 
-	if _is_fire_pressed() \
-			and not state_machine.is_current("stunned") \
-			and not state_machine.is_current("falling"):
+	if is_disabled():
+		return
+	if held_boot:
+		_try_kick()
+	var prefix := "p%d_" % player_id
+	if Input.is_action_just_pressed(prefix + "throw"):
+		# R2 usa lo que se tenga en la mano: tira la piedra o coloca el pozo
 		if held_rock:
 			throw_rock()
-		else:
+		elif held_pit:
 			confirm_aim()
+	elif Input.is_action_just_pressed(prefix + "place"):
+		confirm_aim()
 
 
-func _is_fire_pressed() -> bool:
-	return Input.is_action_just_pressed("p%d_place" % player_id) \
-			or Input.is_action_just_pressed("p%d_throw" % player_id)
+## Queda invencible (titilando) "seconds" segundos: no le pegan piedras, no
+## cae en pozos y no lo pueden patear.
+func make_invincible(seconds: float) -> void:
+	_invincible_left = seconds
+
+
+func is_invincible() -> bool:
+	return _invincible_left > 0.0
+
+
+func _update_invincibility(delta: float) -> void:
+	var model := get_node_or_null("Model") as Node3D
+	if _invincible_left <= 0.0:
+		return
+	_invincible_left -= delta
+	if model:
+		# Titila: 10 veces por segundo, y al terminar queda visible
+		model.visible = _invincible_left <= 0.0 or fmod(_invincible_left * 10.0, 1.0) > 0.4
+
+
+## Aturdido, cayendo al pozo o volando por una patada: no puede hacer nada.
+func is_disabled() -> bool:
+	return state_machine.is_current("stunned") or state_machine.is_current("falling") \
+			or state_machine.is_current("kicked")
 
 
 func get_facing_direction() -> Vector3:
@@ -244,11 +315,17 @@ func apply_friction(delta: float) -> void:
 
 
 func get_walk_speed() -> float:
-	return mower_speed if has_mower else walk_speed
+	if has_mower:
+		return mower_speed
+	return walk_speed * (boot_speed_multiplier if held_boot else 1.0)
+
+
+func get_run_speed() -> float:
+	return run_speed * (boot_speed_multiplier if held_boot else 1.0)
 
 
 func is_hands_full() -> bool:
-	return has_mower or held_rock != null or held_pit != null
+	return has_mower or held_rock != null or held_pit != null or held_boot != null
 
 
 func add_score(amount: int) -> void:
@@ -257,13 +334,41 @@ func add_score(amount: int) -> void:
 	Audio.play_sfx_spam(Audio.score_ping)
 
 
-func toggle_mower() -> void:
-	if mower == null or held_rock != null or held_pit != null:
-		return
+## ✕: suelta la cortadora si la lleva; si tiene las manos libres agarra lo que
+## tenga más cerca (piedra, bota o su cortadora).
+func grab_or_drop() -> void:
 	if has_mower:
 		drop_mower()
-	elif global_position.distance_to(mower.global_position) <= mower_pickup_distance:
+		return
+	if is_hands_full():
+		return
+
+	var item := _get_nearest_item()
+	var item_dist := global_position.distance_to(item.global_position) if item else INF
+	var mower_dist := global_position.distance_to(mower.global_position) if mower else INF
+	if mower_dist <= mower_pickup_distance and mower_dist < item_dist:
 		grab_mower()
+	elif item is Rock:
+		held_rock = item
+		item.pick_up(self)
+	elif item is Boot:
+		held_boot = item
+		item.pick_up(self)
+
+
+# Piedra o bota más cercana que se pueda agarrar, o null
+func _get_nearest_item() -> Node3D:
+	var nearest: Node3D = null
+	var nearest_dist := rock_pickup_distance
+	for group in ["rock", "boot"]:
+		for item in get_tree().get_nodes_in_group(group):
+			if not item.is_available:
+				continue
+			var dist := global_position.distance_to(item.global_position)
+			if dist <= nearest_dist:
+				nearest = item
+				nearest_dist = dist
+	return nearest
 
 
 func grab_mower() -> void:
@@ -295,25 +400,6 @@ func drop_mower() -> void:
 	mower_collision.set_deferred("disabled", true)
 
 
-func try_grab_rock() -> void:
-	if is_hands_full():
-		return
-
-	var nearest: Rock = null
-	var nearest_dist := INF
-	for rock in get_tree().get_nodes_in_group("rock"):
-		if not rock.is_available:
-			continue
-		var dist := global_position.distance_to(rock.global_position)
-		if dist <= rock_pickup_distance and dist < nearest_dist:
-			nearest = rock
-			nearest_dist = dist
-
-	if nearest:
-		held_rock = nearest
-		nearest.pick_up(self)
-
-
 func confirm_aim() -> void:
 	if not is_aiming or reticle == null:
 		return
@@ -336,6 +422,8 @@ func throw_rock() -> void:
 
 
 func get_hit_by_rock(damage: int) -> void:
+	if is_invincible():
+		return
 	if has_mower:
 		drop_mower()
 	if mower:
@@ -343,8 +431,55 @@ func get_hit_by_rock(damage: int) -> void:
 	state_machine.force_state("stunned")
 
 
+## Con la bota no hace falta apretar nada: al pasarle por encima al rival lo
+## patea fuera de la cancha, hacia donde va corriendo.
+func _try_kick() -> void:
+	var rival := _get_rival()
+	if rival == null or not _can_kick(rival):
+		return
+
+	var to_rival := rival.global_position - global_position
+	to_rival.y = 0.0
+	var direction := get_facing_direction() + to_rival.normalized()
+	if direction.length() < 0.1:
+		direction = to_rival
+	direction = direction.normalized()
+
+	rotation.y = atan2(-direction.x, -direction.z)
+	play_anim(ANIM_KICK if anim and anim.has_animation(ANIM_KICK) else ANIM_THROW, true)
+	held_boot.consume()
+	held_boot = null
+	Audio.play_sfx(Audio.kick_hit)
+	rival.get_kicked(direction)
+	var camera := get_viewport().get_camera_3d() as CameraRig
+	if camera:
+		camera.zoom_punch(kick_camera_zoom_out)
+
+
+func _can_kick(rival: Player) -> bool:
+	if rival.is_invincible():
+		return false
+	if rival.state_machine.is_current("falling") or rival.state_machine.is_current("kicked"):
+		return false
+	var to_rival := rival.global_position - global_position
+	to_rival.y = 0.0
+	return to_rival.length() <= kick_range
+
+
+## Lo patearon con la bota: suelta todo y sale volando hacia "direction".
+func get_kicked(direction: Vector3) -> void:
+	kick_direction = direction
+	_drop_everything()
+	state_machine.force_state("kicked")
+
+
 func fall_into_pit(pit: Pit) -> void:
 	falling_pit = pit
+	_drop_everything()
+	state_machine.force_state("falling")
+
+
+func _drop_everything() -> void:
 	if has_mower:
 		drop_mower()
 	if held_rock:
@@ -353,15 +488,18 @@ func fall_into_pit(pit: Pit) -> void:
 	if held_pit:
 		held_pit.drop()
 		held_pit = null
-	state_machine.force_state("falling")
+	if held_boot:
+		held_boot.drop()
+		held_boot = null
 
 
 func _update_aiming(delta: float) -> void:
 	if reticle == null:
 		return
 
-	# La retícula solo se usa para colocar el pozo
-	if state_machine.is_current("stunned") or state_machine.is_current("falling") or held_pit == null:
+	# La retícula solo se usa para colocar el pozo: aparece al agarrarlo y se
+	# mueve con la palanca derecha (sin apretar nada). △ lo coloca.
+	if is_disabled() or held_pit == null:
 		is_aiming = false
 		_was_aiming = false
 		reticle.visible = false
@@ -380,15 +518,15 @@ func _update_aiming(delta: float) -> void:
 					clampf(point.z, map_min.y, map_max.y))
 			return
 
-	is_aiming = Input.is_action_pressed("p%d_aim" % player_id)
-	reticle.visible = is_aiming
-	if not is_aiming:
-		_was_aiming = false
-		return
-
+	is_aiming = true
+	reticle.visible = true
 	if not _was_aiming:
 		_was_aiming = true
-		reticle.global_position = Vector3(global_position.x, reticle_height, global_position.z)
+		var start := global_position + get_facing_direction() * reticle_start_distance
+		reticle.global_position = Vector3(
+				clampf(start.x, map_min.x, map_max.x),
+				reticle_height,
+				clampf(start.z, map_min.y, map_max.y))
 
 	var prefix := "p%d_" % player_id
 	var aim_input := Input.get_vector(prefix + "aim_left", prefix + "aim_right", prefix + "aim_up", prefix + "aim_down")
@@ -403,9 +541,7 @@ func _update_rock_aim() -> void:
 	if aim_indicator == null:
 		return
 
-	var can_aim := held_rock != null \
-			and not state_machine.is_current("stunned") \
-			and not state_machine.is_current("falling")
+	var can_aim := held_rock != null and not is_disabled()
 	aim_indicator.visible = can_aim
 	if not can_aim:
 		_aim_from_stick = false

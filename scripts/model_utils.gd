@@ -29,3 +29,22 @@ static func get_bounds(root: Node3D) -> AABB:
 		result = box if first else result.merge(box)
 		first = false
 	return result
+
+
+## Tiñe todas las mallas de "root" multiplicando su color por "tint" (sobre
+## copias de los materiales, así no cambia a otros que usen el mismo modelo).
+## Color.WHITE = sin cambios.
+static func tint(root: Node, tint_color: Color) -> void:
+	if root == null or tint_color == Color.WHITE:
+		return
+	for node in root.find_children("*", "MeshInstance3D", true, false):
+		var mesh_instance := node as MeshInstance3D
+		if mesh_instance.mesh == null:
+			continue
+		for i in mesh_instance.mesh.get_surface_count():
+			var material := mesh_instance.get_active_material(i) as BaseMaterial3D
+			if material == null:
+				continue
+			var copy := material.duplicate() as BaseMaterial3D
+			copy.albedo_color *= tint_color
+			mesh_instance.set_surface_override_material(i, copy)

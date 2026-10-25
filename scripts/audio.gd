@@ -68,6 +68,17 @@ var sfx_level: float = 1.0
 ## Cuando el pozo se cierra.
 @export var pit_close: AudioStream
 
+@export_group("Bota")
+@export var boot_grab: AudioStream
+## Al patear al rival.
+@export var kick_hit: AudioStream
+## Al patear sin nadie cerca.
+@export var kick_whiff: AudioStream
+## Grito mientras el pateado vuela.
+@export var kicked_scream: AudioStream
+## Cuando el pateado reaparece en la cancha.
+@export var kicked_land: AudioStream
+
 @export_group("Jugador")
 @export var footstep: AudioStream
 ## Tiempo entre pasos caminando.

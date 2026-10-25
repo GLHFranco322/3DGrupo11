@@ -1,14 +1,17 @@
 class_name ItemSpawner
 extends Node3D
 
-# Hace aparecer piedras y pozos en lugares al azar de la cancha. Todo el azar
+# Hace aparecer piedras, pozos y botas en lugares al azar de la cancha. Todo el azar
 # de los items se decide acá (en online lo va a decidir solo el anfitrión).
 
 @export_group("Items")
 @export var rock_scene: PackedScene
 @export var pit_scene: PackedScene
-## Probabilidad de que aparezca una piedra (el resto, un pozo). 0.6 = 60% piedras.
-@export_range(0.0, 1.0, 0.05) var rock_chance: float = 0.6
+@export var boot_scene: PackedScene
+## Peso de cada item: más alto = aparece más seguido. 0 = no aparece.
+@export_range(0.0, 10.0, 0.1) var rock_weight: float = 3.0
+@export_range(0.0, 10.0, 0.1) var pit_weight: float = 2.0
+@export_range(0.0, 10.0, 0.1) var boot_weight: float = 1.5
 ## Segundos que dura cada item en el piso antes de desaparecer.
 @export_range(0.5, 60.0, 0.5, "suffix:s") var item_lifetime: float = 5.0
 
@@ -56,13 +59,29 @@ func _process(delta: float) -> void:
 
 
 func spawn_random_item() -> void:
-	var scene := rock_scene if _rng.randf() < rock_chance else pit_scene
+	var scene := _random_scene()
 	if scene == null:
 		return
 	var point = _find_free_point()
 	if point == null:
 		return
 	spawn_item(scene, point)
+
+
+func _random_scene() -> PackedScene:
+	var options := [[rock_scene, rock_weight], [pit_scene, pit_weight], [boot_scene, boot_weight]]
+	var total := 0.0
+	for option in options:
+		if option[0] != null:
+			total += option[1]
+	var roll := _rng.randf() * total
+	for option in options:
+		if option[0] == null:
+			continue
+		roll -= option[1]
+		if roll <= 0.0:
+			return option[0]
+	return rock_scene
 
 
 func spawn_item(scene: PackedScene, world_position: Vector3) -> Node3D:
@@ -78,7 +97,7 @@ func spawn_item(scene: PackedScene, world_position: Vector3) -> Node3D:
 func _get_items() -> Array[Node3D]:
 	var items: Array[Node3D] = []
 	for child in get_children():
-		if child is Rock or child is Pit:
+		if child is Rock or child is Pit or child is Boot:
 			items.append(child)
 	return items
 

@@ -90,7 +90,7 @@ text = "Salir"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 
 [node name="OptionsTitle" type="Label" parent="Center/Layout/OptionsPanel"]
 layout_mode = 2
@@ -168,6 +168,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "100%"
 horizontal_alignment = 2
+
+[node name="KeyboardCheck" type="CheckButton" parent="Center/Layout/OptionsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Jugador 1 con teclado y mouse"
 
 [node name="BackButton" type="Button" parent="Center/Layout/OptionsPanel"]
 unique_name_in_owner = true

@@ -22,6 +22,8 @@ extends Control
 @onready var master_value: Label = %MasterValue
 @onready var music_value: Label = %MusicValue
 @onready var sfx_value: Label = %SfxValue
+## Jugador 1 con teclado y mouse: el (único) mando queda para el Jugador 2.
+@onready var keyboard_check: CheckButton = %KeyboardCheck
 
 
 func _ready() -> void:
@@ -32,7 +34,7 @@ func _ready() -> void:
 	quit_button.pressed.connect(get_tree().quit)
 	back_button.pressed.connect(_show_panel.bind(main_panel))
 
-	var buttons: Array[Button] = [play_button, options_button, quit_button, back_button]
+	var buttons: Array[BaseButton] = [play_button, options_button, quit_button, keyboard_check, back_button]
 
 	master_slider.value = GameSettings.master_volume * 100.0
 	music_slider.value = GameSettings.music_volume * 100.0
@@ -41,6 +43,9 @@ func _ready() -> void:
 	for slider in [master_slider, music_slider, sfx_slider]:
 		slider.value_changed.connect(_on_volume_changed)
 		slider.drag_ended.connect(func(_changed: bool) -> void: Audio.play_sfx(Audio.ui_click))
+
+	keyboard_check.button_pressed = GameSettings.keyboard_mouse_p1
+	keyboard_check.toggled.connect(GameSettings.set_keyboard_mouse_p1)
 
 	_show_panel(main_panel)
 

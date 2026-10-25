@@ -26,9 +26,17 @@ extends Node3D
 @export var item_pool: Array[ItemData] = []
 @export var collectible_scene: PackedScene
 
+@export_group("Mostrador")
+## Dónde va el mostrador en la zona de atención: 0 = pegado al laberinto, 1 = al fondo.
+@export_range(0.0, 1.0, 0.05) var counter_depth: float = 0.6
+## Altura de la parte de arriba del mostrador (ahí se apoya el tablero).
+@export_range(0.0, 3.0, 0.05, "suffix:u") var counter_height: float = 1.06
+
 @export_group("Referencias")
 @export var maze: MazeBuilder
 @export var board: ToolBoard
+## Mostrador de la zona de atención (el tablero va arriba).
+@export var counter: Node3D
 @export var items_root: Node3D
 @export var player1: StorePlayer
 @export var player2: StorePlayer
@@ -72,16 +80,21 @@ func _players() -> Array[StorePlayer]:
 	return [player1, player2]
 
 
-# El tablero va en la pared de abajo, en la celda del medio; los jugadores
-# arrancan en esa celda, mirando hacia el laberinto
+# Mostrador en la zona de atención (al frente del laberinto) con el tablero
+# arriba, mirando hacia las góndolas. Los jugadores arrancan entre el
+# mostrador y el laberinto, mirando hacia las góndolas.
 func _place_board_and_players() -> void:
-	@warning_ignore("integer_division")
-	var start_cell := Vector2i(maze.columns / 2, maze.rows - 1)
-	var center := maze.get_cell_center(start_cell)
-	var wall_z := center.z + maze.cell_size * 0.5 - maze.wall_thickness * 0.5
-	board.global_transform = Transform3D(Basis(Vector3.UP, PI), Vector3(center.x, 1.4, wall_z - 0.05))
-	player1.global_position = center + Vector3(-0.8, 0.1, 0.0)
-	player2.global_position = center + Vector3(0.8, 0.1, 0.0)
+	var front := maze.get_front_center()
+	var depth := maze.front_rows * maze.cell_size
+	var counter_position := front + Vector3(0.0, 0.0, (counter_depth - 0.5) * depth)
+	counter.global_position = counter_position
+	# El frente del tablero es su +Z: se lo gira para que mire al laberinto (-Z)
+	board.global_transform = Transform3D(Basis(Vector3.UP, PI), counter_position + Vector3(0.0, counter_height + 1.0, 0.0))
+	var start := front - Vector3(0.0, 0.0, depth * 0.25)
+	player1.global_position = start + Vector3(-1.5, 0.1, 0.0)
+	player2.global_position = start + Vector3(1.5, 0.1, 0.0)
+	# Flechas en el piso que llevan hacia el mostrador desde cualquier parte
+	maze.build_path_arrows()
 
 
 func _assign_lists() -> void:
@@ -105,10 +118,7 @@ func _spawn_items() -> void:
 	for i in decoy_items:
 		to_spawn.append(item_pool[_rng.randi_range(0, item_pool.size() - 1)])
 
-	@warning_ignore("integer_division")
-	var start_cell := Vector2i(maze.columns / 2, maze.rows - 1)
 	var cells := maze.get_all_cells()
-	cells.erase(start_cell)
 	_shuffle(cells)
 
 	for i in to_spawn.size():
@@ -144,7 +154,7 @@ func _get_hint(player: StorePlayer) -> String:
 	if player.carried == null:
 		return ""
 	if not board.is_in_range(player):
-		return "Llevala al tablero  ·  ✕ soltar"
+		return "Llevala al mostrador  ·  ✕ soltar"
 	if player.needs(player.carried.data):
 		return "✕ Colgar en el tablero"
 	return "No está en tu lista  ·  alejate y ✕ para soltar"

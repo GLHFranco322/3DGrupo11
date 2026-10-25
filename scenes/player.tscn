@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cj4qp02jdwptw" path="res://scripts/falling.gd" id="7_fjrip"]
 [ext_resource type="PackedScene" uid="uid://do1020523klr3" path="res://assets/personajes/Triangulo/Trianguloblend.glb" id="8_smehm"]
 [ext_resource type="Script" uid="uid://be3muax0328ic" path="res://scripts/aim_indicator.gd" id="9_aim"]
+[ext_resource type="Script" path="res://scripts/kicked.gd" id="10_kicked"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_u8vuu"]
 size = Vector3(1, 1.2, 0.3)
@@ -62,6 +63,9 @@ script = ExtResource("6_tuyoq")
 
 [node name="Falling" type="Node" parent="StateMachine" unique_id=881095213]
 script = ExtResource("7_fjrip")
+
+[node name="Kicked" type="Node" parent="StateMachine"]
+script = ExtResource("10_kicked")
 
 [node name="MowerCollision" type="CollisionShape3D" parent="." unique_id=1609645198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -1.4)

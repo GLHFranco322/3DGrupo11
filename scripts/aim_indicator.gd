@@ -15,7 +15,7 @@ extends Node3D
 @export_range(0.0, 2.0, 0.01, "suffix:u") var height: float = 0.1
 ## Color base. El jugador reemplaza el tono por el suyo pero se respeta la
 ## transparencia (canal A): más bajo = más transparente.
-@export var color: Color = Color(1.0, 1.0, 1.0, 0.3)
+@export var color: Color = Color(1.0, 1.0, 1.0, 0.8)
 
 var _material: StandardMaterial3D
 

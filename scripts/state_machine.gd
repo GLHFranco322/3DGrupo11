@@ -28,8 +28,8 @@ func _physics_process(delta: float) -> void:
 
 	# Sin gravedad ni piso: al chocar con colisiones inclinadas (arbustos,
 	# piedras, cerca) el deslizamiento lo empuja hacia abajo. Se lo mantiene a
-	# la altura del piso, salvo cuando cae al pozo (se hunde a propósito).
-	if not is_current("falling"):
+	# la altura del piso, salvo cuando cae al pozo o vuela por una patada.
+	if not is_current("falling") and not is_current("kicked"):
 		player.velocity.y = 0.0
 		player.global_position.y = player.spawn_position.y
 

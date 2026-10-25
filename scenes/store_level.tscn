@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/item_data.gd" id="8_itemdata"]
 [ext_resource type="Resource" path="res://characters/triangulo.tres" id="9_triangulo"]
 [ext_resource type="Resource" path="res://characters/carlos.tres" id="10_carlos"]
+[ext_resource type="PackedScene" path="res://scenes/counter.tscn" id="11_counter"]
 [ext_resource type="Resource" path="res://items/balde.tres" id="20_item"]
 [ext_resource type="Resource" path="res://items/cepillo.tres" id="21_item"]
 [ext_resource type="Resource" path="res://items/cincel.tres" id="22_item"]
@@ -32,7 +33,7 @@ background_mode = 1
 background_color = Color(0.2, 0.22, 0.25, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.97, 0.9, 1)
-ambient_light_energy = 0.6
+ambient_light_energy = 0.35
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
 albedo_color = Color(0.78, 0.72, 0.62, 1)
@@ -51,12 +52,13 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[node name="StoreLevel" type="Node3D" node_paths=PackedStringArray("maze", "board", "items_root", "player1", "player2", "hud")]
+[node name="StoreLevel" type="Node3D" node_paths=PackedStringArray("maze", "board", "counter", "items_root", "player1", "player2", "hud")]
 script = ExtResource("1_level")
 item_pool = Array[ExtResource("8_itemdata")]([ExtResource("20_item"), ExtResource("21_item"), ExtResource("22_item"), ExtResource("23_item"), ExtResource("24_item"), ExtResource("25_item"), ExtResource("26_item"), ExtResource("27_item"), ExtResource("28_item"), ExtResource("29_item"), ExtResource("30_item"), ExtResource("31_item"), ExtResource("32_item"), ExtResource("33_item"), ExtResource("34_item"), ExtResource("35_item")])
 collectible_scene = ExtResource("7_collectible")
 maze = NodePath("Maze")
 board = NodePath("Board")
+counter = NodePath("Counter")
 items_root = NodePath("Items")
 player1 = NodePath("Player1")
 player2 = NodePath("Player2")
@@ -64,7 +66,7 @@ hud = NodePath("HUD")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.8660254, -0.3535534, 0.3535534, 0, 0.7071068, 0.7071068, -0.5, -0.6123725, 0.6123725, 0, 10, 0)
-light_energy = 0.8
+light_energy = 0.3
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -75,6 +77,8 @@ script = ExtResource("2_maze")
 wall_height = 4.5
 wall_material = SubResource("StandardMaterial3D_wall")
 floor_material = SubResource("StandardMaterial3D_floor")
+
+[node name="Counter" parent="." instance=ExtResource("11_counter")]
 
 [node name="Board" parent="." instance=ExtResource("3_board")]
 
