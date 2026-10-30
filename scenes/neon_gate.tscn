@@ -1,0 +1,121 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_red_neon"]
+albedo_color = Color(0.5, 0.02, 0.05, 1)
+emission_enabled = true
+emission = Color(1, 0.1, 0.15, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="StandardMaterial3D" id="Mat_cyan_neon"]
+shading_mode = 0
+albedo_color = Color(0.1, 0.9, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_dark"]
+albedo_color = Color(0.06, 0.05, 0.08, 1)
+metallic = 0.6
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_lantern"]
+albedo_color = Color(0.7, 0.03, 0.03, 1)
+emission_enabled = true
+emission = Color(1, 0.06, 0.04, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+material = SubResource("Mat_red_neon")
+size = Vector3(0.45, 7, 0.45)
+
+[sub_resource type="BoxMesh" id="BoxMesh_beam"]
+material = SubResource("Mat_dark")
+size = Vector3(18.5, 0.6, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_beam_neon"]
+material = SubResource("Mat_cyan_neon")
+size = Vector3(18.5, 0.08, 1.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sign"]
+material = SubResource("Mat_dark")
+size = Vector3(6, 1.6, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lantern"]
+material = SubResource("Mat_lantern")
+radius = 0.32
+height = 0.75
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_string"]
+material = SubResource("Mat_dark")
+top_radius = 0.015
+bottom_radius = 0.015
+height = 0.8
+
+[node name="NeonGate" type="Node3D"]
+
+[node name="PostLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 3.5, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 3.5, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="Beam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.8, 0)
+mesh = SubResource("BoxMesh_beam")
+
+[node name="BeamNeon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.48, 0)
+mesh = SubResource("BoxMesh_beam_neon")
+
+[node name="Sign" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.9, 0)
+mesh = SubResource("BoxMesh_sign")
+
+[node name="SignText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.9, 0.14)
+pixel_size = 0.012
+modulate = Color(3, 0.4, 1.6, 1)
+outline_modulate = Color(0.3, 0, 0.15, 1)
+text = "NIGHT CITY"
+font_size = 96
+outline_size = 10
+
+[node name="SignTextBack" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 7.9, -0.14)
+pixel_size = 0.012
+modulate = Color(3, 0.4, 1.6, 1)
+outline_modulate = Color(0.3, 0, 0.15, 1)
+text = "NIGHT CITY"
+font_size = 96
+outline_size = 10
+
+[node name="String1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, 6.1, 0)
+mesh = SubResource("CylinderMesh_string")
+
+[node name="Lantern1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4, 5.45, 0)
+mesh = SubResource("SphereMesh_lantern")
+
+[node name="String2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 6.1, 0)
+mesh = SubResource("CylinderMesh_string")
+
+[node name="Lantern2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 5.45, 0)
+mesh = SubResource("SphereMesh_lantern")
+
+[node name="String3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 6.1, 0)
+mesh = SubResource("CylinderMesh_string")
+
+[node name="Lantern3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 5.45, 0)
+mesh = SubResource("SphereMesh_lantern")
+
+[node name="String4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 6.1, 0)
+mesh = SubResource("CylinderMesh_string")
+
+[node name="Lantern4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 5.45, 0)
+mesh = SubResource("SphereMesh_lantern")

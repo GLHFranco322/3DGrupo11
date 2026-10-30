@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/electro_grate.gd" id="1_piece"]
+
+[node name="ElectroGrate" type="Node3D"]
+script = ExtResource("1_piece")

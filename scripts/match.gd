@@ -22,7 +22,7 @@ var _finished: bool = false
 func _ready() -> void:
 	time_left = match_duration
 	hud.set_time(time_left)
-	Audio.play_music(Audio.music_game)
+	Audio.play_level_music(Audio.music_patio)
 
 
 func _process(delta: float) -> void:

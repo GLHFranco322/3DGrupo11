@@ -24,8 +24,15 @@ var sfx_level: float = 1.0
 @export_group("Música")
 ## Música del menú principal y la selección de personaje.
 @export var music_menu: AudioStream
-## Música durante la partida (se repite en loop).
+## Música por defecto de los niveles (se repite en loop). Suena en los niveles
+## que no tengan su propia música abajo.
 @export var music_game: AudioStream
+## Música del nivel 1 (el patio). Vacío = usa "Music Game".
+@export var music_patio: AudioStream
+## Música del nivel 2 (la ferretería). Vacío = usa "Music Game".
+@export var music_store: AudioStream
+## Música del nivel 3 (la carrera). Vacío = usa "Music Game".
+@export var music_race: AudioStream
 ## Música de los últimos segundos. Vacío = sigue la música normal.
 @export var music_hurry: AudioStream
 ## Segundos restantes en los que empieza "Music Hurry".
@@ -95,16 +102,34 @@ var sfx_level: float = 1.0
 @export var barrow_climb: AudioStream
 ## Al agarrar un item o el mate en la pista.
 @export var item_pickup: AudioStream
-## Al usar el turbo (mate).
-@export var turbo_boost: AudioStream
-## Al tirar los clavos.
-@export var nails_drop: AudioStream
-## Cuando a alguien se le pincha la rueda.
-@export var tire_pop: AudioStream
+## Cuando la caña de pescar engancha al rival.
+@export var rod_hook: AudioStream
+## Cuando se usa la caña con el rival fuera de alcance (no se gasta).
+@export var rod_miss: AudioStream
 ## Cuenta regresiva de la largada (3, 2, 1).
 @export var race_count: AudioStream
 ## "¡Ya!" de la largada.
 @export var race_go: AudioStream
+## Al pasar por una rampa de turbo.
+@export var boost_pad: AudioStream
+## Cuando una reja eléctrica tira a alguien de la carretilla.
+@export var grate_zap: AudioStream
+## Al caerse por un hueco del piso (vacío = usa "Pit Fall").
+@export var void_fall: AudioStream
+
+@export_group("Ferretería")
+## Piña que le pega al rival.
+@export var punch_hit: AudioStream
+## Piña al aire.
+@export var punch_whiff: AudioStream
+## Al agarrar una banana o un hielo del piso.
+@export var trap_pickup: AudioStream
+## Al dejar una trampa.
+@export var trap_place: AudioStream
+## Cuando alguien pisa una banana.
+@export var banana_slip: AudioStream
+## Cuando alguien empieza a patinar en el hielo.
+@export var ice_slide: AudioStream
 
 @export_group("Partida")
 ## Suena una vez por segundo cuando el tiempo se pone rojo.
@@ -124,6 +149,9 @@ var sfx_level: float = 1.0
 @export_range(0.0, 1.0, 0.01, "suffix:s") var spam_cooldown: float = 0.12
 
 var _music_player: AudioStreamPlayer
+# Volumen del fade de la música (0 = muda, 1 = normal) y su animación
+var _music_fade: float = 1.0
+var _music_tween: Tween
 var _sfx_players: Array[AudioStreamPlayer] = []
 var _next_voice: int = 0
 var _last_played: Dictionary = {}
@@ -165,20 +193,61 @@ func play_sfx_spam(stream: AudioStream) -> void:
 	play_sfx(stream, spam_cooldown)
 
 
-## Cambia la música. Si ya está sonando la misma, no la reinicia.
-func play_music(stream: AudioStream) -> void:
+## Cambia la música. Si ya está sonando la misma, no la reinicia. "fade_in" =
+## segundos que tarda en subir el volumen desde cero (0 = de golpe).
+func play_music(stream: AudioStream, fade_in: float = 0.0) -> void:
 	if stream == null:
 		stop_music()
 		return
+	_kill_music_fade()
 	if _music_player.stream == stream and _music_player.playing:
+		_set_music_fade(1.0)
 		return
 	_music_player.stream = stream
 	_music_player.play()
+	if fade_in > 0.0:
+		_set_music_fade(0.0)
+		_music_tween = create_tween()
+		_music_tween.tween_method(_set_music_fade, 0.0, 1.0, fade_in)
+	else:
+		_set_music_fade(1.0)
+
+
+## Baja la música de a poco en "time" segundos y la corta. Sigue aunque el juego
+## esté en pausa (ej: al terminar la partida).
+func fade_out_music(time: float) -> void:
+	if not _music_player.playing:
+		return
+	if time <= 0.0:
+		stop_music()
+		return
+	_kill_music_fade()
+	_music_tween = create_tween()
+	_music_tween.tween_method(_set_music_fade, _music_fade, 0.0, time)
+	_music_tween.tween_callback(stop_music)
+
+
+func _kill_music_fade() -> void:
+	if _music_tween and _music_tween.is_valid():
+		_music_tween.kill()
+	_music_tween = null
+
+
+func _set_music_fade(value: float) -> void:
+	_music_fade = value
+	_update_music_volume()
+
+
+## Pone la música de un nivel: la suya si tiene, si no "Music Game".
+func play_level_music(level_stream: AudioStream, fade_in: float = 0.0) -> void:
+	play_music(level_stream if level_stream else music_game, fade_in)
 
 
 func stop_music() -> void:
+	_kill_music_fade()
 	_music_player.stop()
 	_music_player.stream = null
+	_set_music_fade(1.0)
 
 
 ## Crea un reproductor en loop (ej: motor) como hijo de "owner_node".
@@ -198,4 +267,4 @@ func get_sfx_db() -> float:
 
 func _update_music_volume() -> void:
 	if _music_player:
-		_music_player.volume_db = music_volume_db + linear_to_db(maxf(music_level, 0.0001))
+		_music_player.volume_db = music_volume_db + linear_to_db(maxf(music_level * _music_fade, 0.0001))

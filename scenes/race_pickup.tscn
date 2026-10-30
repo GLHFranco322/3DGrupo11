@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/race_pickup.gd" id="1_pickup"]
 [ext_resource type="PackedScene" path="res://scenes/item_timer.tscn" id="2_timer"]
-[ext_resource type="PackedScene" path="res://assets/mate/mate_argentino_drink.glb" id="3_mate"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_rock"]
 albedo_color = Color(0.5, 0.48, 0.45, 1)
@@ -21,16 +20,42 @@ top_radius = 0.45
 bottom_radius = 0.45
 height = 0.08
 
-[sub_resource type="StandardMaterial3D" id="Mat_nail"]
-albedo_color = Color(0.75, 0.75, 0.78, 1)
-metallic = 0.8
-roughness = 0.3
+[sub_resource type="StandardMaterial3D" id="Mat_rod"]
+albedo_color = Color(0.45, 0.28, 0.12, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_nail"]
-material = SubResource("Mat_nail")
-top_radius = 0.04
-bottom_radius = 0.04
-height = 0.5
+[sub_resource type="CylinderMesh" id="CylinderMesh_rod"]
+material = SubResource("Mat_rod")
+top_radius = 0.02
+bottom_radius = 0.045
+height = 1.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_reel"]
+albedo_color = Color(0.2, 0.2, 0.22, 1)
+metallic = 0.6
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_reel"]
+material = SubResource("Mat_reel")
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="Mat_line"]
+shading_mode = 0
+albedo_color = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_line"]
+material = SubResource("Mat_line")
+top_radius = 0.008
+bottom_radius = 0.008
+height = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_hook"]
+albedo_color = Color(0.85, 0.15, 0.12, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hook"]
+material = SubResource("Mat_hook")
+radius = 0.05
+height = 0.1
 
 [sub_resource type="StandardMaterial3D" id="Mat_bubble"]
 transparency = 1
@@ -60,23 +85,23 @@ mesh = SubResource("SphereMesh_rock")
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("CylinderMesh_pit")
 
-[node name="Nails" type="Node3D" parent="Visuals"]
+[node name="Rod" type="Node3D" parent="Visuals"]
+transform = Transform3D(0.94, -0.34, 0, 0.34, 0.94, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Nail1" type="MeshInstance3D" parent="Visuals/Nails"]
-transform = Transform3D(0.94, 0.34, 0, -0.34, 0.94, 0, 0, 0, 1, -0.15, 0, 0)
-mesh = SubResource("CylinderMesh_nail")
+[node name="Pole" type="MeshInstance3D" parent="Visuals/Rod"]
+mesh = SubResource("CylinderMesh_rod")
 
-[node name="Nail2" type="MeshInstance3D" parent="Visuals/Nails"]
-mesh = SubResource("CylinderMesh_nail")
+[node name="Reel" type="MeshInstance3D" parent="Visuals/Rod"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0.07, -0.3, 0)
+mesh = SubResource("CylinderMesh_reel")
 
-[node name="Nail3" type="MeshInstance3D" parent="Visuals/Nails"]
-transform = Transform3D(0.94, -0.34, 0, 0.34, 0.94, 0, 0, 0, 1, 0.15, 0, 0)
-mesh = SubResource("CylinderMesh_nail")
+[node name="Line" type="MeshInstance3D" parent="Visuals/Rod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0)
+mesh = SubResource("CylinderMesh_line")
 
-[node name="Turbo" type="Node3D" parent="Visuals"]
-
-[node name="Mate" parent="Visuals/Turbo" instance=ExtResource("3_mate")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.1, -0.4, 0)
+[node name="Hook" type="MeshInstance3D" parent="Visuals/Rod"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.33, 0)
+mesh = SubResource("SphereMesh_hook")
 
 [node name="Area3D" type="Area3D" parent="."]
 

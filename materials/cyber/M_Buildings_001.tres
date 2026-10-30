@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/escenario/FreeSample/Textures/T_Buildings_001Diffuse- 4K.png" id="1_albedo"]
+[ext_resource type="Texture2D" path="res://assets/escenario/FreeSample/Textures/BAKE_Buildings_001Emissive- 4K.png" id="2_emission"]
+
+[resource]
+resource_name = "M_Buildings_001"
+albedo_texture = ExtResource("1_albedo")
+roughness = 0.8
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+emission_energy_multiplier = 1.4
+emission_texture = ExtResource("2_emission")

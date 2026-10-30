@@ -3,7 +3,7 @@ extends Node3D
 
 # Item que aparece en la pista (lo crea RaceItemSpawner). Se agarra pasando por
 # encima con la carretilla. Si nadie lo agarra en "lifetime" segundos, desaparece.
-# Cada tipo muestra su nodo hijo: Visuals/Rock, Visuals/Pit, Visuals/Nails, Visuals/Turbo.
+# Cada tipo muestra su nodo hijo: Visuals/Rock, Visuals/Pit, Visuals/Rod.
 
 @export var kind: Racer.Item = Racer.Item.ROCK
 ## Segundos que dura en la pista. RaceItemSpawner lo pisa con su valor.
@@ -14,8 +14,7 @@ extends Node3D
 const VISUAL_NAMES := {
 	Racer.Item.ROCK: "Rock",
 	Racer.Item.PIT: "Pit",
-	Racer.Item.NAILS: "Nails",
-	Racer.Item.TURBO: "Turbo",
+	Racer.Item.ROD: "Rod",
 }
 
 var _time: float = 0.0

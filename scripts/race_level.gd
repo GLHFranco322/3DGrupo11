@@ -1,20 +1,25 @@
 extends Node3D
 
-# Nivel 3, carrera de carretillas por el barrio: de punta a punta, gana el
-# primero que llega a la meta. Si se acaba el tiempo, gana el más adelantado.
-# El recorrido es el Path3D "Track": al mover sus puntos en el editor, el
-# camino y los cordones lo siguen solos.
+# Nivel 3, carrera de carretillas en un circuito cerrado: gana el primero que
+# completa todas las vueltas. Si se acaba el tiempo, gana el más adelantado.
+# El recorrido es el Path3D "Track" (curva cerrada): al mover sus puntos en el
+# editor, el camino, los cordones, la ciudad y el minimapa lo siguen solos. La
+# largada y la meta están en el primer punto de la curva.
 
 @export_group("Partida")
 ## Duración máxima de la carrera.
-@export_range(10.0, 900.0, 5.0, "suffix:s") var match_duration: float = 150.0
+@export_range(10.0, 900.0, 5.0, "suffix:s") var match_duration: float = 240.0
+## Vueltas al circuito para ganar.
+@export_range(1, 20) var laps: int = 3
 ## Segundos de la cuenta regresiva antes de largar.
 @export_range(0, 10) var countdown: int = 3
-## La meta está a esta distancia antes del final del recorrido.
-@export_range(0.0, 50.0, 0.5, "suffix:u") var finish_margin: float = 8.0
 ## Tiempo que se muestra el cartel final antes de los resultados.
 @export_range(0.0, 10.0, 0.1, "suffix:s") var end_delay: float = 2.5
 @export_file("*.tscn") var results_scene: String = "res://scenes/results.tscn"
+## Segundos que tarda en subir la música al empezar.
+@export_range(0.0, 10.0, 0.1, "suffix:s") var music_fade_in: float = 2.0
+## Segundos que tarda en apagarse la música al terminar (conviene menor o igual a "End Delay").
+@export_range(0.0, 10.0, 0.1, "suffix:s") var music_fade_out: float = 2.0
 
 @export_group("Progreso")
 ## Si el punto más cercano del recorrido salta más que esto de golpe (por
@@ -28,13 +33,16 @@ extends Node3D
 @export var racer2: Racer
 @export var spawner: RaceItemSpawner
 @export var hud: RaceHud
-## Línea de llegada (se acomoda sola sobre el recorrido).
+## Línea de largada y llegada (se acomoda sola en el primer punto del recorrido).
 @export var finish_line: Node3D
 
 var time_left: float
 var _racing: bool = false
 var _finished: bool = false
 var _length: float = 0.0
+# Racer -> true cuando ya se le calculó el progreso por primera vez
+var _tracked: Dictionary = {}
+var _last_lap_shown: bool = false
 
 
 func _ready() -> void:
@@ -42,10 +50,10 @@ func _ready() -> void:
 	_place_finish_line()
 	spawner.spawn_initial_items()
 	time_left = match_duration
-	hud.setup(_racers())
+	hud.setup(_racers(), track)
 	hud.set_time(time_left)
 	_update_progress()
-	Audio.play_music(Audio.music_game)
+	Audio.play_level_music(Audio.music_race, music_fade_in)
 	_start_countdown()
 
 
@@ -53,14 +61,20 @@ func _racers() -> Array[Racer]:
 	return [racer1, racer2]
 
 
-func get_finish_distance() -> float:
-	return maxf(_length - finish_margin, 0.0)
+## Metros totales de la carrera (todas las vueltas).
+func get_race_distance() -> float:
+	return _length * laps
+
+
+## Vuelta en la que va (1 a "laps").
+func get_lap(r: Racer) -> int:
+	return clampi(floori(r.progress / _length) + 1, 1, laps)
 
 
 func _place_finish_line() -> void:
 	if finish_line == null:
 		return
-	var at := track.global_transform * track.curve.sample_baked_with_rotation(get_finish_distance())
+	var at := track.global_transform * track.curve.sample_baked_with_rotation(0.0)
 	finish_line.global_transform = Transform3D(at.basis.orthonormalized(), at.origin)
 
 
@@ -88,7 +102,7 @@ func _process(delta: float) -> void:
 		hud.set_hint(r, _get_hint(r))
 
 	for r in _racers():
-		if r.progress >= get_finish_distance() and r.state != Racer.Mode.SINKING:
+		if r.progress >= get_race_distance() and r.state != Racer.Mode.SINKING:
 			_finish(r, "¡Jugador %d ganó la carrera!" % r.player_id)
 			return
 	if time_left <= 0.0:
@@ -96,16 +110,30 @@ func _process(delta: float) -> void:
 		_finish(leader, "¡Tiempo! Gana el Jugador %d" % leader.player_id)
 
 
-# Metros recorridos: el punto del recorrido más cercano a la carretilla
+# Metros recorridos en total: se sigue el punto del recorrido más cercano a la
+# carretilla y se suma lo que avanzó desde el cuadro anterior. Al cruzar la meta
+# el punto vuelve a 0 pero el total sigue sumando (así se cuentan las vueltas);
+# cruzarla marcha atrás resta.
 func _update_progress() -> void:
 	var to_track := track.global_transform.affine_inverse()
 	for r in _racers():
 		var offset := track.curve.get_closest_offset(to_track * r.barrow.global_position)
-		if absf(offset - r.progress) <= max_progress_jump or r.progress == 0.0:
-			r.progress = offset
+		if not _tracked.has(r):
+			# En la largada están detrás de la meta: progreso negativo
+			_tracked[r] = true
+			r.progress = offset - _length if offset > _length * 0.5 else offset
+			continue
+		var moved := wrapf(offset - fposmod(r.progress, _length), -_length * 0.5, _length * 0.5)
+		if absf(moved) <= max_progress_jump:
+			r.progress += moved
 	var leader := _get_leader()
 	spawner.leader_progress = leader.progress
-	hud.set_progress(_racers(), get_finish_distance(), leader)
+	hud.set_progress(_racers(), get_race_distance(), leader)
+	for r in _racers():
+		hud.set_lap(r, get_lap(r), laps)
+	if _racing and laps > 1 and not _last_lap_shown and get_lap(leader) == laps:
+		_last_lap_shown = true
+		hud.show_message("¡ÚLTIMA VUELTA!", 1.5)
 
 
 func _get_leader() -> Racer:
@@ -128,12 +156,12 @@ func _finish(winner: Racer, message: String) -> void:
 	# Puntaje = metros recorridos; el ganador suma un extra para que no haya empate
 	for r in _racers():
 		r.controls_enabled = false
-		r.score = int(r.progress)
+		r.score = maxi(int(r.progress), 0)
 	winner.score += 100
 	MatchResult.save_from(_racers())
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message(message)
-	Audio.stop_music()
+	Audio.fade_out_music(music_fade_out)
 	Audio.play_sfx(Audio.time_up)
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout

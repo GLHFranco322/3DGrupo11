@@ -26,6 +26,16 @@ extends Node3D
 @export var item_pool: Array[ItemData] = []
 @export var collectible_scene: PackedScene
 
+@export_group("Trampas")
+## Banana o hielo que aparece tirado en el laberinto (se agarra pasando por encima).
+@export var trap_pickup_scene: PackedScene
+## Cuántas trampas puede haber tiradas al mismo tiempo.
+@export_range(0, 30) var max_trap_pickups: int = 4
+## Cada cuánto aparece una trampa nueva (si hay menos del máximo).
+@export_range(0.5, 120.0, 0.5, "suffix:s") var trap_respawn_time: float = 8.0
+## No aparecen más cerca que esto de los jugadores.
+@export_range(0.0, 50.0, 0.5, "suffix:u") var trap_min_distance_to_players: float = 8.0
+
 @export_group("Mostrador")
 ## Dónde va el mostrador en la zona de atención: 0 = pegado al laberinto, 1 = al fondo.
 @export_range(0.0, 1.0, 0.05) var counter_depth: float = 0.6
@@ -45,6 +55,7 @@ extends Node3D
 var time_left: float
 var _finished: bool = false
 var _rng := RandomNumberGenerator.new()
+var _trap_timer: float = 0.0
 
 
 func _ready() -> void:
@@ -56,13 +67,16 @@ func _ready() -> void:
 	_place_board_and_players()
 	_assign_lists()
 	_spawn_items()
+	for i in max_trap_pickups:
+		_spawn_trap_pickup()
+	_trap_timer = trap_respawn_time
 
 	for p in _players():
 		p.deliver_requested.connect(_on_deliver_requested)
 	time_left = match_duration
 	hud.setup(player1, player2)
 	hud.set_time(time_left)
-	Audio.play_music(Audio.music_game)
+	Audio.play_level_music(Audio.music_store)
 
 
 func _process(delta: float) -> void:
@@ -72,6 +86,8 @@ func _process(delta: float) -> void:
 	hud.set_time(time_left)
 	for p in _players():
 		hud.set_hint(p, _get_hint(p))
+		hud.set_trap(p, p.get_trap_name())
+	_update_trap_pickups(delta)
 	if time_left <= 0.0:
 		_finish("¡Tiempo!")
 
@@ -178,3 +194,38 @@ func _shuffle(array: Array) -> void:
 		var temp = array[i]
 		array[i] = array[j]
 		array[j] = temp
+
+
+# Repone bananas y hielos tirados en el laberinto, de a uno, hasta el máximo
+func _update_trap_pickups(delta: float) -> void:
+	_trap_timer -= delta
+	if _trap_timer > 0.0:
+		return
+	_trap_timer = trap_respawn_time
+	if get_tree().get_nodes_in_group("trap_pickup").size() < max_trap_pickups:
+		_spawn_trap_pickup()
+
+
+func _spawn_trap_pickup() -> void:
+	if trap_pickup_scene == null:
+		return
+	var cells := maze.get_all_cells()
+	for attempt in 15:
+		var cell: Vector2i = cells[_rng.randi_range(0, cells.size() - 1)]
+		var point := maze.get_cell_center(cell)
+		var too_close := false
+		for p in _players():
+			if p.global_position.distance_to(point) < trap_min_distance_to_players:
+				too_close = true
+		for node in get_tree().get_nodes_in_group("trap_pickup"):
+			if (node as Node3D).global_position.distance_to(point) < maze.cell_size * 0.5:
+				too_close = true
+		if too_close:
+			continue
+		var pickup := trap_pickup_scene.instantiate() as TrapPickup
+		pickup.kind = StoreTrap.Kind.BANANA if _rng.randf() < 0.5 else StoreTrap.Kind.ICE
+		pickup.add_to_group("trap_pickup")
+		items_root.add_child(pickup)
+		# Corrida a un costado del centro, para no tapar las flechas del piso
+		pickup.global_position = point + Vector3(maze.cell_size * 0.25, 0.0, 0.0)
+		return

@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/racer.gd" id="1_racer"]
 [ext_resource type="PackedScene" path="res://scenes/race_rock.tscn" id="2_rock"]
 [ext_resource type="PackedScene" path="res://scenes/race_pit.tscn" id="3_pit"]
-[ext_resource type="PackedScene" path="res://scenes/race_nails.tscn" id="4_nails"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_barrow"]
-size = Vector3(1.2, 0.9, 2.1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_barrow"]
+radius = 0.5
+height = 2.1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rider"]
 radius = 0.4
@@ -41,17 +41,24 @@ size = Vector3(0.07, 0.07, 1.0)
 material = SubResource("Mat_wood")
 size = Vector3(0.07, 0.5, 0.07)
 
+[sub_resource type="StandardMaterial3D" id="Mat_headlight"]
+shading_mode = 0
+albedo_color = Color(1, 0.95, 0.7, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_headlight"]
+material = SubResource("Mat_headlight")
+size = Vector3(0.3, 0.18, 0.08)
+
 [node name="Racer" type="Node3D" groups=["racer"]]
 script = ExtResource("1_racer")
 rock_scene = ExtResource("2_rock")
 pit_scene = ExtResource("3_pit")
-nails_scene = ExtResource("4_nails")
 
 [node name="Barrow" type="CharacterBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barrow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_barrow")
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_barrow")
 
 [node name="Model" type="Node3D" parent="Barrow"]
 
@@ -78,6 +85,18 @@ mesh = SubResource("BoxMesh_leg")
 [node name="LegR" type="MeshInstance3D" parent="Barrow/Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.5)
 mesh = SubResource("BoxMesh_leg")
+
+[node name="Headlight" type="SpotLight3D" parent="Barrow"]
+transform = Transform3D(1, 0, 0, 0, 0.985, -0.174, 0, 0.174, 0.985, 0, 0.9, -1.05)
+light_color = Color(1, 0.95, 0.8, 1)
+light_energy = 4.5
+spot_range = 20.0
+spot_angle = 32.0
+
+[node name="HeadlightBulb" type="MeshInstance3D" parent="Barrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.95)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_headlight")
 
 [node name="Seat" type="Node3D" parent="Barrow"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0.05)

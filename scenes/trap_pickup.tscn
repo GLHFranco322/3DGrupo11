@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/trap_pickup.gd" id="1_pickup"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_banana"]
+albedo_color = Color(1, 0.85, 0.15, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_banana"]
+material = SubResource("Mat_banana")
+radius = 0.1
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_ice"]
+transparency = 1
+albedo_color = Color(0.7, 0.9, 1, 0.8)
+metallic = 0.3
+roughness = 0.05
+
+[sub_resource type="BoxMesh" id="BoxMesh_ice"]
+material = SubResource("Mat_ice")
+size = Vector3(0.35, 0.35, 0.35)
+
+[sub_resource type="StandardMaterial3D" id="Mat_bubble"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bubble"]
+material = SubResource("Mat_bubble")
+radius = 0.5
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.9
+
+[node name="TrapPickup" type="Node3D"]
+script = ExtResource("1_pickup")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Banana" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(0.87, -0.5, 0, 0.5, 0.87, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_banana")
+
+[node name="Ice" type="Node3D" parent="Visuals"]
+
+[node name="Cube1" type="MeshInstance3D" parent="Visuals/Ice"]
+transform = Transform3D(0.92, 0, 0.38, 0, 1, 0, -0.38, 0, 0.92, -0.12, 0, 0)
+mesh = SubResource("BoxMesh_ice")
+
+[node name="Cube2" type="MeshInstance3D" parent="Visuals/Ice"]
+transform = Transform3D(0.8, 0.6, 0, -0.6, 0.8, 0, 0, 0, 1, 0.15, 0.08, 0.05)
+mesh = SubResource("BoxMesh_ice")
+
+[node name="Bubble" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_bubble")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+pixel_size = 0.008
+billboard = 1
+outline_modulate = Color(0, 0, 0, 1)
+text = "Banana"
+font_size = 56
+outline_size = 14

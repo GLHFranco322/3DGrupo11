@@ -11,6 +11,8 @@ extends CanvasLayer
 @export var warning_color: Color = Color(1.0, 0.3, 0.3)
 ## Tiempo que se muestran los avisos (ej: "¡No está en tu lista!").
 @export_range(0.2, 5.0, 0.1, "suffix:s") var flash_time: float = 1.5
+## Texto del botón para dejar la trampa (cambiarlo si cambian los controles).
+@export var trap_button_text: String = "△"
 
 @onready var time_label: Label = %TimeLabel
 @onready var message_label: Label = %MessageLabel
@@ -21,6 +23,8 @@ extends CanvasLayer
 # player_id -> { ItemData -> Label }
 var _rows: Dictionary = {1: {}, 2: {}}
 var _flash_until: Dictionary = {1: 0.0, 2: 0.0}
+# player_id -> Label con la trampa que lleva
+var _trap_labels: Dictionary = {}
 
 
 func setup(player1: StorePlayer, player2: StorePlayer) -> void:
@@ -38,6 +42,14 @@ func setup(player1: StorePlayer, player2: StorePlayer) -> void:
 			row.horizontal_alignment = titles[id].horizontal_alignment
 			lists[id].add_child(row)
 			_rows[id][item] = row
+		var trap_label := Label.new()
+		trap_label.add_theme_font_size_override("font_size", 22)
+		trap_label.add_theme_color_override("font_outline_color", Color.BLACK)
+		trap_label.add_theme_constant_override("outline_size", 8)
+		trap_label.horizontal_alignment = titles[id].horizontal_alignment
+		lists[id].add_child(trap_label)
+		_trap_labels[id] = trap_label
+		set_trap(player, "")
 
 
 func set_time(seconds: float) -> void:
@@ -69,3 +81,16 @@ func flash_message(player: StorePlayer, text: String) -> void:
 func show_message(text: String) -> void:
 	message_label.text = text
 	message_label.visible = true
+
+
+## Muestra la trampa que lleva el jugador ("" = ninguna).
+func set_trap(player: StorePlayer, trap_name: String) -> void:
+	var label: Label = _trap_labels.get(player.player_id)
+	if label == null:
+		return
+	if trap_name.is_empty():
+		label.text = "Trampa: —"
+		label.modulate = Color(1, 1, 1, 0.6)
+	else:
+		label.text = "%s  %s" % [trap_button_text, trap_name]
+		label.modulate = Color(1.0, 0.9, 0.4)

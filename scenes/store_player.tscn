@@ -1,6 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/store_player.gd" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/banana_trap.tscn" id="2_banana"]
+[ext_resource type="PackedScene" path="res://scenes/ice_trap.tscn" id="3_ice"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 radius = 0.4
@@ -8,6 +10,8 @@ height = 1.8
 
 [node name="StorePlayer" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_player")
+banana_scene = ExtResource("2_banana")
+ice_scene = ExtResource("3_ice")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

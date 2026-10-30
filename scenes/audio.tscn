@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://g41prpxng27o" path="res://scripts/audio.gd" id="1_audio"]
 [ext_resource type="AudioStream" uid="uid://cmbtrqeowwkux" path="res://music/tunetank-country-western-texas-background-music-348224.mp3" id="2_bwtr5"]
+[ext_resource type="AudioStream" uid="uid://o2g6m1j04hhe" path="res://music/The_Final_Lap.mp3" id="3_f5a2e"]
 
 [node name="Audio" type="Node" unique_id=954677936]
 script = ExtResource("1_audio")
 music_game = ExtResource("2_bwtr5")
+music_race = ExtResource("3_f5a2e")

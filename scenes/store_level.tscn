@@ -11,6 +11,7 @@
 [ext_resource type="Resource" path="res://characters/triangulo.tres" id="9_triangulo"]
 [ext_resource type="Resource" path="res://characters/carlos.tres" id="10_carlos"]
 [ext_resource type="PackedScene" path="res://scenes/counter.tscn" id="11_counter"]
+[ext_resource type="PackedScene" path="res://scenes/trap_pickup.tscn" id="12_trap_pickup"]
 [ext_resource type="Resource" path="res://items/balde.tres" id="20_item"]
 [ext_resource type="Resource" path="res://items/cepillo.tres" id="21_item"]
 [ext_resource type="Resource" path="res://items/cincel.tres" id="22_item"]
@@ -56,6 +57,7 @@ corner_radius_bottom_left = 12
 script = ExtResource("1_level")
 item_pool = Array[ExtResource("8_itemdata")]([ExtResource("20_item"), ExtResource("21_item"), ExtResource("22_item"), ExtResource("23_item"), ExtResource("24_item"), ExtResource("25_item"), ExtResource("26_item"), ExtResource("27_item"), ExtResource("28_item"), ExtResource("29_item"), ExtResource("30_item"), ExtResource("31_item"), ExtResource("32_item"), ExtResource("33_item"), ExtResource("34_item"), ExtResource("35_item")])
 collectible_scene = ExtResource("7_collectible")
+trap_pickup_scene = ExtResource("12_trap_pickup")
 maze = NodePath("Maze")
 board = NodePath("Board")
 counter = NodePath("Counter")
