@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ch2tbixawuf3p"
-path.s3tc="res://.godot/imported/T_PropsDiffuse- 4K.png-d4eccbbd7d2681d92d12b394f51d4cb9.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_PropsDiffuse- 4K.png-6c0d3b15d732ad3bffdc4fe18dd6df0b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/escenario/FreeSample/textures/T_PropsDiffuse- 4K.png"
-dest_files=["res://.godot/imported/T_PropsDiffuse- 4K.png-d4eccbbd7d2681d92d12b394f51d4cb9.s3tc.ctex"]
+source_file="res://assets/escenario/FreeSample/Textures/T_PropsDiffuse- 4K.png"
+dest_files=["res://.godot/imported/T_PropsDiffuse- 4K.png-6c0d3b15d732ad3bffdc4fe18dd6df0b.s3tc.ctex"]
 
 [params]
 
