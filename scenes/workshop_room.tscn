@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/workshop_room.gd" id="1_room"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/saw.fbx" id="2_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/hammer.fbx" id="3_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/wrench_A.fbx" id="4_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/wrench_B.fbx" id="5_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/screwdriver_A_long_color.fbx" id="6_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/screwdriver_B_long_color.fbx" id="7_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/chisel.fbx" id="8_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/file.fbx" id="9_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/handdrill.fbx" id="10_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/mallet.fbx" id="11_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/axe.fbx" id="12_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/scissors.fbx" id="13_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/tongs.fbx" id="14_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/trowel.fbx" id="15_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/knife.fbx" id="16_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/handplane.fbx" id="17_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/journal_open.fbx" id="18_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/blueprint.fbx" id="19_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/rope_bundle_A.fbx" id="20_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/magnifying_glass.fbx" id="21_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/map_rolled.fbx" id="22_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/pencil_A_long.fbx" id="23_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/screwdriver_A_short.fbx" id="24_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Can_A.fbx" id="25_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Can_B.fbx" id="26_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Box_C.fbx" id="27_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/lantern.fbx" id="28_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/bucket_metal.fbx" id="29_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/anvil.fbx" id="30_m"]
+[ext_resource type="PackedScene" path="res://assets/herramientas/Assets/fbx/grindstone.fbx" id="31_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Barrel_A.fbx" id="32_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Barrel_B.fbx" id="33_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Box_A.fbx" id="34_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Box_B.fbx" id="35_m"]
+[ext_resource type="PackedScene" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Pallet_Small_Decorated_A.fbx" id="36_m"]
+
+[node name="WorkshopRoom" type="Node3D"]
+script = ExtResource("1_room")
+bench_item_scenes = Array[PackedScene]([ExtResource("17_m"), ExtResource("3_m"), ExtResource("18_m"), ExtResource("19_m"), ExtResource("20_m"), ExtResource("21_m"), ExtResource("22_m"), ExtResource("23_m"), ExtResource("24_m"), ExtResource("9_m")])
+hang_scenes = Array[PackedScene]([ExtResource("2_m"), ExtResource("3_m"), ExtResource("4_m"), ExtResource("5_m"), ExtResource("6_m"), ExtResource("7_m"), ExtResource("8_m"), ExtResource("9_m"), ExtResource("10_m"), ExtResource("11_m"), ExtResource("12_m"), ExtResource("13_m"), ExtResource("14_m"), ExtResource("15_m"), ExtResource("16_m")])
+shelf_scenes = Array[PackedScene]([ExtResource("25_m"), ExtResource("26_m"), ExtResource("27_m"), ExtResource("28_m"), ExtResource("29_m")])
+floor_prop_scenes = Array[PackedScene]([ExtResource("30_m"), ExtResource("31_m"), ExtResource("29_m"), ExtResource("32_m"), ExtResource("33_m"), ExtResource("34_m"), ExtResource("35_m"), ExtResource("36_m")])
+floor_prop_sizes = PackedFloat32Array(0.75, 0.9, 0.45, 1.1, 1.1, 0.8, 0.7, 1.3)

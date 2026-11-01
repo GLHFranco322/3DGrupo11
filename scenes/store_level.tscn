@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/store_level.gd" id="1_level"]
 [ext_resource type="Script" path="res://scripts/maze_builder.gd" id="2_maze"]
+[ext_resource type="PackedScene" path="res://scenes/workshop_room.tscn" id="40_workshop"]
 [ext_resource type="PackedScene" path="res://scenes/tool_board.tscn" id="3_board"]
 [ext_resource type="PackedScene" path="res://scenes/store_player.tscn" id="4_player"]
 [ext_resource type="PackedScene" path="res://scenes/third_person_camera.tscn" id="5_camera"]
@@ -77,6 +78,7 @@ environment = SubResource("Environment_store")
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("2_maze")
 wall_height = 4.5
+places = Array[PackedScene]([ExtResource("40_workshop")])
 wall_material = SubResource("StandardMaterial3D_wall")
 floor_material = SubResource("StandardMaterial3D_floor")
 

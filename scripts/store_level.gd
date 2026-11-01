@@ -134,7 +134,7 @@ func _spawn_items() -> void:
 	for i in decoy_items:
 		to_spawn.append(item_pool[_rng.randi_range(0, item_pool.size() - 1)])
 
-	var cells := maze.get_all_cells()
+	var cells := maze.get_free_cells()
 	_shuffle(cells)
 
 	for i in to_spawn.size():
@@ -209,7 +209,7 @@ func _update_trap_pickups(delta: float) -> void:
 func _spawn_trap_pickup() -> void:
 	if trap_pickup_scene == null:
 		return
-	var cells := maze.get_all_cells()
+	var cells := maze.get_free_cells()
 	for attempt in 15:
 		var cell: Vector2i = cells[_rng.randi_range(0, cells.size() - 1)]
 		var point := maze.get_cell_center(cell)

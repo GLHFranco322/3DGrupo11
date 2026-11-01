@@ -79,12 +79,27 @@ extends Node3D
 ## Largo de cada flecha (como fracción del ancho del pasillo).
 @export_range(0.1, 1.0, 0.05) var arrow_size: float = 0.35
 
+@export_group("Lugares")
+## Habitaciones (escenas cuya raíz es un MazeRoom, ej: el taller) que aparecen
+## en un lugar al azar del laberinto en cada partida, con sus propias paredes y
+## puertas a los pasillos.
+@export var places: Array[PackedScene] = []
+## Celdas de pasillo que se dejan entre un lugar y el borde del laberinto (y
+## entre dos lugares). Con 1 o más, el laberinto siempre queda conectado.
+@export_range(1, 5) var place_margin: int = 1
+## Puertas máximas de cada lugar (siempre tiene al menos 2, si este número lo permite).
+@export_range(1, 8) var place_doors: int = 2
+
 @export_group("Editor")
 ## Regenera el laberinto en el editor para verlo.
 @export_tool_button("Generar") var generate_button := build
 
 # Paredes abiertas: _open[Vector2i(celda)] = Array de direcciones abiertas
 var _open: Dictionary = {}
+# Lugares de esta partida: {"node": MazeRoom, "rect": Rect2i, "doors": [[celda, dirección hacia afuera], ...]}
+var _rooms: Array[Dictionary] = []
+# Celda -> índice en _rooms de la habitación que la ocupa
+var _room_of: Dictionary = {}
 var _built: bool = false
 ## Semilla con la que se generó el último laberinto (en online, el anfitrión se
 ## la va a pasar al otro jugador para que tengan el mismo).
@@ -118,6 +133,25 @@ func get_all_cells() -> Array[Vector2i]:
 	return cells
 
 
+## Celdas de pasillo (sin las que ocupan los lugares, como el taller). Sirve
+## para repartir cosas por el laberinto sin que caigan adentro de una habitación.
+func get_free_cells() -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	for cell in get_all_cells():
+		if not _room_of.has(cell):
+			cells.append(cell)
+	return cells
+
+
+## Habitaciones que tocaron en esta partida.
+func get_places() -> Array[MazeRoom]:
+	var result: Array[MazeRoom] = []
+	for info in _rooms:
+		if is_instance_valid(info.node):
+			result.append(info.node)
+	return result
+
+
 ## Columnas de la última fila del laberinto que tienen salida a la zona de atención.
 func get_entrance_columns() -> Array[int]:
 	var result: Array[int] = []
@@ -148,6 +182,7 @@ func build() -> void:
 	_generate_layout()
 	_build_room()
 	_build_walls()
+	_build_places()
 	_built = true
 
 
@@ -158,30 +193,192 @@ func _generate_layout() -> void:
 	_open.clear()
 	for cell in get_all_cells():
 		_open[cell] = []
+	_plan_places(rng)
 
-	# Recursive backtracker: recorre todas las celdas abriendo paredes
-	var visited := {Vector2i.ZERO: true}
-	var stack: Array[Vector2i] = [Vector2i.ZERO]
+	# Recursive backtracker: recorre todas las celdas abriendo paredes. Cada
+	# lugar cuenta como una sola celda grande: al entrar se lo recorre entero
+	# de una vez, y cada pared que se abre en su borde es una puerta.
+	var visited := {}
+	var stack: Array[Vector2i] = []
+	_visit(Vector2i.ZERO, visited, stack, rng)
 	while not stack.is_empty():
 		var current: Vector2i = stack.back()
 		var options: Array[Vector2i] = []
 		for dir in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
 			var next: Vector2i = current + dir
-			if _in_bounds(next) and not visited.has(next):
+			if _in_bounds(next) and not visited.has(next) and _can_cross(current, dir):
 				options.append(dir)
 		if options.is_empty():
 			stack.pop_back()
 			continue
 		var chosen := options[rng.randi_range(0, options.size() - 1)]
 		_open_wall(current, chosen)
-		visited[current + chosen] = true
-		stack.append(current + chosen)
+		_note_door(current, chosen)
+		_visit(current + chosen, visited, stack, rng)
 
-	# Quita algunas paredes más para que haya varios caminos
+	# Quita algunas paredes más para que haya varios caminos (no en los lugares)
 	for cell in get_all_cells():
 		for dir in [Vector2i.RIGHT, Vector2i.DOWN]:
-			if _in_bounds(cell + dir) and not _open[cell].has(dir) and rng.randf() < extra_openings:
+			if _in_bounds(cell + dir) and not _open[cell].has(dir) and not _touches_room(cell, dir) \
+					and rng.randf() < extra_openings:
 				_open_wall(cell, dir)
+
+	_add_missing_doors(rng)
+
+
+# Marca una celda como recorrida. Si es de un lugar, marca el lugar entero
+# (abriendo sus paredes de adentro) y sigue desde cualquiera de sus celdas.
+func _visit(cell: Vector2i, visited: Dictionary, stack: Array[Vector2i], rng: RandomNumberGenerator) -> void:
+	if not _room_of.has(cell):
+		visited[cell] = true
+		stack.append(cell)
+		return
+	var rect: Rect2i = _rooms[_room_of[cell]].rect
+	var cells: Array[Vector2i] = []
+	for y in range(rect.position.y, rect.end.y):
+		for x in range(rect.position.x, rect.end.x):
+			var inside := Vector2i(x, y)
+			visited[inside] = true
+			cells.append(inside)
+			if x + 1 < rect.end.x:
+				_open_wall(inside, Vector2i.RIGHT)
+			if y + 1 < rect.end.y:
+				_open_wall(inside, Vector2i.DOWN)
+	for i in range(cells.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var temp := cells[i]
+		cells[i] = cells[j]
+		cells[j] = temp
+	stack.append_array(cells)
+
+
+# Si abrir la pared de "cell" hacia "dir" entra o sale de un lugar, solo se
+# puede mientras ese lugar tenga menos puertas que el máximo
+func _can_cross(cell: Vector2i, dir: Vector2i) -> bool:
+	var from: int = _room_of.get(cell, -1)
+	var to: int = _room_of.get(cell + dir, -1)
+	if from == to:
+		return true
+	if from != -1 and to != -1:
+		return false
+	return _rooms[from if from != -1 else to].doors.size() < place_doors
+
+
+# Si la pared que se abrió es el borde de un lugar, la anota como puerta (desde
+# adentro del lugar, mirando hacia afuera)
+func _note_door(cell: Vector2i, dir: Vector2i) -> void:
+	var from: int = _room_of.get(cell, -1)
+	var to: int = _room_of.get(cell + dir, -1)
+	if from == to:
+		return
+	if from != -1:
+		_rooms[from].doors.append([cell, dir])
+	else:
+		_rooms[to].doors.append([cell + dir, -dir])
+
+
+# Cada lugar tiene al menos 2 puertas (si "Place Doors" lo permite), así no
+# queda como un callejón sin salida
+func _add_missing_doors(rng: RandomNumberGenerator) -> void:
+	var wanted := mini(2, place_doors)
+	for room in _rooms:
+		var rect: Rect2i = room.rect
+		while room.doors.size() < wanted:
+			var options := []
+			for y in range(rect.position.y, rect.end.y):
+				for x in range(rect.position.x, rect.end.x):
+					var cell := Vector2i(x, y)
+					for dir in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+						var outside: Vector2i = cell + dir
+						if _in_bounds(outside) and not _room_of.has(outside) and not _open[cell].has(dir):
+							options.append([cell, dir])
+			if options.is_empty():
+				break
+			var door: Array = options[rng.randi_range(0, options.size() - 1)]
+			_open_wall(door[0], door[1])
+			room.doors.append(door)
+
+
+# true si la pared entre "cell" y "cell + dir" es de un lugar (la arma el lugar)
+func _touches_room(cell: Vector2i, dir: Vector2i) -> bool:
+	return _room_of.has(cell) or _room_of.has(cell + dir)
+
+
+# Elige dónde va cada lugar: un rectángulo al azar, lejos del borde y de los
+# otros lugares. Si no entra, se saltea (con un aviso).
+func _plan_places(rng: RandomNumberGenerator) -> void:
+	_rooms.clear()
+	_room_of.clear()
+	for scene in places:
+		if scene == null:
+			continue
+		var room := scene.instantiate() as MazeRoom
+		if room == null:
+			push_warning("MazeBuilder: la raíz de %s no es un MazeRoom" % scene.resource_path)
+			continue
+		var rect = _find_place_rect(room.size_cells, rng)
+		if rect == null:
+			push_warning("MazeBuilder: %s no entra en el laberinto" % scene.resource_path)
+			room.free()
+			continue
+		var index := _rooms.size()
+		_rooms.append({"node": room, "rect": rect, "doors": []})
+		for y in range(rect.position.y, rect.end.y):
+			for x in range(rect.position.x, rect.end.x):
+				_room_of[Vector2i(x, y)] = index
+
+
+func _find_place_rect(size: Vector2i, rng: RandomNumberGenerator) -> Variant:
+	var max_x := columns - place_margin - size.x
+	var max_y := rows - place_margin - size.y
+	if max_x < place_margin or max_y < place_margin:
+		return null
+	for attempt in 40:
+		var rect := Rect2i(Vector2i(rng.randi_range(place_margin, max_x), rng.randi_range(place_margin, max_y)), size)
+		var free := true
+		for room in _rooms:
+			var other: Rect2i = room.rect
+			if other.grow(place_margin).intersects(rect):
+				free = false
+				break
+		if free:
+			return rect
+	return null
+
+
+# Pone cada lugar en su rectángulo, a la altura del techo y con las puertas
+# donde quedaron abiertas
+func _build_places() -> void:
+	for i in _rooms.size():
+		var info: Dictionary = _rooms[i]
+		var room: MazeRoom = info.node
+		var rect: Rect2i = info.rect
+		room.cell_size = cell_size
+		room.wall_height = wall_height + ceiling_gap
+		room.wall_thickness = wall_thickness
+		room.closed_doors = false
+		# Mismo azar que el laberinto (en online se ve igual en los dos)
+		room.decor_seed = current_seed + 100 + i
+		var doors: Array[Vector2i] = []
+		for door in info.doors:
+			doors.append(_door_side(rect, door[0], door[1]))
+		room.doors = doors
+		var center := (get_cell_center(rect.position) + get_cell_center(rect.end - Vector2i.ONE)) * 0.5
+		room.position = to_local(center)
+		add_child(room)
+		if not room.is_built():
+			room.build()
+
+
+# Puerta en el formato de MazeRoom: Vector2i(lado, tramo)
+func _door_side(rect: Rect2i, cell: Vector2i, dir: Vector2i) -> Vector2i:
+	if dir == Vector2i.UP:
+		return Vector2i(MazeRoom.Side.BACK, cell.x - rect.position.x)
+	if dir == Vector2i.RIGHT:
+		return Vector2i(MazeRoom.Side.RIGHT, cell.y - rect.position.y)
+	if dir == Vector2i.DOWN:
+		return Vector2i(MazeRoom.Side.FRONT, cell.x - rect.position.x)
+	return Vector2i(MazeRoom.Side.LEFT, cell.y - rect.position.y)
 
 
 func _open_wall(cell: Vector2i, dir: Vector2i) -> void:
@@ -265,10 +462,13 @@ func _build_room() -> void:
 			light.shadow_enabled = false
 			add_child(light)
 
-	# Un tubo de luz (que brilla, sin iluminar) en el techo de cada celda
+	# Un tubo de luz (que brilla, sin iluminar) en el techo de cada celda (los
+	# lugares tienen sus propias lámparas)
 	var tubes: Array[Transform3D] = []
 	for y in _total_rows():
 		for x in columns:
+			if _room_of.has(Vector2i(x, y)):
+				continue
 			var center := to_local(get_cell_center(Vector2i(x, y)))
 			tubes.append(_box_transform(Vector3(center.x, ceiling_y - 0.05, center.z), Vector3.RIGHT, Vector3.BACK,
 					Vector3(cell_size * 0.5, 0.06, 0.18)))
@@ -307,10 +507,11 @@ func _build_walls() -> void:
 		var origin := Vector2((cell.x) * cell_size - half.x, (cell.y) * cell_size - half.y)
 		# Pared de arriba (-Z) y de la izquierda (-X) de cada celda; las de
 		# abajo y derecha solo en el borde, para no duplicar. Abajo quedan
-		# abiertas las entradas a la zona de atención.
-		if not _open[cell].has(Vector2i.UP):
+		# abiertas las entradas a la zona de atención. Las paredes de los
+		# lugares las arma cada lugar.
+		if not _open[cell].has(Vector2i.UP) and not _touches_room(cell, Vector2i.UP):
 			_add_wall(walls, origin + Vector2(cell_size * 0.5, 0.0), true, rng, zones)
-		if not _open[cell].has(Vector2i.LEFT):
+		if not _open[cell].has(Vector2i.LEFT) and not _touches_room(cell, Vector2i.LEFT):
 			_add_wall(walls, origin + Vector2(0.0, cell_size * 0.5), false, rng, zones)
 		if cell.y == rows - 1 and not entrance_columns.has(cell.x):
 			_add_wall(walls, origin + Vector2(cell_size * 0.5, cell_size), true, rng, zones)
@@ -461,6 +662,9 @@ func build_path_arrows() -> void:
 
 	var transforms: Array[Transform3D] = []
 	for cell in next_step:
+		# Adentro de los lugares no se pintan (quedarían debajo de los muebles)
+		if _room_of.has(cell):
+			continue
 		var dir: Vector2i = next_step[cell]
 		var yaw := atan2(-float(dir.x), -float(dir.y))
 		var basis := Basis(Vector3.UP, yaw).scaled(Vector3.ONE * cell_size * arrow_size)
