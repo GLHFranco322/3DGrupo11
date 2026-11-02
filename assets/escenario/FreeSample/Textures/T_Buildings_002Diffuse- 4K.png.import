@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfcsxf5r53faq"
-path.s3tc="res://.godot/imported/T_Buildings_002Diffuse- 4K.png-5730527eb6384798851e67d5bb3b8266.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_Buildings_002Diffuse- 4K.png-1f58f8415cde938ba3e3acb9bc420101.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/escenario/FreeSample/textures/T_Buildings_002Diffuse- 4K.png"
-dest_files=["res://.godot/imported/T_Buildings_002Diffuse- 4K.png-5730527eb6384798851e67d5bb3b8266.s3tc.ctex"]
+source_file="res://assets/escenario/FreeSample/Textures/T_Buildings_002Diffuse- 4K.png"
+dest_files=["res://.godot/imported/T_Buildings_002Diffuse- 4K.png-1f58f8415cde938ba3e3acb9bc420101.s3tc.ctex"]
 
 [params]
 

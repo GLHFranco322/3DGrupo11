@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://biwdpfaon3ppf"
-path.s3tc="res://.godot/imported/BAKE_Buildings_001Emissive- 4K.png-cb1471c2038990ea7c1d28fbdb0bd09c.s3tc.ctex"
+path.s3tc="res://.godot/imported/BAKE_Buildings_001Emissive- 4K.png-33193a0a880988b0c2c742619e7cedbb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/escenario/FreeSample/textures/BAKE_Buildings_001Emissive- 4K.png"
-dest_files=["res://.godot/imported/BAKE_Buildings_001Emissive- 4K.png-cb1471c2038990ea7c1d28fbdb0bd09c.s3tc.ctex"]
+source_file="res://assets/escenario/FreeSample/Textures/BAKE_Buildings_001Emissive- 4K.png"
+dest_files=["res://.godot/imported/BAKE_Buildings_001Emissive- 4K.png-33193a0a880988b0c2c742619e7cedbb.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6q3mdian6vdh"
-path.s3tc="res://.godot/imported/T_RoadsDiffuse- 4K.png-2264f0f870a5179a364960cf162f476b.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_RoadsDiffuse- 4K.png-30a39e322a435cf371cf694f972d7866.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/escenario/FreeSample/textures/T_RoadsDiffuse- 4K.png"
-dest_files=["res://.godot/imported/T_RoadsDiffuse- 4K.png-2264f0f870a5179a364960cf162f476b.s3tc.ctex"]
+source_file="res://assets/escenario/FreeSample/Textures/T_RoadsDiffuse- 4K.png"
+dest_files=["res://.godot/imported/T_RoadsDiffuse- 4K.png-30a39e322a435cf371cf694f972d7866.s3tc.ctex"]
 
 [params]
 
