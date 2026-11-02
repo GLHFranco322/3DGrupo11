@@ -46,7 +46,7 @@ extends CharacterBody3D
 @export var boot_hold_offset: Vector3 = Vector3(0.0, 0.6, -0.9)
 ## Con la bota se camina y se corre más rápido (2 = el doble).
 @export_range(1.0, 5.0, 0.1) var boot_speed_multiplier: float = 2.0
-## Distancia al rival a la que lo patea solo, al pasarle por encima (los jugadores
+## Distancia al rival a la que le llega la patada al apretar R2 (los jugadores
 ## miden unas 2 unidades de ancho, así que 2.2 es casi tocarse).
 @export_range(0.5, 6.0, 0.1, "suffix:u") var kick_range: float = 2.2
 ## Cuánto se aleja la cámara al patear (0.15 = 15% más lejos), para darle efecto.
@@ -239,10 +239,11 @@ func _is_my_joypad_event(event: InputEvent) -> bool:
 
 # Botones (los mismos en todos los niveles donde se puede):
 #   ✕ (p*_grab)   agarrar / soltar: cortadora, piedra, bota
-#   R2 o □ (p*_throw)  usar lo que se tiene: tirar la piedra o colocar el pozo (mouse: clic)
+#   R2 o □ (p*_throw)  usar lo que se tiene: tirar la piedra, colocar el pozo o
+#                      patear con la bota (mouse: clic)
 #   △ (p*_place)  también coloca el pozo
 #   palanca derecha  apuntar (flecha de la piedra, marca del pozo)
-# Con la bota se corre el doble de rápido y se patea al rival solo con tocarlo.
+# Con la bota se corre el doble de rápido; la patada sale con R2 si el rival está cerca.
 func _unhandled_input(event: InputEvent) -> void:
 	if is_disabled():
 		return
@@ -258,13 +259,13 @@ func _physics_process(delta: float) -> void:
 
 	if is_disabled():
 		return
-	if held_boot:
-		_try_kick()
 	var prefix := "p%d_" % player_id
 	if Input.is_action_just_pressed(prefix + "throw"):
-		# R2 usa lo que se tenga en la mano: tira la piedra o coloca el pozo
+		# R2 usa lo que se tenga en la mano: tira la piedra, coloca el pozo o patea
 		if held_rock:
 			throw_rock()
+		elif held_boot:
+			kick()
 		elif held_pit:
 			confirm_aim()
 	elif Input.is_action_just_pressed(prefix + "place"):
@@ -354,6 +355,7 @@ func grab_or_drop() -> void:
 	elif item is Boot:
 		held_boot = item
 		item.pick_up(self)
+		Metrics.add(player_id, "botas_agarradas")
 
 
 # Piedra o bota más cercana que se pueda agarrar, o null
@@ -373,6 +375,7 @@ func _get_nearest_item() -> Node3D:
 
 func grab_mower() -> void:
 	has_mower = true
+	Metrics.start_timer(player_id, "seg_con_maquina")
 	mower.is_held = true
 	Audio.play_sfx(Audio.mower_grab)
 	add_collision_exception_with(mower)
@@ -393,6 +396,7 @@ func hold_transform(offset: Vector3) -> Transform3D:
 
 func drop_mower() -> void:
 	has_mower = false
+	Metrics.stop_timer(player_id, "seg_con_maquina")
 	mower.is_held = false
 	Audio.play_sfx(Audio.mower_drop)
 	mower.reparent(_mower_home)
@@ -407,6 +411,7 @@ func confirm_aim() -> void:
 	if held_pit:
 		held_pit.place_at(reticle.global_position)
 		held_pit = null
+		Metrics.add(player_id, "pozos")
 
 	is_aiming = false
 	reticle.visible = false
@@ -418,6 +423,7 @@ func throw_rock() -> void:
 	play_anim(ANIM_THROW, true)
 	held_rock.throw(_aim_direction, self)
 	held_rock = null
+	Metrics.add(player_id, "piedras")
 	_aim_from_stick = false
 
 
@@ -431,11 +437,15 @@ func get_hit_by_rock(damage: int) -> void:
 	state_machine.force_state("stunned")
 
 
-## Con la bota no hace falta apretar nada: al pasarle por encima al rival lo
-## patea fuera de la cancha, hacia donde va corriendo.
-func _try_kick() -> void:
+## R2 con la bota: si el rival está cerca lo patea fuera de la cancha (hacia donde
+## va corriendo) y la bota se gasta. Si no hay nadie cerca, patea al aire y se
+## queda con la bota.
+func kick() -> void:
+	Metrics.add(player_id, "patadas")
 	var rival := _get_rival()
 	if rival == null or not _can_kick(rival):
+		play_anim(ANIM_KICK if anim and anim.has_animation(ANIM_KICK) else ANIM_THROW, true)
+		Audio.play_sfx(Audio.kick_whiff)
 		return
 
 	var to_rival := rival.global_position - global_position
@@ -451,6 +461,7 @@ func _try_kick() -> void:
 	held_boot = null
 	Audio.play_sfx(Audio.kick_hit)
 	rival.get_kicked(direction)
+	Metrics.add(player_id, "patadas_acertadas")
 	var camera := get_viewport().get_camera_3d() as CameraRig
 	if camera:
 		camera.zoom_punch(kick_camera_zoom_out)

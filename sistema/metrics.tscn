@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://xtcrv24fnh0p"]
+
+[ext_resource type="Script" path="res://sistema/metrics.gd" id="1_metrics"]
+
+[node name="Metrics" type="Node" unique_id=710460347]
+script = ExtResource("1_metrics")
+web_app_url = "https://script.google.com/macros/s/AKfycbyZLYd0WbEeA-jqvyooVlUNo4UawhkamW3kPFCK5iOpgMb8ltaPyA5ILjTZlEe_6UV4/exec"
+secret_key = "nostrostudio"

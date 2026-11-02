@@ -73,6 +73,12 @@ func _ready() -> void:
 
 	for p in _players():
 		p.deliver_requested.connect(_on_deliver_requested)
+	Metrics.start_match("Nivel 2 - Laberinto")
+	# Que las columnas salgan en este orden aunque alguien no use nada
+	for p in _players():
+		Metrics.set_value(p.player_id, "personaje", Metrics.character_name(p.player_id))
+		for key in ["puntos", "items_entregados", "pinas", "pinas_acertadas", "bananas", "hielos", "trampas_total"]:
+			Metrics.set_value(p.player_id, key, 0)
 	time_left = match_duration
 	hud.setup(player1, player2)
 	hud.set_time(time_left)
@@ -160,10 +166,11 @@ func _on_deliver_requested(player: StorePlayer) -> void:
 	player.remaining.erase(item.data)
 	player.score += points_per_item
 	board.hang(player.take_carried())
+	Metrics.add(player.player_id, "items_entregados")
 	Audio.play_sfx(Audio.score_ping)
 	hud.mark_delivered(player, item.data)
 	if player.remaining.is_empty():
-		_finish("¡Jugador %d completó su lista!" % player.player_id)
+		_finish("¡Jugador %d completó su lista!" % player.player_id, player)
 
 
 func _get_hint(player: StorePlayer) -> String:
@@ -176,9 +183,11 @@ func _get_hint(player: StorePlayer) -> String:
 	return "No está en tu lista  ·  alejate y ✕ para soltar"
 
 
-func _finish(message: String) -> void:
+## "completed_by" = quien completó su lista (null si se acabó el tiempo).
+func _finish(message: String, completed_by: StorePlayer = null) -> void:
 	_finished = true
 	MatchResult.save_from(_players())
+	_save_metrics(completed_by)
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message(message)
 	Audio.stop_music()
@@ -229,3 +238,16 @@ func _spawn_trap_pickup() -> void:
 		# Corrida a un costado del centro, para no tapar las flechas del piso
 		pickup.global_position = point + Vector3(maze.cell_size * 0.25, 0.0, 0.0)
 		return
+
+
+# Métricas de testeo: cómo terminó, ganador, puntos y trampas usadas (piña,
+# banana y hielo) de cada uno
+func _save_metrics(completed_by: StorePlayer) -> void:
+	Metrics.set_info("fin", "lista" if completed_by else "tiempo")
+	Metrics.set_info("completo_lista", completed_by.player_id if completed_by else "")
+	Metrics.set_info("ganador", MatchResult.winners[0].id if MatchResult.winners.size() == 1 else "empate")
+	for p in _players():
+		var id := p.player_id
+		Metrics.set_value(id, "puntos", p.score)
+		Metrics.set_value(id, "trampas_total", Metrics.get_value(id, "pinas") + Metrics.get_value(id, "bananas") + Metrics.get_value(id, "hielos"))
+	Metrics.end_match()

@@ -46,6 +46,20 @@ func _ready() -> void:
 	Audio.play_sfx(Audio.victory_fanfare)
 	Audio.play_music(Audio.music_results)
 	_show_level_result()
+	_show_match_id()
+
+
+# ID de la partida (abajo a la izquierda), para anotar las observaciones del
+# testeo en la misma fila de la planilla
+func _show_match_id() -> void:
+	if Metrics.last_match_id.is_empty():
+		return
+	var label := Label.new()
+	label.text = "Partida: " + Metrics.last_match_id
+	label.modulate = Color(1, 1, 1, 0.6)
+	label.add_theme_font_size_override("font_size", 18)
+	label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT, Control.PRESET_MODE_MINSIZE, 16)
+	$UI.add_child(label)
 
 
 func _show_level_result() -> void:

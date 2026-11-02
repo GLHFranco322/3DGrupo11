@@ -21,6 +21,13 @@ var _finished: bool = false
 
 func _ready() -> void:
 	time_left = match_duration
+	Metrics.start_match("Nivel 1 - Corta el pasto")
+	# Que las columnas salgan en este orden aunque alguien no use nada
+	for p in [player1, player2]:
+		Metrics.set_value(p.player_id, "personaje", Metrics.character_name(p.player_id))
+		for key in ["puntos", "piedras", "pozos", "botas_agarradas", "patadas", "patadas_acertadas"]:
+			Metrics.set_value(p.player_id, key, 0)
+		Metrics.set_value(p.player_id, "seg_con_maquina", 0.0)
 	hud.set_time(time_left)
 	Audio.play_level_music(Audio.music_patio)
 
@@ -47,6 +54,7 @@ func _update_time_sounds(previous_second: int) -> void:
 func _finish() -> void:
 	_finished = true
 	MatchResult.save_from([player1, player2])
+	_save_metrics()
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message("¡Tiempo!")
 	Audio.stop_music()
@@ -55,3 +63,12 @@ func _finish() -> void:
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)
+
+
+# Métricas de testeo: puntos de cada uno, promedio y ganador
+func _save_metrics() -> void:
+	for p in [player1, player2]:
+		Metrics.set_value(p.player_id, "puntos", p.score)
+	Metrics.set_info("promedio_puntos", (player1.score + player2.score) / 2.0)
+	Metrics.set_info("ganador", MatchResult.winners[0].id if MatchResult.winners.size() == 1 else "empate")
+	Metrics.end_match()

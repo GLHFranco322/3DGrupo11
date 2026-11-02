@@ -2,7 +2,7 @@ class_name Boot
 extends Node3D
 
 # Bota que aparece en el piso (la crea ItemSpawner). Se agarra con ✕: el que la
-# tiene corre el doble de rápido y, al pasarle por encima al rival, lo patea
+# tiene corre el doble de rápido y, apretando R2 cerca del rival, lo patea
 # fuera de la cancha (como la patada de Tusk en Dota 2). Si nadie la agarra
 # antes de "lifetime" segundos, desaparece.
 

@@ -22,6 +22,7 @@ MatchResult="*res://sistema/match_result.gd"
 Audio="*res://sistema/audio.tscn"
 GameSettings="*res://sistema/game_settings.tscn"
 SceneLoader="*res://sistema/scene_loader.tscn"
+Metrics="*res://sistema/metrics.tscn"
 PauseMenu="*res://menus/pause_menu.gd"
 
 [dotnet]

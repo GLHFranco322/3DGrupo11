@@ -227,6 +227,7 @@ func punch() -> void:
 		return
 	_punch_cooldown_left = punch_cooldown
 	_punch_anim_left = 0.4
+	Metrics.add(player_id, "pinas")
 	var forward := get_facing()
 	var min_dot := cos(deg_to_rad(punch_angle * 0.5))
 	for node in get_tree().get_nodes_in_group("player"):
@@ -241,6 +242,7 @@ func punch() -> void:
 			continue
 		Audio.play_sfx(Audio.punch_hit)
 		other.get_punched(forward)
+		Metrics.add(player_id, "pinas_acertadas")
 		return
 	Audio.play_sfx(Audio.punch_whiff)
 
@@ -282,6 +284,7 @@ func place_trap() -> void:
 	trap.placed_by = self
 	get_parent().add_child(trap)
 	trap.global_position = Vector3(spot.x, global_position.y, spot.z)
+	Metrics.add(player_id, "bananas" if trap_kind == StoreTrap.Kind.BANANA else "hielos")
 	has_trap = false
 	Audio.play_sfx(Audio.trap_place)
 
