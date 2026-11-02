@@ -1,6 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cxbggi1ejohj4"]
 
-[ext_resource type="Script" path="res://menus/results.gd" id="1_results"]
+[ext_resource type="Script" uid="uid://7k1tv8pcoeb" path="res://menus/results.gd" id="1_results"]
+[ext_resource type="PackedScene" uid="uid://bed8yhi5hl0ms" path="res://mesh_libraries/resultado_escenario_visual.tscn" id="2_jvknp"]
 
 [sub_resource type="Environment" id="Environment_results"]
 background_mode = 1
@@ -16,43 +17,45 @@ albedo_color = Color(0.3, 0.6, 0.25, 1)
 material = SubResource("StandardMaterial3D_floor")
 size = Vector2(40, 40)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pedestal"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvls3"]
 albedo_color = Color(0.95, 0.75, 0.2, 1)
 metallic = 0.6
 roughness = 0.35
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pedestal"]
-material = SubResource("StandardMaterial3D_pedestal")
+material = SubResource("StandardMaterial3D_lvls3")
 top_radius = 1.4
 bottom_radius = 1.6
 height = 1.0
 
-[node name="Results" type="Node3D"]
+[node name="Results" type="Node3D" unique_id=814884742]
 script = ExtResource("1_results")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1538053816]
 transform = Transform3D(1, 0, 0, 0, 0.9961947, 0.08715574, 0, -0.08715574, 0.9961947, 0, 2.6, 6.5)
-fov = 50.0
 current = true
+fov = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1756792109]
 transform = Transform3D(0.8660254, -0.25, 0.4330127, 0, 0.8660254, 0.5, -0.5, -0.4330127, 0.75, 0, 5, 0)
+visible = false
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1856147268]
 environment = SubResource("Environment_results")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=600462145]
+visible = false
 mesh = SubResource("PlaneMesh_floor")
 
-[node name="Pedestal" type="MeshInstance3D" parent="."]
+[node name="Pedestal" type="MeshInstance3D" parent="." unique_id=290145262]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_pedestal")
 
-[node name="WinnerSpot" type="Node3D" parent="Pedestal"]
+[node name="WinnerSpot" type="Node3D" parent="Pedestal" unique_id=848748999]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1282802923]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Title" type="Label" parent="UI"]
+[node name="Title" type="Label" parent="UI" unique_id=1420010910]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -75,7 +78,7 @@ text = "¡Ganó el Jugador 1!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Points" type="Label" parent="UI"]
+[node name="Points" type="Label" parent="UI" unique_id=1506637363]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -89,7 +92,7 @@ text = "0 puntos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Standings" type="Label" parent="UI"]
+[node name="Standings" type="Label" parent="UI" unique_id=1396464721]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -103,7 +106,7 @@ text = "Torneo"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="UI"]
+[node name="Buttons" type="HBoxContainer" parent="UI" unique_id=1112957134]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -119,25 +122,25 @@ grow_vertical = 0
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="NextLevel" type="Button" parent="UI/Buttons"]
+[node name="NextLevel" type="Button" parent="UI/Buttons" unique_id=2090718953]
 custom_minimum_size = Vector2(300, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Siguiente nivel"
 
-[node name="Menu" type="Button" parent="UI/Buttons"]
+[node name="Menu" type="Button" parent="UI/Buttons" unique_id=1668883106]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Menú"
 
-[node name="Quit" type="Button" parent="UI/Buttons"]
+[node name="Quit" type="Button" parent="UI/Buttons" unique_id=1798719959]
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Salir"
 
-[node name="Hint" type="Label" parent="UI"]
+[node name="Hint" type="Label" parent="UI" unique_id=734154283]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -155,3 +158,5 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 16
 text = "Mando: palanca o flechas para elegir · ✕ / A para aceptar"
 horizontal_alignment = 1
+
+[node name="ResultadoEscenarioVisual" parent="." unique_id=924319529 instance=ExtResource("2_jvknp")]
