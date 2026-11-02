@@ -1,0 +1,131 @@
+extends Node
+
+# Autoload "GameSettings" (escena scenes/game_settings.tscn): personajes
+# disponibles, qué personaje eligió cada jugador y volumen. El volumen se
+# guarda en disco (user://settings.cfg).
+
+const SETTINGS_PATH := "user://settings.cfg"
+
+## Personajes que se pueden elegir, en el orden en que aparecen.
+@export var characters: Array[CharacterData] = []
+## Nombres de los niveles, en orden de juego (mismo orden que "Level Scenes").
+@export var level_names: PackedStringArray = ["Nivel 1: El patio", "Nivel 2: La ferretería", "Nivel 3: La carrera de carretillas", "Nivel 4: Los rompecabezas"]
+## Escenas de los niveles, en orden de juego. Al terminar uno se ofrece el siguiente.
+@export_file("*.tscn") var level_scenes: PackedStringArray = ["res://niveles/1_patio/patio.tscn", "res://niveles/2_ferreteria/store_level.tscn", "res://niveles/3_carrera/race_level.tscn", "res://niveles/4_rompecabezas/puzzle_level.tscn"]
+## Si los dos eligen el mismo personaje, el último en elegirlo se tiñe con
+## este color para distinguirlos (blanco = sin cambio).
+@export var duplicate_tint: Color = Color(0.7, 0.85, 1.0)
+
+## Volumen general (0 a 1).
+var master_volume: float = 1.0
+## Volumen de la música (0 a 1).
+var music_volume: float = 1.0
+## Volumen de los efectos (0 a 1).
+var sfx_volume: float = 1.0
+## Si el Jugador 1 usa teclado y mouse (y los mandos quedan para el Jugador 2).
+var keyboard_mouse_p1: bool = false
+
+# player_id -> CharacterData elegido. Vacío = cada nivel usa su personaje por defecto.
+var _player_characters: Dictionary = {}
+# Jugador que eligió personaje último (para teñirlo si repiten personaje)
+var _last_to_choose: int = 0
+
+## Nivel elegido en el menú (ruta de la escena). Vacío = el que tenga la selección de personaje.
+var selected_level: String = ""
+
+
+func _ready() -> void:
+	_add_menu_joypad_buttons()
+	load_settings()
+	apply_volumes()
+	apply_controls()
+
+
+## Índice del nivel que sigue a "scene_path", o -1 si es el último (o no está en la lista).
+func get_next_level(scene_path: String) -> int:
+	var index := level_scenes.find(scene_path)
+	if index < 0 or index + 1 >= level_scenes.size():
+		return -1
+	return index + 1
+
+
+func set_character(player_id: int, character: CharacterData) -> void:
+	_player_characters[player_id] = character
+
+
+func get_character(player_id: int) -> CharacterData:
+	return _player_characters.get(player_id)
+
+
+## Quién confirmó su personaje último (lo avisa la selección de personaje).
+func set_last_to_choose(player_id: int) -> void:
+	_last_to_choose = player_id
+
+
+## Color con el que se tiñe al personaje de este jugador: "Duplicate Tint" si
+## los dos eligieron el mismo y este fue el último en elegirlo, si no blanco.
+func get_character_tint(player_id: int) -> Color:
+	var mine := get_character(player_id)
+	var other := get_character(2 if player_id == 1 else 1)
+	if mine != null and mine == other and player_id == _last_to_choose:
+		return duplicate_tint
+	return Color.WHITE
+
+
+func set_volumes(master: float, music: float, sfx: float) -> void:
+	master_volume = clampf(master, 0.0, 1.0)
+	music_volume = clampf(music, 0.0, 1.0)
+	sfx_volume = clampf(sfx, 0.0, 1.0)
+	apply_volumes()
+
+
+func set_keyboard_mouse_p1(enabled: bool) -> void:
+	keyboard_mouse_p1 = enabled
+	apply_controls()
+
+
+func apply_controls() -> void:
+	Controls.set_keyboard_player(1 if keyboard_mouse_p1 else 0)
+
+
+func apply_volumes() -> void:
+	AudioServer.set_bus_volume_db(0, _to_db(master_volume))
+	Audio.music_level = music_volume
+	Audio.sfx_level = sfx_volume
+
+
+func save_settings() -> void:
+	var config := ConfigFile.new()
+	config.set_value("audio", "master", master_volume)
+	config.set_value("audio", "music", music_volume)
+	config.set_value("audio", "sfx", sfx_volume)
+	config.set_value("controls", "keyboard_mouse_p1", keyboard_mouse_p1)
+	config.save(SETTINGS_PATH)
+
+
+func load_settings() -> void:
+	var config := ConfigFile.new()
+	if config.load(SETTINGS_PATH) != OK:
+		return
+	master_volume = config.get_value("audio", "master", master_volume)
+	music_volume = config.get_value("audio", "music", music_volume)
+	sfx_volume = config.get_value("audio", "sfx", sfx_volume)
+	keyboard_mouse_p1 = config.get_value("controls", "keyboard_mouse_p1", keyboard_mouse_p1)
+
+
+func _to_db(level: float) -> float:
+	return linear_to_db(maxf(level, 0.0001))
+
+
+# Godot no trae botones de mando para aceptar/volver en los menús:
+# ✕ / A acepta y ○ / B vuelve, con cualquier mando.
+func _add_menu_joypad_buttons() -> void:
+	var accept := InputEventJoypadButton.new()
+	accept.button_index = JOY_BUTTON_A
+	accept.device = -1
+	InputMap.action_add_event("ui_accept", accept)
+
+	var cancel := InputEventJoypadButton.new()
+	cancel.button_index = JOY_BUTTON_B
+	cancel.device = -1
+	InputMap.action_add_event("ui_cancel", cancel)

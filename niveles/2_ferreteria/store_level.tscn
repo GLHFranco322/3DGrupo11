@@ -1,0 +1,255 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://niveles/2_ferreteria/store_level.gd" id="1_level"]
+[ext_resource type="Script" path="res://niveles/2_ferreteria/maze_builder.gd" id="2_maze"]
+[ext_resource type="PackedScene" path="res://lugares/workshop_room.tscn" id="40_workshop"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/tool_board.tscn" id="3_board"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/store_player.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://niveles/comun/third_person_camera.tscn" id="5_camera"]
+[ext_resource type="Script" path="res://niveles/2_ferreteria/store_hud.gd" id="6_hud"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/collectible.tscn" id="7_collectible"]
+[ext_resource type="Script" path="res://niveles/2_ferreteria/item_data.gd" id="8_itemdata"]
+[ext_resource type="Resource" path="res://personajes/triangulo.tres" id="9_triangulo"]
+[ext_resource type="Resource" path="res://personajes/carlos.tres" id="10_carlos"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/counter.tscn" id="11_counter"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/trampas/trap_pickup.tscn" id="12_trap_pickup"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/balde.tres" id="20_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/cepillo.tres" id="21_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/cincel.tres" id="22_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/destornillador.tres" id="23_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/hacha.tres" id="24_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/lima.tres" id="25_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/llave_inglesa.tres" id="26_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/martillo.tres" id="27_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/maza.tres" id="28_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/pala.tres" id="29_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/pico.tres" id="30_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/serrucho.tres" id="31_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/soga.tres" id="32_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/taladro.tres" id="33_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/tenaza.tres" id="34_item"]
+[ext_resource type="Resource" path="res://niveles/2_ferreteria/herramientas/tijera.tres" id="35_item"]
+
+[sub_resource type="Environment" id="Environment_store"]
+background_mode = 1
+background_color = Color(0.2, 0.22, 0.25, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 0.97, 0.9, 1)
+ambient_light_energy = 0.35
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_color = Color(0.78, 0.72, 0.62, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.56, 0.57, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.55)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="StoreLevel" type="Node3D" node_paths=PackedStringArray("maze", "board", "counter", "items_root", "player1", "player2", "hud")]
+script = ExtResource("1_level")
+item_pool = Array[ExtResource("8_itemdata")]([ExtResource("20_item"), ExtResource("21_item"), ExtResource("22_item"), ExtResource("23_item"), ExtResource("24_item"), ExtResource("25_item"), ExtResource("26_item"), ExtResource("27_item"), ExtResource("28_item"), ExtResource("29_item"), ExtResource("30_item"), ExtResource("31_item"), ExtResource("32_item"), ExtResource("33_item"), ExtResource("34_item"), ExtResource("35_item")])
+collectible_scene = ExtResource("7_collectible")
+trap_pickup_scene = ExtResource("12_trap_pickup")
+maze = NodePath("Maze")
+board = NodePath("Board")
+counter = NodePath("Counter")
+items_root = NodePath("Items")
+player1 = NodePath("Player1")
+player2 = NodePath("Player2")
+hud = NodePath("HUD")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.3535534, 0.3535534, 0, 0.7071068, 0.7071068, -0.5, -0.6123725, 0.6123725, 0, 10, 0)
+light_energy = 0.3
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_store")
+
+[node name="Maze" type="Node3D" parent="."]
+script = ExtResource("2_maze")
+wall_height = 4.5
+places = Array[PackedScene]([ExtResource("40_workshop")])
+wall_material = SubResource("StandardMaterial3D_wall")
+floor_material = SubResource("StandardMaterial3D_floor")
+
+[node name="Counter" parent="." instance=ExtResource("11_counter")]
+
+[node name="Board" parent="." instance=ExtResource("3_board")]
+
+[node name="Items" type="Node3D" parent="."]
+
+[node name="Player1" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_player")]
+player_id = 1
+color = Color(0.945, 0.941, 0, 1)
+camera_rig = NodePath("../HUD/Split/View1/SubViewport/CameraRig1")
+default_character = ExtResource("9_triangulo")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_player")]
+player_id = 2
+color = Color(0.945, 0, 0, 1)
+camera_rig = NodePath("../HUD/Split/View2/SubViewport/CameraRig2")
+default_character = ExtResource("10_carlos")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_hud")
+
+[node name="Split" type="HBoxContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="View1" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View1"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig1" parent="HUD/Split/View1/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Player1")
+
+[node name="View2" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View2"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig2" parent="HUD/Split/View2/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Player2")
+
+[node name="ListPanel1" type="PanelContainer" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 276.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="List1" type="VBoxContainer" parent="HUD/ListPanel1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ListTitle1" type="Label" parent="HUD/ListPanel1/List1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "JUGADOR 1"
+
+[node name="ListPanel2" type="PanelContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -276.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 76.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="List2" type="VBoxContainer" parent="HUD/ListPanel2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ListTitle2" type="Label" parent="HUD/ListPanel2/List2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
+text = "JUGADOR 2"
+horizontal_alignment = 2
+
+[node name="TimePanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 12.0
+offset_right = 70.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TimeLabel" type="Label" parent="HUD/TimePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "3:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint1" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="Hint2" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -60.0
+offset_right = 500.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 56
+text = "¡Tiempo!"
+horizontal_alignment = 1
+vertical_alignment = 1

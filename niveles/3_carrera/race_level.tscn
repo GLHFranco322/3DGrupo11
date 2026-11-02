@@ -1,0 +1,666 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://niveles/3_carrera/race_level.gd" id="1_level"]
+[ext_resource type="Script" path="res://niveles/3_carrera/items/race_item_spawner.gd" id="2_spawner"]
+[ext_resource type="Script" path="res://niveles/3_carrera/race_hud.gd" id="3_hud"]
+[ext_resource type="Script" path="res://niveles/3_carrera/race_minimap.gd" id="11_minimap"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/racer.tscn" id="4_racer"]
+[ext_resource type="PackedScene" path="res://niveles/comun/third_person_camera.tscn" id="5_camera"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_pickup.tscn" id="6_pickup"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/mud_zone.tscn" id="7_mud"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/cone.tscn" id="8_cone"]
+[ext_resource type="Resource" path="res://personajes/triangulo.tres" id="9_triangulo"]
+[ext_resource type="Resource" path="res://personajes/carlos.tres" id="10_carlos"]
+[ext_resource type="Script" path="res://niveles/3_carrera/cyber_city.gd" id="30_city"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/neon_gate.tscn" id="42_gate"]
+[ext_resource type="Script" path="res://niveles/3_carrera/pista/track_pieces.gd" id="43_pieces"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/boost_pad.tscn" id="44_boost"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/electro_grate.tscn" id="45_grate"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/pista/track_hole.tscn" id="46_hole"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/BuildingBlock_1.fbx" id="31_b1"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/BuildingBlock_2.fbx" id="32_b2"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/BuildingBlock_18.fbx" id="33_b18"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/BuildingBlock_19.fbx" id="34_b19"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/BuildingBlock_24.fbx" id="35_b24"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/Building_3.fbx" id="36_t3"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/Advertising_5.fbx" id="37_ad5"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/Advertising_6.fbx" id="38_ad6"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/Advertising_7.fbx" id="39_ad7"]
+[ext_resource type="PackedScene" path="res://assets/escenario/FreeSample/SateliteDish.fbx" id="40_dish"]
+[ext_resource type="Material" path="res://niveles/3_carrera/materiales/M_Buildings_001.tres" id="41_M_Buildings_001"]
+[ext_resource type="Material" path="res://niveles/3_carrera/materiales/M_Buildings_002.tres" id="41_M_Buildings_002"]
+[ext_resource type="Material" path="res://niveles/3_carrera/materiales/M_Props_001.tres" id="41_M_Props_001"]
+[ext_resource type="Material" path="res://niveles/3_carrera/materiales/M_Roads_001.tres" id="41_M_Roads_001"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.03, 0.01, 0.07, 1)
+sky_horizon_color = Color(0.32, 0.07, 0.33, 1)
+ground_bottom_color = Color(0.01, 0.0, 0.02, 1)
+ground_horizon_color = Color(0.32, 0.07, 0.33, 1)
+sun_angle_max = 3.0
+sun_curve = 0.05
+
+[sub_resource type="Sky" id="Sky_race"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_race"]
+background_mode = 2
+sky = SubResource("Sky_race")
+ambient_light_source = 2
+ambient_light_color = Color(0.4, 0.25, 0.6, 1)
+ambient_light_energy = 0.4
+fog_enabled = true
+fog_light_color = Color(0.3, 0.05, 0.18, 1)
+fog_density = 0.016
+glow_enabled = true
+glow_intensity = 0.9
+glow_bloom = 0.1
+glow_hdr_threshold = 0.8
+
+[sub_resource type="Curve3D" id="Curve3D_track"]
+_data = {
+"points": PackedVector3Array(0, 0, 14.3, 0, 0, -14.3, 0, 0, -6, -2.6, 0, 15.6, 2.6, 0, -15.6, 0, 0, -63.2, -8.667, 0, 8.233, 8.667, 0, -8.233, 15.6, 0, -99.6, -11.7, 0, -0.433, 11.7, 0, 0.433, 52, 0, -112.6, -6.933, 0, -8.233, 6.933, 0, 8.233, 85.8, 0, -97, 2.167, 0, -9.967, -2.167, 0, 9.967, 93.6, 0, -63.2, 0.433, 0, -9.1, -0.433, 0, 9.1, 72.8, 0, -37.2, -6.067, 0, -10.4, 6.067, 0, 10.4, 91, 0, -8.6, 0.433, 0, -11.7, -0.433, 0, 11.7, 109.2, 0, 25.2, 10.4, 0, -6.933, -10.4, 0, 6.933, 88.4, 0, 61.6, 11.7, 0, 2.167, -11.7, 0, -2.167, 46.8, 0, 66.8, 7.8, 0, 7.367, -7.8, 0, -7.367, 18.2, 0, 48.6, 3.033, 0, 9.1, -3.033, 0, -9.1, 0, 0, 22.6),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
+closed = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_road"]
+albedo_color = Color(0.04, 0.04, 0.06, 1)
+metallic = 0.6
+roughness = 0.12
+
+[sub_resource type="StandardMaterial3D" id="Mat_curb"]
+albedo_color = Color(0.08, 0.08, 0.12, 1)
+metallic = 0.5
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_neon_left"]
+shading_mode = 0
+albedo_color = Color(0.1, 0.9, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_neon_right"]
+shading_mode = 0
+albedo_color = Color(1, 0.1, 0.6, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_lane"]
+shading_mode = 0
+albedo_color = Color(1, 0.85, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_grass"]
+albedo_color = Color(0.06, 0.06, 0.08, 1)
+metallic = 0.2
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_white"]
+albedo_color = Color(0.9, 0.95, 1, 1)
+emission_enabled = true
+emission = Color(0.6, 0.9, 1, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_stripe"]
+material = SubResource("Mat_white")
+size = Vector3(14, 0.02, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+material = SubResource("Mat_white")
+size = Vector3(0.3, 4.5, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="Mat_banner"]
+albedo_color = Color(0.4, 0.02, 0.25, 1)
+emission_enabled = true
+emission = Color(1, 0.1, 0.6, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_banner"]
+material = SubResource("Mat_banner")
+size = Vector3(16, 1, 0.15)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_minimap"]
+bg_color = Color(0.03, 0.01, 0.08, 0.7)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.15, 0.6, 0.8)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.55)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="RaceLevel" type="Node3D" node_paths=PackedStringArray("track", "racer1", "racer2", "spawner", "hud", "finish_line")]
+script = ExtResource("1_level")
+track = NodePath("Track")
+racer1 = NodePath("Racer1")
+racer2 = NodePath("Racer2")
+spawner = NodePath("ItemSpawner")
+hud = NodePath("HUD")
+finish_line = NodePath("FinishLine")
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.3535534, 0.3535534, 0, 0.7071068, 0.7071068, -0.5, -0.6123725, 0.6123725, 0, 20, 0)
+light_color = Color(0.6, 0.45, 1, 1)
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_race")
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -0.1, -20)
+use_collision = true
+size = Vector3(420, 0.1, 420)
+material = SubResource("Mat_grass")
+
+[node name="Track" type="Path3D" parent="."]
+curve = SubResource("Curve3D_track")
+
+[node name="Road" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(-7, -0.3, -7, 0, 7, 0, 7, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_road")
+
+[node name="CurbLeft" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(-7.5, -0.3, -7.5, 1, -7, 1, -7, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_curb")
+
+[node name="CurbRight" type="CSGPolygon3D" parent="Track"]
+use_collision = true
+polygon = PackedVector2Array(7, -0.3, 7, 1, 7.5, 1, 7.5, -0.3)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_curb")
+
+[node name="NeonLeft" type="CSGPolygon3D" parent="Track"]
+polygon = PackedVector2Array(-7.48, 1, -7.48, 1.08, -7.02, 1.08, -7.02, 1)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_neon_left")
+
+[node name="NeonRight" type="CSGPolygon3D" parent="Track"]
+polygon = PackedVector2Array(7.02, 1, 7.02, 1.08, 7.48, 1.08, 7.48, 1)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_neon_right")
+
+[node name="LaneLine" type="CSGPolygon3D" parent="Track"]
+polygon = PackedVector2Array(-0.08, -0.01, -0.08, 0.02, 0.08, 0.02, 0.08, -0.01)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource("Mat_lane")
+
+[node name="FinishLine" type="Node3D" parent="."]
+
+[node name="Stripe" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("BoxMesh_stripe")
+
+[node name="PostL" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 2.25, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostR" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 2.25, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="Banner" type="MeshInstance3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0)
+mesh = SubResource("BoxMesh_banner")
+
+[node name="BannerText" type="Label3D" parent="FinishLine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.4, 0.1)
+pixel_size = 0.02
+outline_modulate = Color(0, 0, 0, 1)
+text = "META"
+font_size = 48
+outline_size = 12
+
+[node name="CyberCity" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("30_city")
+block_scenes = Array[PackedScene]([ExtResource("31_b1"), ExtResource("32_b2"), ExtResource("33_b18"), ExtResource("34_b19"), ExtResource("35_b24")])
+tower_scenes = Array[PackedScene]([ExtResource("36_t3")])
+ad_scenes = Array[PackedScene]([ExtResource("37_ad5"), ExtResource("38_ad6"), ExtResource("39_ad7")])
+roof_scenes = Array[PackedScene]([ExtResource("40_dish")])
+gate_scene = ExtResource("42_gate")
+material_overrides = {
+"M_Buildings_001": ExtResource("41_M_Buildings_001"),
+"M_Buildings_002": ExtResource("41_M_Buildings_002"),
+"M_Props_001": ExtResource("41_M_Props_001"),
+"M_Roads_001": ExtResource("41_M_Roads_001")
+}
+track = NodePath("../Track")
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Cone1" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1.0, 0, 0.01, 0, 1, 0, -0.01, 0, 1.0, 0.9, 0, -42.0)
+
+[node name="Cone2" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(1.0, 0, -0.015, 0, 1, 0, 0.015, 0, 1.0, -3.6, 0, -48.0)
+
+[node name="Cone3" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(0.999, 0, -0.053, 0, 1, 0, 0.053, 0, 0.999, 2.1, 0, -53.8)
+
+[node name="Cone4" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(-0.75, 0, 0.662, 0, 1, 0, -0.662, 0, -0.75, 95.4, 0, 55.3)
+
+[node name="Cone5" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(-0.688, 0, 0.726, 0, 1, 0, -0.726, 0, -0.688, 95.4, 0, 61.1)
+
+[node name="Cone6" parent="Obstacles" instance=ExtResource("8_cone")]
+transform = Transform3D(-0.688, 0, 0.726, 0, 1, 0, -0.726, 0, -0.688, 89.9, 0, 55.3)
+
+[node name="Mud1" parent="Obstacles" instance=ExtResource("7_mud")]
+transform = Transform3D(-0.832, 0, -0.555, 0, 1, 0, 0.555, 0, -0.832, 85.4, 0, -93.4)
+
+[node name="Mud2" parent="Obstacles" instance=ExtResource("7_mud")]
+transform = Transform3D(0.943, 0, 0.332, 0, 1, 0, -0.332, 0, 0.943, -2.6, 0, 24.2)
+
+[node name="TrackPieces" type="Node3D" parent="." node_paths=PackedStringArray("track", "cut_shapes")]
+script = ExtResource("43_pieces")
+track = NodePath("../Track")
+cut_shapes = [NodePath("../Track/Road"), NodePath("../Ground")]
+
+[node name="Boost1" parent="TrackPieces" instance=ExtResource("44_boost")]
+track_offset = 22
+lateral = -3.5
+length = 6
+width = 4
+
+[node name="Boost2" parent="TrackPieces" instance=ExtResource("44_boost")]
+track_offset = 120
+lateral = 3
+length = 6
+width = 4
+
+[node name="Boost3" parent="TrackPieces" instance=ExtResource("44_boost")]
+track_offset = 258
+lateral = 0
+length = 6
+width = 4
+
+[node name="Boost4" parent="TrackPieces" instance=ExtResource("44_boost")]
+track_offset = 432
+lateral = 3
+length = 6
+width = 4
+
+[node name="NarrowA_Left" parent="TrackPieces" instance=ExtResource("46_hole")]
+track_offset = 70
+lateral = -4.75
+length = 16
+width = 4.5
+
+[node name="NarrowA_Right" parent="TrackPieces" instance=ExtResource("46_hole")]
+track_offset = 70
+lateral = 4.75
+length = 16
+width = 4.5
+
+[node name="NarrowB_Left" parent="TrackPieces" instance=ExtResource("46_hole")]
+track_offset = 290
+lateral = -4.75
+length = 18
+width = 4.5
+
+[node name="NarrowB_Right" parent="TrackPieces" instance=ExtResource("46_hole")]
+track_offset = 290
+lateral = 4.75
+length = 18
+width = 4.5
+
+[node name="NarrowC" parent="TrackPieces" instance=ExtResource("46_hole")]
+track_offset = 392
+lateral = 3.5
+length = 14
+width = 7
+
+[node name="Grate1" parent="TrackPieces" instance=ExtResource("45_grate")]
+track_offset = 145
+lateral = 0
+length = 4
+width = 14
+
+[node name="Grate2" parent="TrackPieces" instance=ExtResource("45_grate")]
+track_offset = 328
+lateral = -3.5
+length = 4
+width = 7
+
+[node name="Grate3" parent="TrackPieces" instance=ExtResource("45_grate")]
+track_offset = 334
+lateral = 3.5
+length = 4
+width = 7
+start_delay = 2.5
+
+[node name="Grate4" parent="TrackPieces" instance=ExtResource("45_grate")]
+track_offset = 455
+lateral = 0
+length = 4
+width = 14
+start_delay = 1.5
+
+[node name="ItemSpawner" type="Node3D" parent="." node_paths=PackedStringArray("track")]
+script = ExtResource("2_spawner")
+pickup_scene = ExtResource("6_pickup")
+track = NodePath("../Track")
+
+[node name="Racer1" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_racer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.05, -2.5)
+player_id = 1
+color = Color(0.945, 0.941, 0, 1)
+camera_rig = NodePath("../HUD/Split/View1/SubViewport/CameraRig1")
+default_character = ExtResource("9_triangulo")
+
+[node name="Racer2" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("4_racer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.05, -2.5)
+player_id = 2
+color = Color(0.945, 0, 0, 1)
+camera_rig = NodePath("../HUD/Split/View2/SubViewport/CameraRig2")
+default_character = ExtResource("10_carlos")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_hud")
+
+[node name="Split" type="HBoxContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="View1" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View1"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig1" parent="HUD/Split/View1/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Racer1")
+distance = 6.0
+look_height = 1.6
+pitch_degrees = -16.0
+auto_follow_speed = 3.0
+
+[node name="View2" type="SubViewportContainer" parent="HUD/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Split/View2"]
+handle_input_locally = false
+size = Vector2i(574, 648)
+render_target_update_mode = 4
+
+[node name="CameraRig2" parent="HUD/Split/View2/SubViewport" node_paths=PackedStringArray("target") instance=ExtResource("5_camera")]
+target = NodePath("../../../../../Racer2")
+distance = 6.0
+look_height = 1.6
+pitch_degrees = -16.0
+auto_follow_speed = 3.0
+
+[node name="Panel1" type="PanelContainer" parent="HUD"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 266.0
+offset_bottom = 220.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Info1" type="VBoxContainer" parent="HUD/Panel1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "JUGADOR 1"
+
+[node name="Place1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 48
+text = "1°"
+
+[node name="Lap1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "VUELTA 1/3"
+
+[node name="Progress1" type="ProgressBar" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 14)
+layout_mode = 2
+show_percentage = false
+
+[node name="Item1" type="Label" parent="HUD/Panel1/Info1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "Item: —"
+
+[node name="Panel2" type="PanelContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -266.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 220.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Info2" type="VBoxContainer" parent="HUD/Panel2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "JUGADOR 2"
+horizontal_alignment = 2
+
+[node name="Place2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 48
+text = "2°"
+horizontal_alignment = 2
+
+[node name="Lap2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "VUELTA 1/3"
+horizontal_alignment = 2
+
+[node name="Progress2" type="ProgressBar" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 14)
+layout_mode = 2
+show_percentage = false
+
+[node name="Item2" type="Label" parent="HUD/Panel2/Info2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+text = "Item: —"
+horizontal_alignment = 2
+
+[node name="TimePanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 12.0
+offset_right = 70.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="TimeLabel" type="Label" parent="HUD/TimePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 36
+text = "2:30"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minimap" type="Control" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -216.0
+offset_right = 100.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("11_minimap")
+background = SubResource("StyleBoxFlat_minimap")
+
+[node name="Hint1" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="Hint2" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 3
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -60.0
+offset_right = 500.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 64
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
