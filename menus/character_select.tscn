@@ -1,6 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b1fdee1heydor"]
 
-[ext_resource type="Script" path="res://menus/character_select.gd" id="1_select"]
+[ext_resource type="Script" uid="uid://bt08aljmaoo5k" path="res://menus/character_select.gd" id="1_select"]
+[ext_resource type="PackedScene" uid="uid://dvy58v6oik0w" path="res://mesh_libraries/escenario_ferreteria_visual.tscn" id="2_w63yb"]
 
 [sub_resource type="Environment" id="Environment_select"]
 background_mode = 1
@@ -9,57 +10,61 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.4
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eklex"]
 albedo_color = Color(0.3, 0.6, 0.25, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
-material = SubResource("StandardMaterial3D_floor")
+material = SubResource("StandardMaterial3D_eklex")
 size = Vector2(40, 40)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3m2es"]
 albedo_color = Color(0.85, 0.85, 0.85, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_base"]
-material = SubResource("StandardMaterial3D_base")
+material = SubResource("StandardMaterial3D_3m2es")
 top_radius = 1.0
 bottom_radius = 1.1
 height = 0.2
 
-[node name="CharacterSelect" type="Node3D"]
+[node name="CharacterSelect" type="Node3D" unique_id=1360658877]
 script = ExtResource("1_select")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1150498139]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 2.4, 6.5)
-fov = 50.0
 current = true
+fov = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1040891251]
 transform = Transform3D(0.8660254, -0.25, 0.4330127, 0, 0.8660254, 0.5, -0.5, -0.4330127, 0.75, 0, 5, 0)
+visible = false
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1361839799]
 environment = SubResource("Environment_select")
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=2142114176]
+visible = false
 mesh = SubResource("PlaneMesh_floor")
 
-[node name="Base1" type="MeshInstance3D" parent="."]
+[node name="Base1" type="MeshInstance3D" parent="." unique_id=179227654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.1, 0)
+visible = false
 mesh = SubResource("CylinderMesh_base")
 
-[node name="Base2" type="MeshInstance3D" parent="."]
+[node name="Base2" type="MeshInstance3D" parent="." unique_id=962133674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.1, 0)
+visible = false
 mesh = SubResource("CylinderMesh_base")
 
-[node name="Spot1" type="Node3D" parent="."]
+[node name="Spot1" type="Node3D" parent="." unique_id=2100553628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.2, 0)
 
-[node name="Spot2" type="Node3D" parent="."]
+[node name="Spot2" type="Node3D" parent="." unique_id=801634346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.2, 0)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=561167895]
 
-[node name="Title" type="Label" parent="UI"]
+[node name="Title" type="Label" parent="UI" unique_id=1935492652]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 24.0
@@ -72,8 +77,8 @@ text = "Elegí tu personaje"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Player1Panel" type="VBoxContainer" parent="UI"]
-anchors_preset = 2
+[node name="Player1Panel" type="VBoxContainer" parent="UI" unique_id=1481678921]
+anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -82,7 +87,7 @@ offset_bottom = -50.0
 grow_vertical = 0
 theme_override_constants/separation = 4
 
-[node name="NameLabel1" type="Label" parent="UI/Player1Panel"]
+[node name="NameLabel1" type="Label" parent="UI/Player1Panel" unique_id=1129775434]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -91,7 +96,7 @@ theme_override_font_sizes/font_size = 30
 text = "JUGADOR 1"
 horizontal_alignment = 1
 
-[node name="CharacterLabel1" type="Label" parent="UI/Player1Panel"]
+[node name="CharacterLabel1" type="Label" parent="UI/Player1Panel" unique_id=849594183]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -100,7 +105,7 @@ theme_override_font_sizes/font_size = 40
 text = "◀  Triángulo  ▶"
 horizontal_alignment = 1
 
-[node name="StatusLabel1" type="Label" parent="UI/Player1Panel"]
+[node name="StatusLabel1" type="Label" parent="UI/Player1Panel" unique_id=520097027]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -109,8 +114,8 @@ theme_override_font_sizes/font_size = 22
 text = "✕ para confirmar"
 horizontal_alignment = 1
 
-[node name="Player2Panel" type="VBoxContainer" parent="UI"]
-anchors_preset = 3
+[node name="Player2Panel" type="VBoxContainer" parent="UI" unique_id=1901273210]
+anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 1.0
@@ -121,7 +126,7 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 4
 
-[node name="NameLabel2" type="Label" parent="UI/Player2Panel"]
+[node name="NameLabel2" type="Label" parent="UI/Player2Panel" unique_id=828164072]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -130,7 +135,7 @@ theme_override_font_sizes/font_size = 30
 text = "JUGADOR 2"
 horizontal_alignment = 1
 
-[node name="CharacterLabel2" type="Label" parent="UI/Player2Panel"]
+[node name="CharacterLabel2" type="Label" parent="UI/Player2Panel" unique_id=2072862146]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -139,7 +144,7 @@ theme_override_font_sizes/font_size = 40
 text = "◀  Carlos  ▶"
 horizontal_alignment = 1
 
-[node name="StatusLabel2" type="Label" parent="UI/Player2Panel"]
+[node name="StatusLabel2" type="Label" parent="UI/Player2Panel" unique_id=1870315642]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -148,7 +153,7 @@ theme_override_font_sizes/font_size = 22
 text = "✕ para confirmar"
 horizontal_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="UI"]
+[node name="MessageLabel" type="Label" parent="UI" unique_id=1131527318]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 8
@@ -169,7 +174,7 @@ text = "¡A jugar!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Hint" type="Label" parent="UI"]
+[node name="Hint" type="Label" parent="UI" unique_id=1971648790]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -186,3 +191,6 @@ theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 16
 text = "Apretá ✕ con el mando que vas a usar para unirte · flechas o palanca para elegir · ✕ confirmar · ○ salir"
 horizontal_alignment = 1
+
+[node name="EscenarioFerreteriaVisual" parent="." unique_id=372905964 instance=ExtResource("2_w63yb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.60446125, 0)
