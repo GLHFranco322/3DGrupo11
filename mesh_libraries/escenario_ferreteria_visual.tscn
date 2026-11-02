@@ -482,7 +482,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_4bw7l")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqh7m"]
-albedo_color = Color(0.22352941, 0.49019608, 0.7921569, 1)
+albedo_color = Color(0.05490196, 0.19215687, 0.34509805, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3ppm"]
 
@@ -519,7 +519,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xppt6")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqcp3"]
-albedo_color = Color(0.22352941, 0.49019608, 0.79607844, 1)
+albedo_color = Color(0.05677034, 0.19306737, 0.34382173, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uo43u"]
 
@@ -1534,7 +1534,7 @@ mesh = SubResource("ArrayMesh_b1i01")
 shape = SubResource("ConcavePolygonShape3D_s45p5")
 
 [node name="Tablero" type="Node3D" parent="." unique_id=571796389]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.000259, 2.8989336, -8.545784)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.04003048, 2.8989336, -8.545784)
 
 [node name="Frame" type="MeshInstance3D" parent="Tablero" unique_id=1158180571]
 mesh = SubResource("BoxMesh_trni6")
@@ -1764,7 +1764,7 @@ mesh = SubResource("BoxMesh_bqcp3")
 transform = Transform3D(-5.2453668e-08, -1.2, 5.2453668e-08, 0, -5.2453668e-08, -1.2, 1.2, -5.2453668e-08, 2.2928227e-15, 8.976264, 2.816053, -2.4706764)
 
 [node name="blueprint_stacked" type="MeshInstance3D" parent="Planos" unique_id=733668295]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 0, 0)
+transform = Transform3D(-3.0712938, -7.5462285e-06, 99.95281, -99.95281, -4.1392614e-06, -3.0712929, 4.369075e-06, -99.99996, -7.4155387e-06, -4.737632, 10.973839, -4.7683716e-07)
 mesh = SubResource("ArrayMesh_mmddi")
 
 [node name="Luzcolgante" type="Node3D" parent="." unique_id=1838220620]
@@ -1817,34 +1817,34 @@ mesh = SubResource("ArrayMesh_ykwtm")
 [node name="Herramientas" type="Node3D" parent="." unique_id=1412761548]
 
 [node name="wrench_A" type="MeshInstance3D" parent="Herramientas" unique_id=498634718]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -3.931582, 3.4135878, -8.4232025)
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -1.9403405, 3.4135878, -8.4232025)
 mesh = SubResource("ArrayMesh_027en")
 
 [node name="saw" type="MeshInstance3D" parent="Herramientas" unique_id=460619133]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -2.3423667, 3.473185, -8.424788)
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.35112524, 3.473185, -8.424788)
 mesh = SubResource("ArrayMesh_87omt")
 
 [node name="pickaxe" type="MeshInstance3D" parent="Herramientas" unique_id=787766163]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.5605531, 2.9384482, -8.285511)
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 1.4306884, 2.9384482, -8.285511)
 mesh = SubResource("ArrayMesh_skrjf")
 
 [node name="scissors" type="MeshInstance3D" parent="Herramientas" unique_id=1218671021]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -1.7518103, 3.4164834, -8.408539)
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0.23943114, 3.4164834, -8.408539)
 mesh = SubResource("ArrayMesh_wqh7m")
 
 [node name="scissors_part" type="MeshInstance3D" parent="Herramientas/scissors" unique_id=1367372200]
 mesh = SubResource("ArrayMesh_xxby4")
 
 [node name="hammer" type="MeshInstance3D" parent="Herramientas" unique_id=458305951]
-transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -1.7551751, 2.1374469, -8.424479)
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0.23606634, 2.1374469, -8.424479)
 mesh = SubResource("ArrayMesh_hto0i")
 
 [node name="shovel" type="MeshInstance3D" parent="Herramientas" unique_id=1699929039]
-transform = Transform3D(2.2390761, 1.19179385e-05, -99.97493, 99.97494, -2.6691868e-07, 2.2390761, -2.2194516e-14, -100, -1.1920928e-05, -3.2084715, 2.4482636, -8.417196)
+transform = Transform3D(2.2390761, 1.19179385e-05, -99.97493, 99.97494, -2.6691868e-07, 2.2390761, -2.2194516e-14, -100, -1.1920928e-05, -1.2172301, 2.4482636, -8.417196)
 mesh = SubResource("ArrayMesh_bqcp3")
 
 [node name="tongs" type="MeshInstance3D" parent="Herramientas" unique_id=795001229]
-transform = Transform3D(-0.17801952, 1.1920909e-05, -99.99984, 99.99985, 2.122158e-08, -0.17801951, 0, -100.00001, -1.1920929e-05, -0.6530636, 2.1596289, -8.397415)
+transform = Transform3D(-0.17801952, 1.1920909e-05, -99.99984, 99.99985, 2.122158e-08, -0.17801951, 0, -100.00001, -1.1920929e-05, 1.3381779, 2.1596289, -8.397415)
 mesh = SubResource("ArrayMesh_12uu7")
 
 [node name="tongs_part" type="MeshInstance3D" parent="Herramientas/tongs" unique_id=566688142]
