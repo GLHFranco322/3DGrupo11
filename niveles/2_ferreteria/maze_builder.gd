@@ -302,6 +302,11 @@ func _add_missing_doors(rng: RandomNumberGenerator) -> void:
 			room.doors.append(door)
 
 
+# Clave de una pared para buscarla por su centro (local X, Z) y orientación
+func _wall_key(center: Vector2, horizontal: bool) -> Vector3i:
+	return Vector3i(roundi(center.x * 10.0), roundi(center.y * 10.0), 1 if horizontal else 0)
+
+
 # true si una esquina de la grilla (punto local X, Z) está en el borde de un lugar
 func _point_touches_room(point: Vector2) -> bool:
 	var half := get_size() * 0.5
@@ -513,9 +518,9 @@ func _build_walls() -> void:
 	rng.seed = current_seed + 1
 	var entrance_columns := get_entrance_columns()
 
-	# Las piezas visuales se juntan en MultiMesh por zona: pocos dibujos en total
-	# (en vez de miles de mallas sueltas) y cada zona recibe sus luces cercanas
-	var zones := {}
+	# Primero se anota dónde va cada pared (centro y si va a lo largo de X), así
+	# cada una sabe si en sus puntas sigue otra en línea recta
+	var specs: Array = []
 
 	for cell in get_all_cells():
 		var origin := Vector2((cell.x) * cell_size - half.x, (cell.y) * cell_size - half.y)
@@ -524,24 +529,33 @@ func _build_walls() -> void:
 		# abiertas las entradas a la zona de atención. Las paredes de los
 		# lugares las arma cada lugar.
 		if not _open[cell].has(Vector2i.UP) and not _touches_room(cell, Vector2i.UP):
-			_add_wall(walls, origin + Vector2(cell_size * 0.5, 0.0), true, rng, zones)
+			specs.append([origin + Vector2(cell_size * 0.5, 0.0), true])
 		if not _open[cell].has(Vector2i.LEFT) and not _touches_room(cell, Vector2i.LEFT):
-			_add_wall(walls, origin + Vector2(0.0, cell_size * 0.5), false, rng, zones)
+			specs.append([origin + Vector2(0.0, cell_size * 0.5), false])
 		if cell.y == rows - 1 and not entrance_columns.has(cell.x):
-			_add_wall(walls, origin + Vector2(cell_size * 0.5, cell_size), true, rng, zones)
+			specs.append([origin + Vector2(cell_size * 0.5, cell_size), true])
 		if cell.x == columns - 1:
-			_add_wall(walls, origin + Vector2(cell_size, cell_size * 0.5), false, rng, zones)
+			specs.append([origin + Vector2(cell_size, cell_size * 0.5), false])
 
 	# Zona de atención: solo paredes en el borde (costados y fondo)
 	for y in range(rows, _total_rows()):
 		for x in columns:
 			var origin := Vector2(x * cell_size - half.x, y * cell_size - half.y)
 			if x == 0:
-				_add_wall(walls, origin + Vector2(0.0, cell_size * 0.5), false, rng, zones)
+				specs.append([origin + Vector2(0.0, cell_size * 0.5), false])
 			if x == columns - 1:
-				_add_wall(walls, origin + Vector2(cell_size, cell_size * 0.5), false, rng, zones)
+				specs.append([origin + Vector2(cell_size, cell_size * 0.5), false])
 			if y == _total_rows() - 1:
-				_add_wall(walls, origin + Vector2(cell_size * 0.5, cell_size), true, rng, zones)
+				specs.append([origin + Vector2(cell_size * 0.5, cell_size), true])
+
+	var placed := {}
+	for spec in specs:
+		placed[_wall_key(spec[0], spec[1])] = true
+	# Las piezas visuales se juntan en MultiMesh por zona: pocos dibujos en total
+	# (en vez de miles de mallas sueltas) y cada zona recibe sus luces cercanas
+	var zones := {}
+	for spec in specs:
+		_add_wall(walls, spec[0], spec[1], rng, zones, placed)
 
 	var uprights_material := _flat_material(upright_color)
 	var shelves_material := _flat_material(shelf_color)
@@ -559,17 +573,29 @@ func _build_walls() -> void:
 # largo de X. La colisión es una caja; lo que se ve es una estantería de
 # ferretería: fondo en el medio, parantes en las puntas, estantes y productos de
 # colores de los dos lados.
-func _add_wall(parent: Node3D, center: Vector2, horizontal: bool, rng: RandomNumberGenerator, zones: Dictionary) -> void:
-	# Cada punta se estira medio grosor para tapar la esquina; si la punta toca
-	# un lugar (ej: el taller), en cambio se acorta y termina a 2 cm de su
-	# pared: si se metiera o la tocara justo, las caras se verían rayadas
+#
+# Ninguna cara puede quedar en el mismo plano que otra (se verían rayas que
+# parpadean al moverse): el fondo y los estantes terminan adentro de los
+# parantes, los estantes son apenas menos profundos que la pared y los parantes
+# de las paredes a lo largo de Z son un poco más altos que los de X.
+func _add_wall(parent: Node3D, center: Vector2, horizontal: bool, rng: RandomNumberGenerator, zones: Dictionary, placed: Dictionary) -> void:
+	# Puntas: si sigue otra pared en línea recta, se juntan cara contra cara.
+	# Si no (esquina o punta suelta), se estira medio grosor para tapar la
+	# esquina. Si toca un lugar (ej: el taller), se acorta y termina a 2 cm de
+	# su pared.
 	var dir := Vector2.RIGHT if horizontal else Vector2.DOWN
 	var ends: Array[float] = []
 	for side in [-1.0, 1.0]:
-		ends.append(-wall_thickness * 0.5 - 0.02 if _point_touches_room(center + dir * side * cell_size * 0.5) \
-				else wall_thickness * 0.5)
+		if _point_touches_room(center + dir * side * cell_size * 0.5):
+			ends.append(-wall_thickness * 0.5 - 0.02)
+		elif placed.has(_wall_key(center + dir * side * cell_size, horizontal)):
+			ends.append(0.0)
+		else:
+			ends.append(wall_thickness * 0.5)
 	var length := cell_size + ends[0] + ends[1]
-	center += dir * (ends[1] - ends[0]) * 0.5
+	# Cuánto se corrió el centro respecto del centro de la celda
+	var shift := (ends[1] - ends[0]) * 0.5
+	center += dir * shift
 	var body := StaticBody3D.new()
 	body.position = Vector3(center.x, wall_height * 0.5, center.y)
 	parent.add_child(body)
@@ -592,19 +618,23 @@ func _add_wall(parent: Node3D, center: Vector2, horizontal: bool, rng: RandomNum
 	var along := Vector3.RIGHT if horizontal else Vector3.BACK
 	var across := Vector3.BACK if horizontal else Vector3.RIGHT
 
-	parts.panels.append(_box_transform(base + Vector3.UP * wall_height * 0.5, along, across,
-			Vector3(length, wall_height, wall_thickness * 0.2)))
+	# En las esquinas los fondos y estantes de dos paredes se cruzan: los de Z
+	# van 3 mm más abajo para que sus tapas no queden a la misma altura
+	var drop := 0.0 if horizontal else 0.003
+	parts.panels.append(_box_transform(base + Vector3.UP * (wall_height - drop) * 0.5, along, across,
+			Vector3(length - 0.12, wall_height - drop, wall_thickness * 0.2)))
+	var upright_height := wall_height + (0.02 if horizontal else 0.03)
 	for end in [-1.0, 1.0]:
-		parts.uprights.append(_box_transform(base + along * (length * 0.5 - 0.06) * end + Vector3.UP * wall_height * 0.5,
-				along, across, Vector3(0.12, wall_height, wall_thickness + 0.04)))
+		parts.uprights.append(_box_transform(base + along * (length * 0.5 - 0.06) * end + Vector3.UP * upright_height * 0.5,
+				along, across, Vector3(0.12, upright_height, wall_thickness + 0.04)))
 
 	var gap := (wall_height - 0.3) / shelves_per_wall
-	var usable := length - 0.4
+	var usable := cell_size - 0.4
 	var depth := wall_thickness * 0.4
 	for i in shelves_per_wall:
 		var height := 0.15 + gap * i
-		parts.boards.append(_box_transform(base + Vector3.UP * height, along, across,
-				Vector3(length - 0.1, 0.05, wall_thickness)))
+		parts.boards.append(_box_transform(base + Vector3.UP * (height - drop), along, across,
+				Vector3(length - 0.14, 0.05, wall_thickness - 0.03)))
 		for side in [-1.0, 1.0]:
 			for j in products_per_shelf:
 				if rng.randf() < 0.2:
@@ -613,7 +643,11 @@ func _add_wall(parent: Node3D, center: Vector2, horizontal: bool, rng: RandomNum
 						rng.randf_range(0.15, maxf(0.16, minf(gap - 0.1, 0.6))),
 						rng.randf_range(0.15, maxf(0.16, depth)))
 				var slot := (j + 0.5) / products_per_shelf - 0.5
-				var position: Vector3 = base + along * (slot * usable + rng.randf_range(-0.08, 0.08)) \
+				# Siempre dentro de su celda, sin llegar a los parantes ni al
+				# grosor de la pared que cruza en la esquina
+				var limit := maxf(cell_size * 0.5 - wall_thickness * 0.5 - 0.15 - size.x * 0.5, 0.0)
+				var offset := clampf(slot * usable + rng.randf_range(-0.08, 0.08), -limit, limit) - shift
+				var position: Vector3 = base + along * offset \
 						+ across * side * (wall_thickness * 0.1 + size.z * 0.5 + 0.01) \
 						+ Vector3.UP * (height + 0.025 + size.y * 0.5)
 				parts.products.append(_box_transform(position, along, across, size))

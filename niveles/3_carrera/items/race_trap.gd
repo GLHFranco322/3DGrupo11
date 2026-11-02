@@ -58,7 +58,7 @@ func _trigger(racer: Racer) -> void:
 	Audio.play_sfx(Audio.pit_fall)
 	_paint_hole()
 	var wait := racer.pit_freeze_time + racer.pit_sink_time * 2.0 + racer.pit_hidden_time
-	await get_tree().create_timer(wait).timeout
+	await get_tree().create_timer(wait, false).timeout
 	# Se cierra achicándose hacia el centro
 	Audio.play_sfx(Audio.pit_close)
 	var tween := create_tween()

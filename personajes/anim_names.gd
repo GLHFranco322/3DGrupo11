@@ -18,6 +18,12 @@ const RENAMES := {
 	"Idle": "idle",
 	"Iddle": "idle",
 	"Emote": "festejo",
+	# Carlos: golpes y carretilla (modelo aparte, se suma como animaciones extra)
+	"Bang": "golpear",
+	"Kick": "patear",
+	"Idle car": "carretilla",
+	"falling car": "caer_carretilla",
+	"shooting car": "tirar_carretilla",
 	# Triángulo
 	"cortarPasto": "cortar_pasto",
 	"estuniado": "aturdido",

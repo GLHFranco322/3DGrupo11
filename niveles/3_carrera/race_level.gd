@@ -82,7 +82,7 @@ func _start_countdown() -> void:
 	for i in range(countdown, 0, -1):
 		hud.show_message(str(i))
 		Audio.play_sfx(Audio.race_count)
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(1.0, false).timeout
 	hud.show_message("¡YA!", 0.8)
 	Audio.play_sfx(Audio.race_go)
 	_racing = true

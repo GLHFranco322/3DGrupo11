@@ -168,7 +168,7 @@ func _trigger() -> void:
 	# El pozo se abre (negro) mientras el jugador queda congelado y se hunde
 	trap_visual.material_override = _hole_material()
 	Audio.play_sfx(Audio.pit_fall)
-	await get_tree().create_timer(freeze_time + sink_time).timeout
+	await get_tree().create_timer(freeze_time + sink_time, false).timeout
 	_close()
 
 

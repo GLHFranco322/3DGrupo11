@@ -130,6 +130,10 @@ const ITEM_NAMES := {
 @export var ride_animation: StringName = &"carretilla"
 ## Animación de la palada. Si el personaje no la tiene, usa "Ride Animation".
 @export var stroke_animation: StringName = &"remar"
+## Animación al salir despedido de la carretilla. Si el personaje no la tiene, usa "aturdido".
+@export var knock_animation: StringName = &"caer_carretilla"
+## Animación al tirar un item desde la carretilla. Si el personaje no la tiene, no se anima.
+@export var throw_animation: StringName = &"tirar_carretilla"
 
 @export_group("Skin")
 ## Personaje si no se eligió uno en el menú (al probar la escena directo).
@@ -155,6 +159,7 @@ var _character: CharacterData
 var _anim: AnimationPlayer
 var _stroke_timer: float = 0.0
 var _stroke_anim_time: float = 0.0
+var _throw_anim_time: float = 0.0
 var _knock_timer: float = 0.0
 # Turbo de las rampas: segundos que quedan y velocidad
 var _boost_timer: float = 0.0
@@ -190,6 +195,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_stroke_anim_time = maxf(_stroke_anim_time - delta, 0.0)
+	_throw_anim_time = maxf(_throw_anim_time - delta, 0.0)
 	_boost_timer = maxf(_boost_timer - delta, 0.0)
 	_update_blink(delta)
 	if not _void_falling and (barrow.global_position.y < void_height or rider.global_position.y < void_height):
@@ -391,7 +397,8 @@ func knock_off(away: Vector3 = Vector3.ZERO) -> void:
 	state = Mode.KNOCKED
 	_knock_timer = knock_time
 	_boost_timer = 0.0
-	_play(Player.ANIM_STUNNED)
+	_throw_anim_time = 0.0
+	_play(knock_animation if _has_anim(knock_animation) else Player.ANIM_STUNNED)
 
 
 func _knocked(delta: float) -> void:
@@ -473,6 +480,8 @@ func use_item() -> void:
 				Audio.play_sfx(Audio.rod_miss)
 				return
 	item = Item.NONE
+	if _has_anim(throw_animation):
+		_throw_anim_time = _anim.get_animation(throw_animation).length
 
 
 func _spawn(scene: PackedScene, world_position: Vector3) -> Node3D:
@@ -539,7 +548,7 @@ func _show_rod_line(from: Vector3, to: Vector3) -> void:
 	# El cilindro va a lo largo de su Y: se lo apunta hacia "to" y se lo acuesta
 	line.look_at_from_position((from + to) * 0.5, to, Vector3.UP)
 	line.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
-	get_tree().create_timer(rod_line_time).timeout.connect(line.queue_free)
+	get_tree().create_timer(rod_line_time, false).timeout.connect(line.queue_free)
 
 
 ## Le pega una piedra: se cae (si ya está en el piso, vuelve a quedar tirado).
@@ -716,7 +725,9 @@ func _get_input_direction() -> Vector3:
 
 
 func _play_ride_animation() -> void:
-	if _stroke_anim_time > 0.0 and _has_anim(stroke_animation):
+	if _throw_anim_time > 0.0:
+		_play(throw_animation)
+	elif _stroke_anim_time > 0.0 and _has_anim(stroke_animation):
 		_play(stroke_animation)
 	elif _has_anim(ride_animation):
 		_play(ride_animation)

@@ -80,6 +80,6 @@ func show_message(text: String, duration: float = 0.0) -> void:
 	_message_token += 1
 	if duration > 0.0:
 		var token := _message_token
-		await get_tree().create_timer(duration).timeout
+		await get_tree().create_timer(duration, false).timeout
 		if token == _message_token:
 			message_label.visible = false

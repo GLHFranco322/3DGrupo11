@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" path="res://personajes/character_data.gd" id="1_data"]
 [ext_resource type="PackedScene" uid="uid://r30161ovryvj" path="res://assets/personajes/Carlos/Carlos Actualizado/Sebuscagerente-Personaje-Carlos-Animaciones-Nivel1.glb" id="2_model"]
+[ext_resource type="PackedScene" uid="uid://dqhldwnfvhr42" path="res://assets/personajes/Carlos/Carlos Carretilla - Golpes/Sebuscagerente-Personaje-Carlos-animacionesdegolpe&car-Correcciones.glb" id="3_golpes"]
 
 [resource]
 script = ExtResource("1_data")
 display_name = "Carlos"
 model_scene = ExtResource("2_model")
 model_scale = 0.4
+extra_animations = Array[PackedScene]([ExtResource("3_golpes")])

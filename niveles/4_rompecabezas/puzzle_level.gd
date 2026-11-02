@@ -101,7 +101,7 @@ func _start_countdown() -> void:
 	for i in range(countdown, 0, -1):
 		hud.show_message(str(i))
 		Audio.play_sfx(Audio.race_count)
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(1.0, false).timeout
 	hud.show_message("¡YA!", 0.8)
 	Audio.play_sfx(Audio.race_go)
 	_playing = true
@@ -127,11 +127,11 @@ func _on_completed(p: PuzzlePlayer) -> void:
 	hud.flash(p, "¡Completo!", 0.6)
 	p.play_animation(Player.ANIM_EMOTE)
 	# Un instante para ver la imagen terminada, y se va con pops
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	if _finished:
 		return
 	var gone := p.board.clear_with_pop()
-	await get_tree().create_timer(gone + next_puzzle_delay).timeout
+	await get_tree().create_timer(gone + next_puzzle_delay, false).timeout
 	p.play_animation(Player.ANIM_IDLE)
 	if not _finished:
 		_start_puzzle(p)
