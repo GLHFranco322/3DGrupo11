@@ -40,13 +40,13 @@
 [ext_resource type="PackedScene" uid="uid://dgdaeyjt2q7xw" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/pipe.fbx" id="38_qyhol"]
 [ext_resource type="PackedScene" uid="uid://d3xljugqs1d0" path="res://assets/escenario/piso/Assets/kenney_platformer-kit/Models/FBX format/door-large-open.fbx" id="39_eog3t"]
 [ext_resource type="PackedScene" uid="uid://b2u47vcrmw22l" path="res://assets/herramientas/Assets/fbx/rope_bundle_A.fbx" id="40_oovot"]
-[ext_resource type="Script" path="res://niveles/1_patio/map_collisions.gd" id="41_mapcol"]
+[ext_resource type="Script" uid="uid://85442b8r1mtv" path="res://niveles/1_patio/map_collisions.gd" id="41_mapcol"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ex6e"]
 albedo_color = Color(0.2509804, 0.6, 0.2, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8hykb"]
-material = SubResource("StandardMaterial3D_o5qli")
+material = SubResource("StandardMaterial3D_1ex6e")
 size = Vector2(32, 18)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l80d8"]
@@ -324,6 +324,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=1362217472]
+transform = Transform3D(1.3411859, 0, 0, 0, 1, 0, 0, 0, 2.9207633, 0, 0, -17.756199)
 mesh = SubResource("PlaneMesh_8hykb")
 
 [node name="wooden fences" parent="." unique_id=1001442727 instance=ExtResource("2_0tsit")]
