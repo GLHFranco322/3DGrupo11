@@ -60,6 +60,21 @@
 [ext_resource type="PackedScene" uid="uid://diwraho4xgo0j" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/Primitive_Slope.fbx" id="58_rauqg"]
 [ext_resource type="ArrayMesh" uid="uid://3cldss5rba4m" path="res://assets/escenario/detalles/86-light/light.obj" id="59_o7qnl"]
 [ext_resource type="PackedScene" uid="uid://baaj5chdgh3eg" path="res://assets/escenario/detalles/86-light/Lockers_And Rack_ Pack_1.fbx" id="60_22h2o"]
+[ext_resource type="PackedScene" uid="uid://5enkx4u2kyv5" path="res://assets/laberintonivel2assets/boxes/boxes .FBX/closed box.fbx" id="61_a1m4s"]
+[ext_resource type="PackedScene" uid="uid://cc45c4uq0knvg" path="res://assets/laberintonivel2assets/boxes/boxes .FBX/open box.fbx" id="62_r1v8f"]
+[ext_resource type="PackedScene" uid="uid://dabq7xm1lbk12" path="res://assets/laberintonivel2assets/boxes/boxes .FBX/semi open box.fbx" id="63_2e6dl"]
+[ext_resource type="PackedScene" uid="uid://bkr6jn2k7imd2" path="res://assets/laberintonivel2assets/boxes/boxes .FBX/small box.fbx" id="64_jj73x"]
+[ext_resource type="ArrayMesh" uid="uid://dpop3v2aaps6b" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_01/Low_Poly_Ladder_01_Medium.obj" id="65_fq7d0"]
+[ext_resource type="ArrayMesh" uid="uid://1pf7wmb872jl" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_01/Low_Poly_Ladder_01_Small.obj" id="66_yun0p"]
+[ext_resource type="ArrayMesh" uid="uid://dbepe6qw1hire" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_01/Low_Poly_Ladder_01_Tall.obj" id="67_rpjxy"]
+[ext_resource type="ArrayMesh" uid="uid://db3phb7lp8jcf" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_02/Low_Poly_Ladder_02_Medium.obj" id="68_qbboq"]
+[ext_resource type="ArrayMesh" uid="uid://b5oq372v6htoa" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_02/Low_Poly_Ladder_02_Small.obj" id="69_4vlbg"]
+[ext_resource type="ArrayMesh" uid="uid://b0r706yx4bkdf" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_02/Low_Poly_Ladder_02_Tall.obj" id="70_4xai1"]
+[ext_resource type="PackedScene" uid="uid://bhtua65cfek1f" path="res://assets/laberintonivel2assets/TrafficCone_Base_lines.fbx" id="71_kbmmq"]
+[ext_resource type="PackedScene" uid="uid://bjvg4ne6imj8s" path="res://assets/laberintonivel2assets/TrafficCone_Basic.fbx" id="72_kitug"]
+[ext_resource type="PackedScene" uid="uid://b6loatpq5ngwb" path="res://assets/laberintonivel2assets/TrafficCone_Base.fbx" id="73_h4ief"]
+[ext_resource type="PackedScene" uid="uid://c3f251o1ldqft" path="res://assets/laberintonivel2assets/TrafficCone_Basic_Lines.fbx" id="74_jalbj"]
+[ext_resource type="PackedScene" uid="uid://r46q6upn2du0" path="res://assets/laberintonivel2assets/Wall Clock.fbx" id="75_w8bvk"]
 
 [node name="Ferreteria" type="Node3D" unique_id=1287402556]
 
@@ -276,3 +291,54 @@ mesh = ExtResource("59_o7qnl")
 
 [node name="Lockers_And Rack_ Pack_1" parent="." unique_id=1405909365 instance=ExtResource("60_22h2o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.20359, 0, 8.919323)
+
+[node name="closed box" parent="." unique_id=547863518 instance=ExtResource("61_a1m4s")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.110792, 0, 41.258553)
+
+[node name="open box" parent="." unique_id=1237023968 instance=ExtResource("62_r1v8f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.197897, 0, 41.159477)
+
+[node name="semi open box" parent="." unique_id=1135837421 instance=ExtResource("63_2e6dl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9740467, 0, 41.11819)
+
+[node name="small box" parent="." unique_id=2125027667 instance=ExtResource("64_jj73x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.712816, 0, 41.078896)
+
+[node name="LowPolyLadder01Medium" type="MeshInstance3D" parent="." unique_id=1881184041]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.550152, 0, 37.349434)
+mesh = ExtResource("65_fq7d0")
+
+[node name="LowPolyLadder01Small" type="MeshInstance3D" parent="." unique_id=1360437481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.602187, 0, 37.180073)
+mesh = ExtResource("66_yun0p")
+
+[node name="LowPolyLadder01Tall" type="MeshInstance3D" parent="." unique_id=708049753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.344429, 0, 37.141254)
+mesh = ExtResource("67_rpjxy")
+
+[node name="LowPolyLadder02Medium" type="MeshInstance3D" parent="." unique_id=1947355913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.267407, 0, 43.02551)
+mesh = ExtResource("68_qbboq")
+
+[node name="LowPolyLadder02Small" type="MeshInstance3D" parent="." unique_id=861720259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.4834, 0, 43.224396)
+mesh = ExtResource("69_4vlbg")
+
+[node name="LowPolyLadder02Tall" type="MeshInstance3D" parent="." unique_id=1567464704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.732391, 0, 43.366356)
+mesh = ExtResource("70_4xai1")
+
+[node name="TrafficCone_Base_lines" parent="." unique_id=454589168 instance=ExtResource("71_kbmmq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.055402, 0, 47.813396)
+
+[node name="TrafficCone_Basic" parent="." unique_id=1205020541 instance=ExtResource("72_kitug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.513947, 0, 48.0171)
+
+[node name="TrafficCone_Base" parent="." unique_id=1882678240 instance=ExtResource("73_h4ief")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.249761, 0, 48.54337)
+
+[node name="TrafficCone_Basic_Lines" parent="." unique_id=2126674342 instance=ExtResource("74_jalbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.704998, 0, 48.834587)
+
+[node name="Wall Clock" parent="." unique_id=84962746 instance=ExtResource("75_w8bvk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.050085, 0, 48.77851)
