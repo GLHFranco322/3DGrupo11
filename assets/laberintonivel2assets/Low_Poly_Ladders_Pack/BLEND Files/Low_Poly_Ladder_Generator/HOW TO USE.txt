@@ -1,0 +1,67 @@
+====================================================================================================
+NOTE: These instructions take into account that you have basic knowledge of how to Use Blender 3D, though I will try my best to explain everything in the most simply terms. I myself an a learner to teaching others how to using something as intricate as this can be a bit much. It is also required that Blender 3D is installed on your computer, preferably 2.76 or up.
+====================================================================================================
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+QUESTIONS AND ANSWERS
+
+Q. What does the Array modifier do?
+A. This modifier creates a range of copies of an object that the modifier was applied to, with each copy made being offset from the previous one. It saves time, especially if something needs to repeat over and over. It is mostly used for tiled meshes such as concrete slaps, flooring, grating, fences and more.
+
+Q. What is this Blender file useful for?
+A. If you are unsatisfied with the lengths of the pre-made ladder parts that came as part of this low poly asset pack then you can make your very own, with as many ladder steps as you desire. You can also edit the geometry of the ladder.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+HOW TO USE THE ARRAY MODIFIER
+
+You should first duplicate the Low_Poly_Ladders_Array.blend file before opening it so that you have a template to always make new ladders.
+
+---------------------------------------
+Low_Poly_Ladder_01_Array
+---------------------------------------
+1. Upon opening the file click the blue spanner icon to go to Modifiers tab on the right hand side of the page (it should already be selected).
+
+2. Add an Array modifier (see Ladder_Height) and increase the value of the Count by clicking the right arrow to increase the number of steps. Clicking the left arrow reduces the number of steps. Click the white arrow on the left of the box to open it.
+
+3. Beneath the checked Relative Offset option, make sure that the Z axis offset is set to 1.000 and not 0.000. If it is not then you may find multiple steps merging into one another, which may cause lag depending upon what game engine you use.
+
+4. Make sure the Merge option is ticked; this will connect vertices from the segments above after the modifier has been applied so there is no loose geometry. Once you are happy with the amount of steps you have, click the Apply button in the Array modifier's box (in Object Mode only).
+
+5. All that you need to do now is fill the open gaps on the top and bottom of both rails. To do this you hover your mouse over the areas around the hole; press the Alt key and Right Click simultaneously (Alt + Right Click) and all the vertices should then be highlighted. Press the F key and it should fill the area inside of the selection with a face. Repeat this another four times with the last 3 open holes.
+
+6. Click the File tab (top left of the screen) > Export > Wavefront (.obj) and choose a name and a location you would like to save this new ladder. I would personally recommend saving it in the Custom Ladders folder under the name Low_Poly_Ladder_01_x_Steps, x meaning however many steps you added, so for example if you wanted 24 steps you would name the object as Low_Poly_Ladder_01_24_Steps.
+
+7. Load the object into your favourite game engine and you should be all set!
+
+TIPS
+- If you change the Z axis offset to 0.000 and the X axis offset to 0.909 you can create fences!*
+
+- You can change the material colours in the Materials tab (two spaces away from the Modifiers tab) or edit them after they have been placed in a game engine of your choosing.
+
+- If you are very knowledgeable about UVs and textures then you could try texturing the ladder if you so desire. This mesh was designed with a low poly aesthetic in mind though you are welcome to add textures. You could texture the first step so that the texture repeats throughout the duplicated steps or texture it after the Array modifier has been applied.
+
+- If you add another Array modifier (see Ladder_Width, click the eye icon to enable it) and change the X axis offset to 0.909 you can create a wall of bars/a tall fence/a gate.
+
+---------------------------------------
+Low_Poly_Ladder_02_Array
+---------------------------------------
+The first thing you need to do in order to make ladders using this step type is to go to the Outliner window (top right hand side of the screen) and click the eye icon next to Low_Poly_Ladder_01_Array to hide it, then click the eye icon next to the Low_Poly_Ladder_02_Array to unhide it, as well as single clicking the object to focus on it. This helps reduce confusion.
+
+Most of the steps used for the Low_Poly_Ladder_01_Array apply here.
+
+TIPS
+- If you change the Z axis offset to 0.000 and the X axis offset to 0.807 you can create fences!*
+
+- You can change the material colours in the Materials tab (two spaces away from the Modifiers tab) or edit them after they have been placed in a game engine of your choosing.
+
+* - If the mesh is modified then the offset may need to be adjusted so that the rails of touching ladders will merge into a single one. IT IS ALSO WORTH MENTIONING THAT IF YOU HAVE NO INTENTION OF MAKING A FENCE THEN YOU COULD DELETE THE LADDER_WIDTH MODIFIER. IF YOU YOU HAVE THE INTENTION OF MAKING A FENCE INSTEAD THEN YOU COULD DELETE THE LADDER_HEIGHT MODIFIER.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MORE INFORMATION:
+https://www.blender.org
+https://www.blender.org/manual/modeling/modifiers/introduction.html
+https://www.blender.org/manual/modeling/modifiers/generate/array.html
+
+CONTACT ME:
+emerald.eel.entertainment@gmail.com
+Twitter: @EEEnt_OFFICIAL

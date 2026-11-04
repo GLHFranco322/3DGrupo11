@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b0r706yx4bkdf"
+path="res://.godot/imported/Low_Poly_Ladder_02_Tall.obj-73ca9c66fa1b3d54ce594cebe10b9eb4.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Low_Poly_Ladder_02_Tall.obj-73ca9c66fa1b3d54ce594cebe10b9eb4.mesh"]
+
+source_file="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_02/Low_Poly_Ladder_02_Tall.obj"
+dest_files=["res://.godot/imported/Low_Poly_Ladder_02_Tall.obj-73ca9c66fa1b3d54ce594cebe10b9eb4.mesh", "res://.godot/imported/Low_Poly_Ladder_02_Tall.obj-73ca9c66fa1b3d54ce594cebe10b9eb4.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
