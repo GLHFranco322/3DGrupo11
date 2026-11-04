@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://niveles/3_carrera/racer.gd" id="1_racer"]
-[ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_rock.tscn" id="2_rock"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_mower.tscn" id="2_rock"]
 [ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_pit.tscn" id="3_pit"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_barrow"]
@@ -51,7 +51,7 @@ size = Vector3(0.3, 0.18, 0.08)
 
 [node name="Racer" type="Node3D" groups=["racer"]]
 script = ExtResource("1_racer")
-rock_scene = ExtResource("2_rock")
+mower_scene = ExtResource("2_rock")
 pit_scene = ExtResource("3_pit")
 
 [node name="Barrow" type="CharacterBody3D" parent="."]

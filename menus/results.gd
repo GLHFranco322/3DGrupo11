@@ -52,7 +52,7 @@ func _ready() -> void:
 # ID de la partida (abajo a la izquierda), para anotar las observaciones del
 # testeo en la misma fila de la planilla
 func _show_match_id() -> void:
-	if Metrics.last_match_id.is_empty():
+	if Metrics.last_match_id.is_empty() or Metrics.last_match_scene != MatchResult.last_level_scene:
 		return
 	var label := Label.new()
 	label.text = "Partida: " + Metrics.last_match_id

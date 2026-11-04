@@ -44,10 +44,22 @@ var _length: float = 0.0
 var _tracked: Dictionary = {}
 var _last_lap_shown: bool = false
 
+# Lo que se cuenta de cada jugador para las métricas (empiezan en 0)
+const METRIC_COUNTERS := ["cortadoras", "cortadoras_acertadas", "pozos", "pozos_acertados", "canas",
+		"canas_acertadas", "cayo_en_pozos", "huecos", "rejas", "barro"]
+# Cada item que se tira: [usos, aciertos, fallos]
+const METRIC_ITEMS := [["cortadoras", "cortadoras_acertadas", "cortadoras_fallidas"],
+		["pozos", "pozos_acertados", "pozos_fallidos"], ["canas", "canas_acertadas", "canas_fallidas"]]
+
 
 func _ready() -> void:
 	_length = track.curve.get_baked_length()
 	_place_finish_line()
+	Metrics.start_match("Nivel 3 - Carrera")
+	for r in _racers():
+		Metrics.set_value(r.player_id, "personaje", Metrics.character_name(r.player_id))
+		for key in METRIC_COUNTERS:
+			Metrics.set_value(r.player_id, key, 0)
 	spawner.spawn_initial_items()
 	time_left = match_duration
 	hud.setup(_racers(), track)
@@ -107,7 +119,7 @@ func _process(delta: float) -> void:
 			return
 	if time_left <= 0.0:
 		var leader := _get_leader()
-		_finish(leader, "¡Tiempo! Gana el Jugador %d" % leader.player_id)
+		_finish(leader, "¡Tiempo! Gana el Jugador %d" % leader.player_id, true)
 
 
 # Metros recorridos en total: se sigue el punto del recorrido más cercano a la
@@ -149,7 +161,7 @@ func _get_hint(r: Racer) -> String:
 	return ""
 
 
-func _finish(winner: Racer, message: String) -> void:
+func _finish(winner: Racer, message: String, by_time: bool = false) -> void:
 	_finished = true
 	_racing = false
 	spawner.active = false
@@ -160,9 +172,32 @@ func _finish(winner: Racer, message: String) -> void:
 	winner.score += 100
 	MatchResult.save_from(_racers())
 	MatchResult.last_level_scene = scene_file_path
+	_save_metrics(winner, by_time)
 	hud.show_message(message)
 	Audio.fade_out_music(music_fade_out)
 	Audio.play_sfx(Audio.time_up)
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)
+
+
+func _save_metrics(winner: Racer, by_time: bool) -> void:
+	Metrics.set_info("fin", "tiempo" if by_time else "meta")
+	Metrics.set_info("ganador", winner.player_id)
+	for r in _racers():
+		var id := r.player_id
+		Metrics.set_value(id, "puntos", r.score)
+		Metrics.set_value(id, "metros", maxi(int(r.progress), 0))
+		Metrics.set_value(id, "vueltas", clampi(floori(r.progress / _length), 0, laps))
+		var used := 0
+		var hits := 0
+		for keys in METRIC_ITEMS:
+			var count: int = Metrics.get_value(id, keys[0])
+			var hit: int = Metrics.get_value(id, keys[1])
+			Metrics.set_value(id, keys[2], count - hit)
+			used += count
+			hits += hit
+		Metrics.set_value(id, "trampas_total", used)
+		Metrics.set_value(id, "trampas_acertadas", hits)
+		Metrics.set_value(id, "caidas_mapa", Metrics.get_value(id, "huecos") + Metrics.get_value(id, "rejas"))
+	Metrics.end_match()

@@ -104,6 +104,7 @@ func _zap_riders() -> void:
 		racer.eject_speed = eject * knock_strength
 		racer.knock_off(away)
 		racer.eject_speed = eject
+		Metrics.add(racer.player_id, "rejas")
 
 
 func _show(color: Color, energy: float, flicker: float) -> void:

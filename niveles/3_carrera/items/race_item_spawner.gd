@@ -2,14 +2,14 @@ class_name RaceItemSpawner
 extends Node3D
 
 # Cada cierto tiempo pone una fila de items atravesada en la pista, por delante
-# del que va primero: uno de cada tipo (piedra, pozo y caña de pescar), en orden
+# del que va primero: uno de cada tipo (cortadora, pozo y caña de pescar), en orden
 # al azar. Todo el azar de los items se decide acá (en online lo va a decidir
 # solo el anfitrión).
 
 @export_group("Items")
 @export var pickup_scene: PackedScene
 ## Items de cada fila (se reparten en este orden, mezclado en cada fila).
-@export var row_items: Array[Racer.Item] = [Racer.Item.ROCK, Racer.Item.PIT, Racer.Item.ROD]
+@export var row_items: Array[Racer.Item] = [Racer.Item.MOWER, Racer.Item.PIT, Racer.Item.ROD]
 ## Separación entre los items de una fila (a lo ancho de la pista).
 @export_range(0.5, 5.0, 0.1, "suffix:u") var item_spacing: float = 3.6
 ## Segundos que dura cada item en la pista antes de desaparecer.

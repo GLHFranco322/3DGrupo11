@@ -4,7 +4,8 @@ extends Node3D
 # Jugador del nivel de carreras (estilo Motor Kombat): va parado en una
 # carretilla que se maneja como un kart, con aceleración, inercia y gravedad:
 # hay que ir midiendo cuándo acelerar, frenar o ir marcha atrás. Si le pega una
-# piedra o choca fuerte, se cae: tiene que volver caminando y subirse con ✕.
+# cortadora, lo pesca una caña o choca fuerte, se cae: tiene que volver
+# caminando y subirse con ✕.
 #
 # Botones (se cambian en Proyecto → Configuración → Mapa de entrada):
 #   R1 (p*_accelerate)  acelerar (rema con la pala)
@@ -18,11 +19,11 @@ extends Node3D
 # "Rider" (el personaje, que solo choca y camina cuando se cae).
 
 enum Mode { RIDING, KNOCKED, ON_FOOT, SINKING }
-enum Item { NONE, ROCK, PIT, ROD }
+enum Item { NONE, MOWER, PIT, ROD }
 
 const ITEM_NAMES := {
 	Item.NONE: "",
-	Item.ROCK: "Piedra",
+	Item.MOWER: "Cortadora",
 	Item.PIT: "Pozo",
 	Item.ROD: "Caña de pescar",
 }
@@ -88,12 +89,16 @@ const ITEM_NAMES := {
 
 @export_group("Caña de pescar")
 ## Hasta qué distancia engancha al rival (en cualquier dirección). Si está más
-## lejos, la caña no se usa y se sigue teniendo.
+## lejos, la caña se tira igual al aire y se gasta (así se puede agarrar otro item).
 @export_range(1.0, 100.0, 0.5, "suffix:u") var rod_range: float = 20.0
 ## Tiempo que se ve la línea de la caña tirando del rival.
 @export_range(0.05, 2.0, 0.05, "suffix:s") var rod_line_time: float = 0.35
 ## Color de la línea de la caña.
 @export var rod_line_color: Color = Color(0.95, 0.95, 0.95)
+
+@export_group("Cortadora")
+## Segundos que queda tirado en el piso si le pega una cortadora.
+@export_range(0.0, 10.0, 0.1, "suffix:s") var mower_knock_time: float = 2.0
 
 @export_group("Pozo")
 ## Tiempo quieto sobre el pozo antes de hundirse.
@@ -118,8 +123,8 @@ const ITEM_NAMES := {
 @export_range(0.0, 5.0, 0.05, "suffix:s") var respawn_blink_time: float = 1.2
 
 @export_group("Items")
-## Escena de la piedra que se tira.
-@export var rock_scene: PackedScene
+## Escena de la cortadora que se tira hacia adelante.
+@export var mower_scene: PackedScene
 ## Escena del pozo que se deja atrás.
 @export var pit_scene: PackedScene
 ## Distancia detrás de la carretilla donde se deja el pozo.
@@ -148,7 +153,7 @@ const ITEM_NAMES := {
 ## Lo pone el nivel: false durante la cuenta regresiva y al terminar.
 var controls_enabled: bool = false
 var state: Mode = Mode.RIDING
-## Item en la mano (piedra, pozo, clavos o mate). Se tira con ✕.
+## Item en la mano (cortadora, pozo o caña de pescar). Se usa con ✕.
 var item: Item = Item.NONE
 ## Metros recorridos sobre la pista (lo calcula el nivel).
 var progress: float = 0.0
@@ -382,8 +387,9 @@ func bump(push: Vector3) -> void:
 
 # --- Caerse y subirse ---------------------------------------------------------
 
-## Tira al jugador de la carretilla. "away" = hacia dónde sale despedido.
-func knock_off(away: Vector3 = Vector3.ZERO) -> void:
+## Tira al jugador de la carretilla. "away" = hacia dónde sale despedido;
+## "stun_time" = segundos tirado (negativo = "Knock Time").
+func knock_off(away: Vector3 = Vector3.ZERO, stun_time: float = -1.0) -> void:
 	if state == Mode.SINKING:
 		return
 	if state == Mode.RIDING:
@@ -395,7 +401,7 @@ func knock_off(away: Vector3 = Vector3.ZERO) -> void:
 		rider.global_position = seat.global_position + direction * 0.8
 		rider.velocity = barrow.velocity * 0.5 + direction * eject_speed + Vector3.UP * eject_speed * 0.8
 	state = Mode.KNOCKED
-	_knock_timer = knock_time
+	_knock_timer = stun_time if stun_time >= 0.0 else knock_time
 	_boost_timer = 0.0
 	_throw_anim_time = 0.0
 	_play(knock_animation if _has_anim(knock_animation) else Player.ANIM_STUNNED)
@@ -465,20 +471,28 @@ func give_item(kind: Item) -> bool:
 func use_item() -> void:
 	var forward := get_forward()
 	match item:
-		Item.ROCK:
-			var rock := _spawn(rock_scene, barrow.global_position + forward * 1.3 + Vector3.UP * 0.9)
-			if rock:
-				rock.throw(forward, self)
+		Item.MOWER:
+			var mower := _spawn(mower_scene, barrow.global_position + forward * 1.3 + Vector3.UP * 0.5)
+			if mower:
+				mower.throw(forward, self)
+				Metrics.add(player_id, "cortadoras")
 		Item.PIT:
 			var pit := _spawn(pit_scene, barrow.global_position - forward * drop_distance)
 			if pit:
 				pit.placed_by = self
 				Audio.play_sfx(Audio.pit_place)
+				Metrics.add(player_id, "pozos")
 		Item.ROD:
-			# Siempre acierta: si el rival está fuera de alcance, no se gasta
-			if not cast_rod():
+			Metrics.add(player_id, "canas")
+			if cast_rod():
+				Metrics.add(player_id, "canas_acertadas")
+			else:
+				# Nadie a tiro: se tira al aire hacia adelante y se gasta igual
+				_show_rod_line(seat.global_position + Vector3.UP * 1.2,
+						seat.global_position + forward * rod_range * 0.4 + Vector3.UP * 0.4)
 				Audio.play_sfx(Audio.rod_miss)
-				return
+		Item.NONE:
+			return
 	item = Item.NONE
 	if _has_anim(throw_animation):
 		_throw_anim_time = _anim.get_animation(throw_animation).length
@@ -497,7 +511,7 @@ func _spawn(scene: PackedScene, world_position: Vector3) -> Node3D:
 
 ## Caña de pescar: engancha al rival más cercano (en cualquier dirección, hasta
 ## "Rod Range") y lo tira de la carretilla, hacia quien lo pescó. Devuelve false
-## si no hay nadie a tiro (la caña no se gasta).
+## si no hay nadie a tiro.
 func cast_rod() -> bool:
 	var target := _find_rod_target()
 	if target == null:
@@ -551,12 +565,15 @@ func _show_rod_line(from: Vector3, to: Vector3) -> void:
 	get_tree().create_timer(rod_line_time, false).timeout.connect(line.queue_free)
 
 
-## Le pega una piedra: se cae (si ya está en el piso, vuelve a quedar tirado).
-func hit_by_rock(direction: Vector3) -> void:
+## Le pega una cortadora: queda aturdido "Mower Knock Time" y se cae de la
+## carretilla (si ya estaba en el piso, vuelve a quedar tirado). Devuelve false
+## si no le pudo pegar (ej: está adentro de un pozo).
+func hit_by_mower(direction: Vector3) -> bool:
 	if state == Mode.SINKING:
-		return
+		return false
 	Audio.play_sfx(Audio.rock_hit_player)
-	knock_off(direction)
+	knock_off(direction, mower_knock_time)
+	return true
 
 
 ## Cae en un pozo con carretilla y todo. Devuelve false si no cae (ej: a pie).

@@ -90,6 +90,7 @@ func _physics_process(_delta: float) -> void:
 		var racer := _riding_racer(body)
 		if racer and racer.fall_into_void():
 			Audio.play_sfx(Audio.void_fall if Audio.void_fall else Audio.pit_fall)
+			Metrics.add(racer.player_id, "huecos")
 
 
 ## true si "point" está dentro del hueco (o a menos de "margin" de su borde).

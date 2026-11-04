@@ -68,7 +68,10 @@ func _finish() -> void:
 # Métricas de testeo: puntos de cada uno, promedio y ganador
 func _save_metrics() -> void:
 	for p in [player1, player2]:
-		Metrics.set_value(p.player_id, "puntos", p.score)
+		var id: int = p.player_id
+		Metrics.set_value(id, "puntos", p.score)
+		Metrics.set_value(id, "trampas_total", Metrics.get_value(id, "piedras") + Metrics.get_value(id, "pozos") \
+				+ Metrics.get_value(id, "patadas"))
 	Metrics.set_info("promedio_puntos", (player1.score + player2.score) / 2.0)
 	Metrics.set_info("ganador", MatchResult.winners[0].id if MatchResult.winners.size() == 1 else "empate")
 	Metrics.end_match()

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xtcrv24fnh0p"]
 
-[ext_resource type="Script" path="res://sistema/metrics.gd" id="1_metrics"]
+[ext_resource type="Script" uid="uid://bdofrtssyulj0" path="res://sistema/metrics.gd" id="1_metrics"]
 
 [node name="Metrics" type="Node" unique_id=710460347]
 script = ExtResource("1_metrics")

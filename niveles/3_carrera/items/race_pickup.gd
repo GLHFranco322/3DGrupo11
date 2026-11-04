@@ -3,16 +3,16 @@ extends Node3D
 
 # Item que aparece en la pista (lo crea RaceItemSpawner). Se agarra pasando por
 # encima con la carretilla. Si nadie lo agarra en "lifetime" segundos, desaparece.
-# Cada tipo muestra su nodo hijo: Visuals/Rock, Visuals/Pit, Visuals/Rod.
+# Cada tipo muestra su nodo hijo: Visuals/Mower, Visuals/Pit, Visuals/Rod.
 
-@export var kind: Racer.Item = Racer.Item.ROCK
+@export var kind: Racer.Item = Racer.Item.MOWER
 ## Segundos que dura en la pista. RaceItemSpawner lo pisa con su valor.
 @export_range(0.5, 120.0, 0.5, "suffix:s") var lifetime: float = 10.0
 ## Velocidad de giro del item flotando.
 @export_range(0.0, 10.0, 0.1) var spin_speed: float = 2.0
 
 const VISUAL_NAMES := {
-	Racer.Item.ROCK: "Rock",
+	Racer.Item.MOWER: "Mower",
 	Racer.Item.PIT: "Pit",
 	Racer.Item.ROD: "Rod",
 }

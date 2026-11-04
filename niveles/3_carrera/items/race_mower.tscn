@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://niveles/3_carrera/items/race_mower.gd" id="1_mower"]
+[ext_resource type="Script" path="res://niveles/3_carrera/items/mower_model.gd" id="2_model"]
+
+[node name="RaceMower" type="Node3D"]
+script = ExtResource("1_mower")
+
+[node name="Model" type="Node3D" parent="."]
+script = ExtResource("2_model")
+length = 1.3

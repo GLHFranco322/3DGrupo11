@@ -1,6 +1,6 @@
 # Métricas de testeo → Google Sheets
 
-Al terminar cada partida del nivel 1 o 2, el juego (autoload `Metrics`, en
+Al terminar cada partida de los niveles 1, 2 y 3, el juego (autoload `Metrics`, en
 `sistema/metrics.gd`) manda una fila a una planilla de Google Sheets. Las
 columnas de observación (en amarillo) se llenan a mano durante el testeo.
 
@@ -16,8 +16,8 @@ columnas de observación (en amarillo) se llenan a mano durante el testeo.
    **Ejecutar**. La primera vez pide permisos: *Revisar permisos* → elegir la
    cuenta → *Configuración avanzada* → *Ir a … (no seguro)* → *Permitir*
    (es un script propio, Google avisa porque no está verificado).
-   Esto crea las pestañas "Nivel 1 - Corta el pasto", "Nivel 2 - Laberinto" y
-   "Resumen".
+   Esto crea las pestañas "Nivel 1 - Corta el pasto", "Nivel 2 - Laberinto",
+   "Nivel 3 - Carrera" y "Resumen".
 6. **Implementar → Nueva implementación** → engranaje → **Aplicación web**:
    - Ejecutar como: **Yo**
    - Quién tiene acceso: **Cualquier usuario**
@@ -44,8 +44,14 @@ columnas de observación (en amarillo) se llenan a mano durante el testeo.
 
 ## Si se cambia el script
 
-Después de editarlo: **Implementar → Gestionar implementaciones** → lápiz →
-Versión: **Nueva versión** → Implementar. Así la URL no cambia.
+1. Pegar el script nuevo entero en Apps Script (si la clave no es la del repo,
+   volver a poner la propia en `CLAVE`) y guardar.
+2. Correr **configurar** otra vez: crea las pestañas nuevas y, en las que ya
+   existen, agrega al final las columnas que falten (no mueve ni borra datos).
+   Rehace el "Resumen".
+3. **Implementar → Gestionar implementaciones** → lápiz → Versión: **Nueva
+   versión** → Implementar. Así la URL no cambia (con "Nueva implementación" sí
+   cambia y habría que pegarla otra vez en el juego).
 
 ## Qué mide cada columna
 
@@ -57,7 +63,8 @@ Versión: **Nueva versión** → Implementar. Así la URL no cambia.
 | `jX_piedras` | Piedras tiradas |
 | `jX_pozos` | Pozos colocados |
 | `jX_botas_agarradas` | Botas agarradas |
-| `jX_patadas` / `jX_patadas_acertadas` | Patadas (R2 con la bota) / las que conectaron |
+| `jX_patadas` / `jX_patadas_acertadas` | Patadas (R2 o □ con la bota) / las que conectaron |
+| `jX_trampas_total` | Piedras + pozos + patadas |
 | `jX_seg_con_maquina` | Segundos sosteniendo la cortadora |
 | `ganador` | 1, 2 o "empate" |
 | `obs_…` | Observación (a mano) |
@@ -73,6 +80,23 @@ Versión: **Nueva versión** → Implementar. Así la URL no cambia.
 | `jX_trampas_total` | Piñas + bananas + hielos |
 | `jX_items_entregados` | Herramientas colgadas en el tablero |
 | `obs_…` | Observación (a mano) |
+
+**Nivel 3 – Carrera de carretillas**
+
+| Columna | Qué es |
+|---|---|
+| `fin` | "meta" (alguien completó las vueltas) o "tiempo" |
+| `ganador` | 1 o 2 |
+| `jX_puntos`, `jX_metros`, `jX_vueltas` | Puntaje (metros + 100 al ganador), metros recorridos y vueltas completas |
+| `jX_cortadoras` / `_acertadas` / `_fallidas` | Cortadoras tiradas / que tiraron al rival / que no |
+| `jX_pozos` / `jX_pozos_acertados` / `jX_pozos_fallidos` | Pozos dejados / en los que cayó el rival / que no |
+| `jX_canas` / `_acertadas` / `_fallidas` | Cañas usadas / que pescaron al rival / tiradas al aire |
+| `jX_trampas_total`, `jX_trampas_acertadas` | Suma de los tres items: usados / con éxito |
+| `jX_cayo_en_pozos` | Veces que cayó en un pozo (de cualquiera) |
+| `jX_huecos`, `jX_rejas` | Caídas en huecos de la pista / descargas de las rejas eléctricas |
+| `jX_caidas_mapa` | Huecos + rejas (trampas del mapa) |
+| `jX_barro` | Veces que pasó por el barro (frena, no tira) |
+| `obs_notas` | Observación (a mano) |
 
 Para medir algo nuevo desde el juego alcanza con `Metrics.add(player_id,
 "nombre")`: si la columna no existe, la planilla la agrega sola al final.

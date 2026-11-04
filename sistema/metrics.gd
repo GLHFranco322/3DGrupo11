@@ -36,6 +36,9 @@ var session_id: String = ""
 ## ID de la última partida terminada (se muestra en resultados para las
 ## observaciones).
 var last_match_id: String = ""
+## Escena del nivel de esa partida (resultados muestra el ID solo si es la del
+## nivel que se acaba de jugar: los niveles sin métricas no tienen ID).
+var last_match_scene: String = ""
 
 var _active: bool = false
 var _sheet: String = ""
@@ -148,6 +151,8 @@ func end_match() -> void:
 	_active = false
 	_running_timers.clear()
 	last_match_id = _match_id
+	var scene := get_tree().current_scene
+	last_match_scene = scene.scene_file_path if scene else ""
 
 	var row := {
 		"partida_id": _match_id,

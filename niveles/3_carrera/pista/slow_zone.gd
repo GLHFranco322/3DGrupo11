@@ -17,6 +17,7 @@ func _on_body_entered(body: Node) -> void:
 	var racer := Racer.from_body(body)
 	if racer and body == racer.barrow:
 		racer.enter_zone(self, speed_multiplier)
+		Metrics.add(racer.player_id, "barro")
 
 
 func _on_body_exited(body: Node) -> void:

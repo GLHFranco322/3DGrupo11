@@ -54,6 +54,9 @@ func _trigger(racer: Racer) -> void:
 	if not racer.fall_into_pit(global_position):
 		return
 	_triggered = true
+	Metrics.add(racer.player_id, "cayo_en_pozos")
+	if placed_by and placed_by != racer:
+		Metrics.add(placed_by.player_id, "pozos_acertados")
 	area.set_deferred("monitoring", false)
 	Audio.play_sfx(Audio.pit_fall)
 	_paint_hole()
