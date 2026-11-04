@@ -12,6 +12,11 @@ const SETTINGS_PATH := "user://settings.cfg"
 @export var level_names: PackedStringArray = ["Nivel 1: El patio", "Nivel 2: La ferretería", "Nivel 3: La carrera de carretillas", "Nivel 4: Los rompecabezas"]
 ## Escenas de los niveles, en orden de juego. Al terminar uno se ofrece el siguiente.
 @export_file("*.tscn") var level_scenes: PackedStringArray = ["res://niveles/1_patio/patio.tscn", "res://niveles/2_ferreteria/store_level.tscn", "res://niveles/3_carrera/race_level.tscn", "res://niveles/4_rompecabezas/puzzle_level.tscn"]
+## Cuántos de esos niveles (los primeros) se juegan en el recorrido normal. Los
+## que siguen (ej: el 4, que todavía no es para el público) no se ofrecen al
+## terminar un nivel: solo se abren desde "Elegir nivel (dev)", que aparece
+## corriendo el juego desde el editor.
+@export_range(1, 20) var public_levels: int = 3
 ## Si los dos eligen el mismo personaje, el último en elegirlo se tiñe con
 ## este color para distinguirlos (blanco = sin cambio).
 @export var duplicate_tint: Color = Color(0.7, 0.85, 1.0)
@@ -41,10 +46,11 @@ func _ready() -> void:
 	apply_controls()
 
 
-## Índice del nivel que sigue a "scene_path", o -1 si es el último (o no está en la lista).
+## Índice del nivel que sigue a "scene_path", o -1 si es el último del recorrido
+## normal (ver "Public Levels") o no está en la lista.
 func get_next_level(scene_path: String) -> int:
 	var index := level_scenes.find(scene_path)
-	if index < 0 or index + 1 >= level_scenes.size():
+	if index < 0 or index + 1 >= mini(public_levels, level_scenes.size()):
 		return -1
 	return index + 1
 

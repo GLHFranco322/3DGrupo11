@@ -7,8 +7,9 @@ extends Control
 
 ## Escena que se abre con "Jugar".
 @export_file("*.tscn") var character_select_scene: String = "res://menus/character_select.tscn"
-## Muestra "Elegir nivel (dev)" para arrancar directo en cualquier nivel. Para
-## desarrollo: apagarlo en la versión final.
+## Muestra "Elegir nivel (dev)" para arrancar directo en cualquier nivel (también
+## los que no son públicos, como el 4). Solo aparece corriendo el juego desde el
+## editor de Godot: en el juego exportado nunca está.
 @export var show_dev_level_select: bool = true
 
 @onready var main_panel: Control = %MainPanel
@@ -42,7 +43,7 @@ func _ready() -> void:
 	back_button.pressed.connect(_show_panel.bind(main_panel))
 
 	var buttons: Array[BaseButton] = [play_button, options_button, quit_button, keyboard_check, back_button]
-	if show_dev_level_select:
+	if show_dev_level_select and OS.has_feature("editor"):
 		buttons.append_array(_build_level_select())
 
 	master_slider.value = GameSettings.master_volume * 100.0
