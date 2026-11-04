@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="340" height="300" viewBox="0 0 340 300">
+  <defs>
+    <clipPath id="arriba">
+      <rect x="0" y="0" width="340" height="222"/>
+      <ellipse cx="170" cy="222" rx="138" ry="46"/>
+    </clipPath>
+  </defs>
+  <g fill="none" stroke="#1d2140" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 232 q8 -16 14 0 q6 -18 12 0 M300 236 q7 -15 12 0 q6 -17 12 0" stroke-width="3.5"/>
+    <ellipse cx="170" cy="222" rx="152" ry="56" fill="#6b5a45" fill-opacity="0.35"/>
+    <ellipse cx="170" cy="222" rx="138" ry="46" fill="#1d2140"/>
+    <g clip-path="url(#arriba)">
+      <path d="M118 150 L82 64 M222 150 L258 66"/>
+      <circle cx="80" cy="56" r="13" fill="#ffffff"/>
+      <circle cx="260" cy="58" r="13" fill="#ffffff"/>
+      <circle cx="170" cy="190" r="70" fill="#ff8f8f"/>
+      <circle cx="142" cy="170" r="19" fill="#ffffff"/>
+      <circle cx="198" cy="170" r="19" fill="#ffffff"/>
+      <path d="M140 170 a3 3 0 1 1 5 2 a7 7 0 1 1 -9 -7 a11 11 0 1 1 1 17" stroke-width="3"/>
+      <path d="M196 170 a3 3 0 1 1 5 2 a7 7 0 1 1 -9 -7 a11 11 0 1 1 1 17" stroke-width="3"/>
+      <ellipse cx="170" cy="214" rx="12" ry="15" fill="#1d2140"/>
+    </g>
+    <path d="M32 222 Q170 290 308 222" stroke-width="6"/>
+    <path d="M60 40 l-10 -14 M50 70 l-16 -4 M280 40 l10 -14 M290 72 l16 -4" stroke-width="3.5"/>
+    <path d="M170 64 l5 12 l13 1 l-10 8 l4 13 l-12 -7 l-12 7 l4 -13 l-10 -8 l13 -1 Z" fill="#ffe94d" stroke-width="3"/>
+    <path d="M118 96 l4 10 l10 1 l-8 6 l3 10 l-9 -6 l-9 6 l3 -10 l-8 -6 l10 -1 Z" fill="#ffe94d" stroke-width="3"/>
+  </g>
+</svg>

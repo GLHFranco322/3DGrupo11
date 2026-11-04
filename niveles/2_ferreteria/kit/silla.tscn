@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_032.res" id="1_jh7jr"]
+
+[node name="silla" type="Node3D" unique_id=1155066867]
+metadata/bounds = AABB(-0.37499988, -3.889638e-09, -5.48462e-06, 0.75, 1.2583259, 0.84512866)
+
+[node name="chair_B_0" type="MeshInstance3D" parent="." unique_id=82841119]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -1.513958e-05, 5.9604645e-08, 0.4701233)
+mesh = ExtResource("1_jh7jr")

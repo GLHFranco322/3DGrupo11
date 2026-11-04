@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_025.res" id="1_cgt3s"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_005.res" id="2_tufxr"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_003.res" id="3_6n62t"]
+
+[node name="pallet_cajas" type="Node3D" unique_id=974213107]
+metadata/bounds = AABB(-1.0000001, 3.5527137e-15, 5.960464e-08, 2.0000002, 1.5139605, 2.0236933)
+
+[node name="Pallet_Small_0" type="MeshInstance3D" parent="." unique_id=1467361920]
+transform = Transform3D(-100, 8.742277e-06, 1.0421607e-12, 0, -1.1920929e-05, 99.99999, 8.742278e-06, 99.99999, 1.1920929e-05, 0, 1.4901161e-07, 1)
+mesh = ExtResource("1_cgt3s")
+
+[node name="cajacerrada25_1" type="MeshInstance3D" parent="." unique_id=1573400050]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -0.6183119, 0.51014984, 0.5095196)
+mesh = ExtResource("2_tufxr")
+
+[node name="cajacerrada26_2" type="MeshInstance3D" parent="." unique_id=1507549900]
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, -0.32178116, 0.51014984, 1.3353939)
+mesh = ExtResource("2_tufxr")
+
+[node name="cajacerrada27_3" type="MeshInstance3D" parent="." unique_id=1084092449]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, 0.1629839, 0.51014984, 0.5095196)
+mesh = ExtResource("2_tufxr")
+
+[node name="cajacerrada28_4" type="MeshInstance3D" parent="." unique_id=10665422]
+transform = Transform3D(-1.3113416e-07, 0, 3, 0, 3, 0, -3, 0, -1.3113416e-07, -0.27295303, 0.99349, 0.5095196)
+mesh = ExtResource("2_tufxr")
+
+[node name="cajasemiabierta18_5" type="MeshInstance3D" parent="." unique_id=103351647]
+transform = Transform3D(1.6695035, 0, 1.101253, 0, 2, 0, -1.101253, 0, 1.6695035, 0.4925537, 0.5192765, 1.509943)
+mesh = ExtResource("3_6n62t")

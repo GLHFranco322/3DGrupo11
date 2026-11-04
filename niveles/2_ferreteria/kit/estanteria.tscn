@@ -1,0 +1,99 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_007_MODEL_05_0_001.res" id="1_le20s"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_006.res" id="2_fls6r"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_005.res" id="3_ck2oj"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_020.res" id="4_jqrgc"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_047.res" id="5_v0rj3"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_260.res" id="6_wfghc"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_004.res" id="7_q34it"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_006_2.res" id="8_li6sd"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_005.res" id="9_df46i"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_013.res" id="10_rmm16"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_003.res" id="11_0rn4n"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_016.res" id="12_66h5y"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/bucket_metal.res" id="13_vr61u"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/bucket_metal_handle.res" id="14_2ax8q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rwc2"]
+albedo_color = Color(0.20392157, 0.45882353, 0.7490196, 1)
+
+[node name="estanteria" type="Node3D" unique_id=880064359]
+metadata/bounds = AABB(-1.4155585, -1.8626451e-09, 1.6666587e-06, 2.8311172, 3.0070019, 1.2149636)
+
+[node name="Rack-33_0" type="MeshInstance3D" parent="." unique_id=1683984065]
+transform = Transform3D(-1.7484556e-06, 40, 1.7484556e-06, 0, -1.7484556e-06, 40, 40, 1.7484556e-06, 7.6427424e-14, 0, 0.007302642, 0.6074829)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("1_le20s")
+
+[node name="Box_A70_1" type="MeshInstance3D" parent="." unique_id=1457582190]
+transform = Transform3D(-2.1855694e-06, 49.999996, 5.9604645e-06, 0, -5.9604645e-06, 49.999996, 50, 2.1855692e-06, 2.6054018e-13, 0.5752983, 2.2796052, 0.9352608)
+mesh = ExtResource("2_fls6r")
+
+[node name="Box_C93_2" type="MeshInstance3D" parent="." unique_id=505614114]
+transform = Transform3D(-2.1855694e-06, 49.999996, 5.9604645e-06, 0, -5.9604645e-06, 49.999996, 50, 2.1855692e-06, 2.6054018e-13, 0.85640335, 2.2910583, 0.75346947)
+mesh = ExtResource("3_ck2oj")
+
+[node name="Box_C94_3" type="MeshInstance3D" parent="." unique_id=1303110787]
+transform = Transform3D(-3.2783541e-06, 75, 3.2783541e-06, 0, -3.2783541e-06, 75, 75, 3.2783541e-06, 1.4330141e-13, 0.43943405, 2.2910583, 0.5239544)
+mesh = ExtResource("3_ck2oj")
+
+[node name="Box_A71_4" type="MeshInstance3D" parent="." unique_id=1001614649]
+transform = Transform3D(15.895022, 47.406208, 5.6512604e-06, 0, -5.9604645e-06, 50.000004, 47.40621, -15.8950205, -1.8948341e-06, -0.51587677, 1.5186102, 0.94039536)
+mesh = ExtResource("2_fls6r")
+
+[node name="Box_C95_5" type="MeshInstance3D" parent="." unique_id=2022283916]
+transform = Transform3D(15.895022, 47.406208, 5.6512604e-06, 0, -5.9604645e-06, 50.000004, 47.40621, -15.8950205, -1.8948341e-06, -0.30714798, 1.5772183, 0.6786709)
+mesh = ExtResource("3_ck2oj")
+
+[node name="Box_C96_6" type="MeshInstance3D" parent="." unique_id=2101300652]
+transform = Transform3D(23.842527, 71.10931, 3.1082866e-06, 0, -3.2783541e-06, 74.99999, 71.10931, -23.842527, -1.0421902e-06, -0.77544975, 1.5772183, 0.5936165)
+mesh = ExtResource("3_ck2oj")
+
+[node name="Barrel_A24_7" type="MeshInstance3D" parent="." unique_id=1783881380]
+transform = Transform3D(-1.3113416e-06, 30, 1.3113416e-06, 0, -1.3113416e-06, 30, 30, 1.3113416e-06, 5.732056e-14, 0.8240204, 1.0218799, 0.6161499)
+mesh = ExtResource("4_jqrgc")
+
+[node name="Barrel_C24_8" type="MeshInstance3D" parent="." unique_id=1758971313]
+transform = Transform3D(-1.5298986e-06, 35, 1.5298986e-06, 0, -1.5298986e-06, 35, 35, 1.5298986e-06, 6.687399e-14, 0.9246578, 1.037102, 0.90405846)
+mesh = ExtResource("5_v0rj3")
+
+[node name="Barrel_B24_9" type="MeshInstance3D" parent="." unique_id=1310072545]
+transform = Transform3D(-8.742278e-07, 20, 8.742278e-07, 0, -8.742278e-07, 20, 20, 8.742278e-07, 3.8213712e-14, 0.68190384, 0.9617741, 0.8234196)
+mesh = ExtResource("6_wfghc")
+
+[node name="Box_B24_10" type="MeshInstance3D" parent="." unique_id=271901841]
+transform = Transform3D(-41.005604, 28.610153, 3.4105958e-06, 0, -5.9604645e-06, 50.000004, 28.610155, 41.0056, 4.8882484e-06, 0.6424103, 1.564259, 0.74071693)
+mesh = ExtResource("7_q34it")
+
+[node name="Box_A72_11" type="MeshInstance3D" parent="." unique_id=1533305553]
+transform = Transform3D(-2.1855694e-06, 49.999996, 5.9604645e-06, 0, -5.9604645e-06, 49.999996, 50, 2.1855692e-06, 2.6054018e-13, 0.9245968, 1.5845308, 0.55737877)
+mesh = ExtResource("8_li6sd")
+
+[node name="cajacerrada47_12" type="MeshInstance3D" parent="." unique_id=483134796]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -1.0790043, 2.2964458, 0.73792267)
+mesh = ExtResource("9_df46i")
+
+[node name="cajaabierta24_13" type="MeshInstance3D" parent="." unique_id=1527905072]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -1.1398659, 0.8628707, 0.6633625)
+mesh = ExtResource("10_rmm16")
+
+[node name="cajasemiabierta24_14" type="MeshInstance3D" parent="." unique_id=599170294]
+transform = Transform3D(-1.0673771, 0, -1.0539005, 0, 1.5, 0, 1.0539005, 0, -1.0673771, -0.7885208, 0.15276027, 0.7005272)
+mesh = ExtResource("11_0rn4n")
+
+[node name="Caja pequeña24_15" type="MeshInstance3D" parent="." unique_id=844093701]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.6563282, 2.2923324, 0.8562088)
+mesh = ExtResource("12_66h5y")
+
+[node name="cajacerrada48_16" type="MeshInstance3D" parent="." unique_id=895729077]
+transform = Transform3D(0.6718084, 0, -1.0541221, 0, 1.25, 0, 1.0541221, 0, 0.6718084, -0.44680977, 0.8644097, 0.7981701)
+mesh = ExtResource("9_df46i")
+
+[node name="bucket_metal24_17" type="MeshInstance3D" parent="." unique_id=2011602827]
+transform = Transform3D(49.99746, -0.50438976, -6.0127945e-08, 0, -5.9604645e-06, 50.000004, -0.5043898, -49.997456, -5.9601607e-06, 0.8853817, 0.112917185, 0.6376991)
+mesh = ExtResource("13_vr61u")
+
+[node name="bucket_metal_handle_18" type="MeshInstance3D" parent="." unique_id=767094076]
+transform = Transform3D(49.99746, -0.50438976, -6.0127945e-08, 0, -5.9604645e-06, 50.000004, -0.5043898, -49.997456, -5.9601607e-06, 0.88538265, 0.44891727, 0.6376991)
+mesh = ExtResource("14_2ax8q")

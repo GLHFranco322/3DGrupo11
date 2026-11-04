@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Plane_002.res" id="1_031g4"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_006_3.res" id="2_kcctk"]
+
+[node name="sillon" type="Node3D" unique_id=1758926542]
+metadata/bounds = AABB(-1.5000001, 0, -1.4591929e-07, 3.0000002, 1.2240598, 1.6)
+
+[node name="couch_0" type="MeshInstance3D" parent="." unique_id=791753845]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, 0, 8.940697e-08, 0.75)
+mesh = ExtResource("1_031g4")
+
+[node name="pillow_A_1" type="MeshInstance3D" parent="." unique_id=1769549081]
+transform = Transform3D(91.84741, -31.517132, 23.88987, 0, 60.407063, 79.69308, -39.54814, -73.19602, 55.48232, -0.8762646, 0.703323, 0.7636795)
+mesh = ExtResource("2_kcctk")
+
+[node name="pillow_A2_2" type="MeshInstance3D" parent="." unique_id=1076260564]
+transform = Transform3D(95.134224, 24.556398, -18.613663, -9.86777e-07, 60.407066, 79.69308, 30.813719, -75.81538, 57.467773, 0.8949752, 0.703323, 0.78660583)
+mesh = ExtResource("2_kcctk")

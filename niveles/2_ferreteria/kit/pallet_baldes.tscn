@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_029.res" id="1_m2jeu"]
+
+[node name="pallet_baldes" type="Node3D" unique_id=1697451512]
+metadata/bounds = AABB(-0.99999994, 3.5527137e-15, -4.3711385e-08, 2.0000002, 3, 2)
+
+[node name="Pallet_Small_Decorated_B_0" type="MeshInstance3D" parent="." unique_id=119660397]
+transform = Transform3D(-4.371139e-06, 99.99999, 1.1920929e-05, 0, -1.1920929e-05, 99.99999, 100, 4.3711384e-06, 5.2108036e-13, 0, 1.4901161e-07, 1)
+mesh = ExtResource("1_m2jeu")

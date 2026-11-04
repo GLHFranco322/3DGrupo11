@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cone_008.res" id="1_rmr1a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6ebp"]
+albedo_color = Color(0.96862745, 0.47843137, 0.13333334, 1)
+
+[node name="cono_1" type="Node3D" unique_id=1662846732]
+metadata/bounds = AABB(-0.39000002, 2.1695577e-08, -7.242093e-08, 0.78000003, 0.97500014, 0.78000003)
+
+[node name="Cone_007_0" type="MeshInstance3D" parent="." unique_id=114267878]
+transform = Transform3D(30, 0, 0, 0, -1.3113416e-06, 30, 0, -30, -1.3113416e-06, 0, 2.9802322e-08, 0.39)
+material_override = SubResource("StandardMaterial3D_i6ebp")
+mesh = ExtResource("1_rmr1a")

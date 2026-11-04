@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_030.res" id="1_63c6n"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/defaultMaterial_057.res" id="2_3pe7p"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/defaultMaterial_058.res" id="3_exiu5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wxff"]
+albedo_color = Color(0.9647059, 0, 0.011764706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbkq0"]
+albedo_color = Color(0.53980756, 0, 0.00312667, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw3yc"]
+albedo_color = Color(0.5411765, 0, 0.003921569, 1)
+
+[node name="casillero_1" type="Node3D" unique_id=1107238598]
+metadata/bounds = AABB(-0.79073143, 0, 2.3356617e-07, 1.5814621, 3.4381292, 0.870384)
+
+[node name="Locker_20_0" type="MeshInstance3D" parent="." unique_id=780476277]
+transform = Transform3D(-1.7484556e-06, -39.99999, -1.7484548e-06, 0, -1.7484548e-06, 39.99999, -40, 1.748455e-06, 7.642738e-14, -0.0020771027, 1.2233801, 0.42994213)
+material_override = SubResource("StandardMaterial3D_6wxff")
+mesh = ExtResource("1_63c6n")
+
+[node name="Locker_46_1" type="MeshInstance3D" parent="." unique_id=1071391006]
+transform = Transform3D(-1.7484556e-06, -39.99999, -1.7484548e-06, 0, -1.7484548e-06, 39.99999, -40, 1.748455e-06, 7.642738e-14, 0.7215328, 1.8549637, 0.8018799)
+material_override = SubResource("StandardMaterial3D_fbkq0")
+mesh = ExtResource("2_3pe7p")
+
+[node name="Locker_47_2" type="MeshInstance3D" parent="." unique_id=2069266861]
+transform = Transform3D(-1.7484556e-06, -39.99999, -1.7484548e-06, 0, -1.7484548e-06, 39.99999, -40, 1.748455e-06, 7.642738e-14, -0.72746086, 1.8549637, 0.8018799)
+material_override = SubResource("StandardMaterial3D_aw3yc")
+mesh = ExtResource("3_exiu5")

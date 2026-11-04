@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_004.res" id="1_kowi8"]
+
+[node name="cactus" type="Node3D" unique_id=841910887]
+metadata/bounds = AABB(-0.4184219, 5.0680455e-09, -7.789444e-08, 0.83684385, 0.8272461, 0.8799096)
+
+[node name="cactus_medium_A_0" type="MeshInstance3D" parent="." unique_id=55769886]
+transform = Transform3D(-4.371139e-06, 99.99999, 1.1920929e-05, 0, -1.1920929e-05, 99.99999, 100, 4.3711384e-06, 5.2108036e-13, 0, -1.758337e-06, 0.43996263)
+mesh = ExtResource("1_kowi8")

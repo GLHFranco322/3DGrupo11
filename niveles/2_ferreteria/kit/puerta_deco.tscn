@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_16501.res" id="1_5f1jp"]
+
+[node name="puerta_deco" type="Node3D" unique_id=1806447846]
+metadata/bounds = AABB(-0.8000002, 1.1920921e-08, 1.1265278e-06, 1.6000004, 2.8, 0.5356937)
+
+[node name="Door_B_0" type="MeshInstance3D" parent="." unique_id=1997842292]
+transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.99999, 0, -99.99999, -1.1920929e-05, -0.79999983, 2.9802322e-08, 0.15000153)
+mesh = ExtResource("1_5f1jp")

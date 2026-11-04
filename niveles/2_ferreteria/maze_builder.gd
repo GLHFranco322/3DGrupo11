@@ -2,11 +2,16 @@
 class_name MazeBuilder
 extends Node3D
 
-# Genera la ferretería: el laberinto de góndolas (estanterías), la zona de
-# atención al frente (donde va el mostrador, unida al laberinto por algunas
-# entradas), el piso, el techo y las luces. Con semilla 0 sale un laberinto
-# distinto en cada partida; con otro número sale siempre el mismo. En el editor
-# se puede ver con el botón "Generar" del inspector.
+# Genera la ferretería: el laberinto, la zona de atención al frente (donde va el
+# mostrador, unida al laberinto por algunas entradas), el piso, el techo y las
+# luces. Con semilla 0 sale un laberinto distinto en cada partida; con otro
+# número sale siempre el mismo. En el editor se puede ver con el botón
+# "Generar" del inspector.
+#
+# Se arma con las piezas del mapa hecho a mano (niveles/Escenarios/
+# laberinto_ferreteria.tscn), sacadas a niveles/2_ferreteria/kit/ con
+# kit/extraer_kit.gd: paredes de cemento, muebles contra las paredes y la
+# decoración de la zona de atención.
 #
 # Las celdas del laberinto van de (0, 0) a (columns - 1, rows - 1). La zona de
 # atención son las filas que siguen (rows .. rows + front_rows - 1), sin paredes
@@ -17,12 +22,9 @@ extends Node3D
 @export_range(2, 40) var columns: int = 13
 ## Celdas a lo largo (Z), sin contar la zona de atención.
 @export_range(2, 40) var rows: int = 10
-## Tamaño de cada celda (ancho de los pasillos).
+## Tamaño de cada celda (ancho de los pasillos). La pieza de pared se estira a
+## este largo (mide 4).
 @export_range(1.0, 10.0, 0.1, "suffix:u") var cell_size: float = 4.0
-## Altura de las paredes.
-@export_range(0.5, 10.0, 0.1, "suffix:u") var wall_height: float = 2.6
-## Grosor de las paredes (las estanterías tienen productos de los dos lados).
-@export_range(0.05, 2.0, 0.05, "suffix:u") var wall_thickness: float = 0.8
 
 @export_group("Forma")
 ## Semilla del laberinto. 0 = uno distinto en cada partida; otro número = siempre
@@ -38,38 +40,62 @@ extends Node3D
 ## Entradas entre la zona de atención y el laberinto (repartidas a lo ancho).
 @export_range(1, 10) var entrances: int = 3
 
-@export_group("Aspecto")
-## Fondo de las estanterías (el panel del medio).
-@export var wall_material: StandardMaterial3D
-@export var floor_material: StandardMaterial3D
-## Color de los parantes (las columnas de los costados de cada estantería).
-@export var upright_color: Color = Color(0.95, 0.45, 0.1)
-## Color de los estantes.
-@export var shelf_color: Color = Color(0.55, 0.57, 0.6)
-## Cantidad de estantes por estantería.
-@export_range(1, 10) var shelves_per_wall: int = 4
-## Productos por estante, de cada lado (0 = estanterías vacías).
-@export_range(0, 12) var products_per_shelf: int = 5
-## Colores de los productos (se eligen al azar).
-@export var product_colors: PackedColorArray = [Color(0.85, 0.15, 0.12), Color(0.15, 0.35, 0.8), Color(0.95, 0.8, 0.15), Color(0.2, 0.6, 0.25), Color(0.95, 0.5, 0.1), Color(0.9, 0.9, 0.88), Color(0.35, 0.35, 0.38)]
+@export_group("Piezas")
+## Módulo de pared de una celda de largo. Su alto y su grosor son los de todas
+## las paredes.
+@export var wall_piece: PackedScene = preload("res://niveles/2_ferreteria/kit/pared.tscn")
+## Muebles que se apoyan contra las paredes de los pasillos (como mucho uno por celda).
+@export var corridor_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/estanteria.tscn"),
+	preload("res://niveles/2_ferreteria/kit/casillero_1.tscn"),
+	preload("res://niveles/2_ferreteria/kit/casillero_2.tscn"),
+	preload("res://niveles/2_ferreteria/kit/cajas_barriles.tscn"),
+	preload("res://niveles/2_ferreteria/kit/cono_1.tscn"),
+	preload("res://niveles/2_ferreteria/kit/cono_2.tscn"),
+	preload("res://niveles/2_ferreteria/kit/escalera_chica.tscn"),
+	preload("res://niveles/2_ferreteria/kit/puerta_deco.tscn"),
+]
+## Probabilidad de que una celda de pasillo tenga un mueble.
+@export_range(0.0, 1.0, 0.05) var prop_chance: float = 0.4
+## Profundidad máxima de un mueble de pasillo (fracción del ancho del pasillo),
+## para que no tape el paso ni las herramientas, que aparecen en el medio.
+@export_range(0.1, 0.5, 0.05) var max_prop_depth: float = 0.35
+## Muebles de la zona de atención (contra el fondo y los costados).
+@export var front_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/sillon.tscn"),
+	preload("res://niveles/2_ferreteria/kit/mesa.tscn"),
+	preload("res://niveles/2_ferreteria/kit/silla.tscn"),
+	preload("res://niveles/2_ferreteria/kit/cactus.tscn"),
+	preload("res://niveles/2_ferreteria/kit/pallet_baldes.tscn"),
+	preload("res://niveles/2_ferreteria/kit/pallet_cajas.tscn"),
+	preload("res://niveles/2_ferreteria/kit/escalera_alta.tscn"),
+	preload("res://niveles/2_ferreteria/kit/estanteria.tscn"),
+]
+## Probabilidad de que cada tramo de pared de la zona de atención tenga un mueble.
+@export_range(0.0, 1.0, 0.05) var front_prop_chance: float = 0.75
+## Lo que cuelga de la pared del fondo de la zona de atención. El primero (el
+## reloj) va siempre arriba del mostrador; los demás se reparten.
+@export var front_wall_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/reloj.tscn"),
+	preload("res://niveles/2_ferreteria/kit/planos.tscn"),
+	preload("res://niveles/2_ferreteria/kit/diana.tscn"),
+]
+## Malla del piso y del techo (se estira al tamaño de cada zona).
+@export var floor_mesh: Mesh = preload("res://niveles/2_ferreteria/kit/mallas/piso.res")
 
 @export_group("Techo y luces")
-## Espacio entre la parte de arriba de las góndolas y el techo.
-@export_range(0.0, 5.0, 0.1, "suffix:u") var ceiling_gap: float = 0.8
-## Color del techo.
-@export var ceiling_color: Color = Color(0.82, 0.83, 0.85)
-## Color de los tubos de luz del techo (uno por celda).
-@export var tube_color: Color = Color(1.0, 0.98, 0.9)
+## Espacio entre la parte de arriba de las paredes y el techo.
+@export_range(0.0, 5.0, 0.1, "suffix:u") var ceiling_gap: float = 0.0
 ## Las luces se reparten en zonas de este tamaño (en celdas), una luz por zona.
 ## Godot (modo Compatibility) ilumina cada objeto con 8 luces como mucho, por eso
-## el piso y las góndolas se arman por zonas.
+## el piso, las paredes y los muebles se arman por zonas.
 @export_range(1, 10) var light_zone_cells: int = 3
 ## Color de las luces.
 @export var light_color: Color = Color(1.0, 0.95, 0.85)
-## Intensidad de las luces.
-@export_range(0.0, 10.0, 0.05) var light_energy: float = 1.6
-## Alcance de cada luz (como fracción del tamaño de su zona).
-@export_range(0.2, 2.0, 0.05) var light_range_factor: float = 0.8
+## Intensidad de las luces (son focos que apuntan para abajo, como en el mapa a mano).
+@export_range(0.0, 40.0, 0.5) var light_energy: float = 10.0
+## Apertura de cada foco.
+@export_range(10.0, 89.0, 1.0, "suffix:°") var spot_angle: float = 55.0
 
 @export_group("Camino al tablero")
 ## Flechas pintadas en el piso que marcan el camino más corto al tablero.
@@ -104,6 +130,15 @@ var _built: bool = false
 ## Semilla con la que se generó el último laberinto (en online, el anfitrión se
 ## la va a pasar al otro jugador para que tengan el mismo).
 var current_seed: int = 0
+## Alto y grosor de las paredes (los de la pieza de pared; los usan los lugares).
+var wall_height: float = 8.0
+var wall_thickness: float = 0.56
+# Piezas del kit ya desarmadas en mallas (ver _piece)
+var _piece_cache: Dictionary = {}
+# Copias de mallas con los materiales que pisa cada pieza: [[clave, malla], ...]
+var _material_meshes: Array = []
+# MultiMesh por armar: "zona_malla" -> {"mesh", "zone", "transforms"}
+var _batches: Dictionary = {}
 
 
 func _ready() -> void:
@@ -180,8 +215,12 @@ func build() -> void:
 	for child in get_children():
 		child.free()
 	_generate_layout()
+	_read_wall_size()
 	_build_room()
 	_build_walls()
+	_build_props()
+	_build_front()
+	_flush_batches()
 	_build_places()
 	_built = true
 
@@ -413,6 +452,7 @@ func _total_rows() -> int:
 	return rows + front_rows
 
 
+
 # Zona (para las luces) a la que pertenece un punto local (X, Z)
 func _zone_of(point: Vector2) -> Vector2i:
 	var half := get_size() * 0.5
@@ -426,7 +466,16 @@ func _zone_count() -> Vector2i:
 	return Vector2i(ceili(float(columns) / light_zone_cells), ceili(float(_total_rows()) / light_zone_cells))
 
 
-# Piso (por zonas), techo, tubos de luz y una luz por zona
+# Alto y grosor de las paredes: los de la pieza de pared
+func _read_wall_size() -> void:
+	if wall_piece == null:
+		return
+	var bounds: AABB = _piece(wall_piece).bounds
+	wall_height = bounds.size.y
+	wall_thickness = bounds.size.z
+
+
+# Piso y techo (por zonas, con las mallas del mapa a mano) y un foco por zona
 func _build_room() -> void:
 	var half := get_size() * 0.5
 	var total := Vector2(columns, _total_rows()) * cell_size
@@ -443,19 +492,6 @@ func _build_room() -> void:
 	add_child(ceiling)
 	# Con colisión, así la cámara no lo atraviesa
 	ceiling.add_child(_box_collision(Vector3(total.x, 0.2, total.y), Vector3(0.0, ceiling_y + 0.1, center_z)))
-	var ceiling_mesh := MeshInstance3D.new()
-	var ceiling_plane := PlaneMesh.new()
-	ceiling_plane.size = total
-	ceiling_plane.flip_faces = true
-	var ceiling_material := StandardMaterial3D.new()
-	ceiling_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	ceiling_material.albedo_color = ceiling_color
-	ceiling_plane.material = ceiling_material
-	ceiling_mesh.mesh = ceiling_plane
-	ceiling_mesh.position = Vector3(0.0, ceiling_y, center_z)
-	# No tapa el sol: así sigue iluminando un poco desde arriba
-	ceiling_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	ceiling.add_child(ceiling_mesh)
 
 	var zones := _zone_count()
 	var zone_size := light_zone_cells * cell_size
@@ -464,39 +500,49 @@ func _build_room() -> void:
 			var from := Vector2(zx * zone_size - half.x, zy * zone_size - half.y)
 			var to := Vector2(minf(from.x + zone_size, half.x), minf(from.y + zone_size, -half.y + total.y))
 			var zone_center := (from + to) * 0.5
-			var floor_mesh := MeshInstance3D.new()
-			var plane := PlaneMesh.new()
-			plane.size = to - from
-			plane.material = floor_material
-			floor_mesh.mesh = plane
-			floor_mesh.position = Vector3(zone_center.x, 0.0, zone_center.y)
-			floor_body.add_child(floor_mesh)
+			floor_body.add_child(_slab("Floor_%d_%d" % [zx, zy], zone_center, to - from, 0.0, false))
+			var ceiling_slab := _slab("Ceiling_%d_%d" % [zx, zy], zone_center, to - from, ceiling_y, true)
+			# No tapa el sol: así sigue iluminando un poco desde arriba
+			ceiling_slab.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			ceiling.add_child(ceiling_slab)
 
-			var light := OmniLight3D.new()
+			var light := SpotLight3D.new()
 			light.name = "Light_%d_%d" % [zx, zy]
-			light.position = Vector3(zone_center.x, ceiling_y - 0.4, zone_center.y)
+			light.position = Vector3(zone_center.x, ceiling_y - 0.3, zone_center.y)
+			light.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
 			light.light_color = light_color
 			light.light_energy = light_energy
-			light.omni_range = zone_size * light_range_factor
+			light.spot_range = ceiling_y * 1.6
+			light.spot_angle = spot_angle
 			light.shadow_enabled = false
 			add_child(light)
 
-	# Un tubo de luz (que brilla, sin iluminar) en el techo de cada celda (los
-	# lugares tienen sus propias lámparas)
-	var tubes: Array[Transform3D] = []
-	for y in _total_rows():
-		for x in columns:
-			if _room_of.has(Vector2i(x, y)):
-				continue
-			var center := to_local(get_cell_center(Vector2i(x, y)))
-			tubes.append(_box_transform(Vector3(center.x, ceiling_y - 0.05, center.z), Vector3.RIGHT, Vector3.BACK,
-					Vector3(cell_size * 0.5, 0.06, 0.18)))
-	var tube_material := StandardMaterial3D.new()
-	tube_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	tube_material.albedo_color = tube_color
-	var tube_instance := _make_multimesh("Tubes", tubes, [], tube_material)
-	tube_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	add_child(tube_instance)
+
+# Losa de piso (cara de arriba en "height") o de techo (cara de abajo en
+# "height") hecha con la malla del piso estirada a "size" (X, Z). La malla del
+# kit está acostada en su plano XY, con el grosor en Z.
+func _slab(slab_name: String, center: Vector2, size: Vector2, height: float, is_ceiling: bool) -> MeshInstance3D:
+	var mesh_instance := MeshInstance3D.new()
+	mesh_instance.name = slab_name
+	if floor_mesh == null:
+		var plane := PlaneMesh.new()
+		plane.size = size
+		plane.flip_faces = is_ceiling
+		mesh_instance.mesh = plane
+		mesh_instance.position = Vector3(center.x, height, center.y)
+		return mesh_instance
+	var box := floor_mesh.get_aabb()
+	var thickness := 0.1 / maxf(box.size.z, 0.0001)
+	var sx := size.x / box.size.x
+	var sz := size.y / box.size.y
+	# Piso: Z de la malla hacia arriba; techo: hacia abajo (la cara de arriba
+	# de la malla queda mirando al piso)
+	var basis := Basis(Vector3(sx, 0.0, 0.0), Vector3(0.0, 0.0, -sz), Vector3(0.0, thickness, 0.0)) if not is_ceiling \
+			else Basis(Vector3(sx, 0.0, 0.0), Vector3(0.0, 0.0, sz), Vector3(0.0, -thickness, 0.0))
+	var top := Vector3(box.get_center().x, box.get_center().y, box.end.z)
+	mesh_instance.mesh = floor_mesh
+	mesh_instance.transform = Transform3D(basis, Vector3(center.x, height, center.y) - basis * top)
+	return mesh_instance
 
 
 func _box_collision(size: Vector3, position: Vector3) -> CollisionShape3D:
@@ -513,13 +559,9 @@ func _build_walls() -> void:
 	walls.name = "Walls"
 	add_child(walls)
 	var half := get_size() * 0.5
-	# Mismo azar para el aspecto que para la forma (en online se ve igual en los dos)
-	var rng := RandomNumberGenerator.new()
-	rng.seed = current_seed + 1
 	var entrance_columns := get_entrance_columns()
 
-	# Primero se anota dónde va cada pared (centro y si va a lo largo de X), así
-	# cada una sabe si en sus puntas sigue otra en línea recta
+	# Dónde va cada pared (centro y si va a lo largo de X)
 	var specs: Array = []
 
 	for cell in get_all_cells():
@@ -548,154 +590,256 @@ func _build_walls() -> void:
 			if y == _total_rows() - 1:
 				specs.append([origin + Vector2(cell_size * 0.5, cell_size), true])
 
-	var placed := {}
+	# Puntas de cada pared: en las esquinas, cruces y puntas sueltas va una
+	# columna del mismo material (donde dos paredes siguen en línea recta, no)
+	var corners := {}
 	for spec in specs:
-		placed[_wall_key(spec[0], spec[1])] = true
-	# Las piezas visuales se juntan en MultiMesh por zona: pocos dibujos en total
-	# (en vez de miles de mallas sueltas) y cada zona recibe sus luces cercanas
-	var zones := {}
-	for spec in specs:
-		_add_wall(walls, spec[0], spec[1], rng, zones, placed)
-
-	var uprights_material := _flat_material(upright_color)
-	var shelves_material := _flat_material(shelf_color)
-	var products_material := _vertex_color_material()
-	for zone in zones:
-		var parts: Dictionary = zones[zone]
-		var suffix := "_%d_%d" % [zone.x, zone.y]
-		walls.add_child(_make_multimesh("Panels" + suffix, parts.panels, [], wall_material))
-		walls.add_child(_make_multimesh("Uprights" + suffix, parts.uprights, [], uprights_material))
-		walls.add_child(_make_multimesh("Shelves" + suffix, parts.boards, [], shelves_material))
-		walls.add_child(_make_multimesh("Products" + suffix, parts.products, parts.tints, products_material))
+		_add_wall(walls, spec[0], spec[1])
+		var dir: Vector2 = Vector2.RIGHT if spec[1] else Vector2.DOWN
+		for side in [-1.0, 1.0]:
+			var point: Vector2 = spec[0] + dir * side * cell_size * 0.5
+			var key := Vector2i(roundi(point.x * 10.0), roundi(point.y * 10.0))
+			if not corners.has(key):
+				corners[key] = {"point": point, "along_x": 0, "along_z": 0}
+			corners[key]["along_x" if spec[1] else "along_z"] += 1
+	for info in corners.values():
+		var straight: bool = (info.along_x == 2 and info.along_z == 0) or (info.along_x == 0 and info.along_z == 2)
+		if not straight and not _point_touches_room(info.point):
+			_add_post(walls, info.point)
 
 
 # Pared de una celda de largo centrada en "center" (X, Z). "horizontal" = a lo
-# largo de X. La colisión es una caja; lo que se ve es una estantería de
-# ferretería: fondo en el medio, parantes en las puntas, estantes y productos de
-# colores de los dos lados.
-#
-# Ninguna cara puede quedar en el mismo plano que otra (se verían rayas que
-# parpadean al moverse): el fondo y los estantes terminan adentro de los
-# parantes, los estantes son apenas menos profundos que la pared y los parantes
-# de las paredes a lo largo de Z son un poco más altos que los de X.
-func _add_wall(parent: Node3D, center: Vector2, horizontal: bool, rng: RandomNumberGenerator, zones: Dictionary, placed: Dictionary) -> void:
-	# Puntas: si sigue otra pared en línea recta, se juntan cara contra cara.
-	# Si no (esquina o punta suelta), se estira medio grosor para tapar la
-	# esquina. Si toca un lugar (ej: el taller), se acorta y termina a 2 cm de
-	# su pared.
+# largo de X. La colisión es una caja; lo que se ve es el módulo de pared del
+# kit estirado al largo de la celda. Si toca un lugar (ej: el taller), se acorta
+# y termina a 2 cm de su pared.
+func _add_wall(parent: Node3D, center: Vector2, horizontal: bool) -> void:
 	var dir := Vector2.RIGHT if horizontal else Vector2.DOWN
 	var ends: Array[float] = []
 	for side in [-1.0, 1.0]:
-		if _point_touches_room(center + dir * side * cell_size * 0.5):
-			ends.append(-wall_thickness * 0.5 - 0.02)
-		elif placed.has(_wall_key(center + dir * side * cell_size, horizontal)):
-			ends.append(0.0)
-		else:
-			ends.append(wall_thickness * 0.5)
+		ends.append(-wall_thickness * 0.5 - 0.02 if _point_touches_room(center + dir * side * cell_size * 0.5) else 0.0)
 	var length := cell_size + ends[0] + ends[1]
-	# Cuánto se corrió el centro respecto del centro de la celda
-	var shift := (ends[1] - ends[0]) * 0.5
-	center += dir * shift
+	center += dir * (ends[1] - ends[0]) * 0.5
 	var body := StaticBody3D.new()
 	body.position = Vector3(center.x, wall_height * 0.5, center.y)
 	parent.add_child(body)
 	body.add_child(_box_collision(Vector3(length, wall_height, wall_thickness) if horizontal \
 			else Vector3(wall_thickness, wall_height, length), Vector3.ZERO))
 
-	var zone := _zone_of(center)
-	if not zones.has(zone):
-		zones[zone] = {
-			"panels": [] as Array[Transform3D],
-			"uprights": [] as Array[Transform3D],
-			"boards": [] as Array[Transform3D],
-			"products": [] as Array[Transform3D],
-			"tints": [] as Array[Color],
-		}
-	var parts: Dictionary = zones[zone]
-
-	var base := Vector3(center.x, 0.0, center.y)
-	# "along" = a lo largo de la pared, "across" = hacia los pasillos
-	var along := Vector3.RIGHT if horizontal else Vector3.BACK
-	var across := Vector3.BACK if horizontal else Vector3.RIGHT
-
-	# En las esquinas los fondos y estantes de dos paredes se cruzan: los de Z
-	# van 3 mm más abajo para que sus tapas no queden a la misma altura
-	var drop := 0.0 if horizontal else 0.003
-	parts.panels.append(_box_transform(base + Vector3.UP * (wall_height - drop) * 0.5, along, across,
-			Vector3(length - 0.12, wall_height - drop, wall_thickness * 0.2)))
-	var upright_height := wall_height + (0.02 if horizontal else 0.03)
-	for end in [-1.0, 1.0]:
-		parts.uprights.append(_box_transform(base + along * (length * 0.5 - 0.06) * end + Vector3.UP * upright_height * 0.5,
-				along, across, Vector3(0.12, upright_height, wall_thickness + 0.04)))
-
-	var gap := (wall_height - 0.3) / shelves_per_wall
-	var usable := cell_size - 0.4
-	var depth := wall_thickness * 0.4
-	for i in shelves_per_wall:
-		var height := 0.15 + gap * i
-		parts.boards.append(_box_transform(base + Vector3.UP * (height - drop), along, across,
-				Vector3(length - 0.14, 0.05, wall_thickness - 0.03)))
-		for side in [-1.0, 1.0]:
-			for j in products_per_shelf:
-				if rng.randf() < 0.2:
-					continue  # algún hueco, para que no se vea tan prolijo
-				var size := Vector3(rng.randf_range(0.2, 0.45),
-						rng.randf_range(0.15, maxf(0.16, minf(gap - 0.1, 0.6))),
-						rng.randf_range(0.15, maxf(0.16, depth)))
-				var slot := (j + 0.5) / products_per_shelf - 0.5
-				# Siempre dentro de su celda, sin llegar a los parantes ni al
-				# grosor de la pared que cruza en la esquina
-				var limit := maxf(cell_size * 0.5 - wall_thickness * 0.5 - 0.15 - size.x * 0.5, 0.0)
-				var offset := clampf(slot * usable + rng.randf_range(-0.08, 0.08), -limit, limit) - shift
-				var position: Vector3 = base + along * offset \
-						+ across * side * (wall_thickness * 0.1 + size.z * 0.5 + 0.01) \
-						+ Vector3.UP * (height + 0.025 + size.y * 0.5)
-				parts.products.append(_box_transform(position, along, across, size))
-				parts.tints.append(product_colors[rng.randi_range(0, product_colors.size() - 1)] \
-						if not product_colors.is_empty() else Color.WHITE)
+	var piece_length: float = _piece(wall_piece).bounds.size.x
+	# El módulo va a lo largo de su X: para las paredes a lo largo de Z se gira
+	var basis := Basis(Vector3.UP, 0.0 if horizontal else -PI * 0.5) \
+			* Basis.from_scale(Vector3(length / piece_length, 1.0, 1.0))
+	_stamp(wall_piece, Transform3D(basis, Vector3(center.x, 0.0, center.y)))
 
 
-# Transform de una caja de 1x1x1 estirada a "size" (largo, alto, profundidad) y
-# orientada con "along" / "across"
-# (La caja es simétrica: "across" se da vuelta si hace falta para que la base no
-# quede espejada. Dentro de un MultiMesh una base espejada dibuja las caras de
-# atrás en lugar de las de adelante, y se ven rayas y paredes "huecas".)
-func _box_transform(position: Vector3, along: Vector3, across: Vector3, size: Vector3) -> Transform3D:
-	if along.cross(Vector3.UP).dot(across) < 0.0:
-		across = -across
-	return Transform3D(Basis(along * size.x, Vector3.UP * size.y, across * size.z), position)
+# Columna en una esquina: el mismo módulo de pared, angosto. Apenas más gruesa
+# que las paredes, así sus caras no quedan en el mismo plano que las de ellas.
+func _add_post(parent: Node3D, point: Vector2) -> void:
+	var bounds: AABB = _piece(wall_piece).bounds
+	var width := wall_thickness + 0.01
+	var basis := Basis.from_scale(Vector3(width / bounds.size.x, 1.0, width / bounds.size.z))
+	_stamp(wall_piece, Transform3D(basis, Vector3(point.x, 0.0, point.y)))
+	var body := StaticBody3D.new()
+	body.position = Vector3(point.x, wall_height * 0.5, point.y)
+	parent.add_child(body)
+	body.add_child(_box_collision(Vector3(width, wall_height, width), Vector3.ZERO))
 
 
-func _make_multimesh(node_name: String, transforms: Array, colors: Array, material: Material) -> MultiMeshInstance3D:
-	var box := BoxMesh.new()
-	box.material = material
-	var multimesh := MultiMesh.new()
-	multimesh.transform_format = MultiMesh.TRANSFORM_3D
-	multimesh.use_colors = not colors.is_empty()
-	multimesh.mesh = box
-	multimesh.instance_count = transforms.size()
-	for i in transforms.size():
-		multimesh.set_instance_transform(i, transforms[i])
-		if multimesh.use_colors:
-			multimesh.set_instance_color(i, colors[i])
-	var instance := MultiMeshInstance3D.new()
-	instance.name = node_name
-	instance.multimesh = multimesh
-	return instance
+# true si del lado "dir" de "cell" hay una pared del laberinto (no de un lugar)
+func _has_wall(cell: Vector2i, dir: Vector2i) -> bool:
+	if _touches_room(cell, dir):
+		return false
+	if _in_bounds(cell + dir):
+		return not _open[cell].has(dir)
+	# Abajo de la última fila están las entradas a la zona de atención
+	return not (dir == Vector2i.DOWN and get_entrance_columns().has(cell.x))
 
 
-func _flat_material(color: Color) -> StandardMaterial3D:
-	var material := StandardMaterial3D.new()
-	material.albedo_color = color
-	material.roughness = 0.6
-	return material
+# Muebles de los pasillos: en algunas celdas, uno contra una de sus paredes
+func _build_props() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = current_seed + 2
+	var parent := Node3D.new()
+	parent.name = "Props"
+	add_child(parent)
+	var usable := cell_size - wall_thickness - 0.3
+	var options: Array[PackedScene] = []
+	for scene in corridor_props:
+		if scene == null:
+			continue
+		var bounds: AABB = _piece(scene).bounds
+		if bounds.size.x <= usable and bounds.size.z <= cell_size * max_prop_depth:
+			options.append(scene)
+	if options.is_empty():
+		return
+	for cell in get_free_cells():
+		if rng.randf() >= prop_chance:
+			continue
+		var sides: Array[Vector2i] = []
+		for dir in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
+			if _has_wall(cell, dir):
+				sides.append(dir)
+		if sides.is_empty():
+			continue
+		var side := sides[rng.randi_range(0, sides.size() - 1)]
+		var scene := options[rng.randi_range(0, options.size() - 1)]
+		var slack := maxf((usable - _piece(scene).bounds.size.x) * 0.5, 0.0)
+		_place_against_wall(parent, scene, cell, side, rng.randf_range(-slack, slack))
 
 
-func _vertex_color_material() -> StandardMaterial3D:
-	var material := StandardMaterial3D.new()
-	material.vertex_color_use_as_albedo = true
-	material.roughness = 0.8
-	return material
+# Zona de atención: muebles contra el fondo y los costados (dejando libre el
+# lugar del mostrador) y, colgados del fondo, el reloj arriba del mostrador y
+# algún cuadro más
+func _build_front() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = current_seed + 3
+	var parent := Node3D.new()
+	parent.name = "FrontProps"
+	add_child(parent)
+	var usable := cell_size - 0.3
+	var options: Array[PackedScene] = []
+	for scene in front_props:
+		if scene != null and _piece(scene).bounds.size.x <= usable:
+			options.append(scene)
+	var back_row := _total_rows() - 1
+	var middle := (columns - 1) * 0.5
+	# Celdas del fondo con algo bajo (o nada): ahí se puede colgar un cuadro
+	var low_spots: Array[int] = []
+	for x in columns:
+		if absf(x - middle) <= 1.0:
+			continue
+		if options.is_empty() or rng.randf() >= front_prop_chance:
+			low_spots.append(x)
+			continue
+		var scene := options[rng.randi_range(0, options.size() - 1)]
+		var slack := maxf((usable - _piece(scene).bounds.size.x) * 0.5, 0.0)
+		_place_against_wall(parent, scene, Vector2i(x, back_row), Vector2i.DOWN, rng.randf_range(-slack, slack))
+		if _piece(scene).bounds.end.y < 1.4:
+			low_spots.append(x)
+	# Costados (sin la fila del fondo, que ya tiene lo suyo en las esquinas)
+	for y in range(rows, back_row):
+		for side in [Vector2i.LEFT, Vector2i.RIGHT]:
+			if options.is_empty() or rng.randf() >= front_prop_chance:
+				continue
+			var x := 0 if side == Vector2i.LEFT else columns - 1
+			var scene := options[rng.randi_range(0, options.size() - 1)]
+			var slack := maxf((usable - wall_thickness - _piece(scene).bounds.size.x) * 0.5, 0.0)
+			_place_against_wall(parent, scene, Vector2i(x, y), side, rng.randf_range(-slack, slack))
+
+	if front_wall_props.is_empty():
+		return
+	# El reloj, arriba del mostrador (en el medio del fondo)
+	var middle_cell := Vector2i(floori(middle), back_row)
+	var middle_offset := (middle - floori(middle)) * cell_size
+	if front_wall_props[0]:
+		_place_against_wall(parent, front_wall_props[0], middle_cell, Vector2i.DOWN, middle_offset)
+	for x in low_spots:
+		if front_wall_props.size() > 1 and rng.randf() < 0.5:
+			var scene := front_wall_props[rng.randi_range(1, front_wall_props.size() - 1)]
+			if scene:
+				_place_against_wall(parent, scene, Vector2i(x, back_row), Vector2i.DOWN, rng.randf_range(-0.6, 0.6))
+
+
+# Pone una pieza contra la pared del lado "dir" de "cell", corrida "offset" a
+# lo largo de la pared. Las piezas del kit tienen el frente hacia +Z y la
+# espalda en Z = 0.
+func _place_against_wall(parent: Node3D, scene: PackedScene, cell: Vector2i, dir: Vector2i, offset: float) -> void:
+	var center := to_local(get_cell_center(cell))
+	var toward_wall := Vector3(dir.x, 0.0, dir.y)
+	var along := Vector3(-toward_wall.z, 0.0, toward_wall.x)
+	var origin := center + toward_wall * (cell_size * 0.5 - wall_thickness * 0.5 - 0.02) + along * offset
+	_place_piece(parent, scene, Transform3D(Basis(Vector3.UP, atan2(-toward_wall.x, -toward_wall.z)), origin))
+
+
+# Pieza del kit: lo que se ve va a los MultiMesh de su zona; la colisión es
+# una caja (salvo lo que cuelga de la pared, que no estorba)
+func _place_piece(parent: Node3D, scene: PackedScene, xform: Transform3D) -> void:
+	_stamp(scene, xform)
+	var bounds: AABB = _piece(scene).bounds
+	if bounds.position.y > 0.3:
+		return
+	var body := StaticBody3D.new()
+	body.transform = xform
+	parent.add_child(body)
+	body.add_child(_box_collision(bounds.size, bounds.get_center()))
+
+
+# Piezas desarmadas: escena -> {"parts": [[malla, transform]], "bounds": AABB}
+func _piece(scene: PackedScene) -> Dictionary:
+	if _piece_cache.has(scene):
+		return _piece_cache[scene]
+	var root := scene.instantiate() as Node3D
+	var parts := []
+	for node in root.find_children("*", "MeshInstance3D", true, false):
+		var mesh_instance := node as MeshInstance3D
+		var xform := mesh_instance.transform
+		var parent := mesh_instance.get_parent()
+		while parent != root:
+			xform = (parent as Node3D).transform * xform
+			parent = parent.get_parent()
+		parts.append([_mesh_with_materials(mesh_instance), xform])
+	var info := {"parts": parts, "bounds": root.get_meta("bounds", AABB())}
+	root.free()
+	_piece_cache[scene] = info
+	return info
+
+
+# El MultiMesh no tiene materiales por instancia: si la pieza pisa materiales,
+# se usa una copia de la malla con esos materiales puestos
+func _mesh_with_materials(mesh_instance: MeshInstance3D) -> Mesh:
+	var mesh := mesh_instance.mesh
+	var materials := []
+	var changed := false
+	for i in mesh.get_surface_count():
+		var material: Material = mesh_instance.material_override
+		if material == null and i < mesh_instance.get_surface_override_material_count():
+			material = mesh_instance.get_surface_override_material(i)
+		materials.append(material)
+		changed = changed or material != null
+	if not changed:
+		return mesh
+	var key := [mesh, materials]
+	for entry in _material_meshes:
+		if entry[0] == key:
+			return entry[1]
+	var copy := mesh.duplicate() as Mesh
+	for i in materials.size():
+		if materials[i]:
+			copy.surface_set_material(i, materials[i])
+	_material_meshes.append([key, copy])
+	return copy
+
+
+# Suma una pieza a los MultiMesh de su zona (uno por malla y por zona)
+func _stamp(scene: PackedScene, xform: Transform3D) -> void:
+	var zone := _zone_of(Vector2(xform.origin.x, xform.origin.z))
+	for part in _piece(scene).parts:
+		var mesh: Mesh = part[0]
+		var key := "%d_%d_%d" % [zone.x, zone.y, mesh.get_instance_id()]
+		if not _batches.has(key):
+			_batches[key] = {"mesh": mesh, "zone": zone, "transforms": []}
+		_batches[key].transforms.append(xform * part[1])
+
+
+func _flush_batches() -> void:
+	var visual := Node3D.new()
+	visual.name = "Visual"
+	add_child(visual)
+	var count := {}
+	for batch in _batches.values():
+		var multimesh := MultiMesh.new()
+		multimesh.transform_format = MultiMesh.TRANSFORM_3D
+		multimesh.mesh = batch.mesh
+		multimesh.instance_count = batch.transforms.size()
+		for i in batch.transforms.size():
+			multimesh.set_instance_transform(i, batch.transforms[i])
+		var instance := MultiMeshInstance3D.new()
+		var zone: Vector2i = batch.zone
+		count[zone] = count.get(zone, 0) + 1
+		instance.name = "Zone_%d_%d_%d" % [zone.x, zone.y, count[zone]]
+		instance.multimesh = multimesh
+		visual.add_child(instance)
+	_batches.clear()
 
 
 ## Pinta en el piso de cada celda del laberinto una flecha hacia la siguiente

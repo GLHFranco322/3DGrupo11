@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://sistema/scene_loader.gd" id="1_loader"]
+[ext_resource type="PackedScene" path="res://niveles/1_patio/tutorial/tutorial_patio_recortes.tscn" id="2_tutorial_patio"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0, 0, 0, 0.6)
@@ -19,6 +20,9 @@ corner_radius_bottom_left = 10
 [node name="SceneLoader" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_loader")
+tutorials = Dictionary[String, PackedScene]({
+"res://niveles/1_patio/patio.tscn": ExtResource("2_tutorial_patio")
+})
 
 [node name="Root" type="Control" parent="."]
 layout_mode = 3

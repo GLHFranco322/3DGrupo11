@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_16111.res" id="1_dqujv"]
+
+[node name="diana" type="Node3D" unique_id=1812505839]
+metadata/bounds = AABB(-0.29502377, 2.3580937, 6.803112e-07, 0.59004706, 0.57192016, 0.16288418)
+
+[node name="target_wall_small_0" type="MeshInstance3D" parent="." unique_id=802383393]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, 50, 0, -50, -2.1855694e-06, -0.00016450882, 2.6525772, -0.0023422241)
+mesh = ExtResource("1_dqujv")

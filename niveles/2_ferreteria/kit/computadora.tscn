@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/PSX_Electronics_Asset_Pack_Cube_008.res" id="1_trycm"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_024.res" id="2_m3vas"]
+
+[node name="computadora" type="Node3D" unique_id=1052808088]
+metadata/bounds = AABB(-0.95649505, 4.4703484e-08, -0.58239275, 1.9129901, 0.65325314, 1.1647892)
+
+[node name="CRT PC Monitor_001_0" type="MeshInstance3D" parent="." unique_id=838896192]
+transform = Transform3D(0.15489067, 0, 0.21550561, 0, 0.2366103, 0, -0.21550561, 0, 0.15489067, -0.52977705, 0.15549767, 0.16136551)
+mesh = ExtResource("1_trycm")
+
+[node name="pictureframe_standing_A_1" type="MeshInstance3D" parent="." unique_id=660863283]
+transform = Transform3D(-41.74867, 48.508232, 2.120362e-06, 0, -2.797529e-06, 64, 48.508232, 41.74867, 1.8248923e-06, 0.75112355, 0.016941786, 0.037906647)
+mesh = ExtResource("2_m3vas")

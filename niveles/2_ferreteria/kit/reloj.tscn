@@ -1,0 +1,105 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Объект_Цилиндр.res" id="1_d1qh7"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Выдавливание.res" id="2_0a8pq"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_1.res" id="3_mk645"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_2.res" id="4_cp5pv"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Выдавливание_2.res" id="5_ha2nn"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_1_2.res" id="6_tgk8m"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_2_2.res" id="7_00n2r"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/циверблат.res" id="8_7yp4h"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/секло.res" id="9_juq3i"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/крпус.res" id="10_t37wb"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Объект_Цилиндр_2.res" id="11_c2nhv"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Выдавливание_3.res" id="12_b8l6c"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_1_3.res" id="13_qvju1"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_2_3.res" id="14_73paf"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Выдавливание_2_2.res" id="15_bsggp"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_1_2_2.res" id="16_mikv4"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Шапка_2_2_2.res" id="17_0xrdo"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/циверблат_2.res" id="18_7i3q6"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/секло_2.res" id="19_13jn3"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/крпус_2.res" id="20_kjagt"]
+
+[node name="reloj" type="Node3D" unique_id=365669936]
+metadata/bounds = AABB(-0.3787571, 2.7306073, -1.1776574e-06, 0.7575142, 0.76919985, 0.102265336)
+
+[node name="Объект_Цилиндр_0" type="MeshInstance3D" parent="." unique_id=216102465]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.85046e-05, 3.1145787, 0.029335022)
+mesh = ExtResource("1_d1qh7")
+
+[node name="Выдавливание_1" type="MeshInstance3D" parent="." unique_id=1839522354]
+transform = Transform3D(0.24200888, 0.17728989, 0, -0.17728989, 0.24200888, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("2_0a8pq")
+
+[node name="Шапка_1_2" type="MeshInstance3D" parent="." unique_id=905323410]
+transform = Transform3D(0.24200888, 0.16505688, 0, -0.17728989, 0.22531027, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("3_mk645")
+
+[node name="Шапка_2_3" type="MeshInstance3D" parent="." unique_id=598999927]
+transform = Transform3D(0.24200888, 0.16505688, 0, -0.17728989, 0.22531027, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("4_cp5pv")
+
+[node name="Выдавливание_2_4" type="MeshInstance3D" parent="." unique_id=718275895]
+transform = Transform3D(-0.17751801, 0.24184167, 0, -0.24184167, -0.17751801, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("5_ha2nn")
+
+[node name="Шапка_1_2_5" type="MeshInstance3D" parent="." unique_id=310283168]
+transform = Transform3D(-0.17751801, 0.2251546, 0, -0.24184167, -0.16526927, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("6_tgk8m")
+
+[node name="Шапка_2_2_6" type="MeshInstance3D" parent="." unique_id=169920649]
+transform = Transform3D(-0.17751801, 0.2251546, 0, -0.24184167, -0.16526927, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("7_00n2r")
+
+[node name="циверблат_7" type="MeshInstance3D" parent="." unique_id=1349706662]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.007080078)
+mesh = ExtResource("8_7yp4h")
+
+[node name="секло_8" type="MeshInstance3D" parent="." unique_id=1850086224]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.085990906)
+mesh = ExtResource("9_juq3i")
+
+[node name="крпус_9" type="MeshInstance3D" parent="." unique_id=1009958655]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.007080078)
+mesh = ExtResource("10_t37wb")
+
+[node name="Объект_Цилиндр_10" type="MeshInstance3D" parent="." unique_id=946609579]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.85046e-05, 3.1145787, 0.029335022)
+mesh = ExtResource("11_c2nhv")
+
+[node name="Выдавливание_11" type="MeshInstance3D" parent="." unique_id=1297655075]
+transform = Transform3D(0.24200888, 0.17728989, 0, -0.17728989, 0.24200888, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("12_b8l6c")
+
+[node name="Шапка_1_12" type="MeshInstance3D" parent="." unique_id=2099971386]
+transform = Transform3D(0.24200888, 0.16505688, 0, -0.17728989, 0.22531027, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("13_qvju1")
+
+[node name="Шапка_2_13" type="MeshInstance3D" parent="." unique_id=1499413505]
+transform = Transform3D(0.24200888, 0.16505688, 0, -0.17728989, 0.22531027, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.039440155)
+mesh = ExtResource("14_73paf")
+
+[node name="Выдавливание_2_14" type="MeshInstance3D" parent="." unique_id=1779221781]
+transform = Transform3D(-0.17751801, 0.24184167, 0, -0.24184167, -0.17751801, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("15_bsggp")
+
+[node name="Шапка_1_2_15" type="MeshInstance3D" parent="." unique_id=159919786]
+transform = Transform3D(-0.17751801, 0.2251546, 0, -0.24184167, -0.16526927, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("16_mikv4")
+
+[node name="Шапка_2_2_16" type="MeshInstance3D" parent="." unique_id=2114304838]
+transform = Transform3D(-0.17751801, 0.2251546, 0, -0.24184167, -0.16526927, 0, 0, 0, 0.3, 0.000104904175, 3.1143064, 0.02961731)
+mesh = ExtResource("17_0xrdo")
+
+[node name="циверблат_17" type="MeshInstance3D" parent="." unique_id=1943668213]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.007080078)
+mesh = ExtResource("18_7i3q6")
+
+[node name="секло_18" type="MeshInstance3D" parent="." unique_id=1367299253]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.085990906)
+mesh = ExtResource("19_13jn3")
+
+[node name="крпус_19" type="MeshInstance3D" parent="." unique_id=687502077]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 3.1152072, 0.007080078)
+mesh = ExtResource("20_kjagt")

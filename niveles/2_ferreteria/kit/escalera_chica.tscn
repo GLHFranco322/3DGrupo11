@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/laberintonivel2assets/Low_Poly_Ladders_Pack/OBJ Files/Low_Poly_Ladder_01/Low_Poly_Ladder_01_Small.obj" id="1_6mp1b"]
+
+[node name="escalera_chica" type="Node3D" unique_id=1463141746]
+metadata/bounds = AABB(-0.55, -7.450581e-09, -4.3958426e-07, 1.1, 2.7759898, 1.1597596)
+
+[node name="LowPolyLadder01Small_0" type="MeshInstance3D" parent="." unique_id=1963396939]
+transform = Transform3D(0.5, 0, 0, 0, 0.46593747, 0.18138982, 0, -0.18138982, 0.46593747, 0, 0.24644834, 1.0242844)
+mesh = ExtResource("1_6mp1b")

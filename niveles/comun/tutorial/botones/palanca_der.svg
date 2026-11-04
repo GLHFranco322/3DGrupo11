@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <radialGradient id="cara" cx="50%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#5a5f6e"/>
+      <stop offset="0.6" stop-color="#25272e"/>
+      <stop offset="1" stop-color="#0f1014"/>
+    </radialGradient>
+    <radialGradient id="hueco" cx="50%" cy="60%" r="60%">
+      <stop offset="0" stop-color="#16171c"/>
+      <stop offset="1" stop-color="#3a3d47"/>
+    </radialGradient>
+  </defs>
+  <circle cx="67" cy="71" r="57" fill="#000000" fill-opacity="0.3"/>
+  <circle cx="64" cy="64" r="58" fill="#fbf8ef"/>
+  <circle cx="64" cy="64" r="52" fill="#0a0b0e"/>
+  <circle cx="64" cy="64" r="48" fill="url(#cara)"/>
+  <circle cx="64" cy="64" r="33" fill="url(#hueco)"/>
+  <circle cx="64" cy="64" r="33" fill="none" stroke="#6b7080" stroke-width="2.5"/>
+  <g fill="#e9e9ee">
+    <path d="M64 9 L72 19 L56 19 Z"/>
+    <path d="M64 119 L72 109 L56 109 Z"/>
+    <path d="M9 64 L19 56 L19 72 Z"/>
+    <path d="M119 64 L109 56 L109 72 Z"/>
+  </g>
+  <path d="M55 78 V50 H65 Q75 50 75 59 Q75 67 65 67 H55 M66 67 L76 78" fill="none" stroke="#f4f4f6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cube_015.res" id="1_nhhg6"]
+
+[node name="mesa" type="Node3D" unique_id=1547708579]
+metadata/bounds = AABB(-1, -1.7882378e-08, -7.46982e-08, 2, 1.7088957, 1.5000001)
+
+[node name="table_medium_Decorated_0" type="MeshInstance3D" parent="." unique_id=1626021026]
+transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 0, 5.9604645e-08, 0.75)
+mesh = ExtResource("1_nhhg6")

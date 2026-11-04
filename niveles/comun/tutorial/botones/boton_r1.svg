@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="128" viewBox="0 0 160 128">
+  <defs>
+    <linearGradient id="cara" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a5f6e"/>
+      <stop offset="0.45" stop-color="#2a2c34"/>
+      <stop offset="1" stop-color="#101115"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path transform="translate(4 6)" d="M14 104 Q14 30 80 24 Q146 30 146 104 Q146 112 138 112 L22 112 Q14 112 14 104 Z" fill="#000000" fill-opacity="0.3"/>
+  <path d="M14 104 Q14 30 80 24 Q146 30 146 104 Q146 112 138 112 L22 112 Q14 112 14 104 Z" fill="#fbf8ef" stroke="#fbf8ef" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M14 104 Q14 30 80 24 Q146 30 146 104 Q146 112 138 112 L22 112 Q14 112 14 104 Z" fill="#0a0b0e" stroke="#0a0b0e" stroke-width="2" stroke-linejoin="round"/>
+  <path transform="translate(80 64) scale(0.92) translate(-80 -64)" d="M14 104 Q14 30 80 24 Q146 30 146 104 Q146 112 138 112 L22 112 Q14 112 14 104 Z" fill="url(#cara)"/>
+  <path transform="translate(80 40) scale(0.7 0.35) translate(-80 -64)" d="M14 104 Q14 30 80 24 Q146 30 146 104 Q146 112 138 112 L22 112 Q14 112 14 104 Z" fill="url(#brillo)"/>
+  <g fill="none" stroke="#f4f4f6" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 96 V58 H63 Q76 58 76 69 Q76 80 63 80 H50 M64 80 L78 96"/><path d="M92 66 L104 57 V96"/></g>
+</svg>

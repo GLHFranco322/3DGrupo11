@@ -37,12 +37,6 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 0.97, 0.9, 1)
 ambient_light_energy = 0.35
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
-albedo_color = Color(0.78, 0.72, 0.62, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
-albedo_color = Color(0.56, 0.57, 0.6, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 16.0
 content_margin_top = 10.0
@@ -77,10 +71,7 @@ environment = SubResource("Environment_store")
 
 [node name="Maze" type="Node3D" parent="."]
 script = ExtResource("2_maze")
-wall_height = 4.5
 places = Array[PackedScene]([ExtResource("40_workshop")])
-wall_material = SubResource("StandardMaterial3D_wall")
-floor_material = SubResource("StandardMaterial3D_floor")
 
 [node name="Counter" parent="." instance=ExtResource("11_counter")]
 

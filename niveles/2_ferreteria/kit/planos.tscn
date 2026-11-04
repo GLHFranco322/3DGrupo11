@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/blueprint_stacked.res" id="1_ea5ve"]
+
+[node name="planos" type="Node3D" unique_id=516339808]
+metadata/bounds = AABB(-0.95606035, 1.710238, 3.8146973e-06, 1.9121206, 1.577611, 0.24410728)
+
+[node name="blueprint_stacked_0" type="MeshInstance3D" parent="." unique_id=1288756704]
+transform = Transform3D(90, 0, 0, 0, 90, 0, 0, 0, 90, 0.008597136, 2.499169, 3.8146973e-06)
+mesh = ExtResource("1_ea5ve")

@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_020_2.res" id="1_0e37t"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_047_2.res" id="2_yuo47"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas/Cylinder_260_2.res" id="3_a2tk5"]
+
+[node name="cajas_barriles" type="Node3D" unique_id=919054519]
+metadata/bounds = AABB(-0.6129081, 4.4703484e-08, -1.5352174e-06, 1.2258171, 0.7006567, 1.035508)
+
+[node name="Barrel_A3_0" type="MeshInstance3D" parent="." unique_id=2013036587]
+transform = Transform3D(60, 0, 0, 0, -2.6226833e-06, 60, 0, -60, -2.6226833e-06, -0.31290817, 0.3202126, 0.55127335)
+mesh = ExtResource("1_0e37t")
+
+[node name="Barrel_C3_1" type="MeshInstance3D" parent="." unique_id=1311420201]
+transform = Transform3D(70, 0, 0, 0, -3.059797e-06, 70, 0, -70, -3.059797e-06, 0.26290894, 0.35065675, 0.34999847)
+mesh = ExtResource("2_yuo47")
+
+[node name="Barrel_B3_2" type="MeshInstance3D" parent="." unique_id=1683184321]
+transform = Transform3D(40, 0, 0, 0, -1.7484556e-06, 40, 0, -40, -1.7484556e-06, 0.10163498, 0.20000005, 0.83550644)
+mesh = ExtResource("3_a2tk5")

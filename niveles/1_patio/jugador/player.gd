@@ -238,12 +238,14 @@ func _is_my_joypad_event(event: InputEvent) -> bool:
 
 
 # Botones (los mismos en todos los niveles donde se puede):
-#   ✕ (p*_grab)   agarrar / soltar: cortadora, piedra, bota
+#   ✕ (p*_grab)   agarrar / soltar: cortadora, piedra, bota (el pozo se
+#                 agarra pasando por encima)
 #   R2 o □ (p*_throw)  usar lo que se tiene: tirar la piedra, colocar el pozo o
 #                      patear con la bota (mouse: clic)
-#   △ (p*_place)  también coloca el pozo
+#   R1 (p*_run)   correr
 #   palanca derecha  apuntar (flecha de la piedra, marca del pozo)
-# Con la bota se corre el doble de rápido; la patada sale con R2 si el rival está cerca.
+# Con la bota se corre el doble de rápido; la patada sale con R2 o □ si el rival está cerca.
+# Lo mismo explica el tutorial (niveles/1_patio/tutorial/).
 func _unhandled_input(event: InputEvent) -> void:
 	if is_disabled():
 		return
@@ -261,15 +263,13 @@ func _physics_process(delta: float) -> void:
 		return
 	var prefix := "p%d_" % player_id
 	if Input.is_action_just_pressed(prefix + "throw"):
-		# R2 usa lo que se tenga en la mano: tira la piedra, coloca el pozo o patea
+		# R2 o □ usa lo que se tenga en la mano: tira la piedra, coloca el pozo o patea
 		if held_rock:
 			throw_rock()
 		elif held_boot:
 			kick()
 		elif held_pit:
 			confirm_aim()
-	elif Input.is_action_just_pressed(prefix + "place"):
-		confirm_aim()
 
 
 ## Queda invencible (titilando) "seconds" segundos: no le pegan piedras, no
@@ -509,7 +509,7 @@ func _update_aiming(delta: float) -> void:
 		return
 
 	# La retícula solo se usa para colocar el pozo: aparece al agarrarlo y se
-	# mueve con la palanca derecha (sin apretar nada). △ lo coloca.
+	# mueve con la palanca derecha (sin apretar nada). R2 o □ lo coloca.
 	if is_disabled() or held_pit == null:
 		is_aiming = false
 		_was_aiming = false
