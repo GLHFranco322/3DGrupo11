@@ -11,17 +11,8 @@
 
 [node name="TutorialCarrera" unique_id=1394624670 instance=ExtResource("1_base")]
 
-[node name="Mesa" parent="." index="1"]
-layout_mode = 0
-
-[node name="Libreta" parent="Mesa" index="0"]
-layout_mode = 0
-
 [node name="Fecha" parent="Mesa" index="2"]
 text = "4/11/26"
-
-[node name="Contenido" parent="Mesa" index="3"]
-layout_mode = 0
 
 [node name="Titulo" type="Label" parent="Mesa/Contenido" index="0" unique_id=336146826]
 layout_mode = 0
