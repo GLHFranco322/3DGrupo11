@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" path="res://sistema/scene_loader.gd" id="1_loader"]
 [ext_resource type="PackedScene" path="res://niveles/1_patio/tutorial/tutorial_patio_recortes.tscn" id="2_tutorial_patio"]
+[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/tutorial/tutorial_ferreteria.tscn" id="3_tutorial_ferreteria"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/tutorial/tutorial_carrera.tscn" id="4_tutorial_carrera"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0, 0, 0, 0.6)
@@ -21,7 +23,9 @@ corner_radius_bottom_left = 10
 layer = 100
 script = ExtResource("1_loader")
 tutorials = Dictionary[String, PackedScene]({
-"res://niveles/1_patio/patio.tscn": ExtResource("2_tutorial_patio")
+"res://niveles/1_patio/patio.tscn": ExtResource("2_tutorial_patio"),
+"res://niveles/2_ferreteria/store_level.tscn": ExtResource("3_tutorial_ferreteria"),
+"res://niveles/3_carrera/race_level.tscn": ExtResource("4_tutorial_carrera")
 })
 
 [node name="Root" type="Control" parent="."]

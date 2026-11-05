@@ -1,0 +1,155 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
+[ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
+[ext_resource type="Script" path="res://niveles/comun/tutorial/texto_botones.gd" id="3_texto"]
+[ext_resource type="Script" path="res://niveles/comun/tutorial/vista_item_3d.gd" id="4_vista"]
+[ext_resource type="Texture2D" path="res://niveles/3_carrera/tutorial/dibujos/carrera.png" id="5_carrera"]
+[ext_resource type="PackedScene" path="res://assets/maquinas de pasto/maquina naranja/still/CortadoradepastoModeloNaranja.glb" id="7_cortadora"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_pit.tscn" id="8_pozo"]
+[ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_pickup.tscn" id="9_pickup"]
+
+[node name="TutorialCarrera" instance=ExtResource("1_base")]
+
+[node name="Fecha" parent="Mesa"]
+text = "4/11/26"
+
+[node name="Titulo" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 226.0
+offset_right = 865.0
+offset_bottom = 290.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 38
+text = "LVL 3 = Carrera de carretillas"
+
+[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 290.0
+offset_right = 865.0
+offset_bottom = 402.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]Objetivo:[/b] ¡el que llega primero a la meta gana! Son 3 vueltas."
+
+[node name="Carrera" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 392.0
+offset_right = 866.0
+offset_bottom = 802.0
+texture = ExtResource("5_carrera")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cuidado" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 794.0
+offset_right = 865.0
+offset_bottom = 962.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]¡Cuidado![/b] Los huecos de la pista, las rejas eléctricas y el barro te hacen perder tiempo."
+
+[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 234.0
+offset_right = 1568.0
+offset_bottom = 402.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "Acelerá con {R1} y frená con {CUADRADO}
+Marcha atrás con {O} y doblá con {PALANCA_IZQ}
+Si te caés, subite a la carretilla con {X}"
+
+[node name="TextoItems" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 458.0
+offset_right = 1568.0
+offset_bottom = 570.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]Items:[/b] se agarran pasando por encima y se usan con {X}"
+
+[node name="ItemCortadora" type="SubViewportContainer" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 572.0
+offset_right = 1070.0
+offset_bottom = 672.0
+mouse_filter = 2
+stretch = true
+script = ExtResource("4_vista")
+item_scene = ExtResource("7_cortadora")
+
+[node name="TextoCortadora" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1084.0
+offset_top = 570.0
+offset_right = 1568.0
+offset_bottom = 682.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]Cortadora:[/b] si el rival va adelante, lo persigue y lo tira."
+
+[node name="ItemPozo" type="SubViewportContainer" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 684.0
+offset_right = 1070.0
+offset_bottom = 784.0
+mouse_filter = 2
+stretch = true
+script = ExtResource("4_vista")
+item_scene = ExtResource("8_pozo")
+
+[node name="TextoPozo" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1084.0
+offset_top = 682.0
+offset_right = 1568.0
+offset_bottom = 794.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]Pozo:[/b] lo dejás atrás y el que lo pisa se hunde."
+
+[node name="ItemCana" type="SubViewportContainer" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 796.0
+offset_right = 1070.0
+offset_bottom = 904.0
+mouse_filter = 2
+stretch = true
+script = ExtResource("4_vista")
+item_scene = ExtResource("9_pickup")
+node_path = NodePath("Visuals/Rod")
+
+[node name="TextoCana" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1084.0
+offset_top = 794.0
+offset_right = 1568.0
+offset_bottom = 906.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]Caña:[/b] si el rival está cerca, lo pesca y lo tira."

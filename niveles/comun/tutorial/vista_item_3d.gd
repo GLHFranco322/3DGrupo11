@@ -11,6 +11,11 @@ extends SubViewportContainer
 	set(value):
 		item_scene = value
 		_rebuild()
+## Parte de la escena que se muestra (vacío = toda). Ej: "Visuals/Banana".
+@export var node_path: NodePath:
+	set(value):
+		node_path = value
+		_rebuild()
 ## Vueltas por segundo.
 @export var spin_speed: float = 0.2
 ## Cuánto mira la cámara hacia abajo, en grados.
@@ -64,7 +69,12 @@ func _rebuild() -> void:
 	if item_scene == null:
 		return
 	var source := item_scene.instantiate()
-	var model := _visual_copy(source, true)
+	var shown: Node = source.get_node_or_null(node_path) if not node_path.is_empty() else source
+	if shown == null:
+		push_warning("VistaItem3D: no existe %s en %s" % [node_path, item_scene.resource_path])
+		source.free()
+		return
+	var model := _visual_copy(shown, true)
 	source.free()
 	var box := _mesh_bounds(model, Transform3D.IDENTITY)
 	var center := box.get_center()

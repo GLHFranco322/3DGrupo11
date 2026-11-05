@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="790" viewBox="0 -90 900 790">
+  <defs>
+    <!-- Guante inflado (dedos hacia arriba, muñeca en 0,0) -->
+    <g id="guante" stroke-width="6.5">
+      <path d="M-16 2 C-24 -8 -28 -20 -22 -30 C-17 -38 -9 -36 -8 -28 C-10 -40 -4 -48 3 -47 C10 -46 11 -38 9 -29 C12 -40 22 -40 24 -30 C26 -20 20 -6 14 2 Z"/>
+      <path d="M-8 -28 Q-8 -18 -6 -12 M9 -29 Q8 -20 6 -14" fill="none" stroke-width="4"/>
+      <path d="M-17 2 Q-1 -2 15 2 L14 11 Q-1 8 -16 11 Z"/>
+    </g>
+    <!-- Puño cerrado (para el Triángulo enojado) -->
+    <g id="puno" stroke-width="6.5">
+      <path d="M-17 2 C-24 -12 -21 -30 -6 -33 C5 -37 19 -30 19 -18 C21 -8 17 0 13 2 Z"/>
+      <path d="M-8 -31 Q-7 -22 -6 -16 M4 -33 Q5 -24 4 -18" fill="none" stroke-width="4"/>
+      <path d="M-17 2 Q-1 -2 15 2 L14 11 Q-1 8 -16 11 Z"/>
+    </g>
+  </defs>
+  <g fill="#f4efe2" stroke="#1d2140" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Pista en diagonal: ancha adelante (abajo a la izquierda), angosta al fondo -->
+    <path d="M110 300 Q470 140 880 60" fill="none"/>
+    <path d="M150 690 Q540 420 900 230" fill="none"/>
+    <path d="M330 470 Q600 280 890 150" fill="none" stroke-width="6" stroke-dasharray="26 22"/>
+
+    <!-- ===== Al fondo: el Triángulo, chiquito y enojado ===== -->
+    <g transform="translate(640 60) scale(0.34)">
+      <!-- Humo de bronca -->
+      <path d="M210 60 c-26 -10 -20 -46 6 -44 c4 -26 44 -26 46 0 c26 -6 36 30 12 40 Z" stroke-width="20"/>
+      <path d="M300 40 c-20 -8 -14 -36 6 -34 c4 -20 34 -20 36 0 c20 -4 26 24 8 32 Z" stroke-width="20"/>
+      <!-- Manijas -->
+      <path d="M150 360 Q90 372 40 400" fill="none" stroke-width="26"/>
+      <!-- Triángulo con el ceño fruncido -->
+      <path d="M260 90 Q212 210 170 330 Q260 330 350 320 Q302 206 260 90 Z" stroke-width="26"/>
+      <ellipse cx="262" cy="230" rx="28" ry="32" stroke-width="22"/>
+      <circle cx="262" cy="240" r="13" fill="#1d2140" stroke="none"/>
+      <path d="M214 190 Q258 196 302 220" fill="none" stroke-width="24"/>
+      <!-- Puño en alto, sacudiéndolo -->
+      <path d="M330 220 Q378 196 410 150" fill="none" stroke-width="26"/>
+      <use xlink:href="#puno" transform="translate(414 146) rotate(40) scale(2.8)"/>
+      <path d="M470 110 q20 10 20 34 M486 84 q34 16 32 56" fill="none" stroke-width="20"/>
+      <!-- Carretilla -->
+      <path d="M140 320 Q285 312 430 310 Q416 362 396 410 Q288 420 180 416 Q158 366 140 320 Z" stroke-width="26"/>
+      <circle cx="400" cy="458" r="44" stroke-width="26"/>
+    </g>
+
+    <!-- Polvo que levanta Carlos, entre los dos -->
+    <path d="M520 330 c-18 -26 14 -48 36 -32 c8 -26 52 -26 56 2 c26 -6 40 26 18 40 Z" stroke-width="8"/>
+    <path d="M610 270 c-12 -18 10 -32 24 -22 c6 -18 36 -16 38 4 c18 -4 26 18 12 28 Z" stroke-width="7"/>
+    <path d="M470 400 c-14 -20 12 -38 28 -26 c6 -20 40 -18 42 4 c20 -4 30 20 14 30 Z" stroke-width="8"/>
+
+    <!-- ===== Adelante: Carlos, gigante, mirando para atrás ===== -->
+    <!-- Borde de atrás de la carretilla (queda detrás de Carlos) -->
+    <path d="M80 400 Q275 362 470 330 Q536 374 600 420" fill="none"/>
+    <!-- Brazo en alto festejando (grueso, como en el boceto) -->
+    <path d="M232 196 Q176 140 196 60" fill="none" stroke-width="30"/>
+    <use xlink:href="#guante" transform="translate(198 50) rotate(-6) scale(2.3)"/>
+    <path d="M140 30 q-10 -12 -20 -18 M180 0 q-2 -14 -6 -24 M246 6 q8 -12 16 -20" fill="none" stroke-width="8"/>
+    <!-- Cuerpo -->
+    <circle cx="330" cy="330" r="168"/>
+    <!-- Ojos mirando para atrás, hacia el Triángulo (sin boca) -->
+    <ellipse cx="372" cy="250" rx="40" ry="32" transform="rotate(-14 372 250)" stroke-width="9"/>
+    <ellipse cx="444" cy="290" rx="36" ry="30" transform="rotate(-14 444 290)" stroke-width="9"/>
+    <circle cx="392" cy="244" r="10" fill="#1d2140" stroke="none"/>
+    <circle cx="462" cy="284" r="10" fill="#1d2140" stroke="none"/>
+    <path d="M330 206 q36 -26 76 -10 M420 236 q30 -14 58 4" fill="none" stroke-width="8"/>
+    <!-- Carretilla tipo cajón: costado y frente -->
+    <path d="M80 400 Q136 460 190 520 Q196 600 200 680 Q144 612 90 540 Q84 470 80 400 Z"/>
+    <path d="M190 520 Q396 470 600 420 Q596 490 590 560 Q396 620 200 680 Q196 600 190 520 Z"/>
+    <path d="M214 560 Q400 506 584 460" fill="none" stroke-width="7"/>
+    <!-- Manijas para atrás y rueda adelante -->
+    <path d="M90 530 Q50 556 10 586 M110 620 Q70 646 30 676" fill="none"/>
+    <circle cx="600" cy="600" r="58"/>
+    <circle cx="600" cy="600" r="15" fill="#1d2140"/>
+    <!-- Otro brazo apoyado en el borde (grueso) -->
+    <path d="M444 400 Q400 470 330 500" fill="none" stroke-width="30"/>
+    <use xlink:href="#guante" transform="translate(324 506) rotate(-96) scale(2.3)"/>
+    <!-- Rayas de velocidad -->
+    <path d="M40 380 q-24 4 -40 10 M60 450 q-30 6 -52 14 M150 260 q-30 6 -56 18" fill="none" stroke-width="7"/>
+  </g>
+</svg>

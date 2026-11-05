@@ -3,7 +3,7 @@ class_name TextoConBotones
 extends RichTextLabel
 
 # Texto con los botones del mando dibujados en línea. En "texto" se escriben
-# las marcas {X}, {O}, {CUADRADO}, {TRIANGULO}, {R1}, {R2} o {PALANCA_DER}
+# las marcas {X}, {O}, {CUADRADO}, {TRIANGULO}, {R1}, {R2}, {PALANCA_IZQ} o {PALANCA_DER}
 # donde va cada botón; el resto acepta BBCode ([b], [color], etc.).
 
 const BUTTONS := {
@@ -14,6 +14,7 @@ const BUTTONS := {
 	"R1": preload("res://niveles/comun/tutorial/botones/boton_r1.svg"),
 	"R2": preload("res://niveles/comun/tutorial/botones/boton_r2.svg"),
 	"PALANCA_DER": preload("res://niveles/comun/tutorial/botones/palanca_der.svg"),
+	"PALANCA_IZQ": preload("res://niveles/comun/tutorial/botones/palanca_izq.svg"),
 }
 
 @export_multiline var texto: String = "":
