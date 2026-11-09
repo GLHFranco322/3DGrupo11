@@ -30,14 +30,15 @@ height = 0.2
 script = ExtResource("1_select")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1150498139]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 2.4, 6.5)
+transform = Transform3D(1, 0, 0, 0, 0.9709592, 0.23924527, 0, -0.23924527, 0.9709592, 0, 3.7033203, 8.916134)
 current = true
 fov = 50.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1040891251]
-transform = Transform3D(0.8660254, -0.25, 0.4330127, 0, 0.8660254, 0.5, -0.5, -0.4330127, 0.75, 0, 5, 0)
-visible = false
+transform = Transform3D(0.9929427, 0.05929731, -0.102705926, 0, 0.8660254, 0.5, 0.11859462, -0.49647135, 0.85991365, 0, 5, 0)
+light_energy = 0.525
 shadow_enabled = true
+sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1361839799]
 environment = SubResource("Environment_select")
@@ -67,12 +68,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.2, 0)
 [node name="Title" type="Label" parent="UI" unique_id=1935492652]
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 24.0
-offset_bottom = 100.0
+offset_top = 40.0
+offset_bottom = 110.0
 grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 14
-theme_override_font_sizes/font_size = 52
+theme_type_variation = &"Titulo"
 text = "Elegí tu personaje"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -82,37 +81,36 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -190.0
-offset_bottom = -50.0
+offset_top = -250.0
+offset_bottom = -60.0
 grow_vertical = 0
-theme_override_constants/separation = 4
+theme_override_constants/separation = 7
 
 [node name="NameLabel1" type="Label" parent="UI/Player1Panel" unique_id=1129775434]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
+theme_type_variation = &"Encabezado"
 text = "JUGADOR 1"
 horizontal_alignment = 1
 
 [node name="CharacterLabel1" type="Label" parent="UI/Player1Panel" unique_id=849594183]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"Titulo"
 text = "◀  Triángulo  ▶"
 horizontal_alignment = 1
 
 [node name="StatusLabel1" type="Label" parent="UI/Player1Panel" unique_id=520097027]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 22
-text = "✕ para confirmar"
 horizontal_alignment = 1
+
+[node name="Indicaciones1" type="HBoxContainer" parent="UI/Player1Panel" unique_id=1991341597]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+alignment = 1
 
 [node name="Player2Panel" type="VBoxContainer" parent="UI" unique_id=1901273210]
 anchors_preset = -1
@@ -120,38 +118,37 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -190.0
-offset_bottom = -50.0
+offset_top = -250.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = 4
+theme_override_constants/separation = 7
 
 [node name="NameLabel2" type="Label" parent="UI/Player2Panel" unique_id=828164072]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
+theme_type_variation = &"Encabezado"
 text = "JUGADOR 2"
 horizontal_alignment = 1
 
 [node name="CharacterLabel2" type="Label" parent="UI/Player2Panel" unique_id=2072862146]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"Titulo"
 text = "◀  Carlos  ▶"
 horizontal_alignment = 1
 
 [node name="StatusLabel2" type="Label" parent="UI/Player2Panel" unique_id=1870315642]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 22
-text = "✕ para confirmar"
 horizontal_alignment = 1
+
+[node name="Indicaciones2" type="HBoxContainer" parent="UI/Player2Panel" unique_id=492090611]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+alignment = 1
 
 [node name="MessageLabel" type="Label" parent="UI" unique_id=1131527318]
 unique_name_in_owner = true
@@ -161,36 +158,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
+offset_left = -500.0
 offset_top = -60.0
-offset_right = 300.0
+offset_right = 500.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/font_size = 80
+theme_type_variation = &"Cartel"
 text = "¡A jugar!"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Hint" type="Label" parent="UI" unique_id=1971648790]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -36.0
-offset_right = 400.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 16
-text = "Apretá ✕ con el mando que vas a usar para unirte · flechas o palanca para elegir · ✕ confirmar · ○ salir"
-horizontal_alignment = 1
 
 [node name="EscenarioFerreteriaVisual" parent="." unique_id=372905964 instance=ExtResource("2_w63yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.60446125, 0)

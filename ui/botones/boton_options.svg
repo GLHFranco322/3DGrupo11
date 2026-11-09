@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="176" height="128" viewBox="0 0 176 128">
+  <defs>
+    <linearGradient id="cara" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a5f6e"/>
+      <stop offset="0.45" stop-color="#2a2c34"/>
+      <stop offset="1" stop-color="#101115"/>
+    </linearGradient>
+    <linearGradient id="brillo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Botón OPTIONS: píldora con las tres rayitas -->
+  <rect x="15" y="25" width="152" height="90" rx="45" fill="#000000" fill-opacity="0.3"/>
+  <rect x="10" y="18" width="156" height="92" rx="46" fill="#fbf8ef"/>
+  <rect x="16" y="24" width="144" height="80" rx="40" fill="#0a0b0e"/>
+  <rect x="20" y="28" width="136" height="72" rx="36" fill="url(#cara)"/>
+  <rect x="40" y="32" width="96" height="22" rx="11" fill="url(#brillo)"/>
+  <g stroke="#f4f4f6" stroke-width="8.5" stroke-linecap="round">
+    <path d="M62 48 H114 M62 64 H114 M62 80 H114"/>
+  </g>
+</svg>

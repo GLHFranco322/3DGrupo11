@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=2 format=3]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_hud"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.55)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[resource]
+default_font_size = 26
+Button/font_sizes/font_size = 26
+Cartel/base_type = &"Label"
+Cartel/constants/outline_size = 14
+Cartel/font_sizes/font_size = 72
+Chico/base_type = &"Label"
+Chico/constants/outline_size = 4
+Chico/font_sizes/font_size = 20
+Encabezado/base_type = &"Label"
+Encabezado/constants/outline_size = 8
+Encabezado/font_sizes/font_size = 30
+Indicacion/base_type = &"Label"
+Indicacion/constants/outline_size = 6
+Indicacion/font_sizes/font_size = 24
+IndicacionTexto/base_type = &"RichTextLabel"
+IndicacionTexto/constants/outline_size = 6
+IndicacionTexto/font_sizes/bold_font_size = 24
+IndicacionTexto/font_sizes/normal_font_size = 24
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 6
+PanelHUD/base_type = &"PanelContainer"
+PanelHUD/styles/panel = SubResource("StyleBoxFlat_panel_hud")
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 6
+Titulo/base_type = &"Label"
+Titulo/constants/outline_size = 10
+Titulo/font_sizes/font_size = 48

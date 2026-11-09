@@ -177,10 +177,10 @@ func _get_hint(player: StorePlayer) -> String:
 	if player.carried == null:
 		return ""
 	if not board.is_in_range(player):
-		return "Llevala al mostrador  ·  ✕ soltar"
+		return "Llevala al mostrador  ·  {X} Soltar"
 	if player.needs(player.carried.data):
-		return "✕ Colgar en el tablero"
-	return "No está en tu lista  ·  alejate y ✕ para soltar"
+		return "{X} Colgar en el tablero"
+	return "No está en tu lista  ·  alejate y {X} Soltar"
 
 
 ## "completed_by" = quien completó su lista (null si se acabó el tiempo).

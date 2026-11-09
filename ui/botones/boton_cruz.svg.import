@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn3pfc4tph21i"
-path="res://.godot/imported/palanca_izq.svg-353c4642071b346034e4a0f9ba93a880.ctex"
+uid="uid://com0b10daaqun"
+path="res://.godot/imported/boton_cruz.svg-4f55f7c518e913d71e9ac64cb0b57da3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/palanca_izq.svg"
-dest_files=["res://.godot/imported/palanca_izq.svg-353c4642071b346034e4a0f9ba93a880.ctex"]
+source_file="res://ui/botones/boton_cruz.svg"
+dest_files=["res://.godot/imported/boton_cruz.svg-4f55f7c518e913d71e9ac64cb0b57da3.ctex"]
 
 [params]
 

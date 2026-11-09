@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmb16abirug6a"
-path="res://.godot/imported/boton_r2.svg-2eb6661714c3aaccdb4767ea74a566bf.ctex"
+uid="uid://bn3pfc4tph21i"
+path="res://.godot/imported/palanca_izq.svg-9aee2d15d3a7256be42a3ecdd434b092.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/boton_r2.svg"
-dest_files=["res://.godot/imported/boton_r2.svg-2eb6661714c3aaccdb4767ea74a566bf.ctex"]
+source_file="res://ui/botones/palanca_izq.svg"
+dest_files=["res://.godot/imported/palanca_izq.svg-9aee2d15d3a7256be42a3ecdd434b092.ctex"]
 
 [params]
 

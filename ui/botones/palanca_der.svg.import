@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7x8u2pjsyq32"
-path="res://.godot/imported/boton_circulo.svg-87d02a39e2d57bd07dc3ce8cf7ebff7e.ctex"
+uid="uid://xt3dihqhoya0"
+path="res://.godot/imported/palanca_der.svg-bfe2bab8753c8ba9d12cd4fa90abc558.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/boton_circulo.svg"
-dest_files=["res://.godot/imported/boton_circulo.svg-87d02a39e2d57bd07dc3ce8cf7ebff7e.ctex"]
+source_file="res://ui/botones/palanca_der.svg"
+dest_files=["res://.godot/imported/palanca_der.svg-bfe2bab8753c8ba9d12cd4fa90abc558.ctex"]
 
 [params]
 

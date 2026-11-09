@@ -23,13 +23,13 @@ extends Node3D
 @onready var buttons: Array[Button] = [main_button, menu_button, quit_button]
 
 var _time: float = 0.0
-var _next_level: int = -1
+var _next_level: String = ""
 
 
 func _ready() -> void:
 	_next_level = GameSettings.get_next_level(MatchResult.last_level_scene)
-	if _next_level >= 0:
-		main_button.text = "Jugar: " + GameSettings.level_names[_next_level]
+	if _next_level != "":
+		main_button.text = "Jugar: " + GameSettings.get_level_name(_next_level)
 	else:
 		main_button.text = "Ver campeón"
 	main_button.pressed.connect(_on_main_pressed)
@@ -57,8 +57,8 @@ func _show_match_id() -> void:
 	var label := Label.new()
 	label.text = "Partida: " + Metrics.last_match_id
 	label.modulate = Color(1, 1, 1, 0.6)
-	label.add_theme_font_size_override("font_size", 18)
-	label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT, Control.PRESET_MODE_MINSIZE, 16)
+	label.theme_type_variation = &"Chico"
+	label.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT, Control.PRESET_MODE_MINSIZE, 24)
 	$UI.add_child(label)
 
 
@@ -112,8 +112,8 @@ func _standings_text() -> String:
 
 
 func _on_main_pressed() -> void:
-	if _next_level >= 0:
-		GameSettings.selected_level = GameSettings.level_scenes[_next_level]
+	if _next_level != "":
+		GameSettings.selected_level = _next_level
 		SceneLoader.change_scene(GameSettings.selected_level)
 	else:
 		_show_champion()

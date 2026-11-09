@@ -91,51 +91,52 @@ player1 = NodePath("../Player")
 player2 = NodePath("../Player2")
 
 [node name="ScoreLabel1" type="Label" parent="HUD" unique_id=586473174]
+theme_type_variation = &"Encabezado"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 45.0
+offset_left = -94.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 62.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0.26020515, 0.40514827, 0.8759585, 1)
-theme_override_font_sizes/font_size = 32
 
 [node name="ScoreLabel2" type="Label" parent="HUD" unique_id=244680481]
-offset_right = 40.0
-offset_bottom = 23.0
+theme_type_variation = &"Encabezado"
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 94.0
+offset_bottom = 62.0
 theme_override_colors/font_color = Color(1, 0.38948637, 0.5953161, 1)
-theme_override_font_sizes/font_size = 32
 
 [node name="TimeLabel" type="Label" parent="HUD" unique_id=1309438229]
+theme_type_variation = &"Encabezado"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -80.0
-offset_right = 80.0
-offset_bottom = 50.0
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 62.0
 grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 40
 text = "2:00"
 horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="HUD" unique_id=1957556915]
+theme_type_variation = &"Cartel"
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
+offset_left = -500.0
 offset_top = -60.0
-offset_right = 300.0
+offset_right = 500.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/font_size = 80
 text = "¡Tiempo!"
 horizontal_alignment = 1
 vertical_alignment = 1

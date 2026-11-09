@@ -31,6 +31,8 @@ const KEYBOARD := -2
 @onready var name_labels := {1: %NameLabel1 as Label, 2: %NameLabel2 as Label}
 @onready var character_labels := {1: %CharacterLabel1 as Label, 2: %CharacterLabel2 as Label}
 @onready var status_labels := {1: %StatusLabel1 as Label, 2: %StatusLabel2 as Label}
+## Indicaciones de los botones de cada jugador (debajo de su personaje).
+@onready var prompts := {1: %Indicaciones1 as HBoxContainer, 2: %Indicaciones2 as HBoxContainer}
 @onready var message_label: Label = %MessageLabel
 
 var _index := {1: 0, 2: 1}
@@ -160,15 +162,29 @@ func _refresh(p: int) -> void:
 	character_labels[p].text = "◀  %s  ▶" % character.display_name
 	character_labels[p].modulate = Color.WHITE if _joined[p] else Color(1, 1, 1, 0.35)
 	var keyboard := p == Controls.keyboard_player
+	# Con mando: indicaciones con los botones. En teclado (para probar) se
+	# explica con texto, porque los íconos son del mando.
+	status_labels[p].text = ""
+	status_labels[p].modulate = Color.WHITE
+	var list: Array = []
 	if not _joined[p]:
-		status_labels[p].text = "Apretá E (teclado) para unirte" if keyboard else "Apretá ✕ con tu mando para unirte"
-		status_labels[p].modulate = Color(1, 1, 1, 0.7)
+		if keyboard:
+			status_labels[p].text = "Apretá E (teclado) para unirte"
+		else:
+			list = [["X", "Unirse"]]
 	elif _ready_players[p]:
-		status_labels[p].text = "¡LISTO!   (Esc para cambiar)" if keyboard else "¡LISTO!   (○ para cambiar)"
+		status_labels[p].text = "¡LISTO!"
 		status_labels[p].modulate = Color(0.5, 1.0, 0.5)
+		if keyboard:
+			status_labels[p].text += "   (Esc para cambiar)"
+		else:
+			list = [["O", "Cancelar"]]
+	elif keyboard:
+		status_labels[p].text = "A/D elegir · E confirmar · Esc salir"
 	else:
-		status_labels[p].text = "A/D elegir · E confirmar · Esc salir" if keyboard else "✕ para confirmar · ○ salir"
-		status_labels[p].modulate = Color.WHITE
+		list = [["PALANCA_IZQ", "Cambiar"], ["X", "Confirmar"], ["O", "Volver"]]
+	status_labels[p].visible = status_labels[p].text != ""
+	Botones.llenar(prompts[p], list)
 	_show_model(p, character)
 
 

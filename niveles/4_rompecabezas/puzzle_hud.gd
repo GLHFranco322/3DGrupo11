@@ -9,8 +9,8 @@ extends CanvasLayer
 ## Cuando quedan menos de estos segundos, el tiempo se muestra en rojo.
 @export_range(0.0, 60.0, 1.0, "suffix:s") var warning_time: float = 10.0
 @export var warning_color: Color = Color(1.0, 0.3, 0.3)
-## Texto del botón para agarrar y soltar (cambiarlo si cambian los controles).
-@export var grab_button_text: String = "✕"
+## Botón para agarrar y soltar (marca de TextoConBotones; cambiarla si cambian los controles).
+@export var grab_button_text: String = "{X}"
 
 var _cameras: Dictionary = {}
 var _views: Dictionary = {}
@@ -51,14 +51,15 @@ func _ready() -> void:
 		_build_corner(id, half)
 
 	var time_panel := PanelContainer.new()
+	time_panel.theme_type_variation = &"PanelHUD"
 	time_panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
 	time_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	time_panel.position.x -= 24.0
 	add_child(time_panel)
-	_time_label = _make_label(44)
+	_time_label = _make_label(&"Encabezado")
 	time_panel.add_child(_time_label)
 
-	_message_label = _make_label(72)
+	_message_label = _make_label(&"Cartel")
 	_message_label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_message_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_message_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -83,10 +84,12 @@ func setup(players: Array) -> void:
 func set_counts(player, placed: int, total: int) -> void:
 	_counts[player.player_id].text = "Rompecabezas: %d" % player.completed
 	_pieces[player.player_id].text = "Piezas: %d / %d" % [placed, total] if total > 0 else ""
+	_pieces[player.player_id].visible = total > 0
 
 
 func set_hint(player, text: String) -> void:
-	_hints[player.player_id].text = text
+	if _hints[player.player_id].texto != text:
+		_hints[player.player_id].texto = text
 
 
 func set_time(seconds: float) -> void:
@@ -111,7 +114,7 @@ func show_message(text: String, duration: float = 0.0) -> void:
 
 ## Cartel chico sobre la mitad de un jugador (ej: "¡Completo!").
 func flash(player, text: String, duration: float = 1.0) -> void:
-	var label := _make_label(56)
+	var label := _make_label(&"Cartel")
 	label.text = text
 	label.modulate = player.color
 	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -130,33 +133,39 @@ func flash(player, text: String, duration: float = 1.0) -> void:
 # Esquina de arriba a la izquierda de cada mitad, y la ayuda abajo
 func _build_corner(id: int, container: Control) -> void:
 	var panel := PanelContainer.new()
-	panel.position = Vector2(16.0, 12.0)
+	panel.theme_type_variation = &"PanelHUD"
+	panel.position = Vector2(24.0, 20.0)
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	container.add_child(panel)
 	var column := VBoxContainer.new()
 	panel.add_child(column)
-	_titles[id] = _make_label(26)
-	_counts[id] = _make_label(30)
-	_pieces[id] = _make_label(22)
+	_titles[id] = _make_label(&"Encabezado")
+	_counts[id] = _make_label(&"")
+	_pieces[id] = _make_label(&"")
 	for label in [_titles[id], _counts[id], _pieces[id]]:
 		column.add_child(label)
 
-	_hints[id] = _make_label(22)
-	_hints[id].set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	_hints[id].grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_hints[id].position.y -= 10.0
-	_hints[id].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var hint := TextoConBotones.new()
+	hint.theme_type_variation = &"IndicacionTexto"
+	hint.fit_content = true
+	hint.scroll_active = false
+	hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hint.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	hint.button_height = 34
+	hint.alineacion = HORIZONTAL_ALIGNMENT_CENTER
+	hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	hint.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	hint.position.y -= 20.0
+	_hints[id] = hint
 	container.add_child(_hints[id])
 
 
-func _make_label(font_size: int) -> Label:
+func _make_label(variation: StringName) -> Label:
 	var label := Label.new()
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_outline_color", Color.BLACK)
-	label.add_theme_constant_override("outline_size", maxi(int(font_size * 0.25), 6))
+	label.theme_type_variation = variation
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return label
 
 
 func get_grab_text(holding: bool) -> String:
-	return "%s  %s" % [grab_button_text, "Soltar" if holding else "Agarrar"]
+	return "%s %s" % [grab_button_text, "Soltar" if holding else "Agarrar"]

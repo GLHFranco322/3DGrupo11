@@ -8,15 +8,13 @@ const SETTINGS_PATH := "user://settings.cfg"
 
 ## Personajes que se pueden elegir, en el orden en que aparecen.
 @export var characters: Array[CharacterData] = []
-## Nombres de los niveles, en orden de juego (mismo orden que "Level Scenes").
+## Nombres de los niveles (mismo orden que "Level Scenes").
 @export var level_names: PackedStringArray = ["Nivel 1: El patio", "Nivel 2: La ferretería", "Nivel 3: La carrera de carretillas", "Nivel 4: Los rompecabezas"]
-## Escenas de los niveles, en orden de juego. Al terminar uno se ofrece el siguiente.
+## Escenas de todos los niveles. Cada torneo sortea entre estos.
 @export_file("*.tscn") var level_scenes: PackedStringArray = ["res://niveles/1_patio/patio.tscn", "res://niveles/2_ferreteria/store_level.tscn", "res://niveles/3_carrera/race_level.tscn", "res://niveles/4_rompecabezas/puzzle_level.tscn"]
-## Cuántos de esos niveles (los primeros) se juegan en el recorrido normal. Los
-## que siguen (ej: el 4, que todavía no es para el público) no se ofrecen al
-## terminar un nivel: solo se abren desde "Elegir nivel (dev)", que aparece
-## corriendo el juego desde el editor.
-@export_range(1, 20) var public_levels: int = 3
+## Cuántos niveles se juegan en un torneo: se eligen al azar, sin repetir,
+## entre los de "Level Scenes".
+@export_range(1, 20) var levels_per_tournament: int = 3
 ## Si los dos eligen el mismo personaje, el último en elegirlo se tiñe con
 ## este color para distinguirlos (blanco = sin cambio).
 @export var duplicate_tint: Color = Color(0.7, 0.85, 1.0)
@@ -37,6 +35,8 @@ var _last_to_choose: int = 0
 
 ## Nivel elegido en el menú (ruta de la escena). Vacío = el que tenga la selección de personaje.
 var selected_level: String = ""
+## Niveles del torneo actual, en el orden en que se juegan.
+var tournament_levels: PackedStringArray = []
 
 
 func _ready() -> void:
@@ -46,13 +46,31 @@ func _ready() -> void:
 	apply_controls()
 
 
-## Índice del nivel que sigue a "scene_path", o -1 si es el último del recorrido
-## normal (ver "Public Levels") o no está en la lista.
-func get_next_level(scene_path: String) -> int:
+## Sortea los niveles de un torneo nuevo ("Levels Per Tournament" al azar, sin
+## repetir) y deja elegido el primero. "first" = nivel con el que arranca (desde
+## "Elegir nivel (dev)"); los demás se sortean igual.
+func new_tournament(first: String = "") -> void:
+	var pool := Array(level_scenes)
+	pool.shuffle()
+	if first != "":
+		pool.erase(first)
+		pool.push_front(first)
+	tournament_levels = PackedStringArray(pool.slice(0, mini(levels_per_tournament, pool.size())))
+	selected_level = tournament_levels[0] if not tournament_levels.is_empty() else ""
+
+
+## Nivel del torneo que sigue a "scene_path" ("" si era el último).
+func get_next_level(scene_path: String) -> String:
+	var index := tournament_levels.find(scene_path)
+	if index < 0 or index + 1 >= tournament_levels.size():
+		return ""
+	return tournament_levels[index + 1]
+
+
+## Nombre para mostrar de un nivel (ver "Level Names").
+func get_level_name(scene_path: String) -> String:
 	var index := level_scenes.find(scene_path)
-	if index < 0 or index + 1 >= mini(public_levels, level_scenes.size()):
-		return -1
-	return index + 1
+	return level_names[index] if index >= 0 and index < level_names.size() else scene_path.get_file().get_basename()
 
 
 func set_character(player_id: int, character: CharacterData) -> void:

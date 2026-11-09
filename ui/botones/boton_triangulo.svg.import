@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://com0b10daaqun"
-path="res://.godot/imported/boton_cruz.svg-8c8072665bbe36d4ee8e84804314e9ef.ctex"
+uid="uid://di41rodlr7ji7"
+path="res://.godot/imported/boton_triangulo.svg-bf4b4c720f63730969f32dfc0d04b835.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/boton_cruz.svg"
-dest_files=["res://.godot/imported/boton_cruz.svg-8c8072665bbe36d4ee8e84804314e9ef.ctex"]
+source_file="res://ui/botones/boton_triangulo.svg"
+dest_files=["res://.godot/imported/boton_triangulo.svg-bf4b4c720f63730969f32dfc0d04b835.ctex"]
 
 [params]
 

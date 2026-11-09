@@ -11,19 +11,19 @@ extends CanvasLayer
 @export var warning_color: Color = Color(1.0, 0.3, 0.3)
 ## Tiempo que se muestran los avisos (ej: "¡No está en tu lista!").
 @export_range(0.2, 5.0, 0.1, "suffix:s") var flash_time: float = 1.5
-## Texto del botón para dejar la trampa (cambiarlo si cambian los controles).
-@export var trap_button_text: String = "△"
+## Botón para dejar la trampa (marca de TextoConBotones; cambiarla si cambian los controles).
+@export var trap_button_text: String = "{TRIANGULO}"
 
 @onready var time_label: Label = %TimeLabel
 @onready var message_label: Label = %MessageLabel
 @onready var lists := {1: %List1 as VBoxContainer, 2: %List2 as VBoxContainer}
 @onready var titles := {1: %ListTitle1 as Label, 2: %ListTitle2 as Label}
-@onready var hints := {1: %Hint1 as Label, 2: %Hint2 as Label}
+@onready var hints := {1: %Hint1 as TextoConBotones, 2: %Hint2 as TextoConBotones}
 
 # player_id -> { ItemData -> Label }
 var _rows: Dictionary = {1: {}, 2: {}}
 var _flash_until: Dictionary = {1: 0.0, 2: 0.0}
-# player_id -> Label con la trampa que lleva
+# player_id -> TextoConBotones con la trampa que lleva
 var _trap_labels: Dictionary = {}
 
 
@@ -36,17 +36,17 @@ func setup(player1: StorePlayer, player2: StorePlayer) -> void:
 		for item in player.remaining:
 			var row := Label.new()
 			row.text = "☐  " + item.display_name
-			row.add_theme_font_size_override("font_size", 24)
-			row.add_theme_color_override("font_outline_color", Color.BLACK)
-			row.add_theme_constant_override("outline_size", 8)
 			row.horizontal_alignment = titles[id].horizontal_alignment
 			lists[id].add_child(row)
 			_rows[id][item] = row
-		var trap_label := Label.new()
-		trap_label.add_theme_font_size_override("font_size", 22)
-		trap_label.add_theme_color_override("font_outline_color", Color.BLACK)
-		trap_label.add_theme_constant_override("outline_size", 8)
-		trap_label.horizontal_alignment = titles[id].horizontal_alignment
+		var trap_label := TextoConBotones.new()
+		trap_label.fit_content = true
+		trap_label.scroll_active = false
+		trap_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+		trap_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		trap_label.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+		trap_label.button_height = 32
+		trap_label.alineacion = titles[id].horizontal_alignment
 		lists[id].add_child(trap_label)
 		_trap_labels[id] = trap_label
 		set_trap(player, "")
@@ -70,11 +70,12 @@ func mark_delivered(player: StorePlayer, item: ItemData) -> void:
 func set_hint(player: StorePlayer, text: String) -> void:
 	if Time.get_ticks_msec() / 1000.0 < _flash_until[player.player_id]:
 		return
-	hints[player.player_id].text = text
+	if hints[player.player_id].texto != text:
+		hints[player.player_id].texto = text
 
 
 func flash_message(player: StorePlayer, text: String) -> void:
-	hints[player.player_id].text = text
+	hints[player.player_id].texto = text
 	_flash_until[player.player_id] = Time.get_ticks_msec() / 1000.0 + flash_time
 
 
@@ -85,12 +86,12 @@ func show_message(text: String) -> void:
 
 ## Muestra la trampa que lleva el jugador ("" = ninguna).
 func set_trap(player: StorePlayer, trap_name: String) -> void:
-	var label: Label = _trap_labels.get(player.player_id)
+	var label: TextoConBotones = _trap_labels.get(player.player_id)
 	if label == null:
 		return
 	if trap_name.is_empty():
-		label.text = "Trampa: —"
+		label.texto = "Trampa: —"
 		label.modulate = Color(1, 1, 1, 0.6)
 	else:
-		label.text = "%s  %s" % [trap_button_text, trap_name]
+		label.texto = "%s %s" % [trap_button_text, trap_name]
 		label.modulate = Color(1.0, 0.9, 0.4)

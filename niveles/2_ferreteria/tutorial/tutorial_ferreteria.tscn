@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
 [ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
-[ext_resource type="Script" path="res://niveles/comun/tutorial/texto_botones.gd" id="3_texto"]
+[ext_resource type="Script" path="res://ui/texto_con_botones.gd" id="3_texto"]
 [ext_resource type="Script" path="res://niveles/comun/tutorial/vista_item_3d.gd" id="4_vista"]
 [ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/persecucion.png" id="5_persecucion"]
 [ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/herramienta.png" id="6_herramienta"]
@@ -37,7 +37,7 @@ offset_right = 865.0
 offset_bottom = 293.0
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 44
-text = "LVL 2 = La ferretería"
+text = "Nivel 2 = La ferretería"
 
 [node name="Persecucion" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0

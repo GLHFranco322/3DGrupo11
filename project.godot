@@ -25,6 +25,15 @@ SceneLoader="*res://sistema/scene_loader.tscn"
 Metrics="*res://sistema/metrics.tscn"
 PauseMenu="*res://menus/pause_menu.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
 [dotnet]
 
 project/assembly_name="Se busca Gerente"
@@ -37,6 +46,10 @@ import/blender/enabled=false
 
 player=""
 rock=""
+
+[gui]
+
+theme/custom="res://ui/tema.tres"
 
 [input]
 

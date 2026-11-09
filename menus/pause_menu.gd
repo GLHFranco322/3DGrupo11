@@ -27,6 +27,7 @@ var _previous_mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 var _root: Control
 var _title: Label
 var _hint: Label
+var _prompts: HBoxContainer
 var _list: VBoxContainer
 var _rows: Array[Button] = []
 var _color: Color = Color.WHITE
@@ -161,17 +162,21 @@ func _build() -> void:
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_root.add_child(center)
 	var column := VBoxContainer.new()
-	column.add_theme_constant_override("separation", 18)
+	column.add_theme_constant_override("separation", 20)
 	center.add_child(column)
 
-	_title = _make_label(64)
+	_title = _make_label(&"Titulo")
 	column.add_child(_title)
 	_list = VBoxContainer.new()
 	_list.add_theme_constant_override("separation", 10)
 	column.add_child(_list)
-	_hint = _make_label(22)
+	_hint = _make_label(&"Chico")
 	_hint.modulate = Color(1, 1, 1, 0.75)
 	column.add_child(_hint)
+	_prompts = HBoxContainer.new()
+	_prompts.alignment = BoxContainer.ALIGNMENT_CENTER
+	_prompts.add_theme_constant_override("separation", 32)
+	column.add_child(_prompts)
 
 
 func _show_list(options: bool) -> void:
@@ -183,8 +188,7 @@ func _show_list(options: bool) -> void:
 	for i in (OPTIONS if options else ITEMS).size():
 		var row := Button.new()
 		row.focus_mode = Control.FOCUS_NONE
-		row.custom_minimum_size = Vector2(460, 60)
-		row.add_theme_font_size_override("font_size", 32)
+		row.custom_minimum_size = Vector2(400, 52)
 		# Con mouse solo si el que pausó es el jugador de teclado y mouse
 		if Controls.keyboard_player == owner_id:
 			row.mouse_entered.connect(func() -> void:
@@ -207,11 +211,13 @@ func _refresh_texts() -> void:
 		for i in 3:
 			_rows[i].text = "%s:  ◀ %d%% ▶" % [OPTIONS[i], roundi(levels[i] * 100.0)]
 		_rows[3].text = OPTIONS[3]
-		_hint.text = "Jugador %d  ·  ◀ ▶ cambiar  ·  ✕ elegir  ·  Pausa volver" % owner_id
+		_hint.text = "Jugador %d" % owner_id
+		Botones.llenar(_prompts, [["PALANCA_IZQ", "Cambiar"], ["X", "Seleccionar"], ["OPTIONS", "Volver"]])
 	else:
 		for i in ITEMS.size():
 			_rows[i].text = ITEMS[i]
-		_hint.text = "Solo el Jugador %d puede manejar la pausa  ·  ✕ elegir  ·  Pausa volver" % owner_id
+		_hint.text = "Solo el Jugador %d puede manejar la pausa" % owner_id
+		Botones.llenar(_prompts, [["X", "Seleccionar"], ["OPTIONS", "Volver"]])
 
 
 func _select(index: int) -> void:
@@ -225,7 +231,7 @@ func _select(index: int) -> void:
 		for state in ["font_color", "font_hover_color", "font_pressed_color"]:
 			_rows[i].add_theme_color_override(state, Color.WHITE if on else Color(1, 1, 1, 0.75))
 		_rows[i].add_theme_color_override("font_outline_color", Color.BLACK)
-		_rows[i].add_theme_constant_override("outline_size", 8 if on else 0)
+		_rows[i].add_theme_constant_override("outline_size", 6 if on else 0)
 		_rows[i].scale = Vector2.ONE * (1.06 if on else 1.0)
 		_rows[i].pivot_offset = _rows[i].custom_minimum_size * 0.5
 
@@ -235,16 +241,14 @@ func _make_style(fill: Color, border: Color) -> StyleBoxFlat:
 	style.bg_color = fill
 	style.border_color = border
 	style.set_border_width_all(3)
-	style.set_corner_radius_all(14)
+	style.set_corner_radius_all(12)
 	return style
 
 
-func _make_label(font_size: int) -> Label:
+func _make_label(variation: StringName) -> Label:
 	var label := Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_outline_color", Color.BLACK)
-	label.add_theme_constant_override("outline_size", maxi(int(font_size * 0.25), 6))
+	label.theme_type_variation = variation
 	return label
 
 

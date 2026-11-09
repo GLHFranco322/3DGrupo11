@@ -155,7 +155,7 @@ func _get_leader() -> Racer:
 func _get_hint(r: Racer) -> String:
 	match r.state:
 		Racer.Mode.ON_FOOT:
-			return "✕ Subite a la carretilla" if r.can_climb() else "¡Volvé a la carretilla!"
+			return "{X} Subite a la carretilla" if r.can_climb() else "¡Volvé a la carretilla!"
 		Racer.Mode.KNOCKED:
 			return "¡Te caíste!"
 	return ""

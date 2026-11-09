@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://menus/main_menu.gd" id="1_menu"]
 [ext_resource type="Texture2D" path="res://assets/SE_BUSCA_GERENTE_miniatura.jpg" id="2_bg"]
+[ext_resource type="Script" path="res://ui/indicacion.gd" id="3_indicacion"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -46,69 +47,60 @@ grow_vertical = 2
 
 [node name="Layout" type="VBoxContainer" parent="Center"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 24
 
 [node name="Title" type="Label" parent="Center/Layout"]
 visible = false
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 18
-theme_override_font_sizes/font_size = 72
 text = "Se busca Gerente"
 horizontal_alignment = 1
 
 [node name="MainPanel" type="VBoxContainer" parent="Center/Layout"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 
 [node name="PlayButton" type="Button" parent="Center/Layout/MainPanel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 64)
+custom_minimum_size = Vector2(360, 56)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
 text = "Jugar"
 
 [node name="OptionsButton" type="Button" parent="Center/Layout/MainPanel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 64)
+custom_minimum_size = Vector2(360, 56)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
 text = "Opciones"
 
 [node name="QuitButton" type="Button" parent="Center/Layout/MainPanel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 64)
+custom_minimum_size = Vector2(360, 56)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
 text = "Salir"
 
 [node name="OptionsPanel" type="VBoxContainer" parent="Center/Layout"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 
 [node name="OptionsTitle" type="Label" parent="Center/Layout/OptionsPanel"]
 layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 40
+theme_type_variation = &"Titulo"
 text = "Opciones"
 horizontal_alignment = 1
 
 [node name="Volumes" type="GridContainer" parent="Center/Layout/OptionsPanel"]
 layout_mode = 2
 theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 18
+theme_override_constants/v_separation = 14
 columns = 3
 
 [node name="MasterLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "General"
 
 [node name="MasterSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
@@ -123,13 +115,11 @@ value = 100.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "100%"
 horizontal_alignment = 2
 
 [node name="MusicLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "Música"
 
 [node name="MusicSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
@@ -144,13 +134,11 @@ value = 100.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "100%"
 horizontal_alignment = 2
 
 [node name="SfxLabel" type="Label" parent="Center/Layout/OptionsPanel/Volumes"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "Efectos"
 
 [node name="SfxSlider" type="HSlider" parent="Center/Layout/OptionsPanel/Volumes"]
@@ -165,7 +153,6 @@ value = 100.0
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
 text = "100%"
 horizontal_alignment = 2
 
@@ -173,32 +160,31 @@ horizontal_alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 24
 text = "Jugador 1 con teclado y mouse"
 
 [node name="BackButton" type="Button" parent="Center/Layout/OptionsPanel"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 64)
+custom_minimum_size = Vector2(360, 56)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
 text = "Volver"
 
-[node name="Hint" type="Label" parent="."]
+[node name="Indicaciones" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -40.0
-offset_right = 400.0
-offset_bottom = -12.0
+offset_top = -76.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 16
-text = "Palanca o flechas para moverte · ✕ / A para aceptar · ○ / B para volver"
-horizontal_alignment = 1
+mouse_filter = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Seleccionar" type="HBoxContainer" parent="Indicaciones"]
+layout_mode = 2
+script = ExtResource("3_indicacion")

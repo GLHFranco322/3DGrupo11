@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://di41rodlr7ji7"
-path="res://.godot/imported/boton_triangulo.svg-efe2d05f4064427686a2cfee6d32b40b.ctex"
+uid="uid://dmb16abirug6a"
+path="res://.godot/imported/boton_r2.svg-7aa6f1e8dfe7542a93dfb450d26bdbc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/boton_triangulo.svg"
-dest_files=["res://.godot/imported/boton_triangulo.svg-efe2d05f4064427686a2cfee6d32b40b.ctex"]
+source_file="res://ui/botones/boton_r2.svg"
+dest_files=["res://.godot/imported/boton_r2.svg-7aa6f1e8dfe7542a93dfb450d26bdbc1.ctex"]
 
 [params]
 

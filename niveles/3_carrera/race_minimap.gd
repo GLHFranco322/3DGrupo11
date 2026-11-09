@@ -8,18 +8,18 @@ extends Control
 
 @export_group("Pista")
 ## Ancho del dibujo de la pista.
-@export_range(1.0, 30.0, 0.5, "suffix:px") var track_width: float = 7.0
+@export_range(1.0, 30.0, 0.5, "suffix:px") var track_width: float = 8.0
 @export var track_color: Color = Color(0.85, 0.85, 0.95, 0.9)
 ## Borde de la pista (se dibuja por debajo, un poco más ancho).
-@export_range(0.0, 10.0, 0.5, "suffix:px") var border_width: float = 2.0
+@export_range(0.0, 10.0, 0.5, "suffix:px") var border_width: float = 2.5
 @export var border_color: Color = Color(0.1, 0.9, 1.0, 0.9)
 @export var finish_color: Color = Color(1.0, 0.15, 0.6)
 ## Margen entre el borde del mapa y la pista.
-@export_range(0.0, 60.0, 1.0, "suffix:px") var padding: float = 14.0
+@export_range(0.0, 60.0, 1.0, "suffix:px") var padding: float = 16.0
 
 @export_group("Jugadores")
 ## Tamaño de la flecha de cada jugador.
-@export_range(2.0, 30.0, 0.5, "suffix:px") var marker_size: float = 9.0
+@export_range(2.0, 30.0, 0.5, "suffix:px") var marker_size: float = 11.0
 @export var marker_outline: Color = Color(0, 0, 0, 0.9)
 
 @export_group("Fondo")
@@ -79,7 +79,7 @@ func _draw_finish() -> void:
 	var side := Vector2(at.basis.x.x, at.basis.x.z).normalized()
 	var center := _to_map(Vector2(at.origin.x, at.origin.z))
 	var half := side * (track_width * 0.5 + border_width + 2.0)
-	draw_line(center - half, center + half, finish_color, 3.0, true)
+	draw_line(center - half, center + half, finish_color, 4.0, true)
 
 
 func _draw_marker(r: Racer) -> void:

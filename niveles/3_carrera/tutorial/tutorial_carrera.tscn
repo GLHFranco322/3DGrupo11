@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
 [ext_resource type="FontFile" uid="uid://d1qka0pkd7ppe" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
-[ext_resource type="Script" uid="uid://djsnv05hbgfci" path="res://niveles/comun/tutorial/texto_botones.gd" id="3_texto"]
+[ext_resource type="Script" uid="uid://djsnv05hbgfci" path="res://ui/texto_con_botones.gd" id="3_texto"]
 [ext_resource type="Script" uid="uid://vl81dmu72r1w" path="res://niveles/comun/tutorial/vista_item_3d.gd" id="4_vista"]
 [ext_resource type="Texture2D" uid="uid://c6dy51ujeaaod" path="res://niveles/3_carrera/tutorial/dibujos/carrera.png" id="5_carrera"]
 [ext_resource type="PackedScene" uid="uid://8uaexhg32om2" path="res://assets/maquinas de pasto/maquina naranja/still/CortadoradepastoModeloNaranja.glb" id="7_cortadora"]
@@ -22,7 +22,7 @@ offset_right = 865.0
 offset_bottom = 290.0
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 38
-text = "LVL 3 = Carrera de carretillas"
+text = "Nivel 3 = Carrera de carretillas"
 
 [node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido" index="1" unique_id=1923121805]
 layout_mode = 0
@@ -82,7 +82,7 @@ mouse_filter = 2
 bbcode_enabled = true
 scroll_active = false
 script = ExtResource("3_texto")
-texto = "[b]Items:[/b] se agarran pasando por encima y se usan con {X}"
+texto = "[b]Ítems:[/b] se agarran pasando por encima y se usan con {X}"
 
 [node name="ItemCortadora" type="SubViewportContainer" parent="Mesa/Contenido" index="6" unique_id=1985042045]
 layout_mode = 0

@@ -10,17 +10,17 @@ extends CanvasLayer
 @export var warning_color: Color = Color(1.0, 0.3, 0.3)
 ## Color del texto del item cuando se tiene uno.
 @export var item_color: Color = Color(1.0, 0.9, 0.4)
-## Texto del botón para tirar el item (cambiarlo si cambian los controles).
-@export var item_button_text: String = "✕"
+## Botón para tirar el item (marca de TextoConBotones; cambiarla si cambian los controles).
+@export var item_button_text: String = "{X}"
 
 @onready var time_label: Label = %TimeLabel
 @onready var message_label: Label = %MessageLabel
 @onready var titles := {1: %Title1 as Label, 2: %Title2 as Label}
 @onready var places := {1: %Place1 as Label, 2: %Place2 as Label}
-@onready var items := {1: %Item1 as Label, 2: %Item2 as Label}
+@onready var items := {1: %Item1 as TextoConBotones, 2: %Item2 as TextoConBotones}
 @onready var bars := {1: %Progress1 as ProgressBar, 2: %Progress2 as ProgressBar}
 @onready var lap_labels := {1: %Lap1 as Label, 2: %Lap2 as Label}
-@onready var hints := {1: %Hint1 as Label, 2: %Hint2 as Label}
+@onready var hints := {1: %Hint1 as TextoConBotones, 2: %Hint2 as TextoConBotones}
 @onready var minimap: RaceMinimap = %Minimap
 
 var _racers: Array[Racer] = []
@@ -35,17 +35,17 @@ func setup(racers: Array[Racer], track: Path3D) -> void:
 		var id := r.player_id
 		titles[id].text = "JUGADOR %d" % id
 		titles[id].modulate = r.color
-		hints[id].text = ""
+		hints[id].texto = ""
 
 
 func _process(_delta: float) -> void:
 	for r in _racers:
 		var id := r.player_id
 		if r.item == Racer.Item.NONE:
-			items[id].text = "Item: —"
+			_set_item_text(id, "Ítem: —")
 			items[id].modulate = Color(1, 1, 1, 0.6)
 		else:
-			items[id].text = "%s  %s" % [item_button_text, Racer.ITEM_NAMES[r.item]]
+			_set_item_text(id, "%s %s" % [item_button_text, Racer.ITEM_NAMES[r.item]])
 			items[id].modulate = item_color
 
 
@@ -70,7 +70,14 @@ func set_lap(racer: Racer, lap: int, laps: int) -> void:
 
 
 func set_hint(racer: Racer, text: String) -> void:
-	hints[racer.player_id].text = text
+	if hints[racer.player_id].texto != text:
+		hints[racer.player_id].texto = text
+
+
+# Solo si cambió (rearmar el texto con íconos en cada cuadro es caro)
+func _set_item_text(id: int, text: String) -> void:
+	if items[id].texto != text:
+		items[id].texto = text
 
 
 ## Muestra un cartel en el centro. "duration" > 0 = se oculta solo.

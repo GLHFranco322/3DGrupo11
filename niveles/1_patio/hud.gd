@@ -25,11 +25,11 @@ func _ready() -> void:
 
 
 func _on_player1_score_changed(new_score: int) -> void:
-	score_label_1.text = "P1: %d" % new_score
+	score_label_1.text = "J1: %d" % new_score
 
 
 func _on_player2_score_changed(new_score: int) -> void:
-	score_label_2.text = "P2: %d" % new_score
+	score_label_2.text = "J2: %d" % new_score
 
 
 func set_time(seconds: float) -> void:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ljwvvcwwhduy"
-path="res://.godot/imported/boton_cuadrado.svg-09df343e7def948ca66c52d235bb9455.ctex"
+uid="uid://1jlqxsgq4ju3"
+path="res://.godot/imported/boton_options.svg-b94990232527c5d47e8dba00167cc904.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://niveles/comun/tutorial/botones/boton_cuadrado.svg"
-dest_files=["res://.godot/imported/boton_cuadrado.svg-09df343e7def948ca66c52d235bb9455.ctex"]
+source_file="res://ui/botones/boton_options.svg"
+dest_files=["res://.godot/imported/boton_options.svg-b94990232527c5d47e8dba00167cc904.ctex"]
 
 [params]
 

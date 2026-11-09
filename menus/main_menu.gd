@@ -1,15 +1,16 @@
 extends Control
 
-# Menú principal: Jugar, Opciones (volumen) y Salir. "Jugar" siempre arranca
-# por el primer nivel; los siguientes se juegan desde la pantalla de resultados.
+# Menú principal: Jugar, Opciones (volumen) y Salir. "Jugar" arranca un torneo
+# con niveles al azar (ver GameSettings.new_tournament); los siguientes se
+# juegan desde la pantalla de resultados. Abajo, las indicaciones de los botones.
 # Se maneja con mouse o con cualquier mando (palanca / D-pad para moverse,
 # ✕ / A acepta, ○ / B vuelve).
 
 ## Escena que se abre con "Jugar".
 @export_file("*.tscn") var character_select_scene: String = "res://menus/character_select.tscn"
-## Muestra "Elegir nivel (dev)" para arrancar directo en cualquier nivel (también
-## los que no son públicos, como el 4). Solo aparece corriendo el juego desde el
-## editor de Godot: en el juego exportado nunca está.
+## Muestra "Elegir nivel (dev)" para arrancar directo en cualquier nivel. Solo
+## aparece corriendo el juego desde el editor de Godot: en el juego exportado
+## nunca está.
 @export var show_dev_level_select: bool = true
 
 @onready var main_panel: Control = %MainPanel
@@ -28,6 +29,8 @@ extends Control
 @onready var sfx_value: Label = %SfxValue
 ## Jugador 1 con teclado y mouse: el (único) mando queda para el Jugador 2.
 @onready var keyboard_check: CheckButton = %KeyboardCheck
+## Indicaciones de los botones del mando (abajo al centro).
+@onready var indicaciones: HBoxContainer = %Indicaciones
 
 # Selector de niveles para desarrollo (se arma por código con GameSettings.level_names)
 var level_panel: VBoxContainer
@@ -81,6 +84,10 @@ func _show_panel(panel: Control) -> void:
 			previous = p
 		p.visible = p == panel
 	dim.visible = panel != main_panel
+	if panel == main_panel:
+		Botones.llenar(indicaciones, [["X", "Seleccionar"]])
+	else:
+		Botones.llenar(indicaciones, [["X", "Seleccionar"], ["O", "Volver"]])
 
 	if previous == options_panel:
 		GameSettings.save_settings()
@@ -99,7 +106,7 @@ func _show_panel(panel: Control) -> void:
 
 func _on_play_pressed() -> void:
 	MatchResult.reset_tournament()
-	GameSettings.selected_level = GameSettings.level_scenes[0]
+	GameSettings.new_tournament()
 	SceneLoader.change_scene(character_select_scene)
 
 
@@ -118,7 +125,7 @@ func _refresh_values() -> void:
 # nivel. Devuelve los botones nuevos (para los sonidos).
 func _build_level_select() -> Array[BaseButton]:
 	var created: Array[BaseButton] = []
-	level_button = _make_menu_button("Elegir nivel (dev)", 22)
+	level_button = _make_menu_button("Elegir nivel (dev)")
 	main_panel.add_child(level_button)
 	main_panel.move_child(level_button, quit_button.get_index())
 	level_button.pressed.connect(func() -> void: _show_panel(level_panel))
@@ -126,39 +133,36 @@ func _build_level_select() -> Array[BaseButton]:
 
 	level_panel = VBoxContainer.new()
 	level_panel.visible = false
-	level_panel.add_theme_constant_override("separation", 6)
+	level_panel.add_theme_constant_override("separation", 12)
 	options_panel.get_parent().add_child(level_panel)
 	var title := Label.new()
 	title.text = "Elegir nivel"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 30)
-	title.add_theme_color_override("font_outline_color", Color.BLACK)
-	title.add_theme_constant_override("outline_size", 10)
+	title.theme_type_variation = &"Titulo"
 	level_panel.add_child(title)
 	for i in GameSettings.level_scenes.size():
 		var label := GameSettings.level_names[i] if i < GameSettings.level_names.size() else GameSettings.level_scenes[i]
-		var button := _make_menu_button(label, 24)
+		var button := _make_menu_button(label)
 		button.pressed.connect(_on_level_chosen.bind(GameSettings.level_scenes[i]))
 		level_panel.add_child(button)
 		created.append(button)
-	var back := _make_menu_button("Volver", 24)
+	var back := _make_menu_button("Volver")
 	back.pressed.connect(_show_panel.bind(main_panel))
 	level_panel.add_child(back)
 	created.append(back)
 	return created
 
 
-func _make_menu_button(text: String, font_size: int) -> Button:
+func _make_menu_button(text: String) -> Button:
 	var button := Button.new()
 	button.text = text
-	button.custom_minimum_size = Vector2(320, 40)
+	button.custom_minimum_size = Vector2(360, 56)
 	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	button.add_theme_font_size_override("font_size", font_size)
 	return button
 
 
-# Torneo nuevo que arranca en el nivel elegido (después sigue con los que vienen)
+# Torneo nuevo que arranca en el nivel elegido (después siguen otros al azar)
 func _on_level_chosen(scene: String) -> void:
 	MatchResult.reset_tournament()
-	GameSettings.selected_level = scene
+	GameSettings.new_tournament(scene)
 	SceneLoader.change_scene(character_select_scene)

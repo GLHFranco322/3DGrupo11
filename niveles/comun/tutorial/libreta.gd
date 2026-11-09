@@ -27,7 +27,7 @@ extends Control
 ## Largo del elástico que sale por la derecha.
 @export var strap_length: float = 200.0
 
-const DAYS := ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+const DAYS := ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"]
 
 
 ## Altura (en coordenadas de la libreta) del renglón número "index".
@@ -138,9 +138,9 @@ func _draw_page(rect: Rect2, is_left: bool) -> void:
 		draw_rect(day, print_color, false, 1.0)
 		draw_string(font, day.position + Vector2(3, 12), DAYS[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 9, print_color)
 	if is_left:
-		draw_string(font, Vector2(x1 - 255, top + 66), "Memo No.", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, print_color)
+		draw_string(font, Vector2(x1 - 255, top + 66), "Nota N°", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, print_color)
 		draw_line(Vector2(x1 - 185, top + 70), Vector2(x1, top + 70), print_color, 1.0)
-	draw_string(font, Vector2(x1 - 255, top + 104), "Date", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, print_color)
+	draw_string(font, Vector2(x1 - 255, top + 104), "Fecha", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, print_color)
 	draw_line(Vector2(x1 - 185, top + 108), Vector2(x1, top + 108), print_color, 1.0)
 	draw_line(Vector2(x0, top + header_height), Vector2(x1, top + header_height), print_color.darkened(0.5), 2.5)
 
