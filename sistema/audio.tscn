@@ -2,9 +2,68 @@
 
 [ext_resource type="Script" uid="uid://g41prpxng27o" path="res://sistema/audio.gd" id="1_audio"]
 [ext_resource type="AudioStream" uid="uid://cmbtrqeowwkux" path="res://music/tunetank-country-western-texas-background-music-348224.mp3" id="2_bwtr5"]
-[ext_resource type="AudioStream" uid="uid://o2g6m1j04hhe" path="res://music/The_Final_Lap.mp3" id="3_f5a2e"]
+[ext_resource type="AudioStream" uid="uid://cj2ilhxbidyin" path="res://music/MusicaMenú.mp3" id="2_mni2t"]
+[ext_resource type="AudioStream" uid="uid://wnfu7lpanu71" path="res://music/music_ferreteria.wav" id="4_hvfaf"]
+[ext_resource type="AudioStream" uid="uid://pi62dvqijjlw" path="res://music/music_cortapasto.mp3" id="4_jup20"]
+[ext_resource type="AudioStream" uid="uid://bw45nk5hn30iw" path="res://music/victory1.mp3" id="5_gw534"]
+[ext_resource type="AudioStream" uid="uid://47sdqhvtyc35" path="res://music/victorystadium.mp3" id="5_hvfaf"]
+[ext_resource type="AudioStream" uid="uid://c7hcw5hpaq47k" path="res://music/impactado.mp3" id="5_m4ly6"]
+[ext_resource type="AudioStream" uid="uid://bcpjphvtmqqdi" path="res://music/mower.mp3" id="5_o4iym"]
+[ext_resource type="AudioStream" uid="uid://b23vpoen3ognt" path="res://music/lanzar-piedra.wav" id="6_01pe7"]
+[ext_resource type="AudioStream" uid="uid://bmhdtaus52i57" path="res://music/music_carrera.mp3" id="6_34d0a"]
+[ext_resource type="AudioStream" uid="uid://chrnfpjtcfjf6" path="res://music/patada.mp3" id="6_o4iym"]
+[ext_resource type="AudioStream" uid="uid://rcmpw3fwbf7k" path="res://music/menúbutton.mp3" id="6_tp180"]
+[ext_resource type="AudioStream" uid="uid://4govfnbdmuoc" path="res://music/wooop.mp3" id="7_5l0be"]
+[ext_resource type="AudioStream" uid="uid://by0f64omsykr3" path="res://music/caida.mp3" id="7_fmlkg"]
+[ext_resource type="AudioStream" uid="uid://c4bvbn8ona0co" path="res://music/resbalarse.mp3" id="10_df8h0"]
+[ext_resource type="AudioStream" uid="uid://i2nrs3ve28do" path="res://music/wooiiin.mp3" id="12_lbpc1"]
+[ext_resource type="AudioStream" uid="uid://do68pa5sahgv3" path="res://music/boton22.mp3" id="13_8fap8"]
+[ext_resource type="AudioStream" uid="uid://b81w60r6r42r0" path="res://music/beep.mp3" id="14_gw534"]
+[ext_resource type="AudioStream" uid="uid://vnkqgvh4ia4a" path="res://music/finish1.mp3" id="14_y24rt"]
+[ext_resource type="AudioStream" uid="uid://dmkjwxv75ti5t" path="res://music/piña.mp3" id="15_5qgag"]
+[ext_resource type="AudioStream" uid="uid://bpksq7hyw3o7k" path="res://music/cachetada.mp3" id="15_nychy"]
+[ext_resource type="AudioStream" uid="uid://tanfmkksfnj6" path="res://music/paso2.mp3" id="16_34d0a"]
+[ext_resource type="AudioStream" uid="uid://dbmcc8ri02tm8" path="res://music/barrow_crash.mp3" id="18_x7jfy"]
+[ext_resource type="AudioStream" uid="uid://ciq3l1myj02p1" path="res://music/item_collect.mp3" id="20_t4st1"]
+[ext_resource type="AudioStream" uid="uid://dh45qnkfofil2" path="res://music/hook.mp3" id="21_m1sj0"]
+[ext_resource type="AudioStream" uid="uid://cf8bwvymy4aic" path="res://music/gorace2.mp3" id="23_x7jfy"]
 
 [node name="Audio" type="Node" unique_id=954677936]
 script = ExtResource("1_audio")
+music_menu = ExtResource("2_mni2t")
 music_game = ExtResource("2_bwtr5")
-music_race = ExtResource("3_f5a2e")
+music_patio = ExtResource("4_jup20")
+music_store = ExtResource("4_hvfaf")
+music_race = ExtResource("6_34d0a")
+music_hurry = ExtResource("5_hvfaf")
+music_results = ExtResource("5_gw534")
+mower_engine = ExtResource("5_o4iym")
+rock_grab = ExtResource("6_01pe7")
+rock_throw = ExtResource("6_01pe7")
+rock_hit_player = ExtResource("6_01pe7")
+rock_hit_wall = ExtResource("6_01pe7")
+pit_place = ExtResource("7_5l0be")
+pit_fall = ExtResource("7_fmlkg")
+pit_close = ExtResource("7_5l0be")
+boot_grab = ExtResource("5_m4ly6")
+kick_hit = ExtResource("6_o4iym")
+kick_whiff = ExtResource("15_5qgag")
+footstep = ExtResource("16_34d0a")
+footstep_interval = 0.19
+footstep_run_interval = 0.14
+barrow_crash = ExtResource("18_x7jfy")
+item_pickup = ExtResource("20_t4st1")
+rod_hook = ExtResource("21_m1sj0")
+race_count = ExtResource("14_gw534")
+race_go = ExtResource("23_x7jfy")
+grate_zap = ExtResource("15_5qgag")
+punch_hit = ExtResource("15_nychy")
+punch_whiff = ExtResource("6_01pe7")
+trap_pickup = ExtResource("6_01pe7")
+trap_place = ExtResource("6_01pe7")
+banana_slip = ExtResource("12_lbpc1")
+ice_slide = ExtResource("10_df8h0")
+countdown_tick = ExtResource("14_gw534")
+time_up = ExtResource("14_y24rt")
+ui_hover = ExtResource("13_8fap8")
+ui_click = ExtResource("6_tp180")
