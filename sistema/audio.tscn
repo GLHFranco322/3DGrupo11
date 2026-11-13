@@ -27,6 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://ciq3l1myj02p1" path="res://music/item_collect.mp3" id="20_t4st1"]
 [ext_resource type="AudioStream" uid="uid://dh45qnkfofil2" path="res://music/hook.mp3" id="21_m1sj0"]
 [ext_resource type="AudioStream" uid="uid://cf8bwvymy4aic" path="res://music/gorace2.mp3" id="23_x7jfy"]
+[ext_resource type="AudioStream" uid="uid://bmaistwrif3sf" path="res://music/Boton.03.wav" id="25_x7jfy"]
+[ext_resource type="AudioStream" uid="uid://03x5tna5svuk" path="res://music/botonera.mp3" id="26_ywlkk"]
 
 [node name="Audio" type="Node" unique_id=954677936]
 script = ExtResource("1_audio")
@@ -63,6 +65,11 @@ trap_pickup = ExtResource("6_01pe7")
 trap_place = ExtResource("6_01pe7")
 banana_slip = ExtResource("12_lbpc1")
 ice_slide = ExtResource("10_df8h0")
+puzzle_pop_in = ExtResource("25_x7jfy")
+puzzle_pop_out = ExtResource("6_tp180")
+piece_grab = ExtResource("25_x7jfy")
+piece_snap = ExtResource("25_x7jfy")
+puzzle_complete = ExtResource("26_ywlkk")
 countdown_tick = ExtResource("14_gw534")
 time_up = ExtResource("14_y24rt")
 ui_hover = ExtResource("13_8fap8")
