@@ -18,8 +18,6 @@ extends Node3D
 @export_file("*.tscn") var results_scene: String = "res://menus/results.tscn"
 ## Segundos que tarda en subir la música al empezar.
 @export_range(0.0, 10.0, 0.1, "suffix:s") var music_fade_in: float = 2.0
-## Segundos que tarda en apagarse la música al terminar (conviene menor o igual a "End Delay").
-@export_range(0.0, 10.0, 0.1, "suffix:s") var music_fade_out: float = 2.0
 
 @export_group("Progreso")
 ## Si el punto más cercano del recorrido salta más que esto de golpe (por
@@ -46,7 +44,7 @@ var _last_lap_shown: bool = false
 
 # Lo que se cuenta de cada jugador para las métricas (empiezan en 0)
 const METRIC_COUNTERS := ["cortadoras", "cortadoras_acertadas", "pozos", "pozos_acertados", "canas",
-		"canas_acertadas", "cayo_en_pozos", "huecos", "rejas", "barro"]
+		"canas_acertadas", "cayo_en_pozos", "huecos", "rejas", "barro", "agarres", "agarres_acertados"]
 # Cada item que se tira: [usos, aciertos, fallos]
 const METRIC_ITEMS := [["cortadoras", "cortadoras_acertadas", "cortadoras_fallidas"],
 		["pozos", "pozos_acertados", "pozos_fallidos"], ["canas", "canas_acertadas", "canas_fallidas"]]
@@ -153,6 +151,10 @@ func _get_leader() -> Racer:
 
 
 func _get_hint(r: Racer) -> String:
+	if r.grabbed_by:
+		return "¡Te agarraron! Soltate: {CUADRADO} × %d" % r.escape_left
+	if r.grabbing:
+		return "¡Lo tenés agarrado!"
 	match r.state:
 		Racer.Mode.ON_FOOT:
 			return "{X} Subite a la carretilla" if r.can_climb() else "¡Volvé a la carretilla!"
@@ -174,8 +176,7 @@ func _finish(winner: Racer, message: String, by_time: bool = false) -> void:
 	MatchResult.last_level_scene = scene_file_path
 	_save_metrics(winner, by_time)
 	hud.show_message(message)
-	Audio.fade_out_music(music_fade_out)
-	Audio.play_sfx(Audio.time_up)
+	Audio.play_match_end()
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)
@@ -200,4 +201,6 @@ func _save_metrics(winner: Racer, by_time: bool) -> void:
 		Metrics.set_value(id, "trampas_total", used)
 		Metrics.set_value(id, "trampas_acertadas", hits)
 		Metrics.set_value(id, "caidas_mapa", Metrics.get_value(id, "huecos") + Metrics.get_value(id, "rejas"))
+		# Agarres (no son trampas: van aparte)
+		Metrics.set_value(id, "agarres_fallidos", Metrics.get_value(id, "agarres") - Metrics.get_value(id, "agarres_acertados"))
 	Metrics.end_match()

@@ -3,29 +3,16 @@
 [ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
 [ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
 [ext_resource type="Script" path="res://ui/texto_con_botones.gd" id="3_texto"]
-[ext_resource type="Script" path="res://niveles/comun/tutorial/vista_item_3d.gd" id="4_vista"]
-[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/persecucion.png" id="5_persecucion"]
-[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/herramienta.png" id="6_herramienta"]
-[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/pina.png" id="7_pina"]
-[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/dibujos/banana.png" id="8_banana"]
-[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/dibujos/hielo.png" id="9_hielo"]
-[ext_resource type="PackedScene" path="res://niveles/2_ferreteria/trampas/trap_pickup.tscn" id="10_trampa"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_caja"]
-draw_center = false
-content_margin_left = 12.0
-content_margin_top = 4.0
-content_margin_right = 12.0
-content_margin_bottom = 0.0
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.113725, 0.129412, 0.25098, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 6
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 5
+[ext_resource type="Script" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
+[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/persecucion.png" id="d_persecucion"]
+[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/herramienta.png" id="d_herramienta"]
+[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/recortes/pina.png" id="d_pina"]
+[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/dibujos/banana.png" id="d_banana"]
+[ext_resource type="Texture2D" path="res://niveles/2_ferreteria/tutorial/dibujos/hielo.png" id="d_hielo"]
+[ext_resource type="VideoStream" path="res://niveles/2_ferreteria/tutorial/clips/herramienta.ogv" id="v_herramienta"]
+[ext_resource type="VideoStream" path="res://niveles/2_ferreteria/tutorial/clips/pina.ogv" id="v_pina"]
+[ext_resource type="VideoStream" path="res://niveles/2_ferreteria/tutorial/clips/banana.ogv" id="v_banana"]
+[ext_resource type="VideoStream" path="res://niveles/2_ferreteria/tutorial/clips/hielo.ogv" id="v_hielo"]
 
 [node name="TutorialFerreteria" instance=ExtResource("1_base")]
 
@@ -39,157 +26,123 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 44
 text = "Nivel 2 = La ferretería"
 
-[node name="Persecucion" type="TextureRect" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 236.0
-offset_top = 284.0
-offset_right = 866.0
-offset_bottom = 506.0
-texture = ExtResource("5_persecucion")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 514.0
+offset_top = 290.0
 offset_right = 865.0
-offset_bottom = 626.0
+offset_bottom = 346.0
 mouse_filter = 2
 bbcode_enabled = true
 scroll_active = false
 script = ExtResource("3_texto")
-texto = "[b]Objetivo:[/b] ¡el que completa primero su lista de herramientas gana!"
+texto = "[b]¡Completá tu lista antes que tu rival![/b]"
+alineacion = 0
+
+[node name="Persecucion" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 350.0
+offset_right = 866.0
+offset_bottom = 556.0
+texture = ExtResource("d_persecucion")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Herramienta" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 232.0
-offset_top = 640.0
-offset_right = 432.0
-offset_bottom = 830.0
-texture = ExtResource("6_herramienta")
+offset_left = 248.0
+offset_top = 566.0
+offset_right = 540.0
+offset_bottom = 790.0
+texture = ExtResource("d_herramienta")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextoHerramientas" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="VideoHerramienta" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 440.0
-offset_top = 626.0
-offset_right = 868.0
+offset_left = 566.0
+offset_top = 584.0
+offset_right = 856.0
+offset_bottom = 756.0
+script = ExtResource("4_video")
+video = ExtResource("v_herramienta")
+texto = "Al tablero  {X}"
+inclinacion = -1.5
+
+[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 846.0
+offset_right = 865.0
 offset_bottom = 962.0
 mouse_filter = 2
 bbcode_enabled = true
 scroll_active = false
 script = ExtResource("3_texto")
-texto = "Agarrá las herramientas de tu lista con {X} y entregalas en el mostrador con {X}. Las flechas del piso te llevan.
-Para correr, mantené {R1}"
-
-[node name="Trampas" type="Label" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 940.0
-offset_top = 222.0
-offset_right = 1300.0
-offset_bottom = 293.0
-theme_override_fonts/font = ExtResource("2_bold")
-theme_override_font_sizes/font_size = 44
-text = "Trampas"
-
-[node name="CajaPina" type="Label" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 1270.0
-offset_top = 286.0
-offset_right = 1370.0
-offset_bottom = 342.0
-rotation = -0.02
-theme_override_fonts/font = ExtResource("2_bold")
-theme_override_styles/normal = SubResource("StyleBoxFlat_caja")
-text = "Piña"
+texto = "{PALANCA_IZQ} Moverte      {R1} Correr
+{X} Agarrar y entregar"
+alineacion = 1
 
 [node name="Pina" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 936.0
-offset_top = 290.0
-offset_right = 1256.0
-offset_bottom = 494.0
-texture = ExtResource("7_pina")
+offset_left = 948.0
+offset_top = 236.0
+offset_right = 1215.0
+offset_bottom = 430.0
+texture = ExtResource("d_pina")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextoPina" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="VideoPina" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 1270.0
-offset_top = 346.0
-offset_right = 1568.0
-offset_bottom = 570.0
-mouse_filter = 2
-bbcode_enabled = true
-scroll_active = false
-script = ExtResource("3_texto")
-texto = "Pegá con {CUADRADO} o {R2}: el rival queda mareado y suelta su herramienta"
-
-[node name="CajaBananaHielo" type="Label" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 940.0
-offset_top = 566.0
-offset_right = 1170.0
-offset_bottom = 622.0
-rotation = 0.015
-theme_override_fonts/font = ExtResource("2_bold")
-theme_override_styles/normal = SubResource("StyleBoxFlat_caja")
-text = "Banana y hielo"
+offset_left = 1240.0
+offset_top = 246.0
+offset_right = 1540.0
+offset_bottom = 424.0
+script = ExtResource("4_video")
+video = ExtResource("v_pina")
+texto = "Piña  {CUADRADO}"
+inclinacion = 1.5
 
 [node name="Banana" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 1176.0
-offset_top = 556.0
-offset_right = 1366.0
-offset_bottom = 738.0
-texture = ExtResource("8_banana")
+offset_left = 948.0
+offset_top = 478.0
+offset_right = 1215.0
+offset_bottom = 672.0
+texture = ExtResource("d_banana")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="VideoBanana" type="Control" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 486.0
+offset_right = 1540.0
+offset_bottom = 664.0
+script = ExtResource("4_video")
+video = ExtResource("v_banana")
+texto = "Banana  {TRIANGULO}"
+inclinacion = -1.0
 
 [node name="Hielo" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 1384.0
-offset_top = 548.0
-offset_right = 1554.0
-offset_bottom = 740.0
-texture = ExtResource("9_hielo")
+offset_left = 948.0
+offset_top = 718.0
+offset_right = 1215.0
+offset_bottom = 912.0
+texture = ExtResource("d_hielo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ItemBanana" type="SubViewportContainer" parent="Mesa/Contenido"]
+[node name="VideoHielo" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
-offset_left = 946.0
-offset_top = 630.0
-offset_right = 1056.0
-offset_bottom = 720.0
-mouse_filter = 2
-stretch = true
-script = ExtResource("4_vista")
-item_scene = ExtResource("10_trampa")
-node_path = NodePath("Visuals/Banana")
-
-[node name="ItemHielo" type="SubViewportContainer" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 1060.0
-offset_top = 630.0
-offset_right = 1170.0
-offset_bottom = 720.0
-mouse_filter = 2
-stretch = true
-script = ExtResource("4_vista")
-item_scene = ExtResource("10_trampa")
-node_path = NodePath("Visuals/Ice")
-
-[node name="TextoBananaHielo" type="RichTextLabel" parent="Mesa/Contenido"]
-layout_mode = 0
-offset_left = 940.0
-offset_top = 738.0
-offset_right = 1568.0
-offset_bottom = 962.0
-mouse_filter = 2
-bbcode_enabled = true
-scroll_active = false
-script = ExtResource("3_texto")
-texto = "Se agarran pasando por encima y se dejan atrás con {TRIANGULO}. Si el rival pisa la banana se resbala, y con el hielo patina sin control: los dos le hacen soltar la herramienta."
+offset_left = 1240.0
+offset_top = 726.0
+offset_right = 1540.0
+offset_bottom = 904.0
+script = ExtResource("4_video")
+video = ExtResource("v_hielo")
+texto = "Hielo  {TRIANGULO}"
+inclinacion = 1.2

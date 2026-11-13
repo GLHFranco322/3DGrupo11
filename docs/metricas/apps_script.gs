@@ -48,6 +48,7 @@ function columnasCarrera(j) {
     'canas', 'canas_acertadas', 'canas_fallidas',
     'trampas_total', 'trampas_acertadas',
     'cayo_en_pozos', 'huecos', 'rejas', 'barro', 'caidas_mapa',
+    'agarres', 'agarres_acertados', 'agarres_fallidos',
   ].map((columna) => j + '_' + columna);
 }
 
@@ -270,6 +271,12 @@ function armarResumen() {
   fila(null, 'Promedio de caídas del mapa por partida', '=IFERROR({n3_caidas}/{n3_partidas},0)', '0.0');
   fila(null, 'Veces que pasaron por el barro', '=' + ambos(n3, 'barro'));
   fila(null, 'Caídas en pozos (de cualquiera)', '=' + ambos(n3, 'cayo_en_pozos'));
+  blanco();
+  titulo('Agarres (□ cerca del rival)');
+  fila('n3_agarres', 'Agarres', '=' + ambos(n3, 'agarres'));
+  fila('n3_agarres_ok', 'Agarres que tiraron al rival', '=' + ambos(n3, 'agarres_acertados'));
+  fila(null, 'Agarres de los que el rival se soltó', '=' + ambos(n3, 'agarres_fallidos'));
+  fila(null, '% de agarres que tiraron al rival', '=IFERROR({n3_agarres_ok}/{n3_agarres},0)', '0%');
 
   const valores = filas.map(([texto, formula]) => [
     texto,

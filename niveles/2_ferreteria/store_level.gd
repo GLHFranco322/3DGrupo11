@@ -38,7 +38,7 @@ extends Node3D
 
 @export_group("Mostrador")
 ## Dónde va el mostrador en la zona de atención: 0 = pegado al laberinto, 1 = al fondo.
-@export_range(0.0, 1.0, 0.05) var counter_depth: float = 0.6
+@export_range(0.0, 1.0, 0.05) var counter_depth: float = 0.36
 ## Altura de la parte de arriba del mostrador (ahí se apoya el tablero).
 @export_range(0.0, 3.0, 0.05, "suffix:u") var counter_height: float = 1.06
 
@@ -190,8 +190,7 @@ func _finish(message: String, completed_by: StorePlayer = null) -> void:
 	_save_metrics(completed_by)
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message(message)
-	Audio.stop_music()
-	Audio.play_sfx(Audio.time_up)
+	Audio.play_match_end()
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)

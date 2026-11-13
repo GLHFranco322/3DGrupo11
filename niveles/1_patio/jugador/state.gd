@@ -21,9 +21,13 @@ func physics_update(_delta: float) -> void:
 
 
 func get_move_input() -> Vector2:
+	if not player.controls_enabled:
+		return Vector2.ZERO
 	var prefix := "p%d_" % player.player_id
 	return Input.get_vector(prefix + "left", prefix + "right", prefix + "up", prefix + "down")
 
 
 func is_run_pressed() -> bool:
+	if not player.controls_enabled:
+		return false
 	return Input.is_action_pressed("p%d_run" % player.player_id)

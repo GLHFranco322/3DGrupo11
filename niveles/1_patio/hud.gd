@@ -14,6 +14,8 @@ extends CanvasLayer
 ## Color del tiempo cuando está por terminar.
 @export var warning_color: Color = Color(1.0, 0.3, 0.3)
 
+var _message_token: int = 0
+
 
 func _ready() -> void:
 	if player1:
@@ -41,6 +43,13 @@ func set_time(seconds: float) -> void:
 	time_label.modulate = warning_color if warning else Color.WHITE
 
 
-func show_message(text: String) -> void:
+## Muestra un cartel en el centro. "duration" > 0 = se oculta solo.
+func show_message(text: String, duration: float = 0.0) -> void:
 	message_label.text = text
 	message_label.visible = true
+	_message_token += 1
+	if duration > 0.0:
+		var token := _message_token
+		await get_tree().create_timer(duration, false).timeout
+		if token == _message_token:
+			message_label.visible = false

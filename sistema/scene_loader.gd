@@ -20,6 +20,9 @@ extends CanvasLayer
 ## Tutorial de cada nivel (ruta de la escena del nivel -> pantalla de tutorial,
 ## ver niveles/comun/tutorial/tutorial.gd).
 @export var tutorials: Dictionary[String, PackedScene] = {}
+## Con tutorial: segundos que tarda en apagarse la música antes de mostrarlo
+## (la pantalla del tutorial va sin música).
+@export_range(0.0, 5.0, 0.1, "suffix:s") var tutorial_music_fade: float = 0.8
 
 @onready var root: Control = $Root
 @onready var image: TextureRect = %Image
@@ -48,12 +51,17 @@ func change_scene(path: String) -> void:
 		push_error("SceneLoader: no se pudo cargar %s" % path)
 		return
 	_path = path
+	var tutorial_scene: PackedScene = tutorials.get(path)
+	# El tutorial va sin música: primero se termina de apagar (mientras tanto
+	# el nivel ya se va cargando)
+	if tutorial_scene and Audio.is_music_playing():
+		Audio.fade_out_music(tutorial_music_fade)
+		await get_tree().create_timer(tutorial_music_fade, true, false, true).timeout
 	_elapsed = 0.0
 	progress_bar.value = 0.0
 	label.text = loading_text
 	visible = true
 	set_process(true)
-	var tutorial_scene: PackedScene = tutorials.get(path)
 	if tutorial_scene:
 		_tutorial = tutorial_scene.instantiate() as Tutorial
 		root.add_child(_tutorial)

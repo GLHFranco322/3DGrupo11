@@ -39,6 +39,13 @@ enum Mode {
 ## Qué tan rápido sigue a los jugadores. Más bajo = más suave.
 @export_range(0.1, 20.0, 0.1) var follow_speed: float = 4.0
 
+@export_group("Entrada")
+## Al empezar el nivel la cámara arranca así de lejos (2 = al doble de
+## distancia) y se acerca suave hasta su lugar (ver play_intro()).
+@export_range(1.0, 5.0, 0.05) var intro_distance_factor: float = 1.8
+## Cuánto más alto arranca (en grados de inclinación extra).
+@export_range(0.0, 45.0, 1.0, "suffix:°") var intro_extra_tilt: float = 18.0
+
 @export_group("Golpe de zoom")
 ## Tiempo que tarda la cámara en volver después de un golpe de zoom (patada).
 @export_range(0.1, 5.0, 0.1, "suffix:s") var punch_return_time: float = 1.4
@@ -53,6 +60,9 @@ var _current_target: Vector3
 var _punch: float = 0.0
 var _punch_target: float = 0.0
 var _punch_rate: float = 0.0
+# Entrada: 0 = en su lugar, 1 = lo más lejos (baja hasta 0 en play_intro)
+var _intro: float = 0.0
+var _intro_tween: Tween
 
 
 func _ready() -> void:
@@ -94,12 +104,28 @@ func _is_anyone_kicked() -> bool:
 
 
 func _apply(target: Vector3, distance: float) -> void:
-	global_position = target + Vector3(0.0, sin(_tilt), cos(_tilt)) * distance
+	var tilt := _tilt + deg_to_rad(intro_extra_tilt) * _intro
+	distance *= lerpf(1.0, intro_distance_factor, _intro)
+	rotation.x = -tilt
+	global_position = target + Vector3(0.0, sin(tilt), cos(tilt)) * distance
+
+
+## Arranca lejos y se acerca suave hasta su lugar en "time" segundos (al
+## empezar el nivel, durante la cuenta regresiva).
+func play_intro(time: float) -> void:
+	if _intro_tween and _intro_tween.is_valid():
+		_intro_tween.kill()
+	_intro = 1.0
+	_intro_tween = create_tween()
+	_intro_tween.tween_property(self, "_intro", 0.0, time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 # Busca el punto y la distancia con los que toda la cancha entra en pantalla
 # y queda centrada verticalmente (con la cámara inclinada lo cercano ocupa más).
 func _fit_arena() -> void:
+	# (el cálculo se hace con la cámara en su lugar, aunque esté en la entrada)
+	var intro := _intro
+	_intro = 0.0
 	var screen := get_viewport().get_visible_rect().size
 	var half := Vector3(arena_size.x * 0.5, 0.0, arena_size.y * 0.5)
 	var target := arena_center
@@ -115,6 +141,7 @@ func _fit_arena() -> void:
 
 	_fit_target = target
 	_fit_distance = _min_fit_distance(target, half, screen)
+	_intro = intro
 
 
 func _min_fit_distance(target: Vector3, half: Vector3, screen: Vector2) -> float:

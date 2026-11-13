@@ -1,0 +1,177 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
+[ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
+[ext_resource type="Script" path="res://ui/texto_con_botones.gd" id="3_texto"]
+[ext_resource type="Script" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
+[ext_resource type="Texture2D" path="res://niveles/1_patio/tutorial/recortes/cortadora.png" id="d_cortadora"]
+[ext_resource type="Texture2D" path="res://niveles/1_patio/tutorial/recortes/piedra_tirada.png" id="d_piedra"]
+[ext_resource type="Texture2D" path="res://niveles/1_patio/tutorial/recortes/pozo_caida.png" id="d_pozo"]
+[ext_resource type="Texture2D" path="res://niveles/1_patio/tutorial/recortes/bota_patada.png" id="d_bota"]
+[ext_resource type="VideoStream" path="res://niveles/1_patio/tutorial/clips/cortar.ogv" id="v_cortar"]
+[ext_resource type="VideoStream" path="res://niveles/1_patio/tutorial/clips/piedra.ogv" id="v_piedra"]
+[ext_resource type="VideoStream" path="res://niveles/1_patio/tutorial/clips/pozo.ogv" id="v_pozo"]
+[ext_resource type="VideoStream" path="res://niveles/1_patio/tutorial/clips/bota.ogv" id="v_bota"]
+
+[node name="TutorialPatio" instance=ExtResource("1_base")]
+
+[node name="Titulo" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 222.0
+offset_right = 865.0
+offset_bottom = 293.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 44
+text = "Nivel 1 = Cortá el pasto"
+
+[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 290.0
+offset_right = 865.0
+offset_bottom = 346.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "[b]¡Cortá más pasto que tu rival![/b]"
+alineacion = 0
+
+[node name="TituloCortadora" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 350.0
+offset_right = 600.0
+offset_bottom = 396.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La cortadora"
+
+[node name="Cortadora" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 398.0
+offset_right = 566.0
+offset_bottom = 788.0
+texture = ExtResource("d_cortadora")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoCortar" type="Control" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 486.0
+offset_right = 864.0
+offset_bottom = 658.0
+script = ExtResource("4_video")
+video = ExtResource("v_cortar")
+texto = "Cortadora  {X}"
+inclinacion = -1.5
+
+[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 800.0
+offset_right = 865.0
+offset_bottom = 962.0
+mouse_filter = 2
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("3_texto")
+texto = "{PALANCA_IZQ} Moverte      {R1} Correr
+{X} Agarrar y soltar"
+alineacion = 1
+
+[node name="TituloPiedra" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 222.0
+offset_right = 1300.0
+offset_bottom = 266.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La piedra"
+
+[node name="Piedra" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 268.0
+offset_right = 1215.0
+offset_bottom = 446.0
+texture = ExtResource("d_piedra")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoPiedra" type="Control" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 268.0
+offset_right = 1540.0
+offset_bottom = 446.0
+script = ExtResource("4_video")
+video = ExtResource("v_piedra")
+texto = "Tirar  {PALANCA_DER} {CUADRADO}"
+inclinacion = 1.5
+
+[node name="TituloPozo" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 466.0
+offset_right = 1300.0
+offset_bottom = 510.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "El pozo"
+
+[node name="Pozo" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 512.0
+offset_right = 1215.0
+offset_bottom = 690.0
+texture = ExtResource("d_pozo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoPozo" type="Control" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 512.0
+offset_right = 1540.0
+offset_bottom = 690.0
+script = ExtResource("4_video")
+video = ExtResource("v_pozo")
+texto = "Poner  {PALANCA_DER} {CUADRADO}"
+inclinacion = -1.0
+
+[node name="TituloBota" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 710.0
+offset_right = 1300.0
+offset_bottom = 754.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La bota"
+
+[node name="Bota" type="TextureRect" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 756.0
+offset_right = 1215.0
+offset_bottom = 934.0
+texture = ExtResource("d_bota")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VideoBota" type="Control" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 756.0
+offset_right = 1540.0
+offset_bottom = 934.0
+script = ExtResource("4_video")
+video = ExtResource("v_bota")
+texto = "Patear  {CUADRADO}"
+inclinacion = 1.2

@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://sistema/scene_loader.gd" id="1_loader"]
-[ext_resource type="PackedScene" path="res://niveles/1_patio/tutorial/tutorial_patio_recortes.tscn" id="2_tutorial_patio"]
+[ext_resource type="PackedScene" path="res://niveles/1_patio/tutorial/tutorial_patio.tscn" id="2_tutorial_patio"]
 [ext_resource type="PackedScene" path="res://niveles/2_ferreteria/tutorial/tutorial_ferreteria.tscn" id="3_tutorial_ferreteria"]
 [ext_resource type="PackedScene" path="res://niveles/3_carrera/tutorial/tutorial_carrera.tscn" id="4_tutorial_carrera"]
 

@@ -74,3 +74,11 @@ countdown_tick = ExtResource("14_gw534")
 time_up = ExtResource("14_y24rt")
 ui_hover = ExtResource("13_8fap8")
 ui_click = ExtResource("6_tp180")
+sfx_start_offsets = Dictionary[AudioStream, float]({
+ExtResource("6_o4iym"): 0.35,
+ExtResource("15_5qgag"): 0.33,
+ExtResource("5_m4ly6"): 0.33,
+ExtResource("15_nychy"): 0.32,
+ExtResource("12_lbpc1"): 0.46,
+ExtResource("21_m1sj0"): 0.15
+})

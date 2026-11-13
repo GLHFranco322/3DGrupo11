@@ -7,6 +7,9 @@ extends Node3D
 @export_range(5.0, 600.0, 1.0, "suffix:s") var match_duration: float = 120.0
 ## Tiempo que se muestra "¡Tiempo!" antes de pasar a los resultados.
 @export_range(0.0, 10.0, 0.1, "suffix:s") var end_delay: float = 2.0
+## Cuenta regresiva antes de empezar (3, 2, 1, ¡YA!). Mientras, la cámara se
+## acerca y nadie se puede mover. 0 = sin cuenta.
+@export_range(0, 10) var countdown: int = 3
 ## Escena que se abre al terminar la partida.
 @export_file("*.tscn") var results_scene: String = "res://menus/results.tscn"
 
@@ -14,9 +17,13 @@ extends Node3D
 @export var player1: Player
 @export var player2: Player
 @export var hud: Hud
+## Cámara de la cancha (vacío = la cámara activa).
+@export var camera: CameraRig
 
 var time_left: float
 var _finished: bool = false
+# Ya terminó la cuenta regresiva: corre el tiempo
+var _started: bool = false
 
 
 func _ready() -> void:
@@ -30,10 +37,30 @@ func _ready() -> void:
 		Metrics.set_value(p.player_id, "seg_con_maquina", 0.0)
 	hud.set_time(time_left)
 	Audio.play_level_music(Audio.music_patio)
+	_start_countdown()
+
+
+# 3, 2, 1, ¡YA! con la cámara acercándose; recién ahí se pueden mover
+func _start_countdown() -> void:
+	if camera == null:
+		camera = get_viewport().get_camera_3d() as CameraRig
+	for p in [player1, player2]:
+		p.controls_enabled = false
+	if camera and countdown > 0:
+		camera.play_intro(countdown)
+	for i in range(countdown, 0, -1):
+		hud.show_message(str(i))
+		Audio.play_sfx(Audio.race_count)
+		await get_tree().create_timer(1.0, false).timeout
+	hud.show_message("¡YA!", 0.8)
+	Audio.play_sfx(Audio.race_go)
+	for p in [player1, player2]:
+		p.controls_enabled = true
+	_started = true
 
 
 func _process(delta: float) -> void:
-	if _finished:
+	if _finished or not _started:
 		return
 	var previous_second := ceili(time_left)
 	time_left = maxf(time_left - delta, 0.0)
@@ -57,8 +84,7 @@ func _finish() -> void:
 	_save_metrics()
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message("¡Tiempo!")
-	Audio.stop_music()
-	Audio.play_sfx(Audio.time_up)
+	Audio.play_match_end()
 
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout

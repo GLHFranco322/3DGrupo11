@@ -170,8 +170,7 @@ func _finish() -> void:
 	MatchResult.save_from(_players())
 	MatchResult.last_level_scene = scene_file_path
 	hud.show_message(message)
-	Audio.fade_out_music(end_delay)
-	Audio.play_sfx(Audio.time_up)
+	Audio.play_match_end()
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)

@@ -3,14 +3,15 @@ extends Node3D
 
 # Jugador del nivel de carreras (estilo Motor Kombat): va parado en una
 # carretilla que se maneja como un kart, con aceleración, inercia y gravedad:
-# hay que ir midiendo cuándo acelerar, frenar o ir marcha atrás. Si le pega una
-# cortadora, lo pesca una caña o choca fuerte, se cae: tiene que volver
-# caminando y subirse con ✕.
+# hay que ir midiendo cuándo acelerar o ir marcha atrás (que primero frena). Si
+# le pega una cortadora, lo pesca una caña, choca fuerte o no se suelta a tiempo
+# de un agarre, se cae: tiene que volver caminando y subirse con ✕.
 #
 # Botones (se cambian en Proyecto → Configuración → Mapa de entrada):
 #   R1 (p*_accelerate)  acelerar (rema con la pala)
-#   □  (p*_brake)       frenar
-#   ○  (p*_reverse)     marcha atrás
+#   □  (p*_grab_rival)  agarrar al rival si está muy cerca; si te agarran a
+#                       vos, apretarlo varias veces para soltarte
+#   ○  (p*_reverse)     frenar y marcha atrás
 #   palanca izquierda   doblar (a pie: caminar)
 #   ✕  (p*_grab)        tirar el item que se tenga / subirse a la carretilla
 #   palanca derecha     mover la cámara
@@ -38,10 +39,11 @@ const ITEM_NAMES := {
 
 @export_group("Carretilla")
 ## Velocidad máxima hacia adelante.
-@export_range(1.0, 50.0, 0.5, "suffix:u/s") var max_speed: float = 11.0
+@export_range(1.0, 50.0, 0.5, "suffix:u/s") var max_speed: float = 14.0
 ## Cuánto gana de velocidad por segundo mientras se acelera.
-@export_range(0.1, 50.0, 0.1, "suffix:u/s²") var acceleration: float = 6.0
-## Cuánto pierde de velocidad por segundo mientras se frena.
+@export_range(0.1, 50.0, 0.1, "suffix:u/s²") var acceleration: float = 7.5
+## Cuánto pierde de velocidad por segundo frenando (○ yendo hacia adelante, en
+## el barro o al agarrarse con el rival).
 @export_range(0.1, 100.0, 0.5, "suffix:u/s²") var brake_deceleration: float = 20.0
 ## Cuánto gana de velocidad marcha atrás por segundo.
 @export_range(0.1, 50.0, 0.1, "suffix:u/s²") var reverse_acceleration: float = 4.0
@@ -67,13 +69,28 @@ const ITEM_NAMES := {
 @export_group("Choques")
 ## Velocidad de choque (de frente contra la pared u obstáculo) a partir de la
 ## que el jugador sale volando de la carretilla.
-@export_range(1.0, 50.0, 0.5, "suffix:u/s") var crash_speed: float = 12.0
+@export_range(1.0, 50.0, 0.5, "suffix:u/s") var crash_speed: float = 15.0
 ## Cuánto empuja a la carretilla del rival al chocarla (1 = toda la fuerza del choque).
 @export_range(0.0, 3.0, 0.05) var bump_push: float = 0.8
 ## Cuánto empuja a los objetos sueltos (conos, cajas).
 @export_range(0.0, 10.0, 0.1) var object_push: float = 1.5
 ## Cuánta velocidad pierde la carretilla al llevarse puesto un objeto suelto (0 = nada).
 @export_range(0.0, 1.0, 0.05) var object_slowdown: float = 0.3
+
+@export_group("Agarre")
+## □ agarra al rival si su carretilla está a esta distancia o menos.
+@export_range(0.5, 6.0, 0.1, "suffix:u") var grab_range: float = 2.6
+## Mientras están agarrados, los dos van como mucho a esta fracción de la
+## velocidad máxima.
+@export_range(0.1, 1.0, 0.05) var grab_speed_factor: float = 0.45
+## Si el agarrado no se suelta en este tiempo, se cae de la carretilla.
+@export_range(0.5, 10.0, 0.1, "suffix:s") var grab_time: float = 2.2
+## Veces que el agarrado tiene que apretar □ para soltarse.
+@export_range(1, 30) var escape_presses: int = 6
+## Tiempo después de un agarre hasta poder agarrar de nuevo.
+@export_range(0.0, 10.0, 0.1, "suffix:s") var grab_cooldown: float = 2.0
+## Color de la "mano" que une a los dos (vacío = el color del jugador).
+@export var grab_line_color: Color = Color(0, 0, 0, 0)
 
 @export_group("Caída")
 ## Tiempo tirado en el piso antes de poder levantarse.
@@ -159,6 +176,15 @@ var item: Item = Item.NONE
 var progress: float = 0.0
 ## Puntaje para la pantalla de resultados (lo pone el nivel).
 var score: int = 0
+## Rival al que tiene agarrado (null = a nadie).
+var grabbing: Racer = null
+## Rival que lo tiene agarrado (null = nadie).
+var grabbed_by: Racer = null
+## Veces que le falta apretar □ para soltarse (si lo agarraron).
+var escape_left: int = 0
+var _grab_left: float = 0.0
+var _grab_cooldown_left: float = 0.0
+var _grab_line: MeshInstance3D
 
 var _character: CharacterData
 var _anim: AnimationPlayer
@@ -199,6 +225,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_update_grab(delta)
 	_stroke_anim_time = maxf(_stroke_anim_time - delta, 0.0)
 	_throw_anim_time = maxf(_throw_anim_time - delta, 0.0)
 	_boost_timer = maxf(_boost_timer - delta, 0.0)
@@ -226,6 +253,14 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not controls_enabled:
 		return
+	# □ agarra al rival que está muy cerca, o forcejea si lo agarraron
+	if event.is_action_pressed("p%d_grab_rival" % player_id):
+		if grabbed_by:
+			_struggle()
+		elif state == Mode.RIDING and grabbing == null:
+			try_grab_rival()
+		get_viewport().set_input_as_handled()
+		return
 	# ✕ hace lo que corresponda: arriba tira el item, a pie se sube
 	if not event.is_action_pressed("p%d_grab" % player_id):
 		return
@@ -244,7 +279,6 @@ func _ride(delta: float) -> void:
 	var prefix := "p%d_" % player_id
 	var steer := Input.get_axis(prefix + "left", prefix + "right") if controls_enabled else 0.0
 	var throttle := controls_enabled and Input.is_action_pressed(prefix + "accelerate")
-	var braking := controls_enabled and Input.is_action_pressed(prefix + "brake")
 	var reversing := controls_enabled and Input.is_action_pressed(prefix + "reverse")
 	var on_floor := barrow.is_on_floor()
 
@@ -262,9 +296,7 @@ func _ride(delta: float) -> void:
 
 	# Adelante / atrás: sin tocar el piso no hay tracción ni freno
 	if on_floor:
-		if braking:
-			speed = move_toward(speed, 0.0, brake_deceleration * delta)
-		elif throttle:
+		if throttle:
 			# Si iba marcha atrás, primero frena. Pasando la máxima (turbo) no suma.
 			var limit_now := get_speed_limit()
 			if speed < limit_now:
@@ -283,7 +315,7 @@ func _ride(delta: float) -> void:
 	var limit := get_speed_limit()
 	if speed > limit:
 		# Frenando o en el barro baja de golpe; después de un turbo, de a poco
-		var decay := brake_deceleration if braking or not _zones.is_empty() else boost_decay
+		var decay := brake_deceleration if not _zones.is_empty() or is_in_grab() else boost_decay
 		speed = move_toward(speed, limit, decay * delta)
 	speed = maxf(speed, -max_reverse_speed)
 
@@ -318,6 +350,8 @@ func get_speed_limit() -> float:
 	var limit := max_speed
 	for zone in _zones:
 		limit *= _zones[zone]
+	if is_in_grab():
+		limit = minf(limit, max_speed * grab_speed_factor)
 	if _boost_timer > 0.0:
 		limit = maxf(limit, _boost_speed)
 	return limit
@@ -392,6 +426,7 @@ func bump(push: Vector3) -> void:
 func knock_off(away: Vector3 = Vector3.ZERO, stun_time: float = -1.0) -> void:
 	if state == Mode.SINKING:
 		return
+	end_grab()
 	if state == Mode.RIDING:
 		var direction := Vector3(away.x, 0.0, away.z)
 		if direction.length() < 0.1:
@@ -712,6 +747,113 @@ func get_forward() -> Vector3:
 	var forward := -barrow.global_basis.z
 	forward.y = 0.0
 	return forward.normalized()
+
+
+# --- Agarre -------------------------------------------------------------------
+
+## Agarrado o agarrando: los dos van más despacio.
+func is_in_grab() -> bool:
+	return grabbing != null or grabbed_by != null
+
+
+## □: si el rival está muy cerca (y los dos arriba de la carretilla), lo agarra.
+## Los dos van más lento; si en "Grab Time" no se suelta, se cae.
+func try_grab_rival() -> bool:
+	if _grab_cooldown_left > 0.0:
+		return false
+	var target: Racer = null
+	for node in get_tree().get_nodes_in_group("racer"):
+		var other := node as Racer
+		if other == null or other == self or other.state != Mode.RIDING or other.is_in_grab():
+			continue
+		var offset := other.barrow.global_position - barrow.global_position
+		offset.y = 0.0
+		if offset.length() <= grab_range:
+			target = other
+	if target == null:
+		return false
+	grabbing = target
+	target.grabbed_by = self
+	target.escape_left = escape_presses
+	_grab_left = grab_time
+	_grab_cooldown_left = grab_cooldown
+	Audio.play_sfx(Audio.rival_grab if Audio.rival_grab else Audio.punch_hit)
+	Metrics.add(player_id, "agarres")
+	if _has_anim(throw_animation):
+		_throw_anim_time = _anim.get_animation(throw_animation).length
+	return true
+
+
+## □ del agarrado: cada toque descuenta; al llegar a 0 se suelta.
+func _struggle() -> void:
+	escape_left -= 1
+	Audio.play_sfx(Audio.ui_hover, 0.0, -6.0)
+	if escape_left <= 0 and grabbed_by:
+		Audio.play_sfx(Audio.grab_escape if Audio.grab_escape else Audio.ui_click)
+		grabbed_by.end_grab()
+
+
+## Termina el agarre en el que esté (agarrando o agarrado), sin que nadie se caiga.
+func end_grab() -> void:
+	if grabbing:
+		grabbing.grabbed_by = null
+		grabbing.escape_left = 0
+		grabbing = null
+	if grabbed_by:
+		var other := grabbed_by
+		grabbed_by = null
+		escape_left = 0
+		other.grabbing = null
+	if _grab_line:
+		_grab_line.visible = false
+
+
+func _update_grab(delta: float) -> void:
+	_grab_cooldown_left = maxf(_grab_cooldown_left - delta, 0.0)
+	if grabbing == null:
+		return
+	var target := grabbing
+	var offset := target.barrow.global_position - barrow.global_position
+	offset.y = 0.0
+	# Se cortó solo (uno se cayó, se separaron mucho)
+	if state != Mode.RIDING or target.state != Mode.RIDING or offset.length() > grab_range * 2.5:
+		end_grab()
+		return
+	_draw_grab_line(target)
+	_grab_left -= delta
+	if _grab_left <= 0.0:
+		# No se soltó: se cae (hacia el lado contrario al que lo agarró) y este sigue
+		end_grab()
+		target.knock_off(offset.normalized() if offset.length() > 0.01 else -get_forward())
+		Audio.play_sfx(Audio.barrow_crash)
+		Metrics.add(player_id, "agarres_acertados")
+
+
+# "Mano" entre los dos mientras dura el agarre
+func _draw_grab_line(target: Racer) -> void:
+	var from := seat.global_position + Vector3.UP * 1.0
+	var to := target.seat.global_position + Vector3.UP * 1.0
+	if _grab_line == null:
+		_grab_line = MeshInstance3D.new()
+		var mesh := CylinderMesh.new()
+		mesh.top_radius = 0.06
+		mesh.bottom_radius = 0.06
+		mesh.height = 1.0
+		var material := StandardMaterial3D.new()
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		material.albedo_color = grab_line_color if grab_line_color.a > 0.0 else color
+		mesh.material = material
+		_grab_line.mesh = mesh
+		_grab_line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		get_parent().add_child(_grab_line)
+	var length := from.distance_to(to)
+	if length < 0.05:
+		_grab_line.visible = false
+		return
+	_grab_line.visible = true
+	_grab_line.look_at_from_position((from + to) * 0.5, to, Vector3.UP)
+	_grab_line.rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+	_grab_line.scale = Vector3(1.0, length, 1.0)
 
 
 ## Cuerpo que mira la cámara: la carretilla, o el personaje si se cayó.

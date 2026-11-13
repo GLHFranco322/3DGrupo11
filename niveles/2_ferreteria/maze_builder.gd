@@ -19,9 +19,9 @@ extends Node3D
 
 @export_group("Tamaño")
 ## Celdas a lo ancho (X).
-@export_range(2, 40) var columns: int = 13
+@export_range(2, 40) var columns: int = 10
 ## Celdas a lo largo (Z), sin contar la zona de atención.
-@export_range(2, 40) var rows: int = 10
+@export_range(2, 40) var rows: int = 11
 ## Tamaño de cada celda (ancho de los pasillos). La pieza de pared se estira a
 ## este largo (mide 4).
 @export_range(1.0, 10.0, 0.1, "suffix:u") var cell_size: float = 4.0
@@ -36,7 +36,7 @@ extends Node3D
 
 @export_group("Zona de atención")
 ## Profundidad de la zona del mostrador, en celdas.
-@export_range(1, 10) var front_rows: int = 2
+@export_range(1, 10) var front_rows: int = 5
 ## Entradas entre la zona de atención y el laberinto (repartidas a lo ancho).
 @export_range(1, 10) var entrances: int = 3
 
@@ -44,35 +44,101 @@ extends Node3D
 ## Módulo de pared de una celda de largo. Su alto y su grosor son los de todas
 ## las paredes.
 @export var wall_piece: PackedScene = preload("res://niveles/2_ferreteria/kit/pared.tscn")
-## Muebles que se apoyan contra las paredes de los pasillos (como mucho uno por celda).
-@export var corridor_props: Array[PackedScene] = [
+
+@export_group("Decoración")
+# Los muebles se ubican como en el mapa hecho a mano de Fabricio
+# (niveles/Escenarios/laberinto_ferreteria.tscn): estanterías en fila contra
+# las paredes de afuera, pallets con barriles en las esquinas, cajas en los
+# fondos de los pasillos sin salida, casilleros en la franja que da a la zona
+# de atención, escaleras y muebles contra las paredes de adentro, conos en los
+# cruces y en las entradas, y una isla de estanterías en los salones abiertos.
+## Lo que va en fila contra las paredes de afuera del laberinto.
+@export var perimeter_props: Array[PackedScene] = [
 	preload("res://niveles/2_ferreteria/kit/estanteria.tscn"),
+]
+## Probabilidad de empezar una fila de estanterías (seguirla es más probable).
+@export_range(0.0, 1.0, 0.05) var perimeter_chance: float = 0.6
+## Lo que va en las esquinas del laberinto y de la zona de atención.
+@export var corner_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/pallet_baldes.tscn"),
+]
+## Lo que va al fondo de los pasillos sin salida.
+@export var dead_end_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/cajas_barriles.tscn"),
+	preload("res://niveles/2_ferreteria/kit/escalera_chica.tscn"),
+]
+## Lo que se apoya contra las paredes de adentro del laberinto (puertas no:
+## no llevarían a ningún lado).
+@export var inner_wall_props: Array[PackedScene] = [
 	preload("res://niveles/2_ferreteria/kit/casillero_1.tscn"),
 	preload("res://niveles/2_ferreteria/kit/casillero_2.tscn"),
+	preload("res://niveles/2_ferreteria/kit/escalera_chica.tscn"),
 	preload("res://niveles/2_ferreteria/kit/cajas_barriles.tscn"),
+]
+## Puerta del depósito: va solo contra las paredes de afuera del laberinto
+## (como si llevara a otra parte de la ferretería).
+@export var outer_door_prop: PackedScene = preload("res://niveles/2_ferreteria/kit/puerta_deco.tscn")
+## Cuántas puertas del depósito como mucho.
+@export_range(0, 10) var max_outer_doors: int = 2
+## Probabilidad de que una celda tenga algo contra una pared de adentro.
+@export_range(0.0, 1.0, 0.05) var inner_wall_chance: float = 0.3
+## Casilleros de la última fila del laberinto (la que da a la zona de atención).
+@export var front_row_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/casillero_2.tscn"),
+]
+## Conos: en algunos cruces. Son objetos sueltos (ObjetoSuelto): los jugadores
+## los empujan o los tiran al chocarlos, así nunca tapan un pasillo.
+@export var cone_props: Array[PackedScene] = [
 	preload("res://niveles/2_ferreteria/kit/cono_1.tscn"),
 	preload("res://niveles/2_ferreteria/kit/cono_2.tscn"),
-	preload("res://niveles/2_ferreteria/kit/escalera_chica.tscn"),
-	preload("res://niveles/2_ferreteria/kit/puerta_deco.tscn"),
 ]
-## Probabilidad de que una celda de pasillo tenga un mueble.
-@export_range(0.0, 1.0, 0.05) var prop_chance: float = 0.4
-## Profundidad máxima de un mueble de pasillo (fracción del ancho del pasillo),
-## para que no tape el paso ni las herramientas, que aparecen en el medio.
+## Probabilidad de un cono en un cruce de pasillos.
+@export_range(0.0, 1.0, 0.01) var junction_cone_chance: float = 0.08
+## Cuántos conos como mucho en los cruces.
+@export_range(0, 20) var max_junction_cones: int = 3
+## Peso de cada cono (más liviano = sale volando más lejos).
+@export_range(0.1, 20.0, 0.1, "suffix:kg") var cone_mass: float = 1.5
+## Sala de estanterías (en los salones abiertos de 2x2 celdas, como la de
+## Fabricio): dos estanterías en el medio, otra contra una pared y un pallet de
+## barriles en una esquina.
+@export var island_prop: PackedScene = preload("res://niveles/2_ferreteria/kit/estanteria.tscn")
+## Cuántas salas de estanterías como mucho.
+@export_range(0, 10) var max_islands: int = 2
+## Sala de casilleros (al fondo de un pasillo sin salida, como la de Fabricio):
+## casilleros en U contra las tres paredes.
+@export var locker_room_prop: PackedScene = preload("res://niveles/2_ferreteria/kit/casillero_2.tscn")
+## Cuántas salas de casilleros como mucho.
+@export_range(0, 10) var max_locker_rooms: int = 2
+## Rincón de la escalera (al fondo de un pasillo sin salida): la escalera alta
+## apoyada en la pared, un pallet de barriles y un cono.
+@export var ladder_corner_props: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/escalera_alta.tscn"),
+	preload("res://niveles/2_ferreteria/kit/pallet_baldes.tscn"),
+	preload("res://niveles/2_ferreteria/kit/cono_1.tscn"),
+]
+## Cuántos rincones de la escalera como mucho.
+@export_range(0, 10) var max_ladder_corners: int = 2
+## Profundidad máxima de un mueble contra una pared de pasillo (fracción del
+## ancho del pasillo), para que no tape el paso ni las herramientas.
 @export_range(0.1, 0.5, 0.05) var max_prop_depth: float = 0.35
-## Muebles de la zona de atención (contra el fondo y los costados).
-@export var front_props: Array[PackedScene] = [
+
+@export_group("Muebles de la zona de atención")
+## La zona de atención de Fabricio entera (kit/zona_atencion.tscn, sacada de su
+## mapa con kit/extraer_zonas.gd). Vacío = se arma con los muebles de abajo.
+@export var front_zone: PackedScene = preload("res://niveles/2_ferreteria/kit/zona_atencion.tscn")
+## Junto al mostrador, a cada lado (contra el fondo).
+@export var counter_side_props: Array[PackedScene] = [
 	preload("res://niveles/2_ferreteria/kit/sillon.tscn"),
 	preload("res://niveles/2_ferreteria/kit/mesa.tscn"),
-	preload("res://niveles/2_ferreteria/kit/silla.tscn"),
-	preload("res://niveles/2_ferreteria/kit/cactus.tscn"),
-	preload("res://niveles/2_ferreteria/kit/pallet_baldes.tscn"),
+]
+## Plantas: una a cada lado, después de lo del mostrador.
+@export var plant_prop: PackedScene = preload("res://niveles/2_ferreteria/kit/cactus.tscn")
+## Lo que va contra el resto del fondo y contra la pared que da al laberinto.
+@export var front_wall_shelves: Array[PackedScene] = [
+	preload("res://niveles/2_ferreteria/kit/estanteria.tscn"),
 	preload("res://niveles/2_ferreteria/kit/pallet_cajas.tscn"),
 	preload("res://niveles/2_ferreteria/kit/escalera_alta.tscn"),
-	preload("res://niveles/2_ferreteria/kit/estanteria.tscn"),
 ]
-## Probabilidad de que cada tramo de pared de la zona de atención tenga un mueble.
-@export_range(0.0, 1.0, 0.05) var front_prop_chance: float = 0.75
 ## Lo que cuelga de la pared del fondo de la zona de atención. El primero (el
 ## reloj) va siempre arriba del mostrador; los demás se reparten.
 @export var front_wall_props: Array[PackedScene] = [
@@ -80,6 +146,8 @@ extends Node3D
 	preload("res://niveles/2_ferreteria/kit/planos.tscn"),
 	preload("res://niveles/2_ferreteria/kit/diana.tscn"),
 ]
+
+@export_group("Piso")
 ## Malla del piso y del techo (se estira al tamaño de cada zona).
 @export var floor_mesh: Mesh = preload("res://niveles/2_ferreteria/kit/mallas/piso.res")
 
@@ -126,6 +194,8 @@ var _open: Dictionary = {}
 var _rooms: Array[Dictionary] = []
 # Celda -> índice en _rooms de la habitación que la ocupa
 var _room_of: Dictionary = {}
+# Celdas con un mueble grande (pallet, isla): ahí no se ponen herramientas
+var _prop_cells: Dictionary = {}
 var _built: bool = false
 ## Semilla con la que se generó el último laberinto (en online, el anfitrión se
 ## la va a pasar al otro jugador para que tengan el mismo).
@@ -173,7 +243,7 @@ func get_all_cells() -> Array[Vector2i]:
 func get_free_cells() -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []
 	for cell in get_all_cells():
-		if not _room_of.has(cell):
+		if not _room_of.has(cell) and not _prop_cells.has(cell):
 			cells.append(cell)
 	return cells
 
@@ -655,76 +725,254 @@ func _has_wall(cell: Vector2i, dir: Vector2i) -> bool:
 	return not (dir == Vector2i.DOWN and get_entrance_columns().has(cell.x))
 
 
-# Muebles de los pasillos: en algunas celdas, uno contra una de sus paredes
+# Muebles del laberinto, ubicados como en el mapa de Fabricio (ver "Decoración")
 func _build_props() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = current_seed + 2
 	var parent := Node3D.new()
 	parent.name = "Props"
 	add_child(parent)
-	var usable := cell_size - wall_thickness - 0.3
-	var options: Array[PackedScene] = []
-	for scene in corridor_props:
-		if scene == null:
+	_prop_cells.clear()
+	# Lados de cada celda que ya tienen algo: cell -> [dir, ...]
+	var used: Dictionary = {}
+	var cells := get_free_cells()
+	var free := {}
+	for cell in cells:
+		free[cell] = true
+
+	# 1. Esquinas: pallet con barriles contra las dos paredes de afuera
+	for cell in cells:
+		var outer: Array[Vector2i] = []
+		for dir in DIRS:
+			if not _in_bounds(cell + dir) and _has_wall(cell, dir):
+				outer.append(dir)
+		if outer.size() < 2 or corner_props.is_empty():
 			continue
-		var bounds: AABB = _piece(scene).bounds
-		if bounds.size.x <= usable and bounds.size.z <= cell_size * max_prop_depth:
-			options.append(scene)
-	if options.is_empty():
-		return
-	for cell in get_free_cells():
-		if rng.randf() >= prop_chance:
+		_place_in_corner(parent, _pick(corner_props, rng), cell, outer[0], outer[1])
+		_mark(used, cell, outer[0])
+		_mark(used, cell, outer[1])
+		_prop_cells[cell] = true
+
+	# 2. Paredes de afuera: alguna puerta del depósito, y filas de estanterías
+	# (con huecos entre filas); la última fila, que da a la zona de atención,
+	# lleva casilleros
+	if outer_door_prop and max_outer_doors > 0:
+		var door_spots: Array = []
+		for cell in cells:
+			for dir in [Vector2i.UP, Vector2i.LEFT, Vector2i.RIGHT]:
+				if not _in_bounds(cell + dir) and _has_wall(cell, dir) and not _is_used(used, cell, dir):
+					door_spots.append([cell, dir])
+		for i in range(door_spots.size() - 1, 0, -1):
+			var j := rng.randi_range(0, i)
+			var tmp = door_spots[i]
+			door_spots[i] = door_spots[j]
+			door_spots[j] = tmp
+		var doors := 0
+		for spot in door_spots:
+			if doors >= max_outer_doors:
+				break
+			var cell: Vector2i = spot[0]
+			# Una por celda, y no al lado de otra
+			if used.has(cell) or used.has(cell + Vector2i.LEFT) or used.has(cell + Vector2i.RIGHT) \
+					or used.has(cell + Vector2i.UP) or used.has(cell + Vector2i.DOWN):
+				continue
+			_place_against_wall(parent, outer_door_prop, cell, spot[1], 0.0)
+			_mark(used, cell, spot[1])
+			doors += 1
+	var sides := [
+		[Vector2i.UP, _row_cells(0)], [Vector2i.LEFT, _column_cells(0)],
+		[Vector2i.RIGHT, _column_cells(columns - 1)], [Vector2i.DOWN, _row_cells(rows - 1)],
+	]
+	for side in sides:
+		var dir: Vector2i = side[0]
+		var options := _fitting(front_row_props if dir == Vector2i.DOWN else perimeter_props)
+		var in_row := false
+		for cell in side[1]:
+			if not free.has(cell) or not _has_wall(cell, dir) or _is_used(used, cell, dir) or options.is_empty():
+				in_row = false
+				continue
+			in_row = rng.randf() < (0.85 if in_row else perimeter_chance)
+			if in_row:
+				_place_against_wall(parent, _pick(options, rng), cell, dir, 0.0)
+				_mark(used, cell, dir)
+
+	# 3. Pasillos sin salida: algunos son la sala de casilleros o el rincón de
+	# la escalera de Fabricio; los demás, algo contra la pared del fondo
+	var dead_end_options := _fitting(dead_end_props)
+	var dead_ends: Array[Vector2i] = []
+	for cell in cells:
+		if _open_sides(cell).size() == 1 and not _prop_cells.has(cell):
+			dead_ends.append(cell)
+	_shuffle_cells(dead_ends, rng)
+	var locker_rooms := 0
+	var ladder_corners := 0
+	for cell in dead_ends:
+		var back: Vector2i = -_open_sides(cell)[0]
+		var walls3: Array[Vector2i] = [back, Vector2i(back.y, back.x), Vector2i(-back.y, -back.x)]
+		var free_walls := walls3.all(func(dir): return _has_wall(cell, dir) and not _is_used(used, cell, dir))
+		if free_walls and locker_room_prop and locker_rooms < max_locker_rooms:
+			_build_locker_room(parent, cell, walls3)
+			for dir in walls3:
+				_mark(used, cell, dir)
+				if dir != back:
+					_mark(used, cell - back, dir)
+			locker_rooms += 1
+		elif free_walls and ladder_corner_props.size() >= 3 and ladder_corners < max_ladder_corners:
+			_build_ladder_corner(parent, cell, back, walls3[1], rng)
+			for dir in walls3:
+				_mark(used, cell, dir)
+			_prop_cells[cell] = true
+			ladder_corners += 1
+		elif _has_wall(cell, back) and not _is_used(used, cell, back) and not dead_end_options.is_empty():
+			_place_against_wall(parent, _pick(dead_end_options, rng), cell, back, 0.0)
+			_mark(used, cell, back)
+
+	# 4. Paredes de adentro: casilleros, escaleras, cajas...; en la última fila,
+	# las paredes de los costados llevan casilleros (los boxes de Fabricio)
+	var inner_options := _fitting(inner_wall_props)
+	var row_options := _fitting(front_row_props)
+	for cell in cells:
+		var last_row := cell.y == rows - 1
+		if not last_row and (used.has(cell) or rng.randf() >= inner_wall_chance):
 			continue
-		var sides: Array[Vector2i] = []
-		for dir in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
-			if _has_wall(cell, dir):
-				sides.append(dir)
-		if sides.is_empty():
+		var walls: Array[Vector2i] = []
+		for dir in DIRS:
+			if _in_bounds(cell + dir) and _has_wall(cell, dir) and not _is_used(used, cell, dir):
+				if not last_row or dir == Vector2i.LEFT or dir == Vector2i.RIGHT:
+					walls.append(dir)
+		if walls.is_empty():
 			continue
-		var side := sides[rng.randi_range(0, sides.size() - 1)]
-		var scene := options[rng.randi_range(0, options.size() - 1)]
-		var slack := maxf((usable - _piece(scene).bounds.size.x) * 0.5, 0.0)
-		_place_against_wall(parent, scene, cell, side, rng.randf_range(-slack, slack))
+		if last_row:
+			for dir in walls:
+				if not row_options.is_empty() and rng.randf() < 0.7:
+					_place_against_wall(parent, _pick(row_options, rng), cell, dir, 0.0)
+					_mark(used, cell, dir)
+		elif not inner_options.is_empty():
+			var dir := walls[rng.randi_range(0, walls.size() - 1)]
+			var scene := _pick(inner_options, rng)
+			var slack := maxf((cell_size - wall_thickness - 0.3 - _piece(scene).bounds.size.x) * 0.5, 0.0)
+			_place_against_wall(parent, scene, cell, dir, rng.randf_range(-slack, slack))
+			_mark(used, cell, dir)
+
+	# 5. Salones abiertos (2x2 celdas sin paredes adentro): isla de estanterías
+	var islands := 0
+	for cell in cells:
+		if islands >= max_islands or island_prop == null:
+			break
+		var block: Array[Vector2i] = [cell, cell + Vector2i.RIGHT, cell + Vector2i.DOWN, cell + Vector2i.ONE]
+		var ok := true
+		for c in block:
+			if not free.has(c) or _prop_cells.has(c):
+				ok = false
+		if not ok or _has_wall(cell, Vector2i.RIGHT) or _has_wall(cell, Vector2i.DOWN) \
+				or _has_wall(cell + Vector2i.ONE, Vector2i.UP) or _has_wall(cell + Vector2i.ONE, Vector2i.LEFT):
+			continue
+		_build_shelf_room(parent, block, used, rng)
+		for c in block:
+			_prop_cells[c] = true
+		islands += 1
+
+	# 6. Conos en algunos cruces, en una esquina de la celda (pegados a las
+	# paredes, no en el medio del paso)
+	var cones := 0
+	for cell in cells:
+		if cones >= max_junction_cones:
+			break
+		if cone_props.is_empty() or _prop_cells.has(cell) or _open_sides(cell).size() < 3:
+			continue
+		if rng.randf() >= junction_cone_chance:
+			continue
+		var corner := Vector3(1.0 if rng.randf() < 0.5 else -1.0, 0.0, 1.0 if rng.randf() < 0.5 else -1.0)
+		var spot := to_local(get_cell_center(cell)) + corner * (cell_size * 0.5 - wall_thickness * 0.5 - 0.5)
+		_place_cone(parent, _pick(cone_props, rng), Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)), spot))
+		cones += 1
 
 
-# Zona de atención: muebles contra el fondo y los costados (dejando libre el
-# lugar del mostrador) y, colgados del fondo, el reloj arriba del mostrador y
-# algún cuadro más
+# Zona de atención, como la de Fabricio: pallets en las esquinas, estanterías
+# contra las paredes largas (sin tapar las entradas), y en el fondo, a los lados
+# del mostrador, el sillón y la mesa, después plantas; colgados del fondo, el
+# reloj arriba del mostrador y algún cuadro. Conos a los lados de cada entrada.
 func _build_front() -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = current_seed + 3
 	var parent := Node3D.new()
 	parent.name = "FrontProps"
 	add_child(parent)
-	var usable := cell_size - 0.3
-	var options: Array[PackedScene] = []
-	for scene in front_props:
-		if scene != null and _piece(scene).bounds.size.x <= usable:
-			options.append(scene)
+	# La zona de atención de Fabricio, tal cual: pegada a la pared del laberinto
+	if front_zone:
+		var zone := front_zone.instantiate() as Node3D
+		zone.name = "ZonaAtencion"
+		zone.position = Vector3(0.0, 0.0, get_size().y * 0.5)
+		parent.add_child(zone)
+		var body := StaticBody3D.new()
+		zone.add_child(body)
+		for box: AABB in zone.get_meta("collisions", []):
+			body.add_child(_box_collision(box.size, box.get_center()))
+		# Las puertas de entrada, pegadas a la pared del fondo (en el mapa de
+		# Fabricio la pared estaba un poco más adelante)
+		var back_face := front_rows * cell_size - wall_thickness * 0.5 - 0.01
+		for child in zone.get_children():
+			if child is MeshInstance3D and child.get_meta("pegar_al_fondo", false):
+				var box: AABB = child.transform * (child as MeshInstance3D).mesh.get_aabb()
+				child.position.z += back_face - box.end.z
+		return
+	var first_row := rows
 	var back_row := _total_rows() - 1
 	var middle := (columns - 1) * 0.5
-	# Celdas del fondo con algo bajo (o nada): ahí se puede colgar un cuadro
+	var entrance_columns := get_entrance_columns()
 	var low_spots: Array[int] = []
-	for x in columns:
-		if absf(x - middle) <= 1.0:
-			continue
-		if options.is_empty() or rng.randf() >= front_prop_chance:
-			low_spots.append(x)
-			continue
-		var scene := options[rng.randi_range(0, options.size() - 1)]
-		var slack := maxf((usable - _piece(scene).bounds.size.x) * 0.5, 0.0)
-		_place_against_wall(parent, scene, Vector2i(x, back_row), Vector2i.DOWN, rng.randf_range(-slack, slack))
-		if _piece(scene).bounds.end.y < 1.4:
-			low_spots.append(x)
-	# Costados (sin la fila del fondo, que ya tiene lo suyo en las esquinas)
-	for y in range(rows, back_row):
-		for side in [Vector2i.LEFT, Vector2i.RIGHT]:
-			if options.is_empty() or rng.randf() >= front_prop_chance:
+
+	# Esquinas
+	if not corner_props.is_empty():
+		for cell in [Vector2i(0, first_row), Vector2i(columns - 1, first_row), Vector2i(0, back_row), Vector2i(columns - 1, back_row)]:
+			var side := Vector2i.LEFT if cell.x == 0 else Vector2i.RIGHT
+			var end := Vector2i.UP if cell.y == first_row else Vector2i.DOWN
+			if end == Vector2i.UP and entrance_columns.has(cell.x):
 				continue
-			var x := 0 if side == Vector2i.LEFT else columns - 1
-			var scene := options[rng.randi_range(0, options.size() - 1)]
-			var slack := maxf((usable - wall_thickness - _piece(scene).bounds.size.x) * 0.5, 0.0)
-			_place_against_wall(parent, scene, Vector2i(x, y), side, rng.randf_range(-slack, slack))
+			_place_in_corner(parent, _pick(corner_props, rng), cell, side, end)
+
+	# Costados (si la zona tiene más de dos filas)
+	if not front_wall_shelves.is_empty():
+		for y in range(first_row + 1, back_row):
+			for side in [Vector2i.LEFT, Vector2i.RIGHT]:
+				_place_against_wall(parent, front_wall_shelves[0], Vector2i(0 if side == Vector2i.LEFT else columns - 1, y), side, 0.0)
+
+	# Pared que da al laberinto: estanterías entre las entradas
+	for x in range(1, columns - 1):
+		if entrance_columns.has(x) or front_wall_shelves.is_empty():
+			continue
+		if rng.randf() < 0.75:
+			_place_against_wall(parent, front_wall_shelves[0], Vector2i(x, first_row), Vector2i.UP, 0.0)
+
+	# Fondo: del mostrador hacia afuera
+	for x in range(1, columns - 1):
+		var distance := absf(x - middle)
+		if distance <= 1.0:
+			continue
+		var scene: PackedScene = null
+		if distance <= 2.0 and not counter_side_props.is_empty():
+			scene = counter_side_props[0 if x < middle else mini(1, counter_side_props.size() - 1)]
+		elif distance <= 3.0:
+			scene = plant_prop
+		elif not front_wall_shelves.is_empty():
+			scene = front_wall_shelves[rng.randi_range(0, front_wall_shelves.size() - 1)]
+		if scene == null:
+			low_spots.append(x)
+			continue
+		_place_against_wall(parent, scene, Vector2i(x, back_row), Vector2i.DOWN, 0.0)
+		if _piece(scene).bounds.end.y < 1.8:
+			low_spots.append(x)
+
+	# Conos a los lados de cada entrada (menos la del medio, donde arrancan los
+	# jugadores)
+	if not cone_props.is_empty():
+		for x in entrance_columns:
+			if absf(x - middle) < 1.0:
+				continue
+			var center := to_local(get_cell_center(Vector2i(x, first_row)))
+			for along in [-1.0, 1.0]:
+				var spot := center + Vector3(along * (cell_size * 0.5 - 0.35), 0.0, -cell_size * 0.5 + 0.7)
+				_place_cone(parent, _pick(cone_props, rng), Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)), spot))
 
 	if front_wall_props.is_empty():
 		return
@@ -734,10 +982,165 @@ func _build_front() -> void:
 	if front_wall_props[0]:
 		_place_against_wall(parent, front_wall_props[0], middle_cell, Vector2i.DOWN, middle_offset)
 	for x in low_spots:
-		if front_wall_props.size() > 1 and rng.randf() < 0.5:
+		if front_wall_props.size() > 1 and rng.randf() < 0.6:
 			var scene := front_wall_props[rng.randi_range(1, front_wall_props.size() - 1)]
 			if scene:
 				_place_against_wall(parent, scene, Vector2i(x, back_row), Vector2i.DOWN, rng.randf_range(-0.6, 0.6))
+
+
+# Sala de casilleros de Fabricio: casilleros en U (fondo y costados) al final
+# de un pasillo sin salida, y si el pasillo sigue derecho, también en la celda
+# de antes. "sides" = [fondo, costado, otro costado].
+func _build_locker_room(parent: Node3D, cell: Vector2i, sides: Array[Vector2i]) -> void:
+	var bounds: AABB = _piece(locker_room_prop).bounds
+	var width := bounds.size.x
+	var depth := bounds.size.z
+	var back := sides[0]
+	var open := -back
+	for offset in [-width * 0.5, width * 0.5]:
+		_place_against_wall(parent, locker_room_prop, cell, back, offset)
+	for i in [1, 2]:
+		var dir: Vector2i = sides[i]
+		# Corrido hacia la salida, para no chocar con los del fondo
+		var along := Vector3(-dir.y, 0.0, dir.x)
+		var toward_open := signf(along.dot(Vector3(open.x, 0.0, open.y)))
+		_place_against_wall(parent, locker_room_prop, cell, dir, toward_open * depth * 0.3)
+		var before := cell + open
+		if free_cell(before) and _has_wall(before, dir):
+			_place_against_wall(parent, locker_room_prop, before, dir, 0.0)
+
+
+# Rincón de la escalera de Fabricio: la escalera alta apoyada en la pared del
+# fondo, un pallet de barriles en la otra esquina y un cono más adelante
+func _build_ladder_corner(parent: Node3D, cell: Vector2i, back: Vector2i, side: Vector2i, rng: RandomNumberGenerator) -> void:
+	var ladder: PackedScene = ladder_corner_props[0]
+	var pallet: PackedScene = ladder_corner_props[1]
+	var cone: PackedScene = ladder_corner_props[2]
+	_place_in_corner(parent, ladder, cell, back, side)
+	_place_in_corner(parent, pallet, cell, back, -side)
+	var open := Vector3(-back.x, 0.0, -back.y)
+	var spot := to_local(get_cell_center(cell)) + open * (cell_size * 0.3) - Vector3(side.x, 0.0, side.y) * (cell_size * 0.25)
+	_place_cone(parent, cone, Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)), spot))
+
+
+# Sala de estanterías de Fabricio en un salón de 2x2 celdas: dos estanterías en
+# el medio (mirando cada una para un lado), otra contra una pared del salón y
+# un pallet de barriles en una esquina
+func _build_shelf_room(parent: Node3D, block: Array[Vector2i], used: Dictionary, rng: RandomNumberGenerator) -> void:
+	var center := to_local(get_cell_center(block[0])) + Vector3(cell_size, 0.0, cell_size) * 0.5
+	for facing in [1.0, -1.0]:
+		var basis := Basis(Vector3.UP, PI * 0.5 * facing)
+		_place_piece(parent, island_prop, Transform3D(basis, center + Vector3(0.4 * facing, 0.0, 0.0)))
+	# Lados del salón: [dirección, las dos celdas de ese lado]
+	var sides := [
+		[Vector2i.UP, block[0], block[1]], [Vector2i.DOWN, block[2], block[3]],
+		[Vector2i.LEFT, block[0], block[2]], [Vector2i.RIGHT, block[1], block[3]],
+	]
+	var wall_side: Vector2i = Vector2i.ZERO
+	for side in sides:
+		var dir: Vector2i = side[0]
+		if wall_side == Vector2i.ZERO and _has_wall(side[1], dir) and _has_wall(side[2], dir) \
+				and not _is_used(used, side[1], dir) and not _is_used(used, side[2], dir):
+			wall_side = dir
+			# Centrada en el lado del salón: corrida media celda hacia la otra
+			var along := Vector3(-dir.y, 0.0, dir.x)
+			var to_other: Vector2i = side[2] - side[1]
+			var shift := signf(along.dot(Vector3(to_other.x, 0.0, to_other.y))) * cell_size * 0.5
+			_place_against_wall(parent, island_prop, side[1], dir, shift)
+			_mark(used, side[1], dir)
+			_mark(used, side[2], dir)
+	# Pallet en una esquina del salón (del lado contrario a la estantería)
+	if corner_props.is_empty():
+		return
+	var corners := [
+		[block[0], Vector2i.UP, Vector2i.LEFT], [block[1], Vector2i.UP, Vector2i.RIGHT],
+		[block[2], Vector2i.DOWN, Vector2i.LEFT], [block[3], Vector2i.DOWN, Vector2i.RIGHT],
+	]
+	for corner in corners:
+		var c: Vector2i = corner[0]
+		if corner[1] == wall_side or corner[2] == wall_side:
+			continue
+		if _has_wall(c, corner[1]) and _has_wall(c, corner[2]) and not _is_used(used, c, corner[1]):
+			_place_in_corner(parent, _pick(corner_props, rng), c, corner[1], corner[2])
+			_mark(used, c, corner[1])
+			_mark(used, c, corner[2])
+			return
+
+
+## Celda del laberinto libre (adentro, sin habitación ni mueble grande).
+func free_cell(cell: Vector2i) -> bool:
+	return _in_bounds(cell) and not _room_of.has(cell) and not _prop_cells.has(cell)
+
+
+func _shuffle_cells(cells: Array[Vector2i], rng: RandomNumberGenerator) -> void:
+	for i in range(cells.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var tmp := cells[i]
+		cells[i] = cells[j]
+		cells[j] = tmp
+
+
+const DIRS: Array[Vector2i] = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+
+
+func _row_cells(y: int) -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	for x in columns:
+		cells.append(Vector2i(x, y))
+	return cells
+
+
+func _column_cells(x: int) -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	for y in rows:
+		cells.append(Vector2i(x, y))
+	return cells
+
+
+# Lados de la celda por donde se puede pasar
+func _open_sides(cell: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	for dir in DIRS:
+		if not _has_wall(cell, dir):
+			result.append(dir)
+	return result
+
+
+func _mark(used: Dictionary, cell: Vector2i, dir: Vector2i) -> void:
+	if not used.has(cell):
+		used[cell] = []
+	used[cell].append(dir)
+
+
+func _is_used(used: Dictionary, cell: Vector2i, dir: Vector2i) -> bool:
+	return used.has(cell) and used[cell].has(dir)
+
+
+# Los que entran contra una pared de pasillo sin tapar el paso
+func _fitting(scenes: Array[PackedScene]) -> Array[PackedScene]:
+	var result: Array[PackedScene] = []
+	var usable := cell_size - wall_thickness - 0.3
+	for scene in scenes:
+		if scene == null:
+			continue
+		var bounds: AABB = _piece(scene).bounds
+		if bounds.size.x <= usable and bounds.size.z <= cell_size * max_prop_depth:
+			result.append(scene)
+	return result
+
+
+func _pick(scenes: Array[PackedScene], rng: RandomNumberGenerator) -> PackedScene:
+	return scenes[rng.randi_range(0, scenes.size() - 1)]
+
+
+# Contra la pared "wall" de la celda, corrida hasta la esquina con "toward"
+func _place_in_corner(parent: Node3D, scene: PackedScene, cell: Vector2i, wall: Vector2i, toward: Vector2i) -> void:
+	var toward_wall := Vector3(wall.x, 0.0, wall.y)
+	var along := Vector3(-toward_wall.z, 0.0, toward_wall.x)
+	var side := signf(along.dot(Vector3(toward.x, 0.0, toward.y)))
+	var usable := cell_size - wall_thickness
+	var offset := side * maxf((usable - _piece(scene).bounds.size.x) * 0.5 - 0.05, 0.0)
+	_place_against_wall(parent, scene, cell, wall, offset)
 
 
 # Pone una pieza contra la pared del lado "dir" de "cell", corrida "offset" a
@@ -762,6 +1165,18 @@ func _place_piece(parent: Node3D, scene: PackedScene, xform: Transform3D) -> voi
 	body.transform = xform
 	parent.add_child(body)
 	body.add_child(_box_collision(bounds.size, bounds.get_center()))
+
+
+# Cono (u otra pieza chica) que se puede chocar: un ObjetoSuelto con física en
+# vez de una caja fija. "xform" es como para _place_piece (la pieza con la
+# espalda en Z = 0).
+func _place_cone(parent: Node3D, scene: PackedScene, xform: Transform3D) -> void:
+	var body := ObjetoSuelto.from_piece(scene, cone_mass)
+	var base: Vector3 = body.get_meta("base_offset")
+	body.transform = xform * Transform3D(Basis(), base)
+	# Sin física en el editor (si no, se cae al regenerar)
+	body.freeze = Engine.is_editor_hint()
+	parent.add_child(body)
 
 
 # Piezas desarmadas: escena -> {"parts": [[malla, transform]], "bounds": AABB}

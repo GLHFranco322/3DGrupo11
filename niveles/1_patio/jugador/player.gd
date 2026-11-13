@@ -96,6 +96,8 @@ var has_mower: bool = false
 var held_rock: Rock = null
 var held_pit: Pit = null
 var held_boot: Boot = null
+## false = no responde a los controles (ej: durante la cuenta regresiva).
+var controls_enabled: bool = true
 var is_aiming: bool = false
 var spawn_position: Vector3
 # Pozo en el que está cayendo (lo usa el estado Falling)
@@ -247,7 +249,7 @@ func _is_my_joypad_event(event: InputEvent) -> bool:
 # Con la bota se corre el doble de rápido; la patada sale con R2 o □ si el rival está cerca.
 # Lo mismo explica el tutorial (niveles/1_patio/tutorial/).
 func _unhandled_input(event: InputEvent) -> void:
-	if is_disabled():
+	if is_disabled() or not controls_enabled:
 		return
 	if event.is_action_pressed("p%d_grab" % player_id):
 		grab_or_drop()
@@ -259,7 +261,7 @@ func _physics_process(delta: float) -> void:
 	_update_rock_aim()
 	_update_footsteps(delta)
 
-	if is_disabled():
+	if is_disabled() or not controls_enabled:
 		return
 	var prefix := "p%d_" % player_id
 	if Input.is_action_just_pressed(prefix + "throw"):

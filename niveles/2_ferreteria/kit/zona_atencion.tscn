@@ -1,0 +1,468 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_16094.res" id="1_mcyr0"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_16501.res" id="2_m0jxu"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_029.res" id="3_r4p5q"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cylinder_004.res" id="4_vqgct"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/blueprint_stacked.res" id="5_n5xkw"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_032.res" id="6_k56ft"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_015.res" id="7_1deib"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_16111.res" id="8_xa23y"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Объект_Цилиндр.res" id="9_cv1o0"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Выдавливание.res" id="10_7r53k"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_1.res" id="11_yreay"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_2.res" id="12_1xpwl"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Выдавливание_2.res" id="13_mx3q3"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_1_2.res" id="14_mpmav"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_2_2.res" id="15_73mag"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/циверблат.res" id="16_5n64q"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/секло.res" id="17_ikmnk"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/крпус.res" id="18_iietj"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Объект_Цилиндр_2.res" id="19_la448"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Выдавливание_3.res" id="20_ghc0j"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_1_3.res" id="21_wr48j"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_2_3.res" id="22_xx4i2"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Выдавливание_2_2.res" id="23_jkn66"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_1_2_2.res" id="24_h03k1"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Шапка_2_2_2.res" id="25_3uboy"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/циверблат_2.res" id="26_l62s5"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/секло_2.res" id="27_civ6l"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/крпус_2.res" id="28_2mrqj"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_002.res" id="29_06cn0"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_006.res" id="30_mstc2"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_007_MODEL_05_0_001.res" id="31_3vtt8"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_006_2.res" id="32_sbpvu"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_005.res" id="33_ox6dv"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cylinder_020.res" id="34_m8ajc"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cylinder_047.res" id="35_mob6l"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cylinder_260.res" id="36_xp11v"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_004.res" id="37_ocrky"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Cube_006_3.res" id="38_rumsw"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_005.res" id="39_w7dd1"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_013.res" id="40_ce53u"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_003.res" id="41_qbrsb"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/Plane_016.res" id="42_dj1bi"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/bucket_metal.res" id="43_ffuq7"]
+[ext_resource type="ArrayMesh" path="res://niveles/2_ferreteria/kit/mallas_zonas/bucket_metal_handle.res" id="44_erupf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rwc2"]
+albedo_color = Color(0.20392157, 0.45882353, 0.7490196, 1)
+
+[node name="zona_atencion" type="Node3D" unique_id=586552550]
+metadata/collisions = Array[AABB]([AABB(17.331036, -0.40573135, 13.25305, 2, 3.0000002, 2), AABB(-19.137672, -0.40573135, 13.253046, 2, 3.0000002, 2), AABB(2.673486, -0.007624775, 18.201328, 0.8799095, 0.82724607, 0.8368454), AABB(-3.5790327, -0.007624775, 18.201328, 0.8799095, 0.82724607, 0.8368454), AABB(0.8041176, -0.007626593, 7.86174, 0.7500002, 1.2583258, 0.8451271), AABB(-6.903234, -0.007626593, 7.9334526, 2.0000005, 1.7088957, 1.5), AABB(4.4688134, -0.007626623, 7.7901573, 3.0000005, 1.2240598, 1.5999985), AABB(-19.313164, -0.008706331, 1.9011192, 1.2149639, 3.0070019, 2.8311176), AABB(-19.313166, -0.008706331, 6.1064663, 1.2149639, 3.0070019, 2.8311157), AABB(-19.313166, -0.008706331, 9.885954, 1.2149639, 3.0070019, 2.8311157), AABB(18.049068, -0.008706331, 9.279024, 1.2149639, 3.0070019, 2.8311157), AABB(18.049068, -0.008706331, 5.569025, 1.2149639, 3.0070019, 2.8311157), AABB(18.04907, -0.008706331, 1.5426674, 1.2149639, 3.0070019, 2.8311157), AABB(0.020856326, 0, 9.399742, 4.000001, 4, 0.5299988), AABB(-3.9794831, 0, 9.411819, 4.000001, 4, 0.5299988), AABB(0.020856325, 3.9825897, 9.429741, 4.000001, 4, 0.5299988), AABB(-3.9794831, 3.9825897, 9.441818, 4.000001, 4, 0.5299988), AABB(4.0198045, 0, 9.399742, 4.0000014, 4, 0.5299988), AABB(4.0198045, 3.9825897, 9.429741, 4.0000014, 4, 0.5299988), AABB(-7.9730535, 0, 9.411819, 4.0000005, 4, 0.5299988), AABB(-7.9730535, 3.9825897, 9.441818, 4.0000005, 4, 0.5299988)])
+
+[node name="Wall16_0" type="MeshInstance3D" parent="." unique_id=1713093293]
+transform = Transform3D(-100.00001, -8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, 100.00001, -8.742279e-06, 100.00001, 4.3711393e-06, 2.0208564, 0, 9.679741)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall22_1" type="MeshInstance3D" parent="." unique_id=1380636690]
+transform = Transform3D(-100.00001, -8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, 100.00001, -8.742279e-06, 100.00001, 4.3711393e-06, -1.9794827, 0, 9.691818)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall23_2" type="MeshInstance3D" parent="." unique_id=602014832]
+transform = Transform3D(-100.00001, 8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, -100.00001, -8.742279e-06, -100.00001, 4.3711393e-06, 2.0208564, 7.9825897, 9.679741)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall24_3" type="MeshInstance3D" parent="." unique_id=168419089]
+transform = Transform3D(-100.00001, 8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, -100.00001, -8.742279e-06, -100.00001, 4.3711393e-06, -1.9794827, 7.9825897, 9.691818)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall25_4" type="MeshInstance3D" parent="." unique_id=355267894]
+transform = Transform3D(-100.00001, -8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, 100.00001, -8.742279e-06, 100.00001, 4.3711393e-06, 6.0198045, 0, 9.679741)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall26_5" type="MeshInstance3D" parent="." unique_id=66710538]
+transform = Transform3D(-100.00001, 8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, -100.00001, -8.742279e-06, -100.00001, 4.3711393e-06, 6.0198045, 7.9825897, 9.679741)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall27_6" type="MeshInstance3D" parent="." unique_id=169214612]
+transform = Transform3D(-100.00001, -8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, 100.00001, -8.742279e-06, 100.00001, 4.3711393e-06, -5.9730535, 0, 9.691818)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Wall28_7" type="MeshInstance3D" parent="." unique_id=1442912521]
+transform = Transform3D(-100.00001, 8.742279e-06, -3.8213714e-13, 0, -4.3711393e-06, -100.00001, -8.742279e-06, -100.00001, 4.3711393e-06, -5.9730535, 7.9825897, 9.691818)
+mesh = ExtResource("1_mcyr0")
+
+[node name="Door_B_8" type="MeshInstance3D" parent="." unique_id=1184832372]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 0.0120027065, -0.030748367, 19.186394)
+mesh = ExtResource("2_m0jxu")
+metadata/pegar_al_fondo = true
+
+[node name="Door_B2_9" type="MeshInstance3D" parent="." unique_id=783299505]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 1.63688, -0.030748367, 19.186394)
+mesh = ExtResource("2_m0jxu")
+metadata/pegar_al_fondo = true
+
+[node name="Pallet_Small_Decorated_B_10" type="MeshInstance3D" parent="." unique_id=1904331536]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 18.331036, -0.4057312, 14.253048)
+mesh = ExtResource("3_r4p5q")
+
+[node name="Pallet_Small_Decorated_B7_11" type="MeshInstance3D" parent="." unique_id=2080393680]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, -18.137672, -0.4057312, 14.253048)
+mesh = ExtResource("3_r4p5q")
+
+[node name="cactus_medium_A_12" type="MeshInstance3D" parent="." unique_id=1040107537]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 3.113433, -0.0076265335, 18.619751)
+mesh = ExtResource("4_vqgct")
+
+[node name="cactus_medium_A2_13" type="MeshInstance3D" parent="." unique_id=354547853]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, -3.1390858, -0.0076265335, 18.619751)
+mesh = ExtResource("4_vqgct")
+
+[node name="blueprint_stacked_14" type="MeshInstance3D" parent="." unique_id=1006621089]
+transform = Transform3D(-90, 0, 7.86805e-06, 0, 90, 0, -7.86805e-06, 0, -90, 2.8846464, 1.9991691, 9.460934)
+mesh = ExtResource("5_n5xkw")
+
+[node name="chair_B_15" type="MeshInstance3D" parent="." unique_id=630771072]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 1.1791329, -0.0076265335, 8.23674)
+mesh = ExtResource("6_k56ft")
+
+[node name="table_medium_Decorated_16" type="MeshInstance3D" parent="." unique_id=1467209717]
+transform = Transform3D(-100, -8.742278e-06, -3.8213708e-13, 0, -4.371139e-06, 100, -8.742278e-06, 100, 4.371139e-06, -5.903234, -0.0076265335, 8.683453)
+mesh = ExtResource("7_1deib")
+
+[node name="target_wall_small_17" type="MeshInstance3D" parent="." unique_id=1380884046]
+transform = Transform3D(-50, -4.371139e-06, -1.9106854e-13, 0, -2.1855694e-06, 50, -4.371139e-06, 50, 2.1855694e-06, -4.703462, 2.1525772, 9.440269)
+mesh = ExtResource("8_xa23y")
+
+[node name="target_wall_small2_18" type="MeshInstance3D" parent="." unique_id=1292079971]
+transform = Transform3D(-50, -4.371139e-06, -1.9106854e-13, 0, -2.1855694e-06, 50, -4.371139e-06, 50, 2.1855694e-06, -3.0691476, 1.5048728, 9.440269)
+mesh = ExtResource("8_xa23y")
+
+[node name="Объект_Цилиндр_19" type="MeshInstance3D" parent="." unique_id=1237972029]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4093294, 2.6145787, 9.409359)
+mesh = ExtResource("9_cv1o0")
+
+[node name="Выдавливание_20" type="MeshInstance3D" parent="." unique_id=217314319]
+transform = Transform3D(-0.24200888, -0.17728989, 2.6226834e-08, -0.17728989, 0.24200888, 0, -2.1157089e-08, -1.5499174e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("10_7r53k")
+
+[node name="Шапка_1_21" type="MeshInstance3D" parent="." unique_id=795340844]
+transform = Transform3D(-0.24200888, -0.16505688, 2.6226834e-08, -0.17728989, 0.22531027, 0, -2.1157089e-08, -1.4429731e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("11_yreay")
+
+[node name="Шапка_2_22" type="MeshInstance3D" parent="." unique_id=1286298370]
+transform = Transform3D(-0.24200888, -0.16505688, 2.6226834e-08, -0.17728989, 0.22531027, 0, -2.1157089e-08, -1.4429731e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("12_1xpwl")
+
+[node name="Выдавливание_2_23" type="MeshInstance3D" parent="." unique_id=1322881240]
+transform = Transform3D(0.17751801, -0.24184167, 2.6226834e-08, -0.24184167, -0.17751801, 0, 1.5519117e-08, -2.114247e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("13_mx3q3")
+
+[node name="Шапка_1_2_24" type="MeshInstance3D" parent="." unique_id=256512987]
+transform = Transform3D(0.17751801, -0.2251546, 2.6226834e-08, -0.24184167, -0.16526927, 0, 1.5519117e-08, -1.968364e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("14_mpmav")
+
+[node name="Шапка_2_2_25" type="MeshInstance3D" parent="." unique_id=1659056034]
+transform = Transform3D(0.17751801, -0.2251546, 2.6226834e-08, -0.24184167, -0.16526927, 0, 1.5519117e-08, -1.968364e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("15_73mag")
+
+[node name="циверблат_26" type="MeshInstance3D" parent="." unique_id=121162561]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.431614)
+mesh = ExtResource("16_5n64q")
+
+[node name="секло_27" type="MeshInstance3D" parent="." unique_id=1783568020]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.352703)
+mesh = ExtResource("17_ikmnk")
+
+[node name="крпус_28" type="MeshInstance3D" parent="." unique_id=1583117022]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.431614)
+mesh = ExtResource("18_iietj")
+
+[node name="Объект_Цилиндр_29" type="MeshInstance3D" parent="." unique_id=1656678393]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4093294, 2.6145787, 9.409359)
+mesh = ExtResource("19_la448")
+
+[node name="Выдавливание_30" type="MeshInstance3D" parent="." unique_id=1223060973]
+transform = Transform3D(-0.24200888, -0.17728989, 2.6226834e-08, -0.17728989, 0.24200888, 0, -2.1157089e-08, -1.5499174e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("20_ghc0j")
+
+[node name="Шапка_1_31" type="MeshInstance3D" parent="." unique_id=1889894364]
+transform = Transform3D(-0.24200888, -0.16505688, 2.6226834e-08, -0.17728989, 0.22531027, 0, -2.1157089e-08, -1.4429731e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("21_wr48j")
+
+[node name="Шапка_2_32" type="MeshInstance3D" parent="." unique_id=1748091990]
+transform = Transform3D(-0.24200888, -0.16505688, 2.6226834e-08, -0.17728989, 0.22531027, 0, -2.1157089e-08, -1.4429731e-08, -0.3, -2.4093957, 2.6143064, 9.399254)
+mesh = ExtResource("22_xx4i2")
+
+[node name="Выдавливание_2_33" type="MeshInstance3D" parent="." unique_id=1594417250]
+transform = Transform3D(0.17751801, -0.24184167, 2.6226834e-08, -0.24184167, -0.17751801, 0, 1.5519117e-08, -2.114247e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("23_jkn66")
+
+[node name="Шапка_1_2_34" type="MeshInstance3D" parent="." unique_id=918068708]
+transform = Transform3D(0.17751801, -0.2251546, 2.6226834e-08, -0.24184167, -0.16526927, 0, 1.5519117e-08, -1.968364e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("24_h03k1")
+
+[node name="Шапка_2_2_35" type="MeshInstance3D" parent="." unique_id=2003097766]
+transform = Transform3D(0.17751801, -0.2251546, 2.6226834e-08, -0.24184167, -0.16526927, 0, 1.5519117e-08, -1.968364e-08, -0.3, -2.4093957, 2.6143064, 9.409077)
+mesh = ExtResource("25_3uboy")
+
+[node name="циверблат_36" type="MeshInstance3D" parent="." unique_id=508159862]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.431614)
+mesh = ExtResource("26_l62s5")
+
+[node name="секло_37" type="MeshInstance3D" parent="." unique_id=719719482]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.352703)
+mesh = ExtResource("27_civ6l")
+
+[node name="крпус_38" type="MeshInstance3D" parent="." unique_id=633619078]
+transform = Transform3D(-0.3, 0, 2.6226834e-08, 0, 0.3, 0, -2.6226834e-08, 0, -0.3, -2.4092908, 2.6152072, 9.431614)
+mesh = ExtResource("28_2mrqj")
+
+[node name="couch_39" type="MeshInstance3D" parent="." unique_id=128044188]
+transform = Transform3D(-100, -8.742277e-06, -1.0421607e-12, 0, -1.1920929e-05, 99.99999, -8.742278e-06, 99.99999, 1.1920929e-05, 5.9688134, -0.0076265335, 8.640156)
+mesh = ExtResource("29_06cn0")
+
+[node name="pillow_A_40" type="MeshInstance3D" parent="." unique_id=1550490483]
+transform = Transform3D(-91.84741, 31.517126, -23.889864, 0, 60.407063, 79.69308, 39.548134, 73.19602, -55.482323, 6.845078, 0.69569635, 8.626476)
+mesh = ExtResource("30_mstc2")
+
+[node name="pillow_A2_41" type="MeshInstance3D" parent="." unique_id=7335123]
+transform = Transform3D(-95.134224, -24.556404, 18.613668, -9.86777e-07, 60.407066, 79.69308, -30.813726, 75.81538, -57.467773, 5.073838, 0.69569635, 8.60355)
+mesh = ExtResource("30_mstc2")
+
+[node name="Rack-24_42" type="MeshInstance3D" parent="." unique_id=513761523]
+transform = Transform3D(40, 0, 1.3552527e-20, 0, -1.7484556e-06, 40, 0, -40, -1.7484556e-06, -18.705683, -0.0014036894, 3.316677)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Rack-25_43" type="MeshInstance3D" parent="." unique_id=1500057670]
+transform = Transform3D(40, 0, 1.3552527e-20, 0, -1.7484556e-06, 40, 0, -40, -1.7484556e-06, -18.705685, -0.0014036894, 7.522026)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Rack-26_44" type="MeshInstance3D" parent="." unique_id=516213464]
+transform = Transform3D(40, 0, 1.3552527e-20, 0, -1.7484556e-06, 40, 0, -40, -1.7484556e-06, -18.705685, -0.0014036894, 11.301514)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Rack-27_45" type="MeshInstance3D" parent="." unique_id=15785398]
+transform = Transform3D(-40, -3.4969112e-06, -1.5285485e-13, 0, -1.7484556e-06, 40, -3.4969112e-06, 40, 1.7484556e-06, 18.656551, -0.0014036894, 10.69458)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Rack-28_46" type="MeshInstance3D" parent="." unique_id=692011223]
+transform = Transform3D(-40, -3.4969112e-06, -1.5285485e-13, 0, -1.7484556e-06, 40, -3.4969112e-06, 40, 1.7484556e-06, 18.656551, -0.0014036894, 6.984581)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Rack-29_47" type="MeshInstance3D" parent="." unique_id=1233589100]
+transform = Transform3D(-40, -3.4969112e-06, -1.5285485e-13, 0, -1.7484556e-06, 40, -3.4969112e-06, 40, 1.7484556e-06, 18.656553, -0.0014036894, 2.9582253)
+material_override = SubResource("StandardMaterial3D_4rwc2")
+mesh = ExtResource("31_3vtt8")
+
+[node name="Box_A55_48" type="MeshInstance3D" parent="." unique_id=1417697224]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.328775, 2.2708988, 3.5330162)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C73_49" type="MeshInstance3D" parent="." unique_id=2018094815]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.510567, 2.282352, 3.8141212)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C74_50" type="MeshInstance3D" parent="." unique_id=635004924]
+transform = Transform3D(-75, -6.5567083e-06, -2.8660283e-13, 0, -3.2783541e-06, 75, -6.5567083e-06, 75, 3.2783541e-06, 18.740082, 2.282352, 3.397152)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_A56_51" type="MeshInstance3D" parent="." unique_id=1880921603]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.32364, 1.5099039, 2.4418411)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C75_52" type="MeshInstance3D" parent="." unique_id=1661989319]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.585365, 1.568512, 2.65057)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C76_53" type="MeshInstance3D" parent="." unique_id=373533187]
+transform = Transform3D(-71.10931, 23.842525, 1.0421901e-06, 0, -3.2783541e-06, 74.99999, 23.842525, 71.10931, 3.1082866e-06, 18.67042, 1.568512, 2.18227)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Barrel_A19_54" type="MeshInstance3D" parent="." unique_id=1997728137]
+transform = Transform3D(-30, -2.6226833e-06, -1.1464113e-13, 0, -1.3113416e-06, 30, -2.6226833e-06, 30, 1.3113416e-06, 18.647886, 1.0131736, 3.7817383)
+mesh = ExtResource("34_m8ajc")
+
+[node name="Barrel_C19_55" type="MeshInstance3D" parent="." unique_id=1424752714]
+transform = Transform3D(-35, -3.059797e-06, -1.3374798e-13, 0, -1.5298986e-06, 35, -3.059797e-06, 35, 1.5298986e-06, 18.359978, 1.0283957, 3.8823738)
+mesh = ExtResource("35_mob6l")
+
+[node name="Barrel_B19_56" type="MeshInstance3D" parent="." unique_id=1591060691]
+transform = Transform3D(-20, -1.7484556e-06, -7.6427424e-14, 0, -8.742278e-07, 20, -1.7484556e-06, 20, 8.742278e-07, 18.440617, 0.9530678, 3.6396217)
+mesh = ExtResource("36_xp11v")
+
+[node name="Box_B19_57" type="MeshInstance3D" parent="." unique_id=1355109512]
+transform = Transform3D(-28.610153, -41.005604, -4.888249e-06, 0, -5.9604645e-06, 50.000004, -41.005608, 28.610151, 3.4105956e-06, 18.52332, 1.5555527, 3.6001282)
+mesh = ExtResource("37_ocrky")
+
+[node name="Box_A57_58" type="MeshInstance3D" parent="." unique_id=2068197293]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.706657, 1.5758245, 3.8823166)
+mesh = ExtResource("38_rumsw")
+
+[node name="cajacerrada37_59" type="MeshInstance3D" parent="." unique_id=1624686644]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.526114, 2.2877395, 1.8787155)
+mesh = ExtResource("39_w7dd1")
+
+[node name="cajaabierta19_60" type="MeshInstance3D" parent="." unique_id=2064081019]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.600674, 0.85416436, 1.817852)
+mesh = ExtResource("40_ce53u")
+
+[node name="cajasemiabierta19_61" type="MeshInstance3D" parent="." unique_id=357531222]
+transform = Transform3D(-1.0539004, 0, 1.0673772, 0, 1.5, 0, -1.0673772, 0, -1.0539004, 18.563509, 0.14405394, 2.169197)
+mesh = ExtResource("41_qbrsb")
+
+[node name="Caja pequeña19_62" type="MeshInstance3D" parent="." unique_id=1130125542]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.407827, 2.283626, 2.3013878)
+mesh = ExtResource("42_dj1bi")
+
+[node name="cajacerrada38_63" type="MeshInstance3D" parent="." unique_id=1869586460]
+transform = Transform3D(-1.0541221, 0, -0.67180836, 0, 1.25, 0, 0.67180836, 0, -1.0541221, 18.465866, 0.85570335, 2.51091)
+mesh = ExtResource("39_w7dd1")
+
+[node name="bucket_metal19_64" type="MeshInstance3D" parent="." unique_id=78355419]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626337, 0.10421085, 3.8431015)
+mesh = ExtResource("43_ffuq7")
+
+[node name="bucket_metal_handle_65" type="MeshInstance3D" parent="." unique_id=1558154812]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626337, 0.44021094, 3.8431015)
+mesh = ExtResource("44_erupf")
+
+[node name="Box_A58_66" type="MeshInstance3D" parent="." unique_id=190394640]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.328773, 2.2708988, 7.5775414)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C77_67" type="MeshInstance3D" parent="." unique_id=2129212876]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.510565, 2.282352, 7.8586464)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C78_68" type="MeshInstance3D" parent="." unique_id=1401025112]
+transform = Transform3D(-75, -6.5567083e-06, -2.8660283e-13, 0, -3.2783541e-06, 75, -6.5567083e-06, 75, 3.2783541e-06, 18.74008, 2.282352, 7.441677)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_A59_69" type="MeshInstance3D" parent="." unique_id=1443465905]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.323639, 1.5099039, 6.4863663)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C79_70" type="MeshInstance3D" parent="." unique_id=1627111999]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.585363, 1.568512, 6.695095)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C80_71" type="MeshInstance3D" parent="." unique_id=559825562]
+transform = Transform3D(-71.10931, 23.842525, 1.0421901e-06, 0, -3.2783541e-06, 74.99999, 23.842525, 71.10931, 3.1082866e-06, 18.670418, 1.568512, 6.226795)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Barrel_A20_72" type="MeshInstance3D" parent="." unique_id=1368759996]
+transform = Transform3D(-30, -2.6226833e-06, -1.1464113e-13, 0, -1.3113416e-06, 30, -2.6226833e-06, 30, 1.3113416e-06, 18.647884, 1.0131736, 7.8262634)
+mesh = ExtResource("34_m8ajc")
+
+[node name="Barrel_C20_73" type="MeshInstance3D" parent="." unique_id=593036246]
+transform = Transform3D(-35, -3.059797e-06, -1.3374798e-13, 0, -1.5298986e-06, 35, -3.059797e-06, 35, 1.5298986e-06, 18.359976, 1.0283957, 7.926899)
+mesh = ExtResource("35_mob6l")
+
+[node name="Barrel_B20_74" type="MeshInstance3D" parent="." unique_id=1806161588]
+transform = Transform3D(-20, -1.7484556e-06, -7.6427424e-14, 0, -8.742278e-07, 20, -1.7484556e-06, 20, 8.742278e-07, 18.440615, 0.9530678, 7.684147)
+mesh = ExtResource("36_xp11v")
+
+[node name="Box_B20_75" type="MeshInstance3D" parent="." unique_id=1302287279]
+transform = Transform3D(-28.610153, -41.005604, -4.888249e-06, 0, -5.9604645e-06, 50.000004, -41.005608, 28.610151, 3.4105956e-06, 18.523317, 1.5555527, 7.6446533)
+mesh = ExtResource("37_ocrky")
+
+[node name="Box_A60_76" type="MeshInstance3D" parent="." unique_id=1084162403]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.706656, 1.5758245, 7.9268417)
+mesh = ExtResource("38_rumsw")
+
+[node name="cajacerrada39_77" type="MeshInstance3D" parent="." unique_id=389957419]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.526112, 2.2877395, 5.9232407)
+mesh = ExtResource("39_w7dd1")
+
+[node name="cajaabierta20_78" type="MeshInstance3D" parent="." unique_id=588234761]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.600672, 0.85416436, 5.862377)
+mesh = ExtResource("40_ce53u")
+
+[node name="cajasemiabierta20_79" type="MeshInstance3D" parent="." unique_id=955193892]
+transform = Transform3D(-1.0539004, 0, 1.0673772, 0, 1.5, 0, -1.0673772, 0, -1.0539004, 18.563507, 0.14405394, 6.213722)
+mesh = ExtResource("41_qbrsb")
+
+[node name="Caja pequeña20_80" type="MeshInstance3D" parent="." unique_id=404632396]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.407825, 2.283626, 6.345913)
+mesh = ExtResource("42_dj1bi")
+
+[node name="cajacerrada40_81" type="MeshInstance3D" parent="." unique_id=1163437981]
+transform = Transform3D(-1.0541221, 0, -0.67180836, 0, 1.25, 0, 0.67180836, 0, -1.0541221, 18.465864, 0.85570335, 6.555435)
+mesh = ExtResource("39_w7dd1")
+
+[node name="bucket_metal20_82" type="MeshInstance3D" parent="." unique_id=2012932505]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626335, 0.10421085, 7.8876266)
+mesh = ExtResource("43_ffuq7")
+
+[node name="bucket_metal_handle_83" type="MeshInstance3D" parent="." unique_id=1973136899]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626335, 0.44021094, 7.8876266)
+mesh = ExtResource("44_erupf")
+
+[node name="Box_A61_84" type="MeshInstance3D" parent="." unique_id=631328438]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.328773, 2.2708988, 11.28677)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C81_85" type="MeshInstance3D" parent="." unique_id=1081489452]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.510565, 2.282352, 11.567875)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C82_86" type="MeshInstance3D" parent="." unique_id=1674923336]
+transform = Transform3D(-75, -6.5567083e-06, -2.8660283e-13, 0, -3.2783541e-06, 75, -6.5567083e-06, 75, 3.2783541e-06, 18.74008, 2.282352, 11.150906)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_A62_87" type="MeshInstance3D" parent="." unique_id=1993974800]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.323639, 1.5099039, 10.195595)
+mesh = ExtResource("32_sbpvu")
+
+[node name="Box_C83_88" type="MeshInstance3D" parent="." unique_id=852929402]
+transform = Transform3D(-47.40621, 15.895019, 1.8948339e-06, 0, -5.9604645e-06, 50.000004, 15.8950205, 47.406208, 5.6512604e-06, 18.585363, 1.568512, 10.404324)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Box_C84_89" type="MeshInstance3D" parent="." unique_id=915600348]
+transform = Transform3D(-71.10931, 23.842525, 1.0421901e-06, 0, -3.2783541e-06, 74.99999, 23.842525, 71.10931, 3.1082866e-06, 18.670418, 1.568512, 9.936024)
+mesh = ExtResource("33_ox6dv")
+
+[node name="Barrel_A21_90" type="MeshInstance3D" parent="." unique_id=1287856333]
+transform = Transform3D(-30, -2.6226833e-06, -1.1464113e-13, 0, -1.3113416e-06, 30, -2.6226833e-06, 30, 1.3113416e-06, 18.647884, 1.0131736, 11.535492)
+mesh = ExtResource("34_m8ajc")
+
+[node name="Barrel_C21_91" type="MeshInstance3D" parent="." unique_id=1710577439]
+transform = Transform3D(-35, -3.059797e-06, -1.3374798e-13, 0, -1.5298986e-06, 35, -3.059797e-06, 35, 1.5298986e-06, 18.359976, 1.0283957, 11.636127)
+mesh = ExtResource("35_mob6l")
+
+[node name="Barrel_B21_92" type="MeshInstance3D" parent="." unique_id=492205392]
+transform = Transform3D(-20, -1.7484556e-06, -7.6427424e-14, 0, -8.742278e-07, 20, -1.7484556e-06, 20, 8.742278e-07, 18.440615, 0.9530678, 11.393375)
+mesh = ExtResource("36_xp11v")
+
+[node name="Box_B21_93" type="MeshInstance3D" parent="." unique_id=892710201]
+transform = Transform3D(-28.610153, -41.005604, -4.888249e-06, 0, -5.9604645e-06, 50.000004, -41.005608, 28.610151, 3.4105956e-06, 18.523317, 1.5555527, 11.353882)
+mesh = ExtResource("37_ocrky")
+
+[node name="Box_A63_94" type="MeshInstance3D" parent="." unique_id=1833369781]
+transform = Transform3D(-50, -4.3711384e-06, -5.2108036e-13, 0, -5.9604645e-06, 49.999996, -4.371139e-06, 49.999996, 5.9604645e-06, 18.706656, 1.5758245, 11.63607)
+mesh = ExtResource("38_rumsw")
+
+[node name="cajacerrada41_95" type="MeshInstance3D" parent="." unique_id=1160384828]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.526112, 2.2877395, 9.632469)
+mesh = ExtResource("39_w7dd1")
+
+[node name="cajaabierta21_96" type="MeshInstance3D" parent="." unique_id=531020980]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.600672, 0.85416436, 9.571606)
+mesh = ExtResource("40_ce53u")
+
+[node name="cajasemiabierta21_97" type="MeshInstance3D" parent="." unique_id=588325508]
+transform = Transform3D(-1.0539004, 0, 1.0673772, 0, 1.5, 0, -1.0673772, 0, -1.0539004, 18.563507, 0.14405394, 9.922951)
+mesh = ExtResource("41_qbrsb")
+
+[node name="Caja pequeña21_98" type="MeshInstance3D" parent="." unique_id=704140868]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 18.407825, 2.283626, 10.055141)
+mesh = ExtResource("42_dj1bi")
+
+[node name="cajacerrada42_99" type="MeshInstance3D" parent="." unique_id=1719380131]
+transform = Transform3D(-1.0541221, 0, -0.67180836, 0, 1.25, 0, 0.67180836, 0, -1.0541221, 18.465864, 0.85570335, 10.264664)
+mesh = ExtResource("39_w7dd1")
+
+[node name="bucket_metal21_100" type="MeshInstance3D" parent="." unique_id=913013412]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626335, 0.10421085, 11.596855)
+mesh = ExtResource("43_ffuq7")
+
+[node name="bucket_metal_handle_101" type="MeshInstance3D" parent="." unique_id=1376269272]
+transform = Transform3D(0.5043877, 49.997456, 5.9601607e-06, 0, -5.9604645e-06, 50.000004, 49.99746, -0.5043876, -6.012769e-08, 18.626335, 0.44021094, 11.596855)
+mesh = ExtResource("44_erupf")

@@ -27,6 +27,14 @@ signal deliver_requested(player: StorePlayer)
 @export_range(1.0, 30.0, 0.5) var turn_speed: float = 12.0
 @export_range(0.0, 50.0, 0.5) var gravity: float = 20.0
 
+@export_group("Empujar conos")
+## Velocidad que le pasa a un cono al chocarlo (1 = la misma que el jugador).
+@export_range(0.0, 3.0, 0.05) var push_strength: float = 0.9
+## Altura a la que se lo empuja caminando (bajo = se corre sin caerse).
+@export_range(0.0, 2.0, 0.05, "suffix:u") var push_low_height: float = 0.1
+## Altura a la que se lo empuja corriendo (alto = se cae).
+@export_range(0.0, 2.0, 0.05, "suffix:u") var push_high_height: float = 0.75
+
 @export_group("Herramientas")
 ## Distancia máxima para agarrar una herramienta.
 @export_range(0.5, 5.0, 0.1, "suffix:u") var pickup_distance: float = 1.6
@@ -98,6 +106,8 @@ func _ready() -> void:
 	if _character == null:
 		_character = default_character
 	_load_model()
+	# También choca (y empuja) los objetos sueltos, como los conos
+	set_collision_mask_value(ObjetoSuelto.LAYER, true)
 
 
 func _physics_process(delta: float) -> void:
@@ -111,7 +121,7 @@ func _physics_process(delta: float) -> void:
 		velocity = _slide_direction * ice_slide_speed + Vector3.UP * vertical
 		model_root.rotation.y += 8.0 * delta
 		_play(Player.ANIM_STUNNED)
-		move_and_slide()
+		_move()
 		var flat := Vector3(velocity.x, 0.0, velocity.z)
 		if flat.length() > 0.5:
 			_slide_direction = flat.normalized()
@@ -123,7 +133,7 @@ func _physics_process(delta: float) -> void:
 		var slowed := Vector3(velocity.x, 0.0, velocity.z).move_toward(Vector3.ZERO, 15.0 * delta)
 		velocity = slowed + Vector3.UP * vertical
 		_play(Player.ANIM_STUNNED)
-		move_and_slide()
+		_move()
 		return
 
 	var prefix := "p%d_" % player_id
@@ -146,7 +156,37 @@ func _physics_process(delta: float) -> void:
 	else:
 		_play(Player.ANIM_IDLE)
 
+	_move()
+
+
+# Se mueve y empuja los objetos sueltos que choca (los conos): les da la
+# velocidad con la que venía. Caminando se los empuja desde abajo y se corren;
+# más rápido (corriendo, patinando, empujado por una piña), desde más arriba,
+# y se caen.
+func _move() -> void:
+	var before := Vector3(velocity.x, 0.0, velocity.z)
 	move_and_slide()
+	for i in get_slide_collision_count():
+		var hit := get_slide_collision(i)
+		var body := hit.get_collider() as RigidBody3D
+		if body == null:
+			continue
+		var push := -hit.get_normal()
+		push.y = 0.0
+		if push.length() < 0.01:
+			continue
+		push = push.normalized()
+		var speed := before.dot(push)
+		if speed < 0.2:
+			continue
+		var missing := speed * push_strength - body.linear_velocity.dot(push)
+		if missing <= 0.0:
+			continue
+		var hard := clampf(inverse_lerp(walk_speed, run_speed, speed), 0.0, 1.0)
+		var height := lerpf(push_low_height, push_high_height, hard)
+		var point := hit.get_position() - body.global_position
+		point.y = height
+		body.apply_impulse(push * missing * body.mass, point)
 
 
 func _unhandled_input(event: InputEvent) -> void:
