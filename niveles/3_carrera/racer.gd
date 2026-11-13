@@ -156,6 +156,8 @@ const ITEM_NAMES := {
 @export var knock_animation: StringName = &"caer_carretilla"
 ## Animación al tirar un item desde la carretilla. Si el personaje no la tiene, no se anima.
 @export var throw_animation: StringName = &"tirar_carretilla"
+## Animación al soltar el pozo (cae detrás). Si el personaje no la tiene, usa "Throw Animation".
+@export var drop_animation: StringName = &"soltar_carretilla"
 
 @export_group("Skin")
 ## Personaje si no se eligió uno en el menú (al probar la escena directo).
@@ -191,6 +193,8 @@ var _anim: AnimationPlayer
 var _stroke_timer: float = 0.0
 var _stroke_anim_time: float = 0.0
 var _throw_anim_time: float = 0.0
+# La que se está viendo mientras corre _throw_anim_time (ver _play_action)
+var _action_animation: StringName = &""
 var _knock_timer: float = 0.0
 # Turbo de las rampas: segundos que quedan y velocidad
 var _boost_timer: float = 0.0
@@ -364,6 +368,9 @@ func boost(speed: float, time: float) -> bool:
 		return false
 	_boost_speed = speed
 	_boost_timer = time
+	# La cámara se abre y aparecen las líneas de velocidad
+	if camera_rig:
+		camera_rig.play_boost(time)
 	return true
 
 
@@ -505,6 +512,7 @@ func give_item(kind: Item) -> bool:
 
 func use_item() -> void:
 	var forward := get_forward()
+	var used := item
 	match item:
 		Item.MOWER:
 			var mower := _spawn(mower_scene, barrow.global_position + forward * 1.3 + Vector3.UP * 0.5)
@@ -529,8 +537,17 @@ func use_item() -> void:
 		Item.NONE:
 			return
 	item = Item.NONE
-	if _has_anim(throw_animation):
-		_throw_anim_time = _anim.get_animation(throw_animation).length
+	_play_action(drop_animation if used == Item.PIT else throw_animation)
+
+
+# Animación de una acción desde la carretilla (tirar, soltar, agarrar): se ve
+# mientras dura y después vuelve la de andar. Si no está, prueba con la de tirar.
+func _play_action(anim_name: StringName) -> void:
+	if not _has_anim(anim_name):
+		anim_name = throw_animation
+	if _has_anim(anim_name):
+		_action_animation = anim_name
+		_throw_anim_time = _anim.get_animation(anim_name).length
 
 
 func _spawn(scene: PackedScene, world_position: Vector3) -> Node3D:
@@ -779,8 +796,7 @@ func try_grab_rival() -> bool:
 	_grab_cooldown_left = grab_cooldown
 	Audio.play_sfx(Audio.rival_grab if Audio.rival_grab else Audio.punch_hit)
 	Metrics.add(player_id, "agarres")
-	if _has_anim(throw_animation):
-		_throw_anim_time = _anim.get_animation(throw_animation).length
+	_play_action(throw_animation)
 	return true
 
 
@@ -885,7 +901,7 @@ func _get_input_direction() -> Vector3:
 
 func _play_ride_animation() -> void:
 	if _throw_anim_time > 0.0:
-		_play(throw_animation)
+		_play(_action_animation)
 	elif _stroke_anim_time > 0.0 and _has_anim(stroke_animation):
 		_play(stroke_animation)
 	elif _has_anim(ride_animation):

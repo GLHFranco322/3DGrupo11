@@ -44,17 +44,27 @@ layout_mode = 0
 offset_left = 248.0
 offset_top = 350.0
 offset_right = 866.0
-offset_bottom = 556.0
+offset_bottom = 540.0
 texture = ExtResource("d_persecucion")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="TituloHerramienta" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 548.0
+offset_right = 700.0
+offset_bottom = 592.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "Las herramientas"
+
 [node name="Herramienta" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 248.0
-offset_top = 566.0
+offset_top = 598.0
 offset_right = 540.0
-offset_bottom = 790.0
+offset_bottom = 830.0
 texture = ExtResource("d_herramienta")
 expand_mode = 1
 stretch_mode = 5
@@ -62,9 +72,9 @@ stretch_mode = 5
 [node name="VideoHerramienta" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 566.0
-offset_top = 584.0
+offset_top = 616.0
 offset_right = 856.0
-offset_bottom = 756.0
+offset_bottom = 788.0
 script = ExtResource("4_video")
 video = ExtResource("v_herramienta")
 texto = "Al tablero  {X}"
@@ -73,9 +83,9 @@ inclinacion = -1.5
 [node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 846.0
+offset_top = 852.0
 offset_right = 865.0
-offset_bottom = 962.0
+offset_bottom = 966.0
 mouse_filter = 2
 bbcode_enabled = true
 scroll_active = false
@@ -84,12 +94,22 @@ texto = "{PALANCA_IZQ} Moverte      {R1} Correr
 {X} Agarrar y entregar"
 alineacion = 1
 
+[node name="TituloPina" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 222.0
+offset_right = 1300.0
+offset_bottom = 266.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La piña"
+
 [node name="Pina" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 948.0
-offset_top = 236.0
+offset_top = 268.0
 offset_right = 1215.0
-offset_bottom = 430.0
+offset_bottom = 446.0
 texture = ExtResource("d_pina")
 expand_mode = 1
 stretch_mode = 5
@@ -97,20 +117,30 @@ stretch_mode = 5
 [node name="VideoPina" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 1240.0
-offset_top = 246.0
+offset_top = 268.0
 offset_right = 1540.0
-offset_bottom = 424.0
+offset_bottom = 446.0
 script = ExtResource("4_video")
 video = ExtResource("v_pina")
-texto = "Piña  {CUADRADO}"
+texto = "Pegar  {CUADRADO}"
 inclinacion = 1.5
+
+[node name="TituloBanana" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 466.0
+offset_right = 1300.0
+offset_bottom = 510.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La banana"
 
 [node name="Banana" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 948.0
-offset_top = 478.0
+offset_top = 512.0
 offset_right = 1215.0
-offset_bottom = 672.0
+offset_bottom = 690.0
 texture = ExtResource("d_banana")
 expand_mode = 1
 stretch_mode = 5
@@ -118,20 +148,30 @@ stretch_mode = 5
 [node name="VideoBanana" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 1240.0
-offset_top = 486.0
+offset_top = 512.0
 offset_right = 1540.0
-offset_bottom = 664.0
+offset_bottom = 690.0
 script = ExtResource("4_video")
 video = ExtResource("v_banana")
-texto = "Banana  {TRIANGULO}"
+texto = "Dejar  {TRIANGULO}"
 inclinacion = -1.0
+
+[node name="TituloHielo" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 710.0
+offset_right = 1300.0
+offset_bottom = 754.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "El hielo"
 
 [node name="Hielo" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 948.0
-offset_top = 718.0
+offset_top = 756.0
 offset_right = 1215.0
-offset_bottom = 912.0
+offset_bottom = 934.0
 texture = ExtResource("d_hielo")
 expand_mode = 1
 stretch_mode = 5
@@ -139,10 +179,10 @@ stretch_mode = 5
 [node name="VideoHielo" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 1240.0
-offset_top = 726.0
+offset_top = 756.0
 offset_right = 1540.0
-offset_bottom = 904.0
+offset_bottom = 934.0
 script = ExtResource("4_video")
 video = ExtResource("v_hielo")
-texto = "Hielo  {TRIANGULO}"
+texto = "Dejar  {TRIANGULO}"
 inclinacion = 1.2

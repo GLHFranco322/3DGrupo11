@@ -31,7 +31,7 @@ Godot_console.exe --path . res://niveles/comun/tutorial/clips/grabar.tscn -- res
 
 ## Hacer un clip nuevo
 
-1. Copiá un `demo_X.gd` del nivel. Extienden `DemoPatio`, `DemoFerreteria` o `DemoCarrera`, que a su vez extienden `Demo`.
+1. Copiá un `demo_X.gd` del nivel. Extienden `DemoPatio`, `DemoFerreteria`, `DemoCarrera` o `DemoRompecabezas`, que a su vez extienden `Demo`.
 2. En `preparar()` ubicá a los jugadores y los items, y elegí la cámara:
    - `fijar_camara()`: cámara quieta;
    - `seguir()`: sigue el punto medio de varios nodos;

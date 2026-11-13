@@ -1,7 +1,7 @@
 extends SceneTree
 
 # Arma el kit de piezas del laberinto (paredes, muebles y decoración) a partir
-# del mapa hecho a mano niveles/Escenarios/laberinto_ferreteria.tscn. Cada pieza
+# del mapa hecho a mano niveles/2_ferreteria/mapa_fabricio/laberinto_ferreteria.tscn. Cada pieza
 # queda como una escena en niveles/2_ferreteria/kit/, con su frente hacia +Z y
 # la espalda (lo que va contra la pared) en Z = 0; MazeBuilder las reparte.
 #
@@ -9,7 +9,7 @@ extends SceneTree
 # después recargar el proyecto):
 #   Godot_console.exe --headless --path . -s res://niveles/2_ferreteria/kit/extraer_kit.gd
 
-const SOURCE := "res://niveles/Escenarios/laberinto_ferreteria.tscn"
+const SOURCE := "res://niveles/2_ferreteria/mapa_fabricio/laberinto_ferreteria.tscn"
 const OUT := "res://niveles/2_ferreteria/kit/"
 const WALL_GROUPS := ["ParedesHorizontales1", "ParedesHorizontales2", "Paredesverticales1",
 		"Paredesverticales2", "ParedesInicio", "Paredeslaberinto", "PuertasAbiertas"]

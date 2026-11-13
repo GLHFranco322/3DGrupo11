@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="430" viewBox="0 0 820 430">
+  <g fill="#f4efe2" stroke="#1d2140" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 2x2 terminado, con el tilde -->
+    <rect x="20" y="230" width="130" height="130" rx="6"/>
+    <path d="M85 234 V356 M24 295 H146" fill="none" stroke-width="6"/>
+    <path d="M40 170 l28 30 l56 -70" fill="none" stroke-width="12"/>
+    <path d="M8 222 l-6 -10 M158 222 l8 -10 M8 372 l-6 10 M158 372 l8 10" fill="none" stroke-width="6"/>
+    <!-- Flecha -->
+    <path d="M176 296 H232 M214 278 L234 296 L214 314" fill="none"/>
+    <!-- 3x3 -->
+    <rect x="256" y="176" width="200" height="200" rx="6"/>
+    <path d="M323 180 V372 M389 180 V372 M260 243 H452 M260 309 H452" fill="none" stroke-width="6"/>
+    <!-- Flecha -->
+    <path d="M482 280 H538 M520 262 L540 280 L520 298" fill="none"/>
+    <!-- 4x4, el más grande -->
+    <rect x="562" y="100" width="250" height="276" rx="6"/>
+    <path d="M624 104 V372 M687 104 V372 M749 104 V372 M566 169 H808 M566 238 H808 M566 307 H808" fill="none" stroke-width="6"/>
+    <!-- Brillitos -->
+    <path d="M520 120 v34 M503 137 h34 M760 46 v30 M745 61 h30" fill="none" stroke-width="6"/>
+  </g>
+</svg>

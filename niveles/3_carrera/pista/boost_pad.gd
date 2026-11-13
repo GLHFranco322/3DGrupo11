@@ -9,10 +9,11 @@ extends TrackPiece
 const SHADER := preload("res://niveles/3_carrera/shaders/boost_pad.gdshader")
 
 @export_group("Turbo")
-## Velocidad a la que sale disparada.
-@export_range(1.0, 60.0, 0.5, "suffix:u/s") var boost_speed: float = 17.0
+## Velocidad a la que sale disparada (bien por encima de la máxima de la
+## carretilla, que es 14, así se nota).
+@export_range(1.0, 60.0, 0.5, "suffix:u/s") var boost_speed: float = 24.0
 ## Segundos que mantiene esa velocidad.
-@export_range(0.1, 10.0, 0.1, "suffix:s") var boost_time: float = 1.2
+@export_range(0.1, 10.0, 0.1, "suffix:s") var boost_time: float = 1.0
 
 @export_group("Dibujo")
 @export var arrow_color: Color = Color(0.1, 0.9, 1.0):

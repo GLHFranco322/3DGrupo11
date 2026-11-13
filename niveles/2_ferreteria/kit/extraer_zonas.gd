@@ -1,6 +1,6 @@
 extends SceneTree
 
-# Saca del mapa hecho a mano de Fabricio (niveles/Escenarios/
+# Saca del mapa hecho a mano de Fabricio (niveles/2_ferreteria/mapa_fabricio/
 # laberinto_ferreteria.tscn) zonas enteras, tal cual él las armó, para que
 # MazeBuilder las ponga en el laberinto al azar:
 #   kit/zona_atencion.tscn: la zona de atención (pared del medio con el
@@ -15,7 +15,7 @@ extends SceneTree
 # Se corre (con el editor cerrado o recargando el proyecto después):
 #   Godot_console.exe --headless --path . -s res://niveles/2_ferreteria/kit/extraer_zonas.gd
 
-const SOURCE := "res://niveles/Escenarios/laberinto_ferreteria.tscn"
+const SOURCE := "res://niveles/2_ferreteria/mapa_fabricio/laberinto_ferreteria.tscn"
 const OUT := "res://niveles/2_ferreteria/kit/"
 const MESHES := "res://niveles/2_ferreteria/kit/mallas_zonas/"
 

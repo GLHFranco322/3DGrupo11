@@ -8,7 +8,7 @@ extends Node3D
 # número sale siempre el mismo. En el editor se puede ver con el botón
 # "Generar" del inspector.
 #
-# Se arma con las piezas del mapa hecho a mano (niveles/Escenarios/
+# Se arma con las piezas del mapa hecho a mano (niveles/2_ferreteria/mapa_fabricio/
 # laberinto_ferreteria.tscn), sacadas a niveles/2_ferreteria/kit/ con
 # kit/extraer_kit.gd: paredes de cemento, muebles contra las paredes y la
 # decoración de la zona de atención.
@@ -47,7 +47,7 @@ extends Node3D
 
 @export_group("Decoración")
 # Los muebles se ubican como en el mapa hecho a mano de Fabricio
-# (niveles/Escenarios/laberinto_ferreteria.tscn): estanterías en fila contra
+# (niveles/2_ferreteria/mapa_fabricio/laberinto_ferreteria.tscn): estanterías en fila contra
 # las paredes de afuera, pallets con barriles en las esquinas, cajas en los
 # fondos de los pasillos sin salida, casilleros en la franja que da a la zona
 # de atención, escaleras y muebles contra las paredes de adentro, conos en los

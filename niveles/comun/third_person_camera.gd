@@ -35,14 +35,35 @@ extends Node3D
 ## Giro horizontal actual (lo usa el jugador para saber hacia dónde es "adelante").
 var yaw: float = 0.0
 
+@export_group("Efecto de turbo")
+## Grados que se abre la cámara con el turbo (play_boost).
+@export_range(0.0, 60.0, 1.0, "suffix:°") var boost_fov_kick: float = 24.0
+## Cuánto se aleja la cámara con el turbo.
+@export_range(0.0, 5.0, 0.1, "suffix:u") var boost_distance_kick: float = 1.2
+## Cuánto tiembla la cámara con el turbo.
+@export_range(0.0, 0.5, 0.01, "suffix:u") var boost_shake: float = 0.08
+## Segundos que tarda en llegar al efecto entero.
+@export_range(0.01, 1.0, 0.01, "suffix:s") var boost_attack: float = 0.12
+## Segundos que tarda en volver a la normal cuando termina el turbo.
+@export_range(0.05, 3.0, 0.05, "suffix:s") var boost_release: float = 0.9
+## Líneas de velocidad en la pantalla durante el turbo.
+@export var boost_speed_lines: bool = true
+
 var _idle_time: float = 0.0
+# Efecto de turbo: 0 = nada, 1 = a pleno; se mantiene "_boost_hold" segundos
+var _boost: float = 0.0
+var _boost_hold: float = 0.0
+var _base_fov: float = 70.0
+var _speed_lines: ColorRect
 
 @onready var pitch_pivot: Node3D = $Pitch
 @onready var spring_arm: SpringArm3D = $Pitch/SpringArm3D
+@onready var camera: Camera3D = $Pitch/SpringArm3D/Camera3D
 
 
 func _ready() -> void:
 	top_level = true
+	_base_fov = camera.fov
 	spring_arm.spring_length = distance
 	pitch_pivot.rotation.x = deg_to_rad(pitch_degrees)
 	if target:
@@ -90,6 +111,52 @@ func _process(delta: float) -> void:
 
 	var goal := _get_focus() + Vector3.UP * look_height
 	global_position = global_position.lerp(goal, minf(follow_speed * delta, 1.0))
+	_update_boost(delta)
+
+
+## Efecto de turbo (como en los juegos de carreras): la cámara se abre, se
+## aleja, tiembla un poco y aparecen líneas de velocidad. Dura "time" segundos
+## a pleno y después vuelve de a poco.
+func play_boost(time: float) -> void:
+	_boost_hold = maxf(_boost_hold, time)
+	if boost_speed_lines and _speed_lines == null:
+		_build_speed_lines()
+
+
+func _update_boost(delta: float) -> void:
+	if _boost_hold > 0.0:
+		_boost_hold -= delta
+		_boost = move_toward(_boost, 1.0, delta / boost_attack)
+	elif _boost > 0.0:
+		_boost = move_toward(_boost, 0.0, delta / boost_release)
+	else:
+		return
+	# Sube rápido y baja suave
+	var amount := ease(_boost, 0.6)
+	camera.fov = _base_fov + boost_fov_kick * amount
+	spring_arm.spring_length = distance + boost_distance_kick * amount
+	camera.h_offset = randf_range(-1.0, 1.0) * boost_shake * amount
+	camera.v_offset = randf_range(-1.0, 1.0) * boost_shake * amount
+	if _speed_lines:
+		var size := get_viewport().get_visible_rect().size
+		var material := _speed_lines.material as ShaderMaterial
+		material.set_shader_parameter("intensity", amount)
+		material.set_shader_parameter("aspect", size.x / maxf(size.y, 1.0))
+
+
+# Las líneas van en una capa propia dentro del viewport de esta cámara (en
+# pantalla dividida, solo en la mitad de este jugador)
+func _build_speed_lines() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 1
+	add_child(layer)
+	_speed_lines = ColorRect.new()
+	_speed_lines.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_speed_lines.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var material := ShaderMaterial.new()
+	material.shader = preload("res://niveles/comun/lineas_velocidad.gdshader")
+	_speed_lines.material = material
+	layer.add_child(_speed_lines)
 
 
 func _get_focus() -> Vector3:

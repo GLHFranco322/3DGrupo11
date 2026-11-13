@@ -39,12 +39,22 @@ script = ExtResource("3_texto")
 texto = "[b]¡Llegá primero! Son 3 vueltas[/b]"
 alineacion = 0
 
+[node name="TituloAgarre" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 350.0
+offset_right = 600.0
+offset_bottom = 396.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "El agarre"
+
 [node name="Carrera" type="TextureRect" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 244.0
-offset_top = 356.0
+offset_top = 398.0
 offset_right = 568.0
-offset_bottom = 780.0
+offset_bottom = 788.0
 texture = ExtResource("d_carrera")
 expand_mode = 1
 stretch_mode = 5
@@ -52,9 +62,9 @@ stretch_mode = 5
 [node name="VideoAgarre" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 574.0
-offset_top = 462.0
+offset_top = 486.0
 offset_right = 864.0
-offset_bottom = 634.0
+offset_bottom = 658.0
 script = ExtResource("4_video")
 video = ExtResource("v_agarre")
 texto = "Agarrar  {CUADRADO}"
@@ -63,7 +73,7 @@ inclinacion = -1.5
 [node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 240.0
-offset_top = 794.0
+offset_top = 800.0
 offset_right = 865.0
 offset_bottom = 962.0
 mouse_filter = 2
@@ -74,46 +84,86 @@ texto = "{R1} Acelerar      {O} Frenar y atrás
 {PALANCA_IZQ} Doblar"
 alineacion = 1
 
+[node name="TituloCortadora" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 222.0
+offset_right = 1252.0
+offset_bottom = 266.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La cortadora"
+
 [node name="VideoCortadora" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 952.0
-offset_top = 248.0
+offset_top = 292.0
 offset_right = 1252.0
-offset_bottom = 426.0
+offset_bottom = 470.0
 script = ExtResource("4_video")
 video = ExtResource("v_cortadora")
-texto = "Cortadora  {X}"
+texto = "Usar  {X}"
 inclinacion = -1.5
+
+[node name="TituloPozo" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1262.0
+offset_top = 222.0
+offset_right = 1562.0
+offset_bottom = 266.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "El pozo"
 
 [node name="VideoPozo" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 1262.0
-offset_top = 252.0
+offset_top = 296.0
 offset_right = 1562.0
-offset_bottom = 430.0
+offset_bottom = 474.0
 script = ExtResource("4_video")
 video = ExtResource("v_pozo")
-texto = "Pozo  {X}"
+texto = "Usar  {X}"
 inclinacion = 1.5
+
+[node name="TituloCana" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 588.0
+offset_right = 1252.0
+offset_bottom = 632.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "La caña"
 
 [node name="VideoCana" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 952.0
-offset_top = 622.0
+offset_top = 662.0
 offset_right = 1252.0
-offset_bottom = 800.0
+offset_bottom = 840.0
 script = ExtResource("4_video")
 video = ExtResource("v_cana")
-texto = "Caña  {X}"
+texto = "Usar  {X}"
 inclinacion = 1.0
+
+[node name="TituloSubirse" type="Label" parent="Mesa/Contenido"]
+layout_mode = 0
+offset_left = 1262.0
+offset_top = 588.0
+offset_right = 1562.0
+offset_bottom = 632.0
+theme_override_fonts/font = ExtResource("2_bold")
+theme_override_font_sizes/font_size = 32
+text = "¿Te caíste?"
 
 [node name="VideoSubirse" type="Control" parent="Mesa/Contenido"]
 layout_mode = 0
 offset_left = 1262.0
-offset_top = 618.0
+offset_top = 658.0
 offset_right = 1562.0
-offset_bottom = 796.0
+offset_bottom = 836.0
 script = ExtResource("4_video")
 video = ExtResource("v_subirse")
-texto = "¿Te caíste?  {X}"
+texto = "Subirte  {X}"
 inclinacion = -1.2

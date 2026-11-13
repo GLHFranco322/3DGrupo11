@@ -12,8 +12,12 @@ extends Node3D
 @export var row_items: Array[Racer.Item] = [Racer.Item.MOWER, Racer.Item.PIT, Racer.Item.ROD]
 ## Separación entre los items de una fila (a lo ancho de la pista).
 @export_range(0.5, 5.0, 0.1, "suffix:u") var item_spacing: float = 3.6
-## Segundos que dura cada item en la pista antes de desaparecer.
-@export_range(0.5, 120.0, 0.5, "suffix:s") var item_lifetime: float = 15.0
+## Segundos que dura cada item en la pista antes de desaparecer (0 = quedan
+## hasta que alguien los agarra).
+@export_range(0.0, 120.0, 0.5, "suffix:s") var item_lifetime: float = 0.0
+## Segundos hasta que vuelve a aparecer un item en el lugar de uno que se
+## agarró (0 = no vuelve).
+@export_range(0.0, 60.0, 0.5, "suffix:s") var refill_time: float = 4.0
 
 @export_group("Ritmo")
 ## Filas que ya están en la pista al largar (repartidas a lo largo del recorrido).
@@ -109,12 +113,25 @@ func spawn_row(offset: float) -> void:
 	add_child(row)
 	_rows[row] = offset
 	for i in kinds.size():
-		var pickup := pickup_scene.instantiate() as RacePickup
-		pickup.kind = kinds[i]
-		pickup.lifetime = item_lifetime
 		var slot := i - (kinds.size() - 1) * 0.5
-		row.add_child(pickup)
-		pickup.global_position = along.origin + side * slot * item_spacing
+		_spawn_pickup(row, kinds[i], along.origin + side * slot * item_spacing)
+
+
+func _spawn_pickup(row: Node3D, kind: Racer.Item, at: Vector3) -> void:
+	var pickup := pickup_scene.instantiate() as RacePickup
+	pickup.kind = kind
+	pickup.lifetime = item_lifetime
+	row.add_child(pickup)
+	pickup.global_position = at
+	if refill_time > 0.0:
+		pickup.taken.connect(_refill.bind(row, kind, at))
+
+
+# Un item que se agarró vuelve a aparecer en su lugar al rato (el mismo tipo)
+func _refill(row: Node3D, kind: Racer.Item, at: Vector3) -> void:
+	await get_tree().create_timer(refill_time, false).timeout
+	if is_instance_valid(row) and not row.is_queued_for_deletion():
+		_spawn_pickup(row, kind, at)
 
 
 func _find_row_offset() -> Variant:

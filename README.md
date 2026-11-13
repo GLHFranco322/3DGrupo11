@@ -10,6 +10,7 @@ Cada nivel tiene su carpeta con todo lo suyo junto: escenas (`.tscn`), scripts (
 sistema/          Autoloads: Audio, GameSettings, Controls, MatchResult, SceneLoader
 menus/            Menú principal, selección de personaje, resultados
 personajes/       Carlos y Triángulo (.tres), CharacterData, nombres de animaciones, script de importación
+				  (los modelos .glb van en assets/personajes/<personaje>/)
 lugares/          Habitaciones que aparecen en el laberinto (MazeRoom) y el taller del nivel 4
 niveles/
   comun/          Lo que usan varios niveles: cámara en tercera persona, ItemTimer, ModelUtils
@@ -18,6 +19,8 @@ niveles/
 	items/        Piedra, pozo y bota
 	jugador/      Player y su máquina de estados
   2_ferreteria/   El laberinto de la ferretería (store_level.tscn)
+	kit/          Piezas sacadas del mapa de Fabricio (paredes, muebles, zona de atención)
+	mapa_fabricio/ El mapa hecho a mano de Fabricio (de ahí sale el kit)
 	herramientas/ Las herramientas que se piden (.tres de ItemData)
 	trampas/      Banana y hielo
   3_carrera/      La carrera de carretillas (race_level.tscn)
@@ -28,7 +31,10 @@ niveles/
   4_rompecabezas/ Los rompecabezas (puzzle_level.tscn)
 mesh_libraries/   MeshLibrary y las escenas con las que se arma
 assets/           Modelos, texturas y packs de terceros (compartidos entre niveles)
-music/            Música
+  personajes/     Un .glb por personaje y los de animaciones extra (Versiones viejas = sin usar)
+sonidos/
+  musica/         Música de los menús y de cada nivel
+  efectos/        Efectos de sonido (cuál va dónde: sistema/audio.tscn)
 ```
 
 Para mover un archivo, conviene hacerlo desde el panel Sistema de archivos del editor de Godot, que actualiza solo las referencias.

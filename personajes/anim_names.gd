@@ -30,6 +30,12 @@ const RENAMES := {
 	"tirarOPiedra": "tirar",
 	"falling": "caer",
 	"celebration": "festejo",
+	# Triángulo: golpes y carretilla (movimientosActualizadosTriangulo.glb)
+	"bang": "golpear",
+	"kick": "patear",
+	"idlecarretilla": "carretilla",
+	"tirarPiedra_001": "tirar_carretilla",
+	"drop": "soltar_carretilla",
 }
 
 const LOOPED := ["idle", "caminar", "cortar_pasto", "festejo", "carretilla", "remar"]

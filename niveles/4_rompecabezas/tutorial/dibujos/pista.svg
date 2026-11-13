@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="560" viewBox="0 0 640 560">
+  <defs>
+    <path id="pieza" d="M0 0 H35 C28 -24 72 -24 65 0 H100 V35 C124 28 124 72 100 65 V100 H0 Z"/>
+  </defs>
+  <g fill="#f4efe2" stroke="#1d2140" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Lamparita: la pista -->
+    <path d="M96 150 C40 140 30 60 90 40 C150 20 190 90 150 130 C138 142 134 150 132 166 H100 C100 158 100 154 96 150 Z"/>
+    <path d="M98 180 H134 M102 198 H130" fill="none" stroke-width="8"/>
+    <path d="M100 166 L104 112 Q116 100 128 112 L132 166" fill="none" stroke-width="5"/>
+    <path d="M40 30 l-18 -16 M112 10 v-14 M180 30 l16 -16 M200 90 h20 M20 90 h-20" fill="none" stroke-width="6"/>
+    <!-- Bandeja de 2x2 con el lugar marcado -->
+    <rect x="300" y="250" width="300" height="300" rx="8"/>
+    <path d="M450 254 V546 M304 400 H596" fill="none" stroke-width="6"/>
+    <ellipse cx="375" cy="325" rx="56" ry="56" fill="none" stroke-width="7"/>
+    <path d="M375 254 v-6 M318 325 h-6 M375 402 v6 M432 325 h6" fill="none" stroke-width="5"/>
+    <!-- La pieza que va, brillando -->
+    <use xlink:href="#pieza" transform="translate(60 380) scale(1.1)"/>
+    <path d="M40 360 l-20 -16 M30 420 h-26 M44 486 l-20 14 M120 520 v24 M196 490 l18 14" fill="none" stroke-width="6"/>
+    <!-- La lucecita que va de la pieza a su lugar -->
+    <path d="M130 360 C150 230 270 220 330 290" fill="none" stroke-width="6" stroke-dasharray="4 20"/>
+    <path d="M236 236 l6 -22 l6 22 l22 6 l-22 6 l-6 22 l-6 -22 l-22 -6 Z" stroke-width="6"/>
+  </g>
+</svg>

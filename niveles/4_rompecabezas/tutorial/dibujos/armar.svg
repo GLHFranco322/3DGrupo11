@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="560" viewBox="0 0 640 560">
+  <defs>
+    <!-- Guante inflado (dedos hacia arriba, muñeca en 0,0) -->
+    <g id="guante" stroke-width="6.5">
+      <path d="M-16 2 C-24 -8 -28 -20 -22 -30 C-17 -38 -9 -36 -8 -28 C-10 -40 -4 -48 3 -47 C10 -46 11 -38 9 -29 C12 -40 22 -40 24 -30 C26 -20 20 -6 14 2 Z"/>
+      <path d="M-8 -28 Q-8 -18 -6 -12 M9 -29 Q8 -20 6 -14" fill="none" stroke-width="4"/>
+      <path d="M-17 2 Q-1 -2 15 2 L14 11 Q-1 8 -16 11 Z"/>
+    </g>
+    <!-- Pieza de rompecabezas de 100 de lado (con un encastre arriba y otro a la derecha) -->
+    <path id="pieza" d="M0 0 H35 C28 -24 72 -24 65 0 H100 V35 C124 28 124 72 100 65 V100 H0 Z"/>
+  </defs>
+  <g fill="#f4efe2" stroke="#1d2140" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Bandeja de 2x2 -->
+    <rect x="50" y="210" width="320" height="320" rx="10"/>
+    <path d="M210 214 V526 M54 370 H366" fill="none" stroke-width="7"/>
+    <!-- Lo que ya está armado: un cerro, el sol y el pasto -->
+    <path d="M70 350 Q120 270 190 330" fill="none" stroke-width="7"/>
+    <circle cx="300" cy="290" r="28" stroke-width="7"/>
+    <path d="M300 242 v-14 M300 338 v14 M252 290 h-14 M348 290 h14 M266 256 l-10 -10 M334 256 l10 -10 M266 324 l-10 10" fill="none" stroke-width="6"/>
+    <path d="M78 500 q8 -30 4 -50 M110 505 q4 -36 14 -56 M146 500 q-2 -26 10 -44 M180 505 q4 -30 -4 -48" fill="none" stroke-width="6"/>
+    <!-- El lugar que falta -->
+    <rect x="232" y="392" width="116" height="116" rx="6" fill="none" stroke-width="6" stroke-dasharray="16 14"/>
+    <!-- Recorrido de la pieza hasta su lugar -->
+    <path d="M500 268 C510 360 430 430 372 446" fill="none" stroke-width="6" stroke-dasharray="18 14"/>
+    <path d="M392 424 L366 448 L398 462" fill="none" stroke-width="7"/>
+    <!-- La pieza levantada, con la mano que la lleva -->
+    <path d="M610 20 Q560 40 534 96" fill="none"/>
+    <g transform="translate(436 118) rotate(-8) scale(1.15)">
+      <use xlink:href="#pieza"/>
+      <path d="M22 70 q20 -26 40 -4 q16 14 24 -6" fill="none" stroke-width="6"/>
+    </g>
+    <use xlink:href="#guante" transform="translate(530 100) rotate(200) scale(1.7)"/>
+    <!-- Rayitas de que se está moviendo -->
+    <path d="M410 120 h-30 M404 150 h-44 M414 180 h-26" fill="none" stroke-width="6"/>
+  </g>
+</svg>
