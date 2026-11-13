@@ -25,6 +25,8 @@ extends CanvasLayer
 
 var _racers: Array[Racer] = []
 var _message_token: int = 0
+# Cartel de contramano de cada jugador (sobre su mitad de la pantalla)
+var _wrong_way: Dictionary = {}
 
 
 func setup(racers: Array[Racer], track: Path3D) -> void:
@@ -36,11 +38,21 @@ func setup(racers: Array[Racer], track: Path3D) -> void:
 		titles[id].text = "JUGADOR %d" % id
 		titles[id].modulate = r.color
 		hints[id].texto = ""
+		var sign := CartelContramano.new()
+		sign.name = "Contramano%d" % id
+		add_child(sign)
+		_wrong_way[id] = sign
 
 
 func _process(_delta: float) -> void:
 	for r in _racers:
 		var id := r.player_id
+		# El cartel ocupa la mitad de la pantalla de ese jugador
+		var view := get_node_or_null("Split/View%d" % id) as Control
+		if view and _wrong_way.has(id) and _wrong_way[id].visible:
+			var rect := view.get_global_rect()
+			_wrong_way[id].position = rect.position
+			_wrong_way[id].size = rect.size
 		if r.item == Racer.Item.NONE:
 			_set_item_text(id, "Ítem: —")
 			items[id].modulate = Color(1, 1, 1, 0.6)
@@ -63,6 +75,12 @@ func set_progress(racers: Array[Racer], finish_distance: float, leader: Racer) -
 		bars[id].max_value = maxf(finish_distance, 1.0)
 		bars[id].value = r.progress
 		places[id].text = "1°" if r == leader else "2°"
+
+
+## Muestra u oculta el cartel de "¡CONTRAMANO!" de ese jugador.
+func set_wrong_way(racer: Racer, on: bool) -> void:
+	if _wrong_way.has(racer.player_id):
+		_wrong_way[racer.player_id].show_warning(on)
 
 
 func set_lap(racer: Racer, lap: int, laps: int) -> void:

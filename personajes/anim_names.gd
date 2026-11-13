@@ -36,9 +36,11 @@ const RENAMES := {
 	"idlecarretilla": "carretilla",
 	"tirarPiedra_001": "tirar_carretilla",
 	"drop": "soltar_carretilla",
+	# Hugo (mismos nombres que Carlos, más el de anotar)
+	"take note": "anotar",
 }
 
-const LOOPED := ["idle", "caminar", "cortar_pasto", "festejo", "carretilla", "remar"]
+const LOOPED := ["idle", "caminar", "cortar_pasto", "festejo", "carretilla", "remar", "anotar"]
 
 
 static func normalize(anim_player: AnimationPlayer) -> void:

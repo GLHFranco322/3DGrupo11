@@ -25,6 +25,12 @@ extends Node3D
 ## ignora. Evita que alguien "avance" cortando camino.
 @export_range(1.0, 100.0, 1.0, "suffix:u") var max_progress_jump: float = 15.0
 
+@export_group("Contramano")
+## Segundos mirando para el lado contrario hasta que aparece el cartel.
+@export_range(0.0, 5.0, 0.1, "suffix:s") var wrong_way_time: float = 0.6
+## Qué tan de frente al revés tiene que ir (0 = de costado ya cuenta, 1 = exactamente al revés).
+@export_range(0.0, 1.0, 0.05) var wrong_way_dot: float = 0.4
+
 @export_group("Referencias")
 @export var track: Path3D
 @export var racer1: Racer
@@ -40,6 +46,9 @@ var _finished: bool = false
 var _length: float = 0.0
 # Racer -> true cuando ya se le calculó el progreso por primera vez
 var _tracked: Dictionary = {}
+# Contramano: segundos que lleva cada uno mirando para atrás / para adelante
+var _backwards_time: Dictionary = {}
+var _forwards_time: Dictionary = {}
 var _last_lap_shown: bool = false
 
 # Lo que se cuenta de cada jugador para las métricas (empiezan en 0)
@@ -136,6 +145,7 @@ func _update_progress() -> void:
 		var moved := wrapf(offset - fposmod(r.progress, _length), -_length * 0.5, _length * 0.5)
 		if absf(moved) <= max_progress_jump:
 			r.progress += moved
+		_check_wrong_way(r, offset)
 	var leader := _get_leader()
 	spawner.leader_progress = leader.progress
 	hud.set_progress(_racers(), get_race_distance(), leader)
@@ -144,6 +154,29 @@ func _update_progress() -> void:
 	if _racing and laps > 1 and not _last_lap_shown and get_lap(leader) == laps:
 		_last_lap_shown = true
 		hud.show_message("¡ÚLTIMA VUELTA!", 1.5)
+
+
+# Va para el lado contrario si, arriba de la carretilla, mira en contra del
+# recorrido un rato ("Wrong Way Time"). Para que el cartel no titile, se va
+# recién cuando mira para adelante un momento.
+func _check_wrong_way(r: Racer, offset: float) -> void:
+	var delta := get_process_delta_time()
+	var here := track.curve.sample_baked(offset)
+	var ahead := track.curve.sample_baked(fposmod(offset + 3.0, _length))
+	var along := track.global_basis * (ahead - here)
+	along.y = 0.0
+	var backwards := _racing and r.state == Racer.Mode.RIDING and along.length() > 0.01 \
+			and r.get_forward().dot(along.normalized()) < -wrong_way_dot
+	if backwards:
+		_backwards_time[r] = _backwards_time.get(r, 0.0) + delta
+		_forwards_time[r] = 0.0
+	else:
+		_forwards_time[r] = _forwards_time.get(r, 0.0) + delta
+		_backwards_time[r] = 0.0
+	if _backwards_time[r] >= wrong_way_time:
+		hud.set_wrong_way(r, true)
+	elif _forwards_time[r] >= 0.3 or not _racing:
+		hud.set_wrong_way(r, false)
 
 
 func _get_leader() -> Racer:

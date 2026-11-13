@@ -30,7 +30,6 @@
 [ext_resource type="AudioStream" uid="uid://bmaistwrif3sf" path="res://sonidos/efectos/Boton.03.wav" id="25_x7jfy"]
 [ext_resource type="AudioStream" uid="uid://03x5tna5svuk" path="res://sonidos/efectos/botonera.mp3" id="26_ywlkk"]
 [ext_resource type="AudioStream" uid="uid://boapdv0kuiyn" path="res://sonidos/efectos/acelerar.mp3" id="27_turbo"]
-[ext_resource type="AudioStream" uid="uid://bmt2v1l0whtvk" path="res://sonidos/efectos/shovel_stroke.mp3" id="28_palada"]
 
 [node name="Audio" type="Node" unique_id=954677936]
 script = ExtResource("1_audio")
@@ -57,7 +56,6 @@ footstep_interval = 0.19
 footstep_run_interval = 0.14
 barrow_crash = ExtResource("18_x7jfy")
 boost_pad = ExtResource("27_turbo")
-shovel_stroke = ExtResource("28_palada")
 item_pickup = ExtResource("20_t4st1")
 rod_hook = ExtResource("21_m1sj0")
 race_count = ExtResource("14_gw534")

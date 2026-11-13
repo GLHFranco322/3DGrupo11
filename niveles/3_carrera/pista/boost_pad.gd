@@ -52,5 +52,6 @@ func _build(root: Node3D) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	var racer := _riding_racer(body)
-	if racer and racer.boost(boost_speed, boost_time):
-		Audio.play_sfx(Audio.boost_pad)
+	# El sonido lo maneja la carretilla (dura lo que dura el turbo)
+	if racer:
+		racer.boost(boost_speed, boost_time)

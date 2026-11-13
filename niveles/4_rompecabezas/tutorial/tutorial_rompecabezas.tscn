@@ -21,7 +21,7 @@ offset_right = 865.0
 offset_bottom = 293.0
 theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 44
-text = "Nivel 4 = Rompecabezas"
+text = "Rompecabezas"
 
 [node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
 layout_mode = 0

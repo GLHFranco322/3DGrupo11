@@ -168,6 +168,27 @@ const ITEM_NAMES := {
 @export var barrow_model: PackedScene
 ## Escala del modelo de la carretilla.
 @export_range(0.01, 10.0, 0.01) var barrow_model_scale: float = 1.0
+## Partes de la carretilla (nombres de sus mallas) que se pintan con el color del
+## jugador. Si se cambia el modelo, poner acá los nombres de sus partes.
+@export var barrow_paint_parts: PackedStringArray = ["Tray"]
+## Brillo del color de la carretilla (la pista es oscura).
+@export_range(0.0, 2.0, 0.05) var barrow_paint_glow: float = 0.35
+
+@export_group("Sonido del turbo")
+## El sonido del turbo suena solo mientras dura el turbo: sube en "Fade In" y
+## se desvanece en "Fade Out" cuando termina.
+@export_range(0.0, 2.0, 0.05, "suffix:s") var boost_sound_fade_in: float = 0.1
+@export_range(0.05, 3.0, 0.05, "suffix:s") var boost_sound_fade_out: float = 0.8
+@export_range(-30.0, 10.0, 0.5, "suffix:dB") var boost_sound_volume_db: float = 0.0
+
+@export_group("Señal de la carretilla")
+## Flechita sobre la carretilla vacía cuando el jugador se cae (del color del
+## jugador; se ve a través de las paredes).
+@export var barrow_marker: bool = true
+## Altura de la flechita sobre la carretilla.
+@export_range(0.5, 5.0, 0.1, "suffix:u") var barrow_marker_height: float = 1.8
+## Opacidad de la flechita.
+@export_range(0.1, 1.0, 0.05) var barrow_marker_alpha: float = 0.7
 
 ## Lo pone el nivel: false durante la cuenta regresiva y al terminar.
 var controls_enabled: bool = false
@@ -195,6 +216,11 @@ var _stroke_anim_time: float = 0.0
 var _throw_anim_time: float = 0.0
 # La que se está viendo mientras corre _throw_anim_time (ver _play_action)
 var _action_animation: StringName = &""
+# Flechita sobre la carretilla (ver _build_barrow_marker)
+var _marker: MeshInstance3D
+# Sonido del turbo de esta carretilla y su volumen (0 a 1)
+var _boost_player: AudioStreamPlayer
+var _boost_level: float = 0.0
 var _knock_timer: float = 0.0
 # Turbo de las rampas: segundos que quedan y velocidad
 var _boost_timer: float = 0.0
@@ -223,6 +249,12 @@ func _ready() -> void:
 	_load_model()
 	if barrow_model:
 		_swap_barrow_model()
+	_paint_barrow()
+	if barrow_marker:
+		_build_barrow_marker()
+	if Audio.boost_pad:
+		_boost_player = Audio.create_loop_player(self, Audio.boost_pad)
+		_boost_player.volume_db = -80.0
 	barrow.add_collision_exception_with(rider)
 	_set_riding_collision(true)
 	_follow_seat()
@@ -234,6 +266,8 @@ func _physics_process(delta: float) -> void:
 	_throw_anim_time = maxf(_throw_anim_time - delta, 0.0)
 	_boost_timer = maxf(_boost_timer - delta, 0.0)
 	_update_blink(delta)
+	_update_barrow_marker()
+	_update_boost_sound(delta)
 	if not _void_falling and (barrow.global_position.y < void_height or rider.global_position.y < void_height):
 		_lost_in_void()
 
@@ -282,8 +316,9 @@ func _unhandled_input(event: InputEvent) -> void:
 func _ride(delta: float) -> void:
 	var prefix := "p%d_" % player_id
 	var steer := Input.get_axis(prefix + "left", prefix + "right") if controls_enabled else 0.0
-	var throttle := controls_enabled and Input.is_action_pressed(prefix + "accelerate")
 	var reversing := controls_enabled and Input.is_action_pressed(prefix + "reverse")
+	# Con R1 y ○ apretados a la vez no acelera: gana ○ (frena y va marcha atrás)
+	var throttle := controls_enabled and Input.is_action_pressed(prefix + "accelerate") and not reversing
 	var on_floor := barrow.is_on_floor()
 
 	var horizontal := Vector3(barrow.velocity.x, 0.0, barrow.velocity.z)
@@ -371,7 +406,23 @@ func boost(speed: float, time: float) -> bool:
 	# La cámara se abre y aparecen las líneas de velocidad
 	if camera_rig:
 		camera_rig.play_boost(time)
+	if _boost_player and not _boost_player.playing:
+		_boost_player.play(Audio.sfx_start_offsets.get(Audio.boost_pad, 0.0))
 	return true
+
+
+# Sube mientras dura el turbo y se desvanece cuando termina (o si se cae)
+func _update_boost_sound(delta: float) -> void:
+	if _boost_player == null or not _boost_player.playing:
+		return
+	if _boost_timer > 0.0 and state == Mode.RIDING:
+		_boost_level = move_toward(_boost_level, 1.0, delta / maxf(boost_sound_fade_in, 0.001))
+	else:
+		_boost_level = move_toward(_boost_level, 0.0, delta / boost_sound_fade_out)
+		if _boost_level <= 0.0:
+			_boost_player.stop()
+			return
+	_boost_player.volume_db = Audio.get_sfx_db() + boost_sound_volume_db + linear_to_db(maxf(_boost_level, 0.0001))
 
 
 func _move_barrow(horizontal: Vector3, delta: float) -> void:
@@ -922,6 +973,61 @@ func _load_model() -> void:
 	_anim = model.find_child("AnimationPlayer", true, false) as AnimationPlayer
 	Player.merge_animations(_anim, _character.extra_animations)
 	AnimNames.normalize(_anim)
+
+
+# La carretilla del color del jugador (sobre una copia del material: las dos
+# carretillas comparten el de la escena)
+func _paint_barrow() -> void:
+	for node in barrow_model_root.find_children("*", "MeshInstance3D", true, false):
+		var mesh_instance := node as MeshInstance3D
+		if not String(mesh_instance.name) in barrow_paint_parts or mesh_instance.mesh == null:
+			continue
+		for i in mesh_instance.mesh.get_surface_count():
+			var material := mesh_instance.get_active_material(i) as BaseMaterial3D
+			if material == null:
+				continue
+			var copy := material.duplicate() as BaseMaterial3D
+			copy.albedo_color = color
+			# Un brillo suave: la pista es de noche y si no el color no se distingue
+			copy.emission_enabled = true
+			copy.emission = color
+			copy.emission_energy_multiplier = barrow_paint_glow
+			mesh_instance.set_surface_override_material(i, copy)
+
+
+# Flechita apuntando para abajo sobre la carretilla, para encontrarla al caerse
+func _build_barrow_marker() -> void:
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.22
+	cone.bottom_radius = 0.0
+	cone.height = 0.38
+	cone.radial_segments = 4
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.albedo_color = Color(color, barrow_marker_alpha)
+	material.no_depth_test = true
+	material.render_priority = 1
+	cone.material = material
+	_marker = MeshInstance3D.new()
+	_marker.name = "BarrowMarker"
+	_marker.mesh = cone
+	_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# No gira con la carretilla (que puede quedar volcada)
+	_marker.top_level = true
+	_marker.visible = false
+	barrow.add_child(_marker)
+
+
+func _update_barrow_marker() -> void:
+	if _marker == null:
+		return
+	var fallen := state == Mode.KNOCKED or state == Mode.ON_FOOT
+	_marker.visible = fallen
+	if fallen:
+		var time := Time.get_ticks_msec() / 1000.0
+		var bob := sin(time * 3.0) * 0.12
+		_marker.global_transform = Transform3D(Basis(Vector3.UP, time * 1.5), barrow.global_position + Vector3.UP * (barrow_marker_height + bob))
 
 
 func _swap_barrow_model() -> void:

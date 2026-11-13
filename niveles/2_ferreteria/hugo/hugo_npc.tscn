@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://niveles/2_ferreteria/hugo/hugo_npc.gd" id="1_hugo"]
+
+[node name="Hugo" type="Node3D"]
+script = ExtResource("1_hugo")

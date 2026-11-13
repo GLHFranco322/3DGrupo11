@@ -119,7 +119,8 @@ var sfx_level: float = 1.0
 @export var race_count: AudioStream
 ## "¡Ya!" de la largada.
 @export var race_go: AudioStream
-## Al pasar por una rampa de turbo.
+## Turbo de la carrera: lo reproduce cada carretilla solo mientras dura el
+## turbo y se desvanece al terminar (ver "Sonido del turbo" en Racer).
 @export var boost_pad: AudioStream
 ## Cuando una reja eléctrica tira a alguien de la carretilla.
 @export var grate_zap: AudioStream

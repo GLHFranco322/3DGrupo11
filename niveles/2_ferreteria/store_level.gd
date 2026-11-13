@@ -42,6 +42,16 @@ extends Node3D
 ## Altura de la parte de arriba del mostrador (ahí se apoya el tablero).
 @export_range(0.0, 3.0, 0.05, "suffix:u") var counter_height: float = 1.06
 
+@export_group("Hugo")
+## Hugo, el cubo: parado al lado de la mesa de la zona de atención, anotando y
+## mirando a los jugadores. Vacío = no aparece. Por ahora está sacado (el .glb
+## de Hugo vino mal exportado); para ponerlo: niveles/2_ferreteria/hugo/hugo_npc.tscn
+@export var hugo_scene: PackedScene
+## Nombre (el comienzo) del mueble de la zona de atención al lado del que se para.
+@export var hugo_table: String = "table_medium"
+## Distancia delante de la mesa (hacia el laberinto).
+@export_range(0.0, 3.0, 0.05, "suffix:u") var hugo_table_gap: float = 0.55
+
 @export_group("Referencias")
 @export var maze: MazeBuilder
 @export var board: ToolBoard
@@ -65,6 +75,7 @@ func _ready() -> void:
 		_rng.seed = items_seed
 
 	_place_board_and_players()
+	_place_hugo()
 	_assign_lists()
 	_spawn_items()
 	for i in max_trap_pickups:
@@ -100,6 +111,26 @@ func _process(delta: float) -> void:
 
 func _players() -> Array[StorePlayer]:
 	return [player1, player2]
+
+
+# Hugo, parado delante de la mesa de la zona de atención (la de Fabricio),
+# mirando hacia el laberinto (de donde vienen los jugadores)
+func _place_hugo() -> void:
+	if hugo_scene == null:
+		return
+	var zone := maze.get_node_or_null("FrontProps/ZonaAtencion") as Node3D
+	if zone == null:
+		return
+	for child in zone.get_children():
+		if child is MeshInstance3D and String(child.name).begins_with(hugo_table):
+			var box: AABB = zone.global_transform * (child.transform * (child as MeshInstance3D).mesh.get_aabb())
+			var hugo := hugo_scene.instantiate() as HugoNPC
+			hugo.targets.assign([player1, player2])
+			# El frente de Hugo es su +Z: mirando hacia el laberinto (-Z)
+			hugo.rotation.y = PI
+			add_child(hugo)
+			hugo.global_position = Vector3(box.get_center().x, 0.0, box.position.z - hugo_table_gap)
+			return
 
 
 # Mostrador en la zona de atención (al frente del laberinto) con el tablero
