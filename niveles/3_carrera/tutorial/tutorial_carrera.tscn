@@ -1,22 +1,31 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c6ccwuk2sjmkg"]
 
 [ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
-[ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
-[ext_resource type="Script" path="res://ui/texto_con_botones.gd" id="3_texto"]
-[ext_resource type="Script" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
-[ext_resource type="Texture2D" path="res://niveles/3_carrera/tutorial/dibujos/carrera.png" id="d_carrera"]
-[ext_resource type="VideoStream" path="res://niveles/3_carrera/tutorial/clips/agarre.ogv" id="v_agarre"]
-[ext_resource type="VideoStream" path="res://niveles/3_carrera/tutorial/clips/cortadora.ogv" id="v_cortadora"]
-[ext_resource type="VideoStream" path="res://niveles/3_carrera/tutorial/clips/pozo.ogv" id="v_pozo"]
-[ext_resource type="VideoStream" path="res://niveles/3_carrera/tutorial/clips/cana.ogv" id="v_cana"]
-[ext_resource type="VideoStream" path="res://niveles/3_carrera/tutorial/clips/subirse.ogv" id="v_subirse"]
+[ext_resource type="FontFile" uid="uid://d1qka0pkd7ppe" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
+[ext_resource type="Script" uid="uid://djsnv05hbgfci" path="res://ui/texto_con_botones.gd" id="3_texto"]
+[ext_resource type="Script" uid="uid://bo8epu50er4vp" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
+[ext_resource type="Texture2D" uid="uid://c6dy51ujeaaod" path="res://niveles/3_carrera/tutorial/dibujos/carrera.png" id="d_carrera"]
+[ext_resource type="VideoStream" uid="uid://bh761n24di00t" path="res://niveles/3_carrera/tutorial/clips/agarre.ogv" id="v_agarre"]
+[ext_resource type="VideoStream" uid="uid://bxd4dy2phdwsh" path="res://niveles/3_carrera/tutorial/clips/cana.ogv" id="v_cana"]
+[ext_resource type="VideoStream" uid="uid://djdjcrqegysv4" path="res://niveles/3_carrera/tutorial/clips/cortadora.ogv" id="v_cortadora"]
+[ext_resource type="VideoStream" uid="uid://c40ddydidnv6q" path="res://niveles/3_carrera/tutorial/clips/pozo.ogv" id="v_pozo"]
+[ext_resource type="VideoStream" uid="uid://da4e51xidq6b2" path="res://niveles/3_carrera/tutorial/clips/subirse.ogv" id="v_subirse"]
 
-[node name="TutorialCarrera" instance=ExtResource("1_base")]
+[node name="TutorialCarrera" unique_id=1637996084 instance=ExtResource("1_base")]
 
-[node name="Fecha" parent="Mesa"]
+[node name="Mesa" parent="." index="1"]
+anchors_preset = 0
+
+[node name="Libreta" parent="Mesa" index="0"]
+anchors_preset = 0
+
+[node name="Fecha" parent="Mesa" index="2"]
 text = "4/11/26"
 
-[node name="Titulo" type="Label" parent="Mesa/Contenido"]
+[node name="Contenido" parent="Mesa" index="3"]
+anchors_preset = 0
+
+[node name="Titulo" type="Label" parent="Mesa/Contenido" index="0" unique_id=516971754]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 222.0
@@ -26,7 +35,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 44
 text = "Carrera por la gerencia"
 
-[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido" index="1" unique_id=1570304896]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 290.0
@@ -37,9 +46,8 @@ bbcode_enabled = true
 scroll_active = false
 script = ExtResource("3_texto")
 texto = "[b]¡Llegá primero! Son 3 vueltas[/b]"
-alineacion = 0
 
-[node name="TituloAgarre" type="Label" parent="Mesa/Contenido"]
+[node name="TituloAgarre" type="Label" parent="Mesa/Contenido" index="2" unique_id=1785476457]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 350.0
@@ -49,7 +57,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "El agarre"
 
-[node name="Carrera" type="TextureRect" parent="Mesa/Contenido"]
+[node name="Carrera" type="TextureRect" parent="Mesa/Contenido" index="3" unique_id=1948836188]
 layout_mode = 0
 offset_left = 244.0
 offset_top = 398.0
@@ -59,18 +67,21 @@ texture = ExtResource("d_carrera")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VideoAgarre" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoAgarre" type="Control" parent="Mesa/Contenido" index="4" unique_id=1672260671]
+anchors_preset = 0
 offset_left = 574.0
 offset_top = 486.0
 offset_right = 864.0
 offset_bottom = 658.0
+rotation = -0.02617994
+pivot_offset = Vector2(145, 86)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_agarre")
 texto = "Agarrar  {CUADRADO}"
 inclinacion = -1.5
 
-[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido" index="5" unique_id=267801565]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 800.0
@@ -84,7 +95,7 @@ texto = "{R1} Acelerar      {O} Frenar y atrás
 {PALANCA_IZQ} Doblar"
 alineacion = 1
 
-[node name="TituloCortadora" type="Label" parent="Mesa/Contenido"]
+[node name="TituloCortadora" type="Label" parent="Mesa/Contenido" index="6" unique_id=597576967]
 layout_mode = 0
 offset_left = 952.0
 offset_top = 222.0
@@ -94,18 +105,21 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "La cortadora"
 
-[node name="VideoCortadora" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoCortadora" type="Control" parent="Mesa/Contenido" index="7" unique_id=452401849]
+anchors_preset = 0
 offset_left = 952.0
 offset_top = 292.0
 offset_right = 1252.0
 offset_bottom = 470.0
+rotation = -0.02617994
+pivot_offset = Vector2(150, 89)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_cortadora")
 texto = "Usar  {X}"
 inclinacion = -1.5
 
-[node name="TituloPozo" type="Label" parent="Mesa/Contenido"]
+[node name="TituloPozo" type="Label" parent="Mesa/Contenido" index="8" unique_id=1598463358]
 layout_mode = 0
 offset_left = 1262.0
 offset_top = 222.0
@@ -115,18 +129,21 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "El pozo"
 
-[node name="VideoPozo" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoPozo" type="Control" parent="Mesa/Contenido" index="9" unique_id=1802529819]
+anchors_preset = 0
 offset_left = 1262.0
 offset_top = 296.0
 offset_right = 1562.0
 offset_bottom = 474.0
+rotation = 0.02617994
+pivot_offset = Vector2(150, 89)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_pozo")
 texto = "Usar  {X}"
 inclinacion = 1.5
 
-[node name="TituloCana" type="Label" parent="Mesa/Contenido"]
+[node name="TituloCana" type="Label" parent="Mesa/Contenido" index="10" unique_id=575980815]
 layout_mode = 0
 offset_left = 952.0
 offset_top = 588.0
@@ -136,18 +153,21 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "La caña"
 
-[node name="VideoCana" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoCana" type="Control" parent="Mesa/Contenido" index="11" unique_id=2027445084]
+anchors_preset = 0
 offset_left = 952.0
 offset_top = 662.0
 offset_right = 1252.0
 offset_bottom = 840.0
+rotation = 0.017453292
+pivot_offset = Vector2(150, 89)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_cana")
 texto = "Usar  {X}"
 inclinacion = 1.0
 
-[node name="TituloSubirse" type="Label" parent="Mesa/Contenido"]
+[node name="TituloSubirse" type="Label" parent="Mesa/Contenido" index="12" unique_id=1887585499]
 layout_mode = 0
 offset_left = 1262.0
 offset_top = 588.0
@@ -157,12 +177,15 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "¿Te caíste?"
 
-[node name="VideoSubirse" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoSubirse" type="Control" parent="Mesa/Contenido" index="13" unique_id=1064450646]
+anchors_preset = 0
 offset_left = 1262.0
 offset_top = 658.0
 offset_right = 1562.0
 offset_bottom = 836.0
+rotation = -0.02094395
+pivot_offset = Vector2(150, 89)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_subirse")
 texto = "Subirte  {X}"

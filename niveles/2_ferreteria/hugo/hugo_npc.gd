@@ -12,7 +12,7 @@ extends Node3D
 # se arma.
 
 ## Modelo de Hugo (.glb con esqueleto y animaciones).
-@export var model_scene: PackedScene = preload("res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-takenote-2.glb")
+@export var model_scene: PackedScene = preload("res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-antesderiggear-take-animacion-note-2.glb")
 ## Animación que hace en loop (nombre ya normalizado, ver AnimNames).
 @export var animation: StringName = &"anotar"
 ## Alto de Hugo (se escala el modelo para que mida esto, con los pies en el piso).

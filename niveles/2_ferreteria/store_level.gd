@@ -26,6 +26,9 @@ extends Node3D
 @export var item_pool: Array[ItemData] = []
 @export var collectible_scene: PackedScene
 
+## Distancia mínima entre una herramienta o trampa del piso y cualquier mueble.
+@export_range(0.0, 2.0, 0.05, "suffix:u") var spot_clearance: float = 0.5
+
 @export_group("Trampas")
 ## Banana o hielo que aparece tirado en el laberinto (se agarra pasando por encima).
 @export var trap_pickup_scene: PackedScene
@@ -174,13 +177,32 @@ func _spawn_items() -> void:
 	var cells := maze.get_free_cells()
 	_shuffle(cells)
 
+	var next := 0
 	for i in to_spawn.size():
+		# La próxima celda que tenga lugar sin muebles (si no queda ninguna, da la vuelta)
+		var spot = null
+		for tries in cells.size():
+			spot = _free_spot(cells[next % cells.size()])
+			next += 1
+			if spot != null:
+				break
+		if spot == null:
+			spot = maze.get_cell_center(cells[i % cells.size()])
 		var item := collectible_scene.instantiate() as Collectible
 		item.data = to_spawn[i]
-		var cell: Vector2i = cells[i % cells.size()]
-		var jitter := Vector3(_rng.randf_range(-1.0, 1.0), 0.0, _rng.randf_range(-1.0, 1.0)) * maze.cell_size * 0.2
-		item.position = items_root.to_local(maze.get_cell_center(cell) + jitter)
+		item.position = items_root.to_local(spot)
 		items_root.add_child(item)
+
+
+# Un lugar de la celda, cerca del centro, que no pise ningún mueble (null si
+# los muebles ocupan toda la zona del medio)
+func _free_spot(cell: Vector2i) -> Variant:
+	var center := maze.get_cell_center(cell)
+	for attempt in 8:
+		var jitter := Vector3(_rng.randf_range(-1.0, 1.0), 0.0, _rng.randf_range(-1.0, 1.0)) * maze.cell_size * 0.2
+		if maze.is_spot_clear(center + jitter, spot_clearance):
+			return center + jitter
+	return center if maze.is_spot_clear(center, spot_clearance) else null
 
 
 func _on_deliver_requested(player: StorePlayer) -> void:
@@ -251,8 +273,9 @@ func _spawn_trap_pickup() -> void:
 	var cells := maze.get_free_cells()
 	for attempt in 15:
 		var cell: Vector2i = cells[_rng.randi_range(0, cells.size() - 1)]
-		var point := maze.get_cell_center(cell)
-		var too_close := false
+		# Corrida a un costado del centro, para no tapar las flechas del piso
+		var point := maze.get_cell_center(cell) + Vector3(maze.cell_size * 0.25, 0.0, 0.0)
+		var too_close := not maze.is_spot_clear(point, spot_clearance)
 		for p in _players():
 			if p.global_position.distance_to(point) < trap_min_distance_to_players:
 				too_close = true
@@ -265,8 +288,7 @@ func _spawn_trap_pickup() -> void:
 		pickup.kind = StoreTrap.Kind.BANANA if _rng.randf() < 0.5 else StoreTrap.Kind.ICE
 		pickup.add_to_group("trap_pickup")
 		items_root.add_child(pickup)
-		# Corrida a un costado del centro, para no tapar las flechas del piso
-		pickup.global_position = point + Vector3(maze.cell_size * 0.25, 0.0, 0.0)
+		pickup.global_position = point
 		return
 
 

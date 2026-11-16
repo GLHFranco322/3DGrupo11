@@ -196,6 +196,9 @@ var _rooms: Array[Dictionary] = []
 var _room_of: Dictionary = {}
 # Celdas con un mueble grande (pallet, isla): ahí no se ponen herramientas
 var _prop_cells: Dictionary = {}
+# Huella en el piso (X, Z locales) de cada mueble fijo, para no poner
+# herramientas ni trampas adentro (ver is_spot_clear)
+var _footprints: Array[Rect2] = []
 var _built: bool = false
 ## Semilla con la que se generó el último laberinto (en online, el anfitrión se
 ## la va a pasar al otro jugador para que tengan el mismo).
@@ -733,6 +736,7 @@ func _build_props() -> void:
 	parent.name = "Props"
 	add_child(parent)
 	_prop_cells.clear()
+	_footprints.clear()
 	# Lados de cada celda que ya tienen algo: cell -> [dir, ...]
 	var used: Dictionary = {}
 	var cells := get_free_cells()
@@ -1072,6 +1076,18 @@ func free_cell(cell: Vector2i) -> bool:
 	return _in_bounds(cell) and not _room_of.has(cell) and not _prop_cells.has(cell)
 
 
+## true si un círculo de radio "radius" alrededor de "point" (mundo) no pisa
+## ningún mueble fijo del laberinto. Sirve para no dejar herramientas ni
+## trampas metidas adentro de una estantería o un casillero.
+func is_spot_clear(point: Vector3, radius: float) -> bool:
+	var local := to_local(point)
+	var spot := Vector2(local.x, local.z)
+	for footprint in _footprints:
+		if footprint.grow(radius).has_point(spot):
+			return false
+	return true
+
+
 func _shuffle_cells(cells: Array[Vector2i], rng: RandomNumberGenerator) -> void:
 	for i in range(cells.size() - 1, 0, -1):
 		var j := rng.randi_range(0, i)
@@ -1161,6 +1177,9 @@ func _place_piece(parent: Node3D, scene: PackedScene, xform: Transform3D) -> voi
 	var bounds: AABB = _piece(scene).bounds
 	if bounds.position.y > 0.3:
 		return
+	# Los muebles van girados de a 90°: la caja girada sigue alineada
+	var box := xform * bounds
+	_footprints.append(Rect2(box.position.x, box.position.z, box.size.x, box.size.z))
 	var body := StaticBody3D.new()
 	body.transform = xform
 	parent.add_child(body)
