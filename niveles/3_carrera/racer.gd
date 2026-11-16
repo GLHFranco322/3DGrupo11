@@ -253,7 +253,8 @@ func _ready() -> void:
 	if barrow_marker:
 		_build_barrow_marker()
 	if Audio.boost_pad:
-		_boost_player = Audio.create_loop_player(self, Audio.boost_pad)
+		# El volumen lo maneja _update_boost_sound (sube y baja con el turbo)
+		_boost_player = Audio.create_loop_player(self, Audio.boost_pad, 0.0, false)
 		_boost_player.volume_db = -80.0
 	barrow.add_collision_exception_with(rider)
 	_set_riding_collision(true)
@@ -403,6 +404,7 @@ func boost(speed: float, time: float) -> bool:
 		return false
 	_boost_speed = speed
 	_boost_timer = time
+	Metrics.add(player_id, "turbos")
 	# La cámara se abre y aparecen las líneas de velocidad
 	if camera_rig:
 		camera_rig.play_boost(time)
@@ -486,6 +488,7 @@ func knock_off(away: Vector3 = Vector3.ZERO, stun_time: float = -1.0) -> void:
 		return
 	end_grab()
 	if state == Mode.RIDING:
+		Metrics.add(player_id, "caidas_carretilla")
 		var direction := Vector3(away.x, 0.0, away.z)
 		if direction.length() < 0.1:
 			direction = barrow.global_basis.x
@@ -612,9 +615,9 @@ func _spawn(scene: PackedScene, world_position: Vector3) -> Node3D:
 	return node
 
 
-## Caña de pescar: engancha al rival más cercano (en cualquier dirección, hasta
-## "Rod Range") y lo tira de la carretilla, hacia quien lo pescó. Devuelve false
-## si no hay nadie a tiro.
+## Caña de pescar: engancha al rival más cercano que vaya arriba de su
+## carretilla (en cualquier dirección, hasta "Rod Range") y lo tira, hacia quien
+## lo pescó. Devuelve false si no hay nadie a tiro.
 func cast_rod() -> bool:
 	var target := _find_rod_target()
 	if target == null:
@@ -633,7 +636,9 @@ func _find_rod_target() -> Racer:
 	var best_distance := rod_range
 	for node in get_tree().get_nodes_in_group("racer"):
 		var other := node as Racer
-		if other == null or other == self or other.state == Mode.SINKING:
+		# Solo al que va arriba de la carretilla: si ya está en el piso no tiene
+		# sentido pescarlo (la caña se tira al aire y se gasta igual)
+		if other == null or other == self or other.state != Mode.RIDING:
 			continue
 		var to_other := other.get_focus_body().global_position - barrow.global_position
 		to_other.y = 0.0

@@ -1,30 +1,22 @@
 class_name HugoNPC
 extends Node3D
 
-# Hugo, el cubo: está parado en la zona de atención de la ferretería, al lado
-# de la mesa, anotando (animación "take note" del .glb) y girando de a poco
-# hacia el jugador que tenga más cerca. Lo pone StoreLevel.
+# Hugo, el cubo: decoración de la ferretería. Está parado al lado del tablero
+# donde se cuelgan las herramientas, quieto y anotando (animación "take note"
+# del .glb). Lo pone StoreLevel.
 #
-# El .glb de Hugo que hay ahora trae solo el esqueleto y las animaciones (se
-# exportó sin la malla). Mientras sea así, se arma un Hugo provisorio con
-# formas simples pegadas a los huesos (cubo, ojos, brazos, guantes y zapatos),
-# que siguen la animación. Cuando el .glb traiga el modelo, el provisorio no
-# se arma.
+# Si el .glb viniera sin la malla (solo esqueleto y animaciones, como una
+# versión anterior), se arma un Hugo provisorio con formas simples pegadas a
+# los huesos. Con el .glb actual, que trae el modelo, el provisorio no se arma.
 
 ## Modelo de Hugo (.glb con esqueleto y animaciones).
 @export var model_scene: PackedScene = preload("res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-antesderiggear-take-animacion-note-2.glb")
 ## Animación que hace en loop (nombre ya normalizado, ver AnimNames).
 @export var animation: StringName = &"anotar"
 ## Alto de Hugo (se escala el modelo para que mida esto, con los pies en el piso).
-@export_range(0.5, 5.0, 0.05, "suffix:u") var height: float = 2.0
-## Qué tan rápido gira hacia el jugador.
-@export_range(0.1, 20.0, 0.1) var turn_speed: float = 3.0
-## Mira a los jugadores que estén a esta distancia o menos (si no hay, mira al frente).
-@export_range(1.0, 100.0, 0.5, "suffix:u") var look_range: float = 25.0
-## A quiénes mira (los pone StoreLevel).
-@export var targets: Array[Node3D] = []
+@export_range(0.5, 5.0, 0.05, "suffix:u") var height: float = 1.5
 ## Radio de la colisión (para que no lo atraviesen).
-@export_range(0.1, 3.0, 0.05, "suffix:u") var collision_radius: float = 0.7
+@export_range(0.1, 3.0, 0.05, "suffix:u") var collision_radius: float = 0.55
 
 @export_group("Provisorio (sin malla)")
 @export var body_color: Color = Color(0.35, 0.7, 1.0)
@@ -38,11 +30,9 @@ var _skeleton: Skeleton3D
 # y [MeshInstance3D, hueso, offset] de lo que va pegado a un hueso
 var _limbs: Array = []
 var _attached: Array = []
-var _front_yaw: float = 0.0
 
 
 func _ready() -> void:
-	_front_yaw = rotation.y
 	_model = model_scene.instantiate() as Node3D
 	add_child(_model)
 	_anim = _model.find_child("AnimationPlayer", true, false) as AnimationPlayer
@@ -58,52 +48,37 @@ func _ready() -> void:
 	_build_collision()
 
 
-func _process(delta: float) -> void:
-	_turn_to_target(delta)
+func _process(_delta: float) -> void:
 	_update_placeholder()
 
 
-# Gira (solo en Y) hacia el jugador más cercano; si no hay ninguno cerca, al frente
-func _turn_to_target(delta: float) -> void:
-	var goal := _front_yaw
-	var best := look_range
-	for target in targets:
-		if not is_instance_valid(target):
-			continue
-		var offset := target.global_position - global_position
-		offset.y = 0.0
-		if offset.length() < best and offset.length() > 0.1:
-			best = offset.length()
-			# Los modelos miran a +Z
-			goal = atan2(offset.x, offset.z)
-	rotation.y = lerp_angle(rotation.y, goal, minf(turn_speed * delta, 1.0))
-
-
-# Lo escala para que mida "height" y lo apoya en el piso. Se mide lo que se ve
-# (el .glb trae el esqueleto achicado adentro, así que los huesos no sirven)
+# Lo escala para que mida "height". El .glb ya viene con los pies en el piso
+# (en el origen), así que no se lo mueve. Se mide la malla del cuerpo (la que
+# tiene esqueleto) en su propio espacio: llevada al mundo queda corrida hacia
+# arriba por el "Armature" del .glb, y moverlo según eso lo hundía en el piso.
 func _fit_height() -> void:
-	var to_model := global_transform.affine_inverse()
-	var box := AABB()
-	var first := true
-	for mesh in _model.find_children("*", "MeshInstance3D", true, false):
-		var part: AABB = to_model * (mesh as MeshInstance3D).global_transform * (mesh as MeshInstance3D).get_aabb()
-		box = part if first else box.merge(part)
-		first = false
-	if first or box.size.y <= 0.0:
+	var model_height := 0.0
+	for node in _model.find_children("*", "MeshInstance3D", true, false):
+		var mesh := node as MeshInstance3D
+		if mesh.skin != null:
+			model_height = maxf(model_height, mesh.get_aabb().size.y)
+	if model_height <= 0.0:
 		return
-	var factor := height / box.size.y
-	_model.scale = Vector3.ONE * factor
-	_model.position.y = -box.position.y * factor
+	_model.scale = Vector3.ONE * (height / model_height)
 
 
 func _build_collision() -> void:
 	var body := StaticBody3D.new()
+	# En la capa de los objetos sueltos: los jugadores lo chocan, pero la cámara
+	# no lo esquiva como si fuera una pared
+	body.collision_layer = 1 << (ObjetoSuelto.LAYER - 1)
+	body.collision_mask = 0
 	var shape := CollisionShape3D.new()
 	var capsule := CapsuleShape3D.new()
 	capsule.radius = collision_radius
-	capsule.height = 2.0
+	capsule.height = maxf(height, collision_radius * 2.0)
 	shape.shape = capsule
-	shape.position.y = 1.0
+	shape.position.y = capsule.height * 0.5
 	body.add_child(shape)
 	add_child(body)
 

@@ -50,12 +50,23 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# Durante la cuenta regresiva (nadie se puede mover) no aparece nada: la
+	# espera del primer item cuenta desde el "¡YA!"
+	if not _match_started():
+		return
 	_timer -= delta
 	if _timer > 0.0:
 		return
 	_timer = _rng.randf_range(spawn_interval_min, maxf(spawn_interval_min, spawn_interval_max))
 	if _get_items().size() < max_items:
 		spawn_random_item()
+
+
+func _match_started() -> bool:
+	for player in get_tree().get_nodes_in_group("player"):
+		if player is Player and not player.controls_enabled:
+			return false
+	return true
 
 
 func spawn_random_item() -> void:

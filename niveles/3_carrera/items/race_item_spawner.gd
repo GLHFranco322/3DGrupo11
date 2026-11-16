@@ -129,7 +129,7 @@ func _spawn_pickup(row: Node3D, kind: Racer.Item, at: Vector3) -> void:
 
 # Un item que se agarró vuelve a aparecer en su lugar al rato (el mismo tipo)
 func _refill(row: Node3D, kind: Racer.Item, at: Vector3) -> void:
-	await get_tree().create_timer(refill_time, false).timeout
+	await create_tween().tween_interval(refill_time).finished
 	if is_instance_valid(row) and not row.is_queued_for_deletion():
 		_spawn_pickup(row, kind, at)
 

@@ -55,6 +55,12 @@ func _ready() -> void:
 		_rng.seed = puzzle_seed
 	_prepare_images()
 	_place_players()
+	# Su hipótesis es de observación (expresiones y comentarios de los
+	# jugadores): no se cuenta nada del juego. La fila solo trae el ID de la
+	# partida (se ve en resultados), para anotar al lado lo que se observó.
+	Metrics.start_match("Nivel 4 - Rompecabezas")
+	for p in _players():
+		Metrics.set_value(p.player_id, "personaje", Metrics.character_name(p.player_id))
 	time_left = match_duration
 	hud.setup(_players())
 	hud.set_time(time_left)
@@ -101,7 +107,7 @@ func _start_countdown() -> void:
 	for i in range(countdown, 0, -1):
 		hud.show_message(str(i))
 		Audio.play_sfx(Audio.race_count)
-		await get_tree().create_timer(1.0, false).timeout
+		await create_tween().tween_interval(1.0).finished
 	hud.show_message("¡YA!", 0.8)
 	Audio.play_sfx(Audio.race_go)
 	_playing = true
@@ -127,11 +133,13 @@ func _on_completed(p: PuzzlePlayer) -> void:
 	hud.flash(p, "¡Completo!", 0.6)
 	p.play_animation(Player.ANIM_EMOTE)
 	# Un instante para ver la imagen terminada, y se va con pops
-	await get_tree().create_timer(0.5, false).timeout
+	# (tweens del nivel y no timers del árbol: si la partida termina mientras
+	# espera, se cortan junto con el nivel)
+	await create_tween().tween_interval(0.5).finished
 	if _finished:
 		return
 	var gone := p.board.clear_with_pop()
-	await get_tree().create_timer(gone + next_puzzle_delay, false).timeout
+	await create_tween().tween_interval(gone + next_puzzle_delay).finished
 	p.play_animation(Player.ANIM_IDLE)
 	if not _finished:
 		_start_puzzle(p)
@@ -169,8 +177,16 @@ func _finish() -> void:
 		winner.play_animation(Player.ANIM_EMOTE)
 	MatchResult.save_from(_players())
 	MatchResult.last_level_scene = scene_file_path
+	_save_metrics()
 	hud.show_message(message)
 	Audio.play_match_end()
 	get_tree().paused = true
 	await get_tree().create_timer(end_delay, true).timeout
 	SceneLoader.change_scene(results_scene)
+
+
+func _save_metrics() -> void:
+	Metrics.set_info("ganador", MatchResult.winners[0].id if MatchResult.winners.size() == 1 else "empate")
+	for p in _players():
+		Metrics.set_value(p.player_id, "puntos", p.score)
+	Metrics.end_match()

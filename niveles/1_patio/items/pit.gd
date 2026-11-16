@@ -53,7 +53,6 @@ var _home_position: Vector3
 func _ready() -> void:
 	_home_parent = get_parent()
 	_home_position = global_position
-	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	item_timer.expired.connect(_on_expired)
 	_enter_spawning()
 
@@ -61,6 +60,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if state == State.PLACED:
 		_check_fall()
+		return
+	if state == State.LANDED:
+		_check_pickup()
 		return
 	if state != State.SPAWNING:
 		return
@@ -138,12 +140,17 @@ func _on_expired() -> void:
 		_close()
 
 
-func _on_pickup_area_body_entered(body: Node) -> void:
-	if state != State.LANDED:
+# Se agarra pasando por encima con las manos libres. Se revisa en cada cuadro
+# (no solo al entrar al área): así también lo agarra quien ya estaba parado
+# encima y recién suelta lo que tenía
+func _check_pickup() -> void:
+	if not pickup_area.monitoring:
 		return
-	# Las señales de física no permiten mover nodos con colisión: se posterga
-	if body is Player and not body.is_hands_full():
-		pick_up.call_deferred(body)
+	for body in pickup_area.get_overlapping_bodies():
+		var player := body as Player
+		if player and not player.is_hands_full() and not player.is_disabled():
+			pick_up(player)
+			return
 
 
 # Cualquier jugador cae (incluso el que lo colocó) cuando pasa cerca del centro
@@ -168,7 +175,7 @@ func _trigger() -> void:
 	# El pozo se abre (negro) mientras el jugador queda congelado y se hunde
 	trap_visual.material_override = _hole_material()
 	Audio.play_sfx(Audio.pit_fall)
-	await get_tree().create_timer(freeze_time + sink_time, false).timeout
+	await create_tween().tween_interval(freeze_time + sink_time).finished
 	_close()
 
 

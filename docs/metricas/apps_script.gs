@@ -36,6 +36,15 @@ const HOJAS = {
       columnasCarrera('j1'), columnasCarrera('j2')),
     observaciones: ['obs_notas'],
   },
+  // Hipótesis de observación: no se mide nada del juego, la fila es para
+  // anotar al lado de cada partida las expresiones y el feedback
+  'Nivel 4 - Rompecabezas': {
+    columnas: [
+      'partida_id', 'sesion', 'fecha', 'duracion_s', 'ganador',
+      'j1_personaje', 'j1_puntos', 'j2_personaje', 'j2_puntos',
+    ],
+    observaciones: ['obs_expresiones', 'obs_lo_entendieron_solos', 'obs_feedback', 'obs_cambios_sugeridos', 'obs_notas'],
+  },
 };
 
 // Columnas de cada jugador en la carrera: items (usos, aciertos y fallos) y
@@ -49,6 +58,8 @@ function columnasCarrera(j) {
     'trampas_total', 'trampas_acertadas',
     'cayo_en_pozos', 'huecos', 'rejas', 'barro', 'caidas_mapa',
     'agarres', 'agarres_acertados', 'agarres_fallidos',
+    'items_agarrados', 'turbos', 'contramano', 'seg_contramano',
+    'caidas_carretilla', 'seg_a_pie',
   ].map((columna) => j + '_' + columna);
 }
 
@@ -277,6 +288,40 @@ function armarResumen() {
   fila('n3_agarres_ok', 'Agarres que tiraron al rival', '=' + ambos(n3, 'agarres_acertados'));
   fila(null, 'Agarres de los que el rival se soltó', '=' + ambos(n3, 'agarres_fallidos'));
   fila(null, '% de agarres que tiraron al rival', '=IFERROR({n3_agarres_ok}/{n3_agarres},0)', '0%');
+  blanco();
+  titulo('Items de la pista (reaparecen al rato de agarrarlos)');
+  fila('n3_items', 'Items agarrados', '=' + ambos(n3, 'items_agarrados'));
+  fila(null, 'Promedio de items agarrados por partida', '=IFERROR({n3_items}/{n3_partidas},0)', '0.0');
+  fila(null, '% de items agarrados que se usaron', '=IFERROR({n3_trampas}/{n3_items},0)', '0%');
+  blanco();
+  titulo('Turbos (rampas de turbo)');
+  fila('n3_turbos', 'Turbos agarrados', '=' + ambos(n3, 'turbos'));
+  fila(null, 'Promedio de turbos por partida', '=IFERROR({n3_turbos}/{n3_partidas},0)', '0.0');
+  blanco();
+  titulo('Contramano (cartel de ¡CONTRAMANO!)');
+  fila('n3_contramano', 'Veces que apareció el cartel', '=' + ambos(n3, 'contramano'));
+  fila(null, 'Promedio de veces por partida', '=IFERROR({n3_contramano}/{n3_partidas},0)', '0.0');
+  fila('n3_seg_contramano', 'Segundos de contramano en total', '=' + ambos(n3, 'seg_contramano'), '0.0');
+  fila(null, 'Promedio de segundos por vez (cuánto tardan en darse vuelta)', '=IFERROR({n3_seg_contramano}/{n3_contramano},0)', '0.0');
+  blanco();
+  titulo('Caídas de la carretilla (con la flechita para encontrarla)');
+  fila('n3_caidas_carretilla', 'Veces que se cayeron de la carretilla', '=' + ambos(n3, 'caidas_carretilla'));
+  fila(null, 'Promedio de caídas por partida', '=IFERROR({n3_caidas_carretilla}/{n3_partidas},0)', '0.0');
+  fila('n3_seg_a_pie', 'Segundos a pie en total', '=' + ambos(n3, 'seg_a_pie'), '0.0');
+  fila(null, 'Promedio de segundos hasta volver a subirse', '=IFERROR({n3_seg_a_pie}/{n3_caidas_carretilla},0)', '0.0');
+  blanco();
+
+  const n4 = 'Nivel 4 - Rompecabezas';
+  titulo('NIVEL 4 - ROMPECABEZAS');
+  fila('n4_partidas', 'Partidas jugadas', '=COUNTA(' + col(n4, 'partida_id') + ')');
+  blanco();
+  titulo('Hipótesis (observación): es fácil e intuitivo, se resuelve rápido sin pensar cómo');
+  fila(null, 'Se evalúa con las expresiones y el feedback anotados en la pestaña del nivel (columnas obs_)');
+  fila(null, 'Partidas con expresiones anotadas', '=COUNTA(' + col(n4, 'obs_expresiones') + ')');
+  fila(null, 'Partidas con feedback anotado', '=COUNTA(' + col(n4, 'obs_feedback') + ')');
+  fila(null, 'Lo entendieron solos ("sí")', '=COUNTIF(' + col(n4, 'obs_lo_entendieron_solos') + ',"sí")+COUNTIF(' + col(n4, 'obs_lo_entendieron_solos') + ',"si")');
+  fila(null, 'Necesitaron ayuda ("no")', '=COUNTIF(' + col(n4, 'obs_lo_entendieron_solos') + ',"no")');
+  fila(null, 'Partidas con cambios sugeridos', '=COUNTA(' + col(n4, 'obs_cambios_sugeridos') + ')');
 
   const valores = filas.map(([texto, formula]) => [
     texto,

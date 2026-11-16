@@ -40,19 +40,24 @@ func _ready() -> void:
 		item_timer.blink_node = visuals
 		item_timer.expired.connect(queue_free)
 		item_timer.start(lifetime)
-	area.body_entered.connect(_on_body_entered)
 
 
 func _process(delta: float) -> void:
 	_time += delta
 	visuals.rotation.y += spin_speed * delta
 	visuals.position.y = 0.6 + sin(_time * 3.0) * 0.12
+	_check_pickup()
 
 
-func _on_body_entered(body: Node) -> void:
-	var racer := Racer.from_body(body)
-	if racer == null or body != racer.barrow:
+# Se revisa en cada cuadro (no solo al entrar al área): así también lo agarra
+# quien ya estaba encima y recién tiró su item o se volvió a subir
+func _check_pickup() -> void:
+	if is_queued_for_deletion():
 		return
-	if racer.give_item(kind):
-		taken.emit()
-		queue_free()
+	for body in area.get_overlapping_bodies():
+		var racer := Racer.from_body(body)
+		if racer and body == racer.barrow and racer.give_item(kind):
+			Metrics.add(racer.player_id, "items_agarrados")
+			taken.emit()
+			queue_free()
+			return

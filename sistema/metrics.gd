@@ -144,6 +144,15 @@ func get_value(player_id: int, key: String, default: Variant = 0) -> Variant:
 	return _players.get(player_id, {}).get(key, default)
 
 
+## Partida que se dejó por la mitad (ej: "Menú principal" en la pausa): se
+## guarda y se envía igual, con fin = "abandonada".
+func abandon_match() -> void:
+	if not _active:
+		return
+	set_info("fin", "abandonada")
+	end_match()
+
+
 ## Termina la partida: arma la fila, la guarda y la envía.
 func end_match() -> void:
 	if not _active:

@@ -19,7 +19,10 @@ var music_level: float = 1.0:
 	set(value):
 		music_level = value
 		_update_music_volume()
-var sfx_level: float = 1.0
+var sfx_level: float = 1.0:
+	set(value):
+		sfx_level = value
+		_update_loop_volumes()
 
 @export_group("Música")
 ## Música del menú principal y la selección de personaje.
@@ -197,6 +200,8 @@ var _sfx_players: Array[AudioStreamPlayer] = []
 var _next_voice: int = 0
 var _last_played: Dictionary = {}
 var _end_token: int = 0
+# Reproductores en loop que siguen el volumen de efectos: [reproductor, offset dB]
+var _loop_players: Array = []
 
 
 func _ready() -> void:
@@ -334,14 +339,25 @@ func _set_fade(value: float, index: int) -> void:
 	_update_music_volume()
 
 
-## Crea un reproductor en loop (ej: motor) como hijo de "owner_node".
-func create_loop_player(owner_node: Node, stream: AudioStream, volume_offset_db: float = 0.0) -> AudioStreamPlayer:
+## Crea un reproductor en loop (ej: motor) como hijo de "owner_node". Con
+## "follow_volume" su volumen se actualiza solo si se cambia el volumen de los
+## efectos (ej: desde la pausa); en false lo maneja quien lo creó.
+func create_loop_player(owner_node: Node, stream: AudioStream, volume_offset_db: float = 0.0,
+		follow_volume: bool = true) -> AudioStreamPlayer:
 	var player := AudioStreamPlayer.new()
 	player.stream = stream
 	player.volume_db = get_sfx_db() + volume_offset_db
 	player.finished.connect(player.play)
 	owner_node.add_child(player)
+	if follow_volume:
+		_loop_players.append([player, volume_offset_db])
 	return player
+
+
+func _update_loop_volumes() -> void:
+	_loop_players = _loop_players.filter(func(entry: Array) -> bool: return is_instance_valid(entry[0]))
+	for entry in _loop_players:
+		(entry[0] as AudioStreamPlayer).volume_db = get_sfx_db() + entry[1]
 
 
 ## Volumen final de los efectos (dB), con el nivel del menú de opciones aplicado.

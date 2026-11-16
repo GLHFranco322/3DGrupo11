@@ -129,6 +129,7 @@ func _choose(index: int) -> void:
 			owner_id = 0
 			_root.visible = false
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			_save_abandoned_metrics()
 			SceneLoader.change_scene(main_menu_scene)
 
 
@@ -250,6 +251,19 @@ func _make_label(variation: StringName) -> Label:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.theme_type_variation = variation
 	return label
+
+
+# Se sale del nivel sin terminarlo: la partida queda en la planilla igual
+# (como "abandonada"), con los puntos que llevaba cada uno
+func _save_abandoned_metrics() -> void:
+	if not Metrics.is_active():
+		return
+	var scene := get_tree().current_scene
+	if scene:
+		for node in scene.find_children("*", "Node", true, false):
+			if "player_id" in node and "score" in node:
+				Metrics.set_value(node.player_id, "puntos", node.score)
+	Metrics.abandon_match()
 
 
 # Color del jugador que pausó (lo tiene su nodo en el nivel)

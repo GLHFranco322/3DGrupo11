@@ -49,11 +49,16 @@ var _tracked: Dictionary = {}
 # Contramano: segundos que lleva cada uno mirando para atrás / para adelante
 var _backwards_time: Dictionary = {}
 var _forwards_time: Dictionary = {}
+# Racer -> true mientras se le muestra el cartel de contramano
+var _wrong_way_shown: Dictionary = {}
 var _last_lap_shown: bool = false
 
 # Lo que se cuenta de cada jugador para las métricas (empiezan en 0)
 const METRIC_COUNTERS := ["cortadoras", "cortadoras_acertadas", "pozos", "pozos_acertados", "canas",
-		"canas_acertadas", "cayo_en_pozos", "huecos", "rejas", "barro", "agarres", "agarres_acertados"]
+		"canas_acertadas", "cayo_en_pozos", "huecos", "rejas", "barro", "agarres", "agarres_acertados",
+		"turbos", "items_agarrados", "contramano", "caidas_carretilla"]
+# Tiempos de cada jugador (segundos, empiezan en 0)
+const METRIC_TIMERS := ["seg_contramano", "seg_a_pie"]
 # Cada item que se tira: [usos, aciertos, fallos]
 const METRIC_ITEMS := [["cortadoras", "cortadoras_acertadas", "cortadoras_fallidas"],
 		["pozos", "pozos_acertados", "pozos_fallidos"], ["canas", "canas_acertadas", "canas_fallidas"]]
@@ -67,6 +72,8 @@ func _ready() -> void:
 		Metrics.set_value(r.player_id, "personaje", Metrics.character_name(r.player_id))
 		for key in METRIC_COUNTERS:
 			Metrics.set_value(r.player_id, key, 0)
+		for key in METRIC_TIMERS:
+			Metrics.set_value(r.player_id, key, 0.0)
 	spawner.spawn_initial_items()
 	time_left = match_duration
 	hud.setup(_racers(), track)
@@ -101,7 +108,7 @@ func _start_countdown() -> void:
 	for i in range(countdown, 0, -1):
 		hud.show_message(str(i))
 		Audio.play_sfx(Audio.race_count)
-		await get_tree().create_timer(1.0, false).timeout
+		await create_tween().tween_interval(1.0).finished
 	hud.show_message("¡YA!", 0.8)
 	Audio.play_sfx(Audio.race_go)
 	_racing = true
@@ -119,6 +126,11 @@ func _process(delta: float) -> void:
 	hud.set_time(time_left)
 	for r in _racers():
 		hud.set_hint(r, _get_hint(r))
+		# Tiempo fuera de la carretilla (tirado o caminando hasta ella)
+		if r.state == Racer.Mode.KNOCKED or r.state == Racer.Mode.ON_FOOT:
+			Metrics.start_timer(r.player_id, "seg_a_pie")
+		else:
+			Metrics.stop_timer(r.player_id, "seg_a_pie")
 
 	for r in _racers():
 		if r.progress >= get_race_distance() and r.state != Racer.Mode.SINKING:
@@ -174,9 +186,23 @@ func _check_wrong_way(r: Racer, offset: float) -> void:
 		_forwards_time[r] = _forwards_time.get(r, 0.0) + delta
 		_backwards_time[r] = 0.0
 	if _backwards_time[r] >= wrong_way_time:
-		hud.set_wrong_way(r, true)
+		_show_wrong_way(r, true)
 	elif _forwards_time[r] >= 0.3 or not _racing:
-		hud.set_wrong_way(r, false)
+		_show_wrong_way(r, false)
+
+
+# Muestra o saca el cartel, y cuenta para las métricas cuántas veces apareció
+# y cuánto tiempo estuvo
+func _show_wrong_way(r: Racer, on: bool) -> void:
+	hud.set_wrong_way(r, on)
+	if _wrong_way_shown.get(r, false) == on:
+		return
+	_wrong_way_shown[r] = on
+	if on:
+		Metrics.add(r.player_id, "contramano")
+		Metrics.start_timer(r.player_id, "seg_contramano")
+	else:
+		Metrics.stop_timer(r.player_id, "seg_contramano")
 
 
 func _get_leader() -> Racer:

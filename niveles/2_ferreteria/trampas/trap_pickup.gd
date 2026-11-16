@@ -26,16 +26,20 @@ func _ready() -> void:
 	for child in visuals.get_children():
 		child.visible = child.name == VISUAL_NAMES.get(kind, "")
 	label.text = StoreTrap.KIND_NAMES.get(kind, "")
-	area.body_entered.connect(_on_body_entered)
 
 
 func _process(delta: float) -> void:
 	_time += delta
 	visuals.rotation.y += spin_speed * delta
 	visuals.position.y = 0.5 + sin(_time * 3.0) * 0.1
+	_check_pickup()
 
 
-func _on_body_entered(body: Node) -> void:
-	var player := body as StorePlayer
-	if player and player.give_trap(kind):
-		queue_free()
+# Se revisa en cada cuadro (no solo al entrar al área): así también la agarra
+# quien ya estaba parado encima y recién dejó la trampa que tenía
+func _check_pickup() -> void:
+	for body in area.get_overlapping_bodies():
+		var player := body as StorePlayer
+		if player and player.give_trap(kind):
+			queue_free()
+			return

@@ -1,6 +1,6 @@
 # Métricas de testeo → Google Sheets
 
-Al terminar cada partida de los niveles 1, 2 y 3, el juego (autoload `Metrics`, en
+Al terminar cada partida, el juego (autoload `Metrics`, en
 `sistema/metrics.gd`) manda una fila a una planilla de Google Sheets. Las
 columnas de observación (en amarillo) se llenan a mano durante el testeo.
 
@@ -17,7 +17,7 @@ columnas de observación (en amarillo) se llenan a mano durante el testeo.
    cuenta → *Configuración avanzada* → *Ir a … (no seguro)* → *Permitir*
    (es un script propio, Google avisa porque no está verificado).
    Esto crea las pestañas "Nivel 1 - Corta el pasto", "Nivel 2 - Laberinto",
-   "Nivel 3 - Carrera" y "Resumen".
+   "Nivel 3 - Carrera", "Nivel 4 - Rompecabezas" y "Resumen".
 6. **Implementar → Nueva implementación** → engranaje → **Aplicación web**:
    - Ejecutar como: **Yo**
    - Quién tiene acceso: **Cualquier usuario**
@@ -96,7 +96,33 @@ columnas de observación (en amarillo) se llenan a mano durante el testeo.
 | `jX_huecos`, `jX_rejas` | Caídas en huecos de la pista / descargas de las rejas eléctricas |
 | `jX_caidas_mapa` | Huecos + rejas (trampas del mapa) |
 | `jX_barro` | Veces que pasó por el barro (frena, no tira) |
+| `jX_agarres` / `_acertados` / `_fallidos` | Agarres al rival (□ cerca) / que lo tiraron / de los que se soltó |
+| `jX_items_agarrados` | Items agarrados de la pista (reaparecen al rato en el mismo lugar) |
+| `jX_turbos` | Rampas de turbo que agarró |
+| `jX_contramano`, `jX_seg_contramano` | Veces que le apareció el cartel de ¡CONTRAMANO! / segundos que estuvo |
+| `jX_caidas_carretilla` | Veces que lo tiraron de la carretilla (cortadora, caña, agarre, choque, reja) |
+| `jX_seg_a_pie` | Segundos fuera de la carretilla hasta volver a subirse (con la flechita que la marca) |
 | `obs_notas` | Observación (a mano) |
+
+Las cañas ahora solo pescan al rival si va arriba de su carretilla: si está a
+pie, la caña se tira al aire y cuenta en `jX_canas_fallidas`.
+
+**Nivel 4 – Rompecabezas**
+
+Su hipótesis es de **observación**: el nivel está pensado para ser fácil e
+intuitivo, para que se resuelva rápido antes que pensar cómo. No se cuenta nada
+del juego; se evalúan las expresiones y el feedback de los jugadores, que puede
+llevar a cambios más adelante. El juego solo manda la fila de cada partida
+(para tener el `partida_id` y anotar al lado):
+
+| Columna | Qué es |
+|---|---|
+| `ganador`, `jX_puntos` | 1, 2 o "empate" / puntaje (100 por rompecabezas + piezas puestas del que quedó a medias) |
+| `obs_expresiones` | Reacciones durante la partida (risas, frustración, apuro...) (a mano) |
+| `obs_lo_entendieron_solos` | "sí" / "no": si lo jugaron sin que nadie les explique (a mano) |
+| `obs_feedback` | Lo que comentaron al terminar (a mano) |
+| `obs_cambios_sugeridos` | Cambios que surjan del feedback (a mano) |
+| `obs_notas` | Otras observaciones (a mano) |
 
 Para medir algo nuevo desde el juego alcanza con `Metrics.add(player_id,
 "nombre")`: si la columna no existe, la planilla la agrega sola al final.

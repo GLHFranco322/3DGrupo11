@@ -51,7 +51,9 @@ func _start_countdown() -> void:
 	for i in range(countdown, 0, -1):
 		hud.show_message(str(i))
 		Audio.play_sfx(Audio.race_count)
-		await get_tree().create_timer(1.0, false).timeout
+		# (tween del nodo y no timer del árbol: si se sale del nivel en la
+		# cuenta, se corta junto con él)
+		await create_tween().tween_interval(1.0).finished
 	hud.show_message("¡YA!", 0.8)
 	Audio.play_sfx(Audio.race_go)
 	for p in [player1, player2]:
