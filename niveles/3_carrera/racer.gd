@@ -168,6 +168,10 @@ const ITEM_NAMES := {
 @export var barrow_model: PackedScene
 ## Escala del modelo de la carretilla.
 @export_range(0.01, 10.0, 0.01) var barrow_model_scale: float = 1.0
+## Giro del modelo de la carretilla (para que la rueda quede adelante, en -Z).
+@export_range(-180.0, 180.0, 1.0, "suffix:°") var barrow_model_rotation: float = 0.0
+## Corrimiento del modelo de la carretilla (después de escalarlo y girarlo).
+@export var barrow_model_offset: Vector3 = Vector3.ZERO
 ## Partes de la carretilla (nombres de sus mallas) que se pintan con el color del
 ## jugador. Si se cambia el modelo, poner acá los nombres de sus partes.
 @export var barrow_paint_parts: PackedStringArray = ["Tray"]
@@ -1036,10 +1040,15 @@ func _update_barrow_marker() -> void:
 
 
 func _swap_barrow_model() -> void:
+	# Se sacan ya (no solo queue_free): si no, _paint_barrow y la cámara
+	# todavía encontrarían la carretilla provisoria
 	for child in barrow_model_root.get_children():
+		barrow_model_root.remove_child(child)
 		child.queue_free()
 	var model := barrow_model.instantiate() as Node3D
 	model.scale = Vector3.ONE * barrow_model_scale
+	model.rotation.y = deg_to_rad(barrow_model_rotation)
+	model.position = barrow_model_offset
 	barrow_model_root.add_child(model)
 
 

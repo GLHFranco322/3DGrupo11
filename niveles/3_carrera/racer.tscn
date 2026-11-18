@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://niveles/3_carrera/racer.gd" id="1_racer"]
 [ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_mower.tscn" id="2_rock"]
 [ext_resource type="PackedScene" path="res://niveles/3_carrera/items/race_pit.tscn" id="3_pit"]
+[ext_resource type="PackedScene" uid="uid://dp6adajrbpdwd" path="res://assets/carretilla/forklift truck.glb" id="4_barrow"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_barrow"]
 radius = 0.5
@@ -53,6 +54,10 @@ size = Vector3(0.3, 0.18, 0.08)
 script = ExtResource("1_racer")
 mower_scene = ExtResource("2_rock")
 pit_scene = ExtResource("3_pit")
+barrow_model = ExtResource("4_barrow")
+barrow_model_scale = 0.5
+barrow_model_rotation = -90.0
+barrow_paint_parts = PackedStringArray("Cube")
 
 [node name="Barrow" type="CharacterBody3D" parent="."]
 
@@ -87,14 +92,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.25, 0.5)
 mesh = SubResource("BoxMesh_leg")
 
 [node name="Headlight" type="SpotLight3D" parent="Barrow"]
-transform = Transform3D(1, 0, 0, 0, 0.985, -0.174, 0, 0.174, 0.985, 0, 0.9, -1.05)
+transform = Transform3D(1, 0, 0, 0, 0.985, -0.174, 0, 0.174, 0.985, 0, 0.7, -0.95)
 light_color = Color(1, 0.95, 0.8, 1)
 light_energy = 4.5
 spot_range = 20.0
 spot_angle = 32.0
 
 [node name="HeadlightBulb" type="MeshInstance3D" parent="Barrow"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62, -0.84)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_headlight")
 
