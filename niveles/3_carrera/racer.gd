@@ -162,8 +162,9 @@ const ITEM_NAMES := {
 @export_group("Skin")
 ## Personaje si no se eligió uno en el menú (al probar la escena directo).
 @export var default_character: CharacterData
-## Multiplicador de tamaño del personaje en este nivel.
-@export_range(0.1, 5.0, 0.05) var size_multiplier: float = 1.5
+## Multiplicador de tamaño del personaje en este nivel (que entre en la batea
+## de la carretilla).
+@export_range(0.1, 5.0, 0.05) var size_multiplier: float = 1.0
 ## Modelo de la carretilla (.glb). Vacío = usa la carretilla provisoria de la escena.
 @export var barrow_model: PackedScene
 ## Escala del modelo de la carretilla.
