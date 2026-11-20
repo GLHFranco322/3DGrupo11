@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://rq70v8oogv8h"]
 
-[ext_resource type="Texture2D" uid="uid://gbqviioq88qk" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/prototypebits_texture.png" id="1_331ag"]
+[ext_resource type="Texture2D" uid="uid://6iu6oxkbqjty" path="res://assets/escenario/ferreteria (interior)/Assets/fbx/prototypebits_texture.png" id="1_331ag"]
 [ext_resource type="Texture2D" uid="uid://cykj0w5mwik7e" path="res://assets/escenario/detalles/PSX Electronics Asset Pack_PSX PC Monitor Atlas.png" id="2_nk3dh"]
 [ext_resource type="Texture2D" uid="uid://bsdityg1kulw5" path="res://assets/escenario/detalles/PSX Electronics Asset Pack_PSX PC Atlas Lying Down.png" id="3_6kh54"]
-[ext_resource type="Texture2D" uid="uid://cvh70enu6n0es" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/furniturebits_texture.png" id="4_pwusc"]
+[ext_resource type="Texture2D" uid="uid://u2ufx0bk2884" path="res://assets/escenario/muebles/cama - sillón - mesa - mueble/Assets/fbx/furniturebits_texture.png" id="4_pwusc"]
 [ext_resource type="Texture2D" uid="uid://cl2614yklulp2" path="res://assets/herramientas/Assets/fbx/tools_bits_texture.png" id="5_pwusc"]
 [ext_resource type="Texture2D" uid="uid://jxml2nss7jx3" path="res://assets/herramientas/Assets/fbx/tools_bits_blueprint.png" id="6_4rwc2"]
 [ext_resource type="PackedScene" uid="uid://r46q6upn2du0" path="res://assets/laberintonivel2assets/Wall Clock.fbx" id="7_4rwc2"]
