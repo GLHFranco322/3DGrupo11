@@ -5,7 +5,17 @@ extends Control
 # juegan desde la pantalla de resultados. Abajo, las indicaciones de los botones.
 # Se maneja con mouse o con cualquier mando (palanca / D-pad para moverse,
 # ✕ / A acepta, ○ / B vuelve).
+## Truco para destapar "Elegir nivel (dev)" en el juego exportado:
+## △ △ □ ○ R1 R1 (en Xbox: Y Y X B RB RB)
+const CHEAT_CODE := [
+	JOY_BUTTON_Y, JOY_BUTTON_Y, JOY_BUTTON_X, JOY_BUTTON_B,
+	JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_RIGHT_SHOULDER,
+]
+## Segundos máximos entre un botón y el siguiente.
+const CHEAT_TIMEOUT := 2.0
 
+var _cheat_index := 0
+var _cheat_last_msec := 0
 ## Escena que se abre con "Jugar".
 @export_file("*.tscn") var character_select_scene: String = "res://menus/character_select.tscn"
 ## Muestra "Elegir nivel (dev)" para arrancar directo en cualquier nivel. Solo
@@ -70,7 +80,10 @@ func _ready() -> void:
 		button.focus_entered.connect(Audio.play_sfx.bind(Audio.ui_hover))
 		button.mouse_entered.connect(Audio.play_sfx.bind(Audio.ui_hover))
 		button.pressed.connect(Audio.play_sfx.bind(Audio.ui_click))
-
+	
+		# Sonidos después del foco inicial, para que no suenen al entrar
+	for button in buttons:
+		_connect_button_sounds(button)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not main_panel.visible and event.is_action_pressed("ui_cancel"):
@@ -172,3 +185,37 @@ func _on_level_chosen(scene: String) -> void:
 	MatchResult.reset_tournament()
 	GameSettings.new_tournament(scene)
 	SceneLoader.change_scene(character_select_scene)
+
+func _connect_button_sounds(button: BaseButton) -> void:
+	button.focus_entered.connect(Audio.play_sfx.bind(Audio.ui_hover))
+	button.mouse_entered.connect(Audio.play_sfx.bind(Audio.ui_hover))
+	button.pressed.connect(Audio.play_sfx.bind(Audio.ui_click))
+
+
+func _input(event: InputEvent) -> void:
+	# Solo en el menú principal y mientras el selector no esté creado
+	if level_panel != null or not main_panel.visible:
+		return
+	if not (event is InputEventJoypadButton and event.pressed):
+		return
+
+	var now := Time.get_ticks_msec()
+	if now - _cheat_last_msec > CHEAT_TIMEOUT * 1000.0:
+		_cheat_index = 0
+	_cheat_last_msec = now
+
+	if event.button_index == CHEAT_CODE[_cheat_index]:
+		_cheat_index += 1
+		if _cheat_index == CHEAT_CODE.size():
+			_cheat_index = 0
+			_unlock_level_select()
+	else:
+		# Si se equivocó pero apretó el primer botón, ya cuenta como arranque
+		_cheat_index = 1 if event.button_index == CHEAT_CODE[0] else 0
+
+
+func _unlock_level_select() -> void:
+	for button in _build_level_select():
+		_connect_button_sounds(button)
+	Audio.play_sfx(Audio.ui_click)
+	level_button.grab_focus()
