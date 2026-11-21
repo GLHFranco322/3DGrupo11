@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyjukl7iiocpx"
+path="res://.godot/imported/hacerse el boludo eco.MP3-4869297b07e3e72c49c8e3f1e4fa4998.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/hacerse el boludo eco.MP3"
+dest_files=["res://.godot/imported/hacerse el boludo eco.MP3-4869297b07e3e72c49c8e3f1e4fa4998.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

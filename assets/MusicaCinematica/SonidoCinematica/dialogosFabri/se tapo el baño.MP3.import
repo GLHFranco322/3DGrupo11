@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bunok7negwew1"
+path="res://.godot/imported/se tapo el baño.MP3-43dc89c770733b4d443207f7253f99c2.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/se tapo el baño.MP3"
+dest_files=["res://.godot/imported/se tapo el baño.MP3-43dc89c770733b4d443207f7253f99c2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

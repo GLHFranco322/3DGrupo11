@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cqf7aqep7f2xg"
+path="res://.godot/imported/para que me necesitabas franco.MP3-6c7c671d3d7a8e9a586a1026638f51cc.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/para que me necesitabas franco.MP3"
+dest_files=["res://.godot/imported/para que me necesitabas franco.MP3-6c7c671d3d7a8e9a586a1026638f51cc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

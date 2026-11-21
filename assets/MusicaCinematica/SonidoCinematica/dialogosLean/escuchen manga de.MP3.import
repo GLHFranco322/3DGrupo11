@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kinm2np5o4pl"
+path="res://.godot/imported/escuchen manga de.MP3-94d25331370243fc125467f824f44a8d.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/escuchen manga de.MP3"
+dest_files=["res://.godot/imported/escuchen manga de.MP3-94d25331370243fc125467f824f44a8d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

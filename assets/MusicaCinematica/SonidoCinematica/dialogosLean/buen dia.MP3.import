@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dn4hvh05b2sud"
+path="res://.godot/imported/buen dia.MP3-ccf32e1c23454f414556f69786ecd733.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/buen dia.MP3"
+dest_files=["res://.godot/imported/buen dia.MP3-ccf32e1c23454f414556f69786ecd733.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

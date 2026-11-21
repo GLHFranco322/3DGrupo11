@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpqlvw01imw5m"
+path="res://.godot/imported/sacando cuentas leo.MP3-f90a54385891b0a382185be651532122.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLeo/sacando cuentas leo.MP3"
+dest_files=["res://.godot/imported/sacando cuentas leo.MP3-f90a54385891b0a382185be651532122.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

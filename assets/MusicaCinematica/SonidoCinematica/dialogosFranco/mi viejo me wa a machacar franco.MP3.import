@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://chly48ude755q"
+path="res://.godot/imported/mi viejo me wa a machacar franco.MP3-0f26a1f1dab009675a9583243aa99461.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/mi viejo me wa a machacar franco.MP3"
+dest_files=["res://.godot/imported/mi viejo me wa a machacar franco.MP3-0f26a1f1dab009675a9583243aa99461.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

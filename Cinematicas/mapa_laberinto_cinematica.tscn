@@ -29,16 +29,47 @@
 [ext_resource type="Texture2D" uid="uid://cj442o3urvocu" path="res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-antesderiggear-take-animacion-note-2_Piernas.jpg" id="28_1b64a"]
 [ext_resource type="Texture2D" uid="uid://cvrmjng6u0it5" path="res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-antesderiggear-take-animacion-note-2_CuerpoHugo.jpg" id="29_g5kir"]
 [ext_resource type="Texture2D" uid="uid://1jcx88073y6b" path="res://assets/personajes/Hugo/Sebuscagerente-Personaje-Hugo-Cubo-antesderiggear-take-animacion-note-2_PiesBlancos.jpg" id="30_c77xp"]
+[ext_resource type="AudioStream" uid="uid://c0141huhve8ky" path="res://assets/MusicaCinematica/SonidoCinematica/puertas/ogg/qubodup-DoorClose01.ogg" id="32_c77xp"]
 [ext_resource type="Texture2D" uid="uid://1owats2fimm0" path="res://assets/personajes/JefeTriangulo/JefeTriangulo-normalito-modelo3d1_ojo.jpg" id="32_d6n03"]
+[ext_resource type="AudioStream" uid="uid://b1ncvsm8ixayv" path="res://assets/MusicaCinematica/SonidoCinematica/correr.wav" id="33_hwi6v"]
 [ext_resource type="Texture2D" uid="uid://wb0phvw2ga6c" path="res://assets/personajes/JefeTriangulo/JefeTriangulo-normalito-modelo3d1_piel.jpg" id="33_m103t"]
+[ext_resource type="AudioStream" uid="uid://c63byrfyvqhap" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/tararea franco.MP3" id="33_s23e2"]
+[ext_resource type="AudioStream" uid="uid://chly48ude755q" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/mi viejo me wa a machacar franco.MP3" id="34_hwi6v"]
 [ext_resource type="Texture2D" uid="uid://b63sfnjidv6cw" path="res://assets/personajes/JefeTriangulo/JefeTriangulo-normalito-modelo3d1_cuerpo.jpg" id="34_jusu7"]
 [ext_resource type="Texture2D" uid="uid://ja8sio3xfecd" path="res://assets/personajes/JefeTriangulo/JefeTriangulo-normalito-modelo3d1_Bigote.jpg" id="35_elr6l"]
 [ext_resource type="PackedScene" uid="uid://c3lwilok8ae7o" path="res://niveles/1_patio/escene_map.tscn" id="35_jusu7"]
+[ext_resource type="AudioStream" uid="uid://1d111rdxdq02" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/tranqui franco.MP3" id="35_p3bp5"]
+[ext_resource type="AudioStream" uid="uid://cyjukl7iiocpx" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/hacerse el boludo eco.MP3" id="36_chaom"]
 [ext_resource type="PackedScene" uid="uid://rq70v8oogv8h" path="res://niveles/2_ferreteria/mapa_fabricio/laberinto_ferreteria.tscn" id="36_elr6l"]
 [ext_resource type="Texture2D" uid="uid://brfmjx1hhcy4l" path="res://assets/Sky/Bumpy Sky/Bumpy_Sky-Blue_01-512x512.png" id="36_m103t"]
+[ext_resource type="AudioStream" uid="uid://uodpb6d8i18" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/ya fue franco.MP3" id="37_3s3lx"]
 [ext_resource type="PackedScene" uid="uid://bed8yhi5hl0ms" path="res://mesh_libraries/resultado_escenario_visual.tscn" id="37_8diuy"]
 [ext_resource type="Texture2D" uid="uid://dndy5vu6y60qq" path="res://assets/maquinas de pasto/maquina azul/still/CortadoradepastoModeloazul_MaquinaColorAzul.jpg" id="38_8diuy"]
+[ext_resource type="AudioStream" uid="uid://cv17yc33khmbn" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/buen dia pa.MP3" id="38_d5vgv"]
 [ext_resource type="Texture2D" uid="uid://dl4luwauvfb6h" path="res://assets/maquinas de pasto/maquina azul/still/CortadoradepastoModeloazul_RuedasdeMaquinaAzules.jpg" id="39_nxkq6"]
+[ext_resource type="AudioStream" uid="uid://c3m0sqw6c7k4v" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/ya estoy aca franco.MP3" id="39_uawmk"]
+[ext_resource type="AudioStream" uid="uid://blxe0t1fman8i" path="res://assets/MusicaCinematica/SonidoCinematica/reloj.wav" id="40_nxkq6"]
+[ext_resource type="AudioStream" uid="uid://cqf7aqep7f2xg" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/para que me necesitabas franco.MP3" id="40_whylx"]
+[ext_resource type="AudioStream" uid="uid://dtruryaeeqnbr" path="res://assets/MusicaCinematica/SonidoCinematica/Musica Suspenso.ogg" id="42_hwi6v"]
+[ext_resource type="AudioStream" uid="uid://ctrdig8oqdtn7" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/se puede saber donde estabas.MP3" id="43_chaom"]
+[ext_resource type="AudioStream" uid="uid://dn4hvh05b2sud" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/buen dia.MP3" id="44_3s3lx"]
+[ext_resource type="AudioStream" uid="uid://cnmhq0nycgwfq" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/te necesitaba.MP3" id="45_d5vgv"]
+[ext_resource type="AudioStream" uid="uid://dopb4k26wym77" path="res://assets/MusicaCinematica/SonidoCinematica/baño carlos.MP3" id="46_uawmk"]
+[ext_resource type="AudioStream" uid="uid://rwg2ocf5segy" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/Audio llamada al jefe fabri.MP3" id="47_hodir"]
+[ext_resource type="AudioStream" uid="uid://bunok7negwew1" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/se tapo el baño.MP3" id="48_4ouxn"]
+[ext_resource type="AudioStream" uid="uid://dpqlvw01imw5m" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLeo/sacando cuentas leo.MP3" id="50_mdpgn"]
+[ext_resource type="AudioStream" uid="uid://q4blw2nxnmh1" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLeo/no tenemos presupuesto.MP3" id="51_lekeb"]
+[ext_resource type="AudioStream" uid="uid://dtpfbv1mw5mpq" path="res://assets/MusicaCinematica/SonidoCinematica/Escribirpapel.wav" id="52_gvfyy"]
+[ext_resource type="AudioStream" uid="uid://dgdp4e4xx2xjw" path="res://assets/MusicaCinematica/SonidoCinematica/estresado music.mp3" id="53_h0dbd"]
+[ext_resource type="AudioStream" uid="uid://wq322o4e1a2j" path="res://assets/MusicaCinematica/SonidoCinematica/Puerta Ruidosa.wav" id="54_gvfyy"]
+[ext_resource type="AudioStream" uid="uid://kinm2np5o4pl" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/escuchen manga de.MP3" id="54_lekeb"]
+[ext_resource type="AudioStream" uid="uid://b2j08yfr3r18a" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/aprovechando que estamos todos aca.MP3" id="55_ar4ut"]
+[ext_resource type="AudioStream" uid="uid://bb3tpixyesa4p" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/quien haga mejor su trabajo.MP3" id="56_cuibj"]
+[ext_resource type="AudioStream" uid="uid://b2c5d1hlu1kqx" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/vamos muchachos.MP3" id="57_f371g"]
+[ext_resource type="AudioStream" uid="uid://bvx3seq7raoxw" path="res://assets/MusicaCinematica/SonidoCinematica/presentacion.wav" id="58_cuibj"]
+[ext_resource type="Texture2D" uid="uid://pac7dh72nnkq" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/NostroStudio (1).png" id="68_8oes8"]
+[ext_resource type="FontFile" uid="uid://b2uwhb0mhkai1" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/Inlanders Demo.otf" id="69_evffq"]
+[ext_resource type="Texture2D" uid="uid://v5cf65h04huu" path="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/Se Busca Gerente (7).png" id="70_4mjpy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0squ"]
 resource_name = "prototype_texture"
@@ -3025,7 +3056,7 @@ shadow_mesh = SubResource("ArrayMesh_hwma0")
 
 [sub_resource type="Animation" id="Animation_8diuy"]
 resource_name = "CinematicaPresentacion"
-length = 100.0
+length = 100.13333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -3472,14 +3503,14 @@ tracks/40/enabled = true
 tracks/40/path = NodePath("JefeTrianguloPersonaje0/Armature/Skeleton3D:Bone.001")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
-tracks/40/keys = PackedFloat32Array(0, 1, 4.6119897e-08, 3.7940026e-08, 0.004983204, 0.9999876, 14.933333, 1, 4.6119897e-08, 3.7940026e-08, 0.004983204, 0.9999876, 16.033333, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 17.01763, 1, 0.03915476, -0.00019507996, 0.004979383, 0.9992207, 23.033133, 1, 0.03915476, -0.00019507996, 0.004979383, 0.9992207, 23.3, 1, 0.06502794, -0.000324013, 0.004972659, 0.997871, 23.533333, 1, 0.011963854, -5.9580667e-05, 0.0049828463, 0.999916, 23.766666, 1, 0.06502794, -0.000324013, 0.004972659, 0.997871, 24.014994, 1, 0.011963854, -5.9580667e-05, 0.0049828463, 0.999916, 25, 1, 0.012854995, 0.26398692, 0.0016467546, 0.9644392, 35.544586, 1, 0.012854995, 0.26398692, 0.0016467546, 0.9644392, 40, 1, 0.009196093, -0.37767836, 0.0091320155, 0.92584616, 49.533333, 1, 0.009196093, -0.37767836, 0.0091320155, 0.92584616, 49.6788, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 64.95694, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 66, 1, 0.070304096, -0.00035030537, 0.004970875, 0.9975132, 67.23333, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523, 68.333336, 1, 0.06080396, -0.00030296372, 0.004973984, 0.9981373, 69.666664, 1, 0.0029496376, -1.4660351e-05, 0.0049831807, 0.99998325, 71, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 72.23333, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523, 73.333336, 1, 0.06080396, -0.00030296372, 0.004973984, 0.9981373, 74.666664, 1, 0.0029496376, -1.4660351e-05, 0.0049831807, 0.99998325, 76, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 78, 1, 0.070304096, -0.00035030537, 0.004970875, 0.9975132, 79.87852, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523, 92.13214, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523)
+tracks/40/keys = PackedFloat32Array(0, 1, 4.6119897e-08, 3.7940026e-08, 0.004983204, 0.9999876, 14.933333, 1, 4.6119897e-08, 3.7940026e-08, 0.004983204, 0.9999876, 16.033333, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 17.01763, 1, 0.03915476, -0.00019507996, 0.004979383, 0.9992207, 23.033133, 1, 0.03915476, -0.00019507996, 0.004979383, 0.9992207, 23.3, 1, 0.06502794, -0.000324013, 0.004972659, 0.997871, 23.533333, 1, 0.011963854, -5.9580667e-05, 0.0049828463, 0.999916, 23.766666, 1, 0.06502794, -0.000324013, 0.004972659, 0.997871, 24.014994, 1, 0.011963854, -5.9580667e-05, 0.0049828463, 0.999916, 25, 1, 0.012854995, 0.26398692, 0.0016467546, 0.9644392, 35.544586, 1, 0.012854995, 0.26398692, 0.0016467546, 0.9644392, 40, 1, 0.009196093, -0.37767836, 0.0091320155, 0.92584616, 49.533333, 1, 0.009196093, -0.37767836, 0.0091320155, 0.92584616, 49.6788, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 64.95694, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 66, 1, 0.070304096, -0.00035030537, 0.004970875, 0.9975132, 69.666664, 1, 0.0029496376, -1.4660351e-05, 0.0049831807, 0.99998325, 71, 1, 0.039154757, -0.00019507996, 0.0049793837, 0.9992207, 78, 1, 0.070304096, -0.00035030537, 0.004970875, 0.9975132, 79.87852, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523, 92.13214, 1, 0.016448839, -8.193047e-05, 0.004982529, 0.9998523)
 tracks/41/type = "rotation_3d"
 tracks/41/imported = false
 tracks/41/enabled = true
 tracks/41/path = NodePath("JefeTrianguloPersonaje0/Armature/Skeleton3D:Bone.007.L")
 tracks/41/interp = 1
 tracks/41/loop_wrap = true
-tracks/41/keys = PackedFloat32Array(0, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 17.01763, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 18.266666, 1, 0.30618557, 0.61667264, 0.6292039, -0.36064902, 23.033133, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 24.014994, 1, 0.32016632, 0.64099985, 0.6044021, -0.34829706, 49.533333, 1, 0.32016632, 0.64099985, 0.6044021, -0.34829706, 49.6788, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 64.96667, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 65.96667, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 67.22062, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 68.302666, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 69.63464, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 70.930756, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 72.22062, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 73.302666, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 74.63464, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 75.930756, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 80.01305, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 92.13333, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 94.23333, 1, 0.36909932, 0.7249338, 0.50065327, -0.29594418)
+tracks/41/keys = PackedFloat32Array(0, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 17.01763, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 18.266666, 1, 0.30618557, 0.61667264, 0.6292039, -0.36064902, 23.033133, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 24.014994, 1, 0.32016632, 0.64099985, 0.6044021, -0.34829706, 49.533333, 1, 0.32016632, 0.64099985, 0.6044021, -0.34829706, 49.6788, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 64.96667, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 65.96667, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 69.63464, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 70.930756, 1, 0.35430002, 0.6997791, 0.53524935, -0.31351048, 80.01305, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 92.13333, 1, -0.032467928, 0.0024253016, 0.881009, -0.47197792, 94.23333, 1, 0.36909932, 0.7249338, 0.50065327, -0.29594418)
 tracks/42/type = "value"
 tracks/42/imported = false
 tracks/42/enabled = true
@@ -4398,10 +4429,578 @@ tracks/130/path = NodePath("ColorRect:modulate")
 tracks/130/interp = 1
 tracks/130/loop_wrap = true
 tracks/130/keys = {
-"times": PackedFloat32Array(0, 4.0217586, 98.2708, 100),
+"times": PackedFloat32Array(0, 4.0217586, 95.23333, 100),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/131/type = "audio"
+tracks/131/imported = false
+tracks/131/enabled = true
+tracks/131/path = NodePath("Audio/Reloj")
+tracks/131/interp = 1
+tracks/131/loop_wrap = true
+tracks/131/keys = {
+"clips": [{
+"end_offset": 2.56,
+"start_offset": 0.0,
+"stream": ExtResource("40_nxkq6")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/131/use_blend = true
+tracks/132/type = "method"
+tracks/132/imported = false
+tracks/132/enabled = true
+tracks/132/path = NodePath("Audio/Reloj")
+tracks/132/interp = 1
+tracks/132/loop_wrap = true
+tracks/132/keys = {
+"times": PackedFloat32Array(2.5333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/133/type = "audio"
+tracks/133/imported = false
+tracks/133/enabled = true
+tracks/133/path = NodePath("Audio/EfectosdeSonido")
+tracks/133/interp = 1
+tracks/133/loop_wrap = true
+tracks/133/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("32_c77xp")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("33_hwi6v")
+}],
+"times": PackedFloat32Array(3.2666667, 8)
+}
+tracks/133/use_blend = true
+tracks/134/type = "audio"
+tracks/134/imported = false
+tracks/134/enabled = true
+tracks/134/path = NodePath("Audio/DialogosFranco")
+tracks/134/interp = 1
+tracks/134/loop_wrap = true
+tracks/134/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("33_s23e2")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("34_hwi6v")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("35_p3bp5")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("36_chaom")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("37_3s3lx")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("38_d5vgv")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("39_uawmk")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("40_whylx")
+}],
+"times": PackedFloat32Array(2.4, 4.9333334, 8.7, 9.5, 11.4, 14.833333, 14.833533, 20.233334, 22.333334)
+}
+tracks/134/use_blend = true
+tracks/135/type = "method"
+tracks/135/imported = false
+tracks/135/enabled = true
+tracks/135/path = NodePath("Audio/EfectosdeSonido")
+tracks/135/interp = 1
+tracks/135/loop_wrap = true
+tracks/135/keys = {
+"times": PackedFloat32Array(9.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/136/type = "audio"
+tracks/136/imported = false
+tracks/136/enabled = true
+tracks/136/path = NodePath("Audio/EfectosdeSonido")
+tracks/136/interp = 1
+tracks/136/loop_wrap = true
+tracks/136/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("33_hwi6v")
+}],
+"times": PackedFloat32Array(11.466666)
+}
+tracks/136/use_blend = true
+tracks/137/type = "method"
+tracks/137/imported = false
+tracks/137/enabled = true
+tracks/137/path = NodePath("Audio/EfectosdeSonido")
+tracks/137/interp = 1
+tracks/137/loop_wrap = true
+tracks/137/keys = {
+"times": PackedFloat32Array(13.066667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/138/type = "audio"
+tracks/138/imported = false
+tracks/138/enabled = true
+tracks/138/path = NodePath("Audio/MusicaSuspenso")
+tracks/138/interp = 1
+tracks/138/loop_wrap = true
+tracks/138/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("42_hwi6v")
+}],
+"times": PackedFloat32Array(7.9666667)
+}
+tracks/138/use_blend = true
+tracks/139/type = "method"
+tracks/139/imported = false
+tracks/139/enabled = true
+tracks/139/path = NodePath("Audio/MusicaSuspenso")
+tracks/139/interp = 1
+tracks/139/loop_wrap = true
+tracks/139/keys = {
+"times": PackedFloat32Array(13.133333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/140/type = "audio"
+tracks/140/imported = false
+tracks/140/enabled = true
+tracks/140/path = NodePath("Audio/DialogoLean")
+tracks/140/interp = 1
+tracks/140/loop_wrap = true
+tracks/140/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("43_chaom")
+}],
+"times": PackedFloat32Array(12.233334)
+}
+tracks/140/use_blend = true
+tracks/141/type = "method"
+tracks/141/imported = false
+tracks/141/enabled = true
+tracks/141/path = NodePath("Audio/DialogoLean")
+tracks/141/interp = 1
+tracks/141/loop_wrap = true
+tracks/141/keys = {
+"times": PackedFloat32Array(14.833333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/142/type = "audio"
+tracks/142/imported = false
+tracks/142/enabled = true
+tracks/142/path = NodePath("Audio/DialogoLean1")
+tracks/142/interp = 1
+tracks/142/loop_wrap = true
+tracks/142/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("44_3s3lx")
+}],
+"times": PackedFloat32Array(16.266666)
+}
+tracks/142/use_blend = true
+tracks/143/type = "audio"
+tracks/143/imported = false
+tracks/143/enabled = true
+tracks/143/path = NodePath("Audio/Efectobaño")
+tracks/143/interp = 1
+tracks/143/loop_wrap = true
+tracks/143/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("46_uawmk")
+}],
+"times": PackedFloat32Array(23.733334)
+}
+tracks/143/use_blend = true
+tracks/144/type = "method"
+tracks/144/imported = false
+tracks/144/enabled = true
+tracks/144/path = NodePath("Audio/Efectobaño")
+tracks/144/interp = 1
+tracks/144/loop_wrap = true
+tracks/144/keys = {
+"times": PackedFloat32Array(34.566666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/145/type = "audio"
+tracks/145/imported = false
+tracks/145/enabled = true
+tracks/145/path = NodePath("Audio/DialogoFabri")
+tracks/145/interp = 1
+tracks/145/loop_wrap = true
+tracks/145/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("47_hodir")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("48_4ouxn")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+}],
+"times": PackedFloat32Array(31.433332, 33.733334, 36.899998)
+}
+tracks/145/use_blend = true
+tracks/146/type = "method"
+tracks/146/imported = false
+tracks/146/enabled = true
+tracks/146/path = NodePath("Audio/DialogoLean1")
+tracks/146/interp = 1
+tracks/146/loop_wrap = true
+tracks/146/keys = {
+"times": PackedFloat32Array(20.166666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/147/type = "audio"
+tracks/147/imported = false
+tracks/147/enabled = true
+tracks/147/path = NodePath("Audio/DialogoLean2")
+tracks/147/interp = 1
+tracks/147/loop_wrap = true
+tracks/147/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("45_d5vgv")
+}],
+"times": PackedFloat32Array(22.6)
+}
+tracks/147/use_blend = true
+tracks/148/type = "method"
+tracks/148/imported = false
+tracks/148/enabled = true
+tracks/148/path = NodePath("Audio/DialogoLean2")
+tracks/148/interp = 1
+tracks/148/loop_wrap = true
+tracks/148/keys = {
+"times": PackedFloat32Array(24.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/149/type = "audio"
+tracks/149/imported = false
+tracks/149/enabled = true
+tracks/149/path = NodePath("Audio/DialogoLeo")
+tracks/149/interp = 1
+tracks/149/loop_wrap = true
+tracks/149/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("50_mdpgn")
+}],
+"times": PackedFloat32Array(35.1)
+}
+tracks/149/use_blend = true
+tracks/150/type = "method"
+tracks/150/imported = false
+tracks/150/enabled = true
+tracks/150/path = NodePath("Audio/DialogoLeo")
+tracks/150/interp = 1
+tracks/150/loop_wrap = true
+tracks/150/keys = {
+"times": PackedFloat32Array(44.066666),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/151/type = "audio"
+tracks/151/imported = false
+tracks/151/enabled = true
+tracks/151/path = NodePath("Audio/DialogoLeo1")
+tracks/151/interp = 1
+tracks/151/loop_wrap = true
+tracks/151/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("51_lekeb")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("40_nxkq6")
+}],
+"times": PackedFloat32Array(44.033333, 45.566666, 49.233334)
+}
+tracks/151/use_blend = true
+tracks/152/type = "method"
+tracks/152/imported = false
+tracks/152/enabled = true
+tracks/152/path = NodePath("Audio/DialogoLeo1")
+tracks/152/interp = 1
+tracks/152/loop_wrap = true
+tracks/152/keys = {
+"times": PackedFloat32Array(49.666668),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/153/type = "audio"
+tracks/153/imported = false
+tracks/153/enabled = true
+tracks/153/path = NodePath("Audio/Locura")
+tracks/153/interp = 1
+tracks/153/loop_wrap = true
+tracks/153/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("53_h0dbd")
+}],
+"times": PackedFloat32Array(49.666668)
+}
+tracks/153/use_blend = true
+tracks/154/type = "method"
+tracks/154/imported = false
+tracks/154/enabled = true
+tracks/154/path = NodePath("Audio/Locura")
+tracks/154/interp = 1
+tracks/154/loop_wrap = true
+tracks/154/keys = {
+"times": PackedFloat32Array(55.166668),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/155/type = "audio"
+tracks/155/imported = false
+tracks/155/enabled = true
+tracks/155/path = NodePath("Audio/Escuchen")
+tracks/155/interp = 1
+tracks/155/loop_wrap = true
+tracks/155/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("54_lekeb")
+}],
+"times": PackedFloat32Array(54.566666)
+}
+tracks/155/use_blend = true
+tracks/156/type = "audio"
+tracks/156/imported = false
+tracks/156/enabled = true
+tracks/156/path = NodePath("Audio/Escribir")
+tracks/156/interp = 1
+tracks/156/loop_wrap = true
+tracks/156/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("52_gvfyy")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("52_gvfyy")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("52_gvfyy")
+}],
+"times": PackedFloat32Array(38.6, 40, 46.866665)
+}
+tracks/156/use_blend = true
+tracks/157/type = "audio"
+tracks/157/imported = false
+tracks/157/enabled = true
+tracks/157/path = NodePath("Audio/PuertaMolesta")
+tracks/157/interp = 1
+tracks/157/loop_wrap = true
+tracks/157/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("54_gvfyy")
+}],
+"times": PackedFloat32Array(29.8)
+}
+tracks/157/use_blend = true
+tracks/158/type = "method"
+tracks/158/imported = false
+tracks/158/enabled = true
+tracks/158/path = NodePath("Audio/PuertaMolesta")
+tracks/158/interp = 1
+tracks/158/loop_wrap = true
+tracks/158/keys = {
+"times": PackedFloat32Array(31.133333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/159/type = "audio"
+tracks/159/imported = false
+tracks/159/enabled = true
+tracks/159/path = NodePath("Audio/Introduccion")
+tracks/159/interp = 1
+tracks/159/loop_wrap = true
+tracks/159/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("55_ar4ut")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("56_cuibj")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("57_f371g")
+}],
+"times": PackedFloat32Array(58.5, 69.2, 91.333336)
+}
+tracks/159/use_blend = true
+tracks/160/type = "audio"
+tracks/160/imported = false
+tracks/160/enabled = true
+tracks/160/path = NodePath("Audio/Ambiente")
+tracks/160/interp = 1
+tracks/160/loop_wrap = true
+tracks/160/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("58_cuibj")
+}],
+"times": PackedFloat32Array(58.5)
+}
+tracks/160/use_blend = true
+tracks/161/type = "method"
+tracks/161/imported = false
+tracks/161/enabled = true
+tracks/161/path = NodePath("Audio/Ambiente")
+tracks/161/interp = 1
+tracks/161/loop_wrap = true
+tracks/161/keys = {
+"times": PackedFloat32Array(99.96667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/162/type = "value"
+tracks/162/imported = false
+tracks/162/enabled = true
+tracks/162/path = NodePath("Audio/Ambiente:volume_db")
+tracks/162/interp = 1
+tracks/162/loop_wrap = true
+tracks/162/keys = {
+"times": PackedFloat32Array(58.4, 78.666664, 82.53333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-25.0, -25.0, -15.0]
+}
+tracks/163/type = "value"
+tracks/163/imported = false
+tracks/163/enabled = true
+tracks/163/path = NodePath("TextureRect:modulate")
+tracks/163/interp = 1
+tracks/163/loop_wrap = true
+tracks/163/keys = {
+"times": PackedFloat32Array(79.680695, 82.6, 91.46667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/164/type = "value"
+tracks/164/imported = false
+tracks/164/enabled = true
+tracks/164/path = NodePath("Label:modulate")
+tracks/164/interp = 1
+tracks/164/loop_wrap = true
+tracks/164/keys = {
+"times": PackedFloat32Array(80.3795, 84.76667, 91.433334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/165/type = "value"
+tracks/165/imported = false
+tracks/165/enabled = true
+tracks/165/path = NodePath("TextureRect2:modulate")
+tracks/165/interp = 1
+tracks/165/loop_wrap = true
+tracks/165/keys = {
+"times": PackedFloat32Array(92.1, 96.76667, 100.00962),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nxkq6"]
@@ -5775,6 +6374,54 @@ tracks/129/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/130/type = "value"
+tracks/130/imported = false
+tracks/130/enabled = true
+tracks/130/path = NodePath("Audio/Ambiente:volume_db")
+tracks/130/interp = 1
+tracks/130/loop_wrap = true
+tracks/130/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-25.0]
+}
+tracks/131/type = "value"
+tracks/131/imported = false
+tracks/131/enabled = true
+tracks/131/path = NodePath("TextureRect:modulate")
+tracks/131/interp = 1
+tracks/131/loop_wrap = true
+tracks/131/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/132/type = "value"
+tracks/132/imported = false
+tracks/132/enabled = true
+tracks/132/path = NodePath("Label:modulate")
+tracks/132/interp = 1
+tracks/132/loop_wrap = true
+tracks/132/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/133/type = "value"
+tracks/133/imported = false
+tracks/133/enabled = true
+tracks/133/path = NodePath("TextureRect2:modulate")
+tracks/133/interp = 1
+tracks/133/loop_wrap = true
+tracks/133/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b1j5g"]
@@ -8126,3 +8773,97 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Audio" type="Node3D" parent="." unique_id=43610129]
+
+[node name="Reloj" type="AudioStreamPlayer" parent="Audio" unique_id=594824566]
+volume_db = -5.0
+
+[node name="EfectosdeSonido" type="AudioStreamPlayer" parent="Audio" unique_id=230237200]
+
+[node name="DialogosFranco" type="AudioStreamPlayer" parent="Audio" unique_id=890786559]
+
+[node name="MusicaSuspenso" type="AudioStreamPlayer" parent="Audio" unique_id=604590568]
+volume_db = -21.342
+
+[node name="DialogoLean" type="AudioStreamPlayer" parent="Audio" unique_id=475493109]
+
+[node name="DialogoLean1" type="AudioStreamPlayer" parent="Audio" unique_id=1638830964]
+
+[node name="Efectobaño" type="AudioStreamPlayer" parent="Audio" unique_id=1374003102]
+volume_db = -10.0
+
+[node name="DialogoFabri" type="AudioStreamPlayer" parent="Audio" unique_id=1844656678]
+
+[node name="DialogoLean2" type="AudioStreamPlayer" parent="Audio" unique_id=1906362686]
+
+[node name="DialogoLeo" type="AudioStreamPlayer" parent="Audio" unique_id=1051634311]
+
+[node name="DialogoLeo1" type="AudioStreamPlayer" parent="Audio" unique_id=1490584175]
+
+[node name="Locura" type="AudioStreamPlayer" parent="Audio" unique_id=1226295828]
+volume_db = -5.0
+
+[node name="Escuchen" type="AudioStreamPlayer" parent="Audio" unique_id=1949113132]
+
+[node name="PuertaMolesta" type="AudioStreamPlayer" parent="Audio" unique_id=1072148727]
+volume_db = -16.0
+
+[node name="Escribir" type="AudioStreamPlayer" parent="Audio" unique_id=1051256551]
+volume_db = -16.0
+
+[node name="Introduccion" type="AudioStreamPlayer" parent="Audio" unique_id=1575001155]
+volume_db = 3.0
+
+[node name="Ambiente" type="AudioStreamPlayer" parent="Audio" unique_id=17840498]
+volume_db = -25.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1723358328]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -284.5
+offset_top = -68.5
+offset_right = 284.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("68_8oes8")
+
+[node name="Label" type="Label" parent="." unique_id=1543934292]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.5
+offset_top = 67.0
+offset_right = 185.5
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("69_evffq")
+theme_override_font_sizes/font_size = 80
+text = "PRESENTA"
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=379303895]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -414.28308
+offset_top = -233.25
+offset_right = 414.28308
+offset_bottom = 233.25
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("70_4mjpy")
+expand_mode = 1
+stretch_mode = 5

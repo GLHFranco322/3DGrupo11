@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvt01r7uhx8u6"
+path="res://.godot/imported/Audio Franco.MP3-00d7c69834e322e70ead72c2119bf865.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/Audio Franco.MP3"
+dest_files=["res://.godot/imported/Audio Franco.MP3-00d7c69834e322e70ead72c2119bf865.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

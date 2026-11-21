@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://i7fblb0a0ekv"
+path="res://.godot/imported/tampoco hay papel.MP3-e092f0934ab870f15b5209e02ea2f01a.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFabri/tampoco hay papel.MP3"
+dest_files=["res://.godot/imported/tampoco hay papel.MP3-e092f0934ab870f15b5209e02ea2f01a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

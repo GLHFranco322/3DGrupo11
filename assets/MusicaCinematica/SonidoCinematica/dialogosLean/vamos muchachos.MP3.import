@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b2c5d1hlu1kqx"
+path="res://.godot/imported/vamos muchachos.MP3-2507ee83e8070c25f717e6403af2d147.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/vamos muchachos.MP3"
+dest_files=["res://.godot/imported/vamos muchachos.MP3-2507ee83e8070c25f717e6403af2d147.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ctrdig8oqdtn7"
+path="res://.godot/imported/se puede saber donde estabas.MP3-12ca0558352bb90e001db1218d0bb1f2.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/se puede saber donde estabas.MP3"
+dest_files=["res://.godot/imported/se puede saber donde estabas.MP3-12ca0558352bb90e001db1218d0bb1f2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

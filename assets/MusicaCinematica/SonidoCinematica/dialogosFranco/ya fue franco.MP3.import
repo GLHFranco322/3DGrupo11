@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://uodpb6d8i18"
+path="res://.godot/imported/ya fue franco.MP3-9bf57dabcacd36c7f7a461031a31fd69.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/ya fue franco.MP3"
+dest_files=["res://.godot/imported/ya fue franco.MP3-9bf57dabcacd36c7f7a461031a31fd69.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

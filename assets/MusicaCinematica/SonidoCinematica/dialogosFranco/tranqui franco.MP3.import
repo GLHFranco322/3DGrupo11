@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1d111rdxdq02"
+path="res://.godot/imported/tranqui franco.MP3-7a51ae05c4f08f91fa8fd438a005acec.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/tranqui franco.MP3"
+dest_files=["res://.godot/imported/tranqui franco.MP3-7a51ae05c4f08f91fa8fd438a005acec.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

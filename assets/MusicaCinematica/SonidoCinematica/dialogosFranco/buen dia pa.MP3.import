@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cv17yc33khmbn"
+path="res://.godot/imported/buen dia pa.MP3-6b1836515046858569684f196ab3943a.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosFranco/buen dia pa.MP3"
+dest_files=["res://.godot/imported/buen dia pa.MP3-6b1836515046858569684f196ab3943a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

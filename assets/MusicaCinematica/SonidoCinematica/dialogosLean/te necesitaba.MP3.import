@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnmhq0nycgwfq"
+path="res://.godot/imported/te necesitaba.MP3-d3f47e65237fbd07d245e9b219293a5f.mp3str"
+
+[deps]
+
+source_file="res://assets/MusicaCinematica/SonidoCinematica/dialogosLean/te necesitaba.MP3"
+dest_files=["res://.godot/imported/te necesitaba.MP3-d3f47e65237fbd07d245e9b219293a5f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
