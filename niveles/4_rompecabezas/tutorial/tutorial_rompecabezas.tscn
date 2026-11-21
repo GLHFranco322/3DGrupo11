@@ -1,19 +1,28 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cxbmtujdxc2sc"]
 
 [ext_resource type="PackedScene" path="res://niveles/comun/tutorial/tutorial_base.tscn" id="1_base"]
-[ext_resource type="FontFile" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
-[ext_resource type="Script" path="res://ui/texto_con_botones.gd" id="3_texto"]
-[ext_resource type="Script" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
-[ext_resource type="Texture2D" path="res://niveles/4_rompecabezas/tutorial/dibujos/armar.png" id="d_armar"]
-[ext_resource type="Texture2D" path="res://niveles/4_rompecabezas/tutorial/dibujos/crece.png" id="d_crece"]
-[ext_resource type="Texture2D" path="res://niveles/4_rompecabezas/tutorial/dibujos/pista.png" id="d_pista"]
-[ext_resource type="VideoStream" path="res://niveles/4_rompecabezas/tutorial/clips/armar.ogv" id="v_armar"]
-[ext_resource type="VideoStream" path="res://niveles/4_rompecabezas/tutorial/clips/completar.ogv" id="v_completar"]
-[ext_resource type="VideoStream" path="res://niveles/4_rompecabezas/tutorial/clips/pista.ogv" id="v_pista"]
+[ext_resource type="FontFile" uid="uid://d1qka0pkd7ppe" path="res://niveles/comun/tutorial/fuentes/Kalam-Bold.ttf" id="2_bold"]
+[ext_resource type="Script" uid="uid://djsnv05hbgfci" path="res://ui/texto_con_botones.gd" id="3_texto"]
+[ext_resource type="Script" uid="uid://bo8epu50er4vp" path="res://niveles/comun/tutorial/ventana_video.gd" id="4_video"]
+[ext_resource type="Texture2D" uid="uid://cq3y56m1lwh0h" path="res://niveles/4_rompecabezas/tutorial/dibujos/armar.png" id="d_armar"]
+[ext_resource type="Texture2D" uid="uid://ctc0gigtwgrwm" path="res://niveles/4_rompecabezas/tutorial/dibujos/crece.png" id="d_crece"]
+[ext_resource type="Texture2D" uid="uid://ycbsil6bwiej" path="res://niveles/4_rompecabezas/tutorial/dibujos/pista.png" id="d_pista"]
+[ext_resource type="VideoStream" uid="uid://bct8ynnc626qr" path="res://niveles/4_rompecabezas/tutorial/clips/armar.ogv" id="v_armar"]
+[ext_resource type="VideoStream" uid="uid://bjm4nyjvk3yr5" path="res://niveles/4_rompecabezas/tutorial/clips/completar.ogv" id="v_completar"]
+[ext_resource type="VideoStream" uid="uid://bitxr2dwvtly5" path="res://niveles/4_rompecabezas/tutorial/clips/pista.ogv" id="v_pista"]
 
-[node name="TutorialRompecabezas" instance=ExtResource("1_base")]
+[node name="TutorialRompecabezas" unique_id=158921061 instance=ExtResource("1_base")]
 
-[node name="Titulo" type="Label" parent="Mesa/Contenido"]
+[node name="Mesa" parent="." index="1"]
+anchors_preset = 0
+
+[node name="Libreta" parent="Mesa" index="0"]
+anchors_preset = 0
+
+[node name="Contenido" parent="Mesa" index="3"]
+anchors_preset = 0
+
+[node name="Titulo" type="Label" parent="Mesa/Contenido" index="0" unique_id=1243547771]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 222.0
@@ -23,7 +32,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 44
 text = "Rompecabezas"
 
-[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="Objetivo" type="RichTextLabel" parent="Mesa/Contenido" index="1" unique_id=814949709]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 290.0
@@ -34,9 +43,8 @@ bbcode_enabled = true
 scroll_active = false
 script = ExtResource("3_texto")
 texto = "[b]¡Armá más rompecabezas que tu rival![/b]"
-alineacion = 0
 
-[node name="TituloArmar" type="Label" parent="Mesa/Contenido"]
+[node name="TituloArmar" type="Label" parent="Mesa/Contenido" index="2" unique_id=1851619083]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 350.0
@@ -46,7 +54,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "Las piezas"
 
-[node name="Armar" type="TextureRect" parent="Mesa/Contenido"]
+[node name="Armar" type="TextureRect" parent="Mesa/Contenido" index="3" unique_id=1988627702]
 layout_mode = 0
 offset_left = 248.0
 offset_top = 420.0
@@ -56,18 +64,21 @@ texture = ExtResource("d_armar")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VideoArmar" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoArmar" type="Control" parent="Mesa/Contenido" index="4" unique_id=143939467]
+anchors_preset = 0
 offset_left = 574.0
 offset_top = 486.0
 offset_right = 864.0
 offset_bottom = 658.0
+rotation = -0.02617994
+pivot_offset = Vector2(145, 86)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_armar")
 texto = "Agarrar y soltar  {X}"
 inclinacion = -1.5
 
-[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido"]
+[node name="Controles" type="RichTextLabel" parent="Mesa/Contenido" index="5" unique_id=1523757845]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 800.0
@@ -81,7 +92,7 @@ texto = "{PALANCA_IZQ} Mover la mano
 {X} Agarrar y soltar"
 alineacion = 1
 
-[node name="TituloCrece" type="Label" parent="Mesa/Contenido"]
+[node name="TituloCrece" type="Label" parent="Mesa/Contenido" index="6" unique_id=1888120923]
 layout_mode = 0
 offset_left = 948.0
 offset_top = 222.0
@@ -91,7 +102,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "Cada vez más grande"
 
-[node name="Crece" type="TextureRect" parent="Mesa/Contenido"]
+[node name="Crece" type="TextureRect" parent="Mesa/Contenido" index="7" unique_id=132083850]
 layout_mode = 0
 offset_left = 948.0
 offset_top = 290.0
@@ -101,18 +112,21 @@ texture = ExtResource("d_crece")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VideoCompletar" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoCompletar" type="Control" parent="Mesa/Contenido" index="8" unique_id=1723517796]
+anchors_preset = 0
 offset_left = 1236.0
 offset_top = 276.0
 offset_right = 1556.0
 offset_bottom = 466.0
+rotation = 0.02617994
+pivot_offset = Vector2(160, 95)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_completar")
 texto = "¡Completo! Sale otro"
 inclinacion = 1.5
 
-[node name="TituloPista" type="Label" parent="Mesa/Contenido"]
+[node name="TituloPista" type="Label" parent="Mesa/Contenido" index="9" unique_id=1391647614]
 layout_mode = 0
 offset_left = 948.0
 offset_top = 596.0
@@ -122,7 +136,7 @@ theme_override_fonts/font = ExtResource("2_bold")
 theme_override_font_sizes/font_size = 32
 text = "La pista"
 
-[node name="Pista" type="TextureRect" parent="Mesa/Contenido"]
+[node name="Pista" type="TextureRect" parent="Mesa/Contenido" index="10" unique_id=1480486263]
 layout_mode = 0
 offset_left = 948.0
 offset_top = 650.0
@@ -132,12 +146,15 @@ texture = ExtResource("d_pista")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VideoPista" type="Control" parent="Mesa/Contenido"]
-layout_mode = 0
+[node name="VideoPista" type="Control" parent="Mesa/Contenido" index="11" unique_id=1819325740]
+anchors_preset = 0
 offset_left = 1236.0
 offset_top = 660.0
 offset_right = 1556.0
 offset_bottom = 850.0
+rotation = -0.017453292
+pivot_offset = Vector2(160, 95)
+mouse_filter = 2
 script = ExtResource("4_video")
 video = ExtResource("v_pista")
 texto = "¿Trabado? Seguí la luz"

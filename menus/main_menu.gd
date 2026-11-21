@@ -13,6 +13,9 @@ extends Control
 ## nunca está.
 @export var show_dev_level_select: bool = true
 
+## Cinemática que se ve al apretar "Jugar" (una vez por sesión).
+@export_file("*.tscn") var cinematic_scene: String = "res://Cinematicas/mapa_laberinto_cinematica.tscn"
+
 @onready var main_panel: Control = %MainPanel
 @onready var options_panel: Control = %OptionsPanel
 # Oscurece la imagen de fondo en Opciones para que se lean los textos
@@ -107,7 +110,10 @@ func _show_panel(panel: Control) -> void:
 func _on_play_pressed() -> void:
 	MatchResult.reset_tournament()
 	GameSettings.new_tournament()
-	SceneLoader.change_scene(character_select_scene)
+	if cinematic_scene != "":
+		SceneLoader.change_scene(cinematic_scene)
+	else:
+		SceneLoader.change_scene(character_select_scene)
 
 
 func _on_volume_changed(_value: float) -> void:

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhqr0vueh1hny"
-path.s3tc="res://.godot/imported/T_DS_Palette.png-8e917885edd4c4b1d43643a3dc936296.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_DS_Palette.png-cc1e6316bd0b22685f247d7199ec85d4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/baño/Bathroom_Essentials_FREE_v2/Bathroom_Essentials_FREE_v2/textures/T_DS_Palette.png"
-dest_files=["res://.godot/imported/T_DS_Palette.png-8e917885edd4c4b1d43643a3dc936296.s3tc.ctex"]
+source_file="res://assets/baño/Bathroom_Essentials_FREE_v2/Bathroom_Essentials_FREE_v2/Textures/T_DS_Palette.png"
+dest_files=["res://.godot/imported/T_DS_Palette.png-cc1e6316bd0b22685f247d7199ec85d4.s3tc.ctex"]
 
 [params]
 
