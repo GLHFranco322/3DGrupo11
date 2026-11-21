@@ -4973,10 +4973,10 @@ tracks/163/path = NodePath("TextureRect:modulate")
 tracks/163/interp = 1
 tracks/163/loop_wrap = true
 tracks/163/keys = {
-"times": PackedFloat32Array(79.680695, 82.6, 91.46667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(79.680695, 82.96667, 88.76667, 91.46667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/164/type = "value"
 tracks/164/imported = false
@@ -4985,10 +4985,10 @@ tracks/164/path = NodePath("Label:modulate")
 tracks/164/interp = 1
 tracks/164/loop_wrap = true
 tracks/164/keys = {
-"times": PackedFloat32Array(80.3795, 84.76667, 91.433334),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(79.73333, 82.86667, 88.76667, 91.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/165/type = "value"
 tracks/165/imported = false
@@ -4997,10 +4997,10 @@ tracks/165/path = NodePath("TextureRect2:modulate")
 tracks/165/interp = 1
 tracks/165/loop_wrap = true
 tracks/165/keys = {
-"times": PackedFloat32Array(92.1, 96.76667, 100.00962),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(90.96667, 93.433334, 97.63333, 100.00962),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_nxkq6"]
